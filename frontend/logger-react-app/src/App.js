@@ -24,22 +24,10 @@ function App() {
         <div>대시보드 구성요소</div>
       </body>
       <footer className="App-footer">
-        <div className="description">
-          기타 정보 들어갈 예정
-          <ul>
-            <li>
-              <a>소프트웨어학과 조성빈</a>
-            </li>
-            <li>
-              <a>소프트웨어학과 윤예진</a>
-            </li>
-            <li>
-              <a>소프트웨어학과 정욱재</a>
-            </li>
-            <li>
-              <a>소프트웨어학과 임찬수</a>
-            </li>
-          </ul>
+        <div className="inner">
+          <div className="message">차량 포렌식 데이터 수집을 위하여 OBD2 로그를 모아 시각화하는 서비스입니다.</div>
+          <div className="contact">E-MAIL : whtjdqls01@gmail.com</div>
+          <div className="copyright">Copyrigh 2024 All ⓒ rights reserved</div>
         </div>
       </footer>
     </div>
