@@ -1,4 +1,8 @@
 import './App.css';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 function App() {
 
@@ -21,7 +25,11 @@ function App() {
         </div>
       </header>
       <body className="App-body">
-        <div>대시보드 구성요소</div>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DemoContainer components={['DatePicker']}>
+            <DatePicker label="Basic date picker" />
+          </DemoContainer>
+        </LocalizationProvider>
       </body>
       <footer className="App-footer">
         <div className="inner">
