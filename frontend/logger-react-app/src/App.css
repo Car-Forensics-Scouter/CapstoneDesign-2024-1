@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 ul {
   list-style-type: none;
   padding-left: 0;
@@ -10,65 +15,99 @@ a {
 
 .App {
   text-align: center;
+  background-color: #808080;
+  padding: 20px;
 }
 
-.App .App-header .wrap {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.App .Report {
+  background-color: #ffffff;
 }
 
-.App .App-header .wrap .title {
-  font-size: 20px;
-  font-weight: 1000;
-  padding-left: 1%;
-}
-
-.App .App-header .wrap .member-menu {
-  padding-right: 3%;
-}
-
-.App .App-header .wrap .member-menu ul {
+.App .Frame {
+  background-color: #ffffff;
+  border-radius: 27.71px;
   display: flex;
 }
 
-.App .App-header .wrap .member-menu .slash {
-  padding-left: 3px;
-  padding-right: 3px;
+.App .Frame .Banner {
+  padding: 20px;
+  border-radius: 18.47px;
+  height: auto;
+  position: relative;
+  border: 0.5px solid #808080;
 }
 
-.App .App-body {
-  height: 500px;
-  border: 1px solid #000;
+.App .Banner .Menu {
+  margin-bottom: 100px;
+  text-align: center;
+  padding: 15px;
+}
+
+.App .Banner .Menu i {
+  padding-right: 20px;
+}
+
+.App .Banner .Menu .Bt2 i {
+  padding-right: 15px;
+}
+
+.App .Banner .Menu .Reports, .App .Banner .Menu .Library, .App .Banner .Menu .GraphDashboard, .App .Banner .Support .Settings {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 0;
+  border-radius: 9.24px;
+  padding: 10px;
+  margin: 5px;
 }
 
-.App .App-footer {
-  border-top: 1px solid #e4e4e4;
-  background-color: #f8f9fa;
-  padding: 1rem 0;
-  margin: 1rem 0;
+.App .Banner .Menu .Reportsactive, .App .Banner .Menu .Libraryactive, .App .Banner .Menu .GraphDashboardactive, .App .Banner .Support .Settingsactive {
+  background-color: #E6F9E9;
+  display: flex;
+  border-radius: 9.24px;
+  padding: 10px;
+  margin: 5px;
+  color: #0AB22F;
 }
 
-.App .App-footer .message {
+.App .Banner .Support i {
+  padding-right: 20px;
+}
+
+.App .Banner .SubTitle {
+  padding: 5px;
+  text-align: left;
+  margin-left: 20px;
+}
+
+.App .Banner .Support {
+  text-align: left;
+  padding: 15px;
+  margin-bottom: 200px;
+}
+
+.App .Banner .Info {
+  position: absolute;
+  bottom: 0%;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.App .Banner .Info .Line {
+  border: 1px solid #E5E5E5;
+  width: 100%;
+}
+
+.App .Banner .Info .Contents {
+  text-align: left;
+  padding-top: 50px;
+  padding-bottom: 30px;
+  width: 200%;
+}
+
+.App .Banner .Info .Contents .Intro {
   font-weight: bold;
-  font-size: 0.9rem;
-  color: #545e6f;
-  margin-bottom: 0.3rem;
-  margin: 0 0 0 0.6rem;
+  font-size: small;
 }
 
-.App .App-footer .contact {
-  font-size: 0.9rem;
-  color: #545e6f;
-  margin: 0.6rem;
-}
-
-.App .App-footer .copyright {
-  font-size: 0.9rem;
-  color: #545e6f;
-  margin: 0.6rem;
+.App .Banner .Info .Contents .Contact {
+  font-size: smaller;
+  color: #878787;
 }
