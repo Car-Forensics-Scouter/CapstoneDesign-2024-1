@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Button } from '@mui/material';
+import Box from '@mui/material/Box'
+import TextFields from '@mui/material/TextField'
 
 const SignUpForm = () => {
     const [email, setEmail] = useState('');
@@ -63,9 +66,9 @@ const SignUpForm = () => {
                     })
                 });
 
-            if (response.ok) {
+            if (response.status == 201) {
                 const data = await response.json();
-                if (data.isDuplicate) {
+                if (data.isDuplicate) { // 여기에 백엔드에서 처리한 로직을 연결
                     alert('이미 사용중인 ID입니다.');
                 }
                 else {
@@ -86,46 +89,58 @@ const SignUpForm = () => {
     return (
         <form onSubmit={handleSignUp}>
             <div>
-                <input
-                    type ='email'
-                    placeholder='email'
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
+                <Box sx={{ marginBottom : 2 }}>
+                    <TextFields
+                        type ='email'
+                        placeholder='Email'
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                </Box>
             </div>
             <div>
-                <input
-                    type ='text'
-                    placeholder='ID'
-                    value={id}
-                    onChange={(e) => setID(e.target.value)}
-                />
-                <button type='submit' onClick={() => checkDuplication(id)}>중복 확인</button>
+                <Box sx={{ marginBottom : 2 }}>
+                    <TextFields
+                        type ='text'
+                        placeholder='ID'
+                        value={id}
+                        onChange={(e) => setID(e.target.value)}
+                    />
+                    <Button variant='contained' type='button' sx={{ marginLeft : 1 }}
+                     onClick={() => checkDuplication(id)}>중복 확인</Button>
+                </Box>
             </div>
             <div>
-                <input
-                    type ='password'
-                    placeholder='password'
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button type='button' onClick={() => checkDuplication(password)}>중복 확인</button>
+                <Box sx={{ marginBottom : 2 }}>
+                    <TextFields
+                        type ='password'
+                        placeholder='Password'
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <Button variant='contained' type='button' sx={{ marginLeft : 1 }}
+                     onClick={() => checkDuplication(password)}>중복 확인</Button>
+                </Box>
             </div>
             <div>
-                <input
-                    type ='name'
-                    placeholder='name'
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
+                <Box sx={{ marginBottom : 2 }}>
+                    <TextFields
+                        type ='name'
+                        placeholder='name'
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                </Box>
             </div>
             <div>
-                <input
-                    type ='car'
-                    placeholder='car'
-                    value={car}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
+                <Box sx={{ marginBottom : 2 }}>
+                    <TextFields
+                        type ='car'
+                        placeholder='car'
+                        value={car}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                </Box>
             </div>
 
             <p className="login-link">
