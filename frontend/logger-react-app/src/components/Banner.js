@@ -24,19 +24,19 @@ function Banner() {
                 </div>
                 <div className="Menu">
                     <Link to="/Reports" onClick={() => handleClickForLink(1)} className="Bt1">
-                        <div className={"Reports" + (1 == clickBtn ? "active" : "")}>
+                        <div className={"LReports" + (1 == clickBtn ? "active" : "")}>
                             <i class="fa-solid fa-chart-simple"></i>
                             <div>Reports</div>
                         </div>
                     </Link>
                     <Link to="/Library" onClick={() => handleClickForLink(2)} className="Bt2">
-                        <div className={"Library" + (2 == clickBtn ? "active" : "")}>
+                        <div className={"LLibrary" + (2 == clickBtn ? "active" : "")}>
                             <i class="fa-solid fa-photo-film"></i>
                             <div>Library</div>
                         </div>
                     </Link>
                     <Link to="/GraphDashboard" onClick={() => handleClickForLink(3)} className="Bt3">
-                        <div className={"GraphDashboard" + (3 == clickBtn ? "active" : "")}>
+                        <div className={"LGraphDashboard" + (3 == clickBtn ? "active" : "")}>
                             <i class="fa-solid fa-chart-line"></i>
                             <div>GraphDashboard</div>
                         </div>
@@ -45,7 +45,7 @@ function Banner() {
                 <div className="SubTitle">Support</div>
                 <div className="Support">
                     <Link to="/Settings" onClick={() => handleClickForLink(4)} className="Bt4">
-                        <div className={"Settings" + (4 == clickBtn ? "active" : "")}>
+                        <div className={"LSettings" + (4 == clickBtn ? "active" : "")}>
                             <i class="fa-solid fa-gear"></i>
                             <div>Settings</div>
                         </div>

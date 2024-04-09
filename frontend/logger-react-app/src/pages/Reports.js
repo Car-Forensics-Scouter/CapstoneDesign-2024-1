@@ -8,7 +8,20 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 function Reports() {
 
     return  (
-        <h1>메인 대시보드 페이지</h1>
+        <div className="Reports">
+            <div>
+                타이틑이랑 다운로드 부분
+            </div>
+            <div>분리선 부분</div>
+            <div>
+                <div className="left">
+                    왼쪽 부분 - 차량 사진, 차량 정보, 그 외 속성들
+                </div>
+                <div className="right">
+                    오른쪽 부분 - 지도, 그 외 속성들
+                </div>
+            </div>
+        </div>
     );
 }
 

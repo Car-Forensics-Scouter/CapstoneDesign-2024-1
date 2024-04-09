@@ -17,24 +17,28 @@ a {
   text-align: center;
   background-color: #808080;
   padding: 20px;
-}
-
-.App .Report {
-  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  min-width: 1400px;
 }
 
 .App .Frame {
   background-color: #ffffff;
   border-radius: 27.71px;
   display: flex;
+  width: 1267px;
+  position: relative;
+  min-width: 1267px;
 }
 
 .App .Frame .Banner {
+  background-color: #ffffff;
   padding: 20px;
   border-radius: 18.47px;
   height: auto;
   position: relative;
   border: 0.5px solid #808080;
+  z-index: 2;
 }
 
 .App .Banner .Menu {
@@ -51,14 +55,14 @@ a {
   padding-right: 15px;
 }
 
-.App .Banner .Menu .Reports, .App .Banner .Menu .Library, .App .Banner .Menu .GraphDashboard, .App .Banner .Support .Settings {
+.App .Banner .Menu .LReports, .App .Banner .Menu .LLibrary, .App .Banner .Menu .LGraphDashboard, .App .Banner .Support .LSettings {
   display: flex;
   border-radius: 9.24px;
   padding: 10px;
   margin: 5px;
 }
 
-.App .Banner .Menu .Reportsactive, .App .Banner .Menu .Libraryactive, .App .Banner .Menu .GraphDashboardactive, .App .Banner .Support .Settingsactive {
+.App .Banner .Menu .LReportsactive, .App .Banner .Menu .LLibraryactive, .App .Banner .Menu .LGraphDashboardactive, .App .Banner .Support .LSettingsactive {
   background-color: #E6F9E9;
   display: flex;
   border-radius: 9.24px;
@@ -110,4 +114,16 @@ a {
 .App .Banner .Info .Contents .Contact {
   font-size: smaller;
   color: #878787;
+}
+
+.App .Reports {
+  position: absolute;
+  background-color: #D3F8D5;
+  border-radius: 27.71px;
+  width: 82.7%;
+  z-index: 1;
+  margin: 20px;
+  height: 658px;
+  top: 50%;
+  transform: translate(17%, -53%);
 }
