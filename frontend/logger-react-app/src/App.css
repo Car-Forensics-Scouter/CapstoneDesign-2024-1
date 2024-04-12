@@ -127,3 +127,33 @@ a {
   top: 50%;
   transform: translate(17%, -53%);
 }
+
+.App .Reports .wrap {
+  padding-left: 80px;
+  padding-right: 20px;
+}
+
+.App .Reports .wrap .head {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  align-items: center;
+}
+
+.App .Reports .wrap .head .title {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.App .Reports .wrap .head .download-button {
+  display: flex;
+  color: #4D4D4D;
+  font-size: small;
+  align-items: center;
+}
+
+.App .Reports .wrap .head .download-button .download {
+  margin-left: 10px;
+  font-weight: bold;
+}

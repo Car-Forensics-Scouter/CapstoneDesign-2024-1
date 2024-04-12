@@ -1,24 +1,49 @@
 import '../App.css';
+import React, { useState } from "react";
 
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
-function Reports() {
+function Reports(props) {
+    const downloadData = () => {
+        // 다운로드 기능 구현
+    };
 
     return  (
         <div className="Reports">
-            <div>
-                타이틑이랑 다운로드 부분
-            </div>
-            <div>분리선 부분</div>
-            <div>
-                <div className="left">
-                    왼쪽 부분 - 차량 사진, 차량 정보, 그 외 속성들
+            <div className="wrap">
+                <div className="head">
+                    <div className="title">
+                        Reports
+                    </div>
+                    <div className="download-button" onclick={downloadData}>
+                        <i class="fa-solid fa-download"/>
+                        <div className="download">Download</div>
+                    </div>
                 </div>
-                <div className="right">
-                    오른쪽 부분 - 지도, 그 외 속성들
+                <hr width="" color="#E5E5E5"/>
+                <div>
+                    <div className="left">
+                        <div className="car-photo">
+                            <img src={props.photo} alt="차량 이미지"/>
+                        </div>
+                        <div className="car-info">
+                            <ul>
+                                <li>차량 이름: 현대 아반떼</li>
+                                <li>VIN: F876F7623G234</li>
+                                <li>대충 차량의 기타 정보들</li>
+                            </ul>
+                        </div>
+                        <div className="car-status-left">
+                            컴포넌트 제작 예정...
+                        </div>
+                    </div>
+                    <div className="right">
+                        <div className="map">
+                            맵이 들어갈 예정이랍니다...
+                        </div>
+                        <div className="car-status-right">
+                            컴포넌트 제작 예정...
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
