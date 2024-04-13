@@ -29,6 +29,7 @@ a {
   width: 1267px;
   position: relative;
   min-width: 1267px;
+  height: auto;
 }
 
 .App .Frame .Banner {
@@ -116,28 +117,29 @@ a {
   color: #878787;
 }
 
-.App .Reports {
-  position: absolute;
+.App .Frame .Reports {
+  position: relative;
   background-color: #D3F8D5;
   border-radius: 27.71px;
-  width: 82.7%;
   z-index: 1;
-  margin: 20px;
-  height: 658px;
-  top: 50%;
-  transform: translate(17%, -53%);
+  width: 1000px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  min-height: 658px;
+  right: 20px;
+  flex: 1;
 }
 
 .App .Reports .wrap {
-  padding-left: 80px;
-  padding-right: 20px;
+  padding-left: 60px;
+  padding-right: 30px;
 }
 
 .App .Reports .wrap .head {
   display: flex;
   justify-content: space-between;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   align-items: center;
 }
 
