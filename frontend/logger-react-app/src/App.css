@@ -1,3 +1,5 @@
+/* 마음대로 수정 금지!!! */
+
 * {
   margin: 0;
   padding: 0;
@@ -130,12 +132,12 @@ a {
   flex: 1;
 }
 
-.App .Reports .wrap {
-  padding-left: 60px;
-  padding-right: 30px;
+.App .Frame .Reports .wrap {
+  padding-left: 52px;
+  padding-right: 32px;
 }
 
-.App .Reports .wrap .head {
+.App .Frame .Reports .wrap .head {
   display: flex;
   justify-content: space-between;
   padding-top: 20px;
@@ -143,19 +145,131 @@ a {
   align-items: center;
 }
 
-.App .Reports .wrap .head .title {
+.App .Frame .Reports .wrap .head .title {
   font-weight: bold;
   font-size: 24px;
 }
 
-.App .Reports .wrap .head .download-button {
+.App .Frame .Reports .wrap .head .download-button {
   display: flex;
   color: #4D4D4D;
   font-size: small;
   align-items: center;
 }
 
-.App .Reports .wrap .head .download-button .download {
+.App .Frame .Reports .wrap .head .download-button .download {
   margin-left: 10px;
   font-weight: bold;
 }
+
+.App .Frame .Reports .wrap .time-setting {
+  display: grid;
+  justify-content: left;
+  align-items: center;
+  grid-template-columns: 140px 80px 300px 50px 300px;
+  margin-top: 30px;
+  font-size: larger;
+  font-weight: bold;
+  margin-left: 30px;
+}
+
+.App .Frame .Reports .wrap .time-setting .start-time, .App .Frame .Reports .wrap .time-setting .finish-time {
+  width: 300px;
+  height: 30px;
+  background-color: #FFFFFF;
+  border-radius: 18.47px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 2px #878787;
+  font-weight: lighter;
+}
+
+.App .Frame .Reports .wrap .body {
+  display: flex;
+  margin-top: 30px;
+  justify-content: center;
+}
+
+.App .Frame .Reports .wrap .body .left {
+  margin-right: 30px;
+}
+
+.App .Frame .Reports .wrap .body .left .car-photo {
+  width: 330px;
+  height: 150px;
+  display: flex;
+  margin-bottom: 30px;
+  border-radius: 18.47px;
+  box-shadow: 2px 2px #878787;
+}
+
+.App .Frame .Reports .wrap .body .left .car-photo img {
+  width: 330px;
+  height: 150px;
+  border-radius: 18.47px;
+}
+
+.App .Frame .Reports .wrap .body .left .car-info {
+  background-color: #FFFFFF;
+  border-radius: 18.47px;
+  width: 330px;
+  height: 150px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  box-shadow: 2px 2px #878787;
+}
+
+.App .Frame .Reports .wrap .body .left .car-info ul {
+  text-align: left;
+  padding: 20px;
+}
+
+.App .Frame .Reports .wrap .body .left .car-info ul li {
+  padding: 10px;
+  font-weight: bold;
+}
+
+.App .Frame .Reports .wrap .body .left .car-status-left {
+  display: grid;
+  grid-template-columns: 150px 150px;
+  column-gap: 30px;
+  grid-template-rows: 150px 150px;
+  row-gap: 30px;
+  margin-bottom: 30px;
+}
+
+.App .Frame .Reports .wrap .body .right .map {
+  background-color: #FFFFFF;
+  border: 0.5px solid #878787;
+  box-shadow: 2px 2px #878787;
+  width: 510px;
+  height: 510px;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.App .Frame .Reports .wrap .body .right .map .naver-map {
+  width: 100%;
+  height: 510px;
+}
+
+.App .Frame .Reports .wrap .body .right .car-status-right {
+  display: grid;
+  grid-template-columns: 150px 150px 150px;
+  column-gap: 30px;
+  grid-template-rows: 150px;
+  row-gap: 30px;
+  margin-bottom: 30px;
+}
+
+.OneToOne {
+  width: 150px;
+  height: 150px;
+  background-color: #FFFFFF;
+  border-radius: 18.47px;
+  box-shadow: 2px 2px #878787;
+}
+
+/* 네이버 지도 API Client ID : kzkbajpzzx */

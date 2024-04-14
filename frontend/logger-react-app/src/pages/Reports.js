@@ -1,11 +1,32 @@
 import '../App.css';
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import OneToOne from "../components/OneToOne";
 
 
 function Reports(props) {
     const downloadData = () => {
         // 다운로드 기능 구현
     };
+
+    const mapRef = useRef();
+    const lat = 37.3595704;
+    const lng = 127.105399;
+
+    useEffect(() => {
+        const { naver } = window;
+        if(mapRef.current && naver) {
+            const location = new naver.maps.LatLng(lat, lng);
+            const map = new naver.maps.Map(mapRef.current, {
+                center: location,
+                zoom: 17,
+            });
+            new naver.maps.Marker({
+                position: location,
+                map,
+            });
+        }
+    }, []);
+
 
     return  (
         <div className="Reports">
@@ -19,8 +40,15 @@ function Reports(props) {
                         <div className="download">Download</div>
                     </div>
                 </div>
-                <hr width="" color="#E5E5E5"/>
-                <div>
+                <hr color="#E5E5E5"/>
+                <div className="time-setting">
+                    <div className="title">TIME RANGE :</div>
+                    <div className="from">FROM</div>
+                    <div className="start-time">2020.04.13. 13:42:45</div>
+                    <div className="to">TO</div>
+                    <div className="finish-time">2020.04.13. 13:42:45</div>
+                </div>
+                <div className="body">
                     <div className="left">
                         <div className="car-photo">
                             <img src={props.photo} alt="차량 이미지"/>
@@ -33,15 +61,20 @@ function Reports(props) {
                             </ul>
                         </div>
                         <div className="car-status-left">
-                            컴포넌트 제작 예정...
+                            <OneToOne className="OneToOne" title="SPEED"/>
+                            <OneToOne className="OneToOne" title="RPM"/>
+                            <OneToOne className="OneToOne" title="RPM"/>
+                            <OneToOne className="OneToOne" title="RPM"/>
                         </div>
                     </div>
                     <div className="right">
                         <div className="map">
-                            맵이 들어갈 예정이랍니다...
+                            <div className="naver-map" ref={mapRef}></div>
                         </div>
                         <div className="car-status-right">
-                            컴포넌트 제작 예정...
+                            <OneToOne className="OneToOne" title="RPM"/>
+                            <OneToOne className="OneToOne" title="RPM"/>
+                            <OneToOne className="OneToOne" title="RPM"/>
                         </div>
                     </div>
                 </div>
