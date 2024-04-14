@@ -61,10 +61,10 @@ function Reports(props) {
                             </ul>
                         </div>
                         <div className="car-status-left">
-                            <OneToOne className="OneToOne" title="SPEED"/>
-                            <OneToOne className="OneToOne" title="RPM"/>
-                            <OneToOne className="OneToOne" title="RPM"/>
-                            <OneToOne className="OneToOne" title="RPM"/>
+                            <OneToOne className="OneToOne" title="SPEED" value="76" unit="km.h" fontSize="24px"/>
+                            <OneToOne className="OneToOne" title="RPM" value="76" unit="km.h" fontSize="24px"/>
+                            <OneToOne className="OneToOne" title="THROTTLE POSITION" value="76" unit="km.h" fontSize="16px"/>
+                            <OneToOne className="OneToOne" title="RPM" value="76" unit="km.h" fontSize="24px"/>
                         </div>
                     </div>
                     <div className="right">
@@ -72,9 +72,9 @@ function Reports(props) {
                             <div className="naver-map" ref={mapRef}></div>
                         </div>
                         <div className="car-status-right">
-                            <OneToOne className="OneToOne" title="RPM"/>
-                            <OneToOne className="OneToOne" title="RPM"/>
-                            <OneToOne className="OneToOne" title="RPM"/>
+                            <OneToOne className="OneToOne" title="RPM" value="76.2" unit="km.h" fontSize="24px"/>
+                            <OneToOne className="OneToOne" title="RPM" value="76" unit="km.h" fontSize="24px"/>
+                            <OneToOne className="OneToOne" title="RPM" value="76" unit="km.h" fontSize="24px"/>
                         </div>
                     </div>
                 </div>
