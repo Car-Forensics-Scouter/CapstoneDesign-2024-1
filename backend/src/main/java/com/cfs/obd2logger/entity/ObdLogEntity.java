@@ -1,5 +1,5 @@
 package com.cfs.obd2logger.entity;
-
+/*
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -30,3 +30,4 @@ public class ObdLogEntity {
   private double runTime;           // 주행 시간
   private double runTimeMIL;        // 경고등 이후 엔진 작동 시간
 }
+*/

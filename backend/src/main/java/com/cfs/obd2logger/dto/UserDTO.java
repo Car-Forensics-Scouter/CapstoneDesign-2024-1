@@ -1,5 +1,5 @@
 package com.cfs.obd2logger.dto;
-
+/*
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,3 +19,4 @@ public class UserDTO {
     private String car_name;
     private String device_id;
 }
+ */

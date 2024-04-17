@@ -1,5 +1,5 @@
 package com.cfs.obd2logger.entity;
-
+/*
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,3 +34,4 @@ public class UserEntity {
     @Column(name = "DEVICE_ID", length = 8, nullable = false)
     private String device_id;
 }
+ */
