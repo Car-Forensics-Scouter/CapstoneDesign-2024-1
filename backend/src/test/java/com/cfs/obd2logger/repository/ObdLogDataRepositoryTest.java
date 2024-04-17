@@ -1,8 +1,6 @@
 package com.cfs.obd2logger.repository;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import com.cfs.obd2logger.entity.ObdLogEntity;
+import com.cfs.obd2logger.entity.ObdLog;
 import com.cfs.obd2logger.entity.ObdLogTablePK;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -20,7 +18,7 @@ class ObdLogDataRepositoryTest {
 
   @Test
   public void testObdLogData() {
-    ObdLogEntity obdLog1 = new ObdLogEntity();
+    ObdLog obdLog1 = new ObdLog();
     ObdLogTablePK obdLogTablePK1 = new ObdLogTablePK();
     LocalDateTime localDateTime1 = LocalDateTime.now();
     obdLog1.setDistance(1.0);

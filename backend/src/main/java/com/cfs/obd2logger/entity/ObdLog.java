@@ -12,7 +12,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class ObdLogEntity {
+public class ObdLog {
 
   @EmbeddedId
   private ObdLogTablePK obdLogTablePK;      // 라즈베리 파이 식별 번호, 타임 스탬프
