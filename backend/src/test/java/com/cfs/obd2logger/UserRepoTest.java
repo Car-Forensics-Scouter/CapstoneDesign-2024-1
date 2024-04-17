@@ -17,7 +17,7 @@ public class UserRepoTest {
     @Test
     @Transactional
     @Rollback(false)                                // 테스트가 완료된 후 데이터베이스 상태 유지
-    public void testMember() {
+    public void testUser() {
         User user = new User();                     // 객체 생성
         user.setUsername("Hello");                  // 객체 이름 설정
 
