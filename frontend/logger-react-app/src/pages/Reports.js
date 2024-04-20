@@ -25,7 +25,7 @@ function Reports(props) {
             },
             {
                 type: "RPM",
-                value: "1432",
+                value: "143",
                 unit: "rpm"
             },
             {
