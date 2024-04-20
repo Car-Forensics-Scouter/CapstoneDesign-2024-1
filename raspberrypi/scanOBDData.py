@@ -1,6 +1,6 @@
 import obd
-from gps import *
 import datetime
+import time
 
 # 1초마다 OBD 데이터를 수집
 # 타임스탬프도 찍기
@@ -16,12 +16,28 @@ VIN = str(connection.query(obd.commands.VIN).value.magnitude)  # 차량의 VIN
 
 serialNumber = "F1234"  # 제품 일련번호
 
+json_dict = {
+    "VIN" : VIN,
+    "serialNumber" : serialNumber
+}
 
 
 
 
 
-
+"""
+json_dict["partition1"] = {
+    "SPEED" : 12,
+    "RPM" : 12,
+    "ENGINELOAD" : 12,
+    "FUELLEVEL" : 12,
+    "COOLANTTEMP" : 12,
+    "THROTTLEPOSITION" : 12,
+    "DISTANCE" : 12,
+    "RUNTIME" : 12,
+    "BAROMETRIC" : 12
+}
+"""
 
 
 """
