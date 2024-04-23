@@ -34,8 +34,8 @@ while True:
         FUELLEVEL = str(connection.query(obd.commands.FUEL_LEVEL).value.magnitude)
         COOLANTTEMP = str(connection.query(obd.commands.COOLANT_TEMP).value.magnitude)
         THROTTLEPOSITION = str(connection.query(obd.commands.THROTTLE_POS).value.magnitude)
-        RUNTIME = str(connection.query(obd.commands.VIN).value.magnitude)
-        BAROMETRIC = str(connection.query(obd.commands.VIN).value.magnitude)
+        RUNTIME = str(connection.query(obd.commands.RUN_TIME).value.magnitude)
+        BAROMETRIC = str(connection.query(obd.commands.BAROMETRIC_PRESSURE).value.magnitude)
 
         key = "partition" + str(i + 1)
 
