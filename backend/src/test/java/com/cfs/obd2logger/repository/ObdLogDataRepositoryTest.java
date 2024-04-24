@@ -32,7 +32,7 @@ class ObdLogDataRepositoryTest {
     obdLog1.setRunTime(1.0);
     obdLog1.setRunTimeMIL(1.0);
     obdLog1.setThrottlePos(1.0);
-    obdLogTablePK1.setDeviceId(3333L);
+    obdLogTablePK1.setDeviceId("VF190913");
     obdLogTablePK1.setTimeStamp(localDateTime1);
     obdLog1.setObdLogTablePK(obdLogTablePK1);
 
