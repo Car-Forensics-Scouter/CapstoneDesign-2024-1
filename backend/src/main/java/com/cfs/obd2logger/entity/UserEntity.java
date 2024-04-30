@@ -33,4 +33,7 @@ public class UserEntity {
 
   @Column(name = "DEVICE_ID", length = 8, nullable = false)
   private String device_id;
+
+  @Column(name = "STATUS", length = 20, nullable = false)
+  private String status = "activated";
 }
