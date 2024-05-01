@@ -35,7 +35,7 @@ class ObdLogDataRepositoryTest {
     obdLog1.setRunTime(1.0);
     obdLog1.setRunTimeMIL(1.0);
     obdLog1.setThrottlePos(1.0);
-    obdLogTablePK1.setDevice_id("VF190913");
+    obdLogTablePK1.setDeviceId("VF190913");
     obdLogTablePK1.setTimeStamp(localDateTime1);
     obdLog1.setObdLogTablePK(obdLogTablePK1);
 
@@ -54,7 +54,7 @@ class ObdLogDataRepositoryTest {
     obdLog2.setRunTime(1.0);
     obdLog2.setRunTimeMIL(1.0);
     obdLog2.setThrottlePos(1.0);
-    obdLogTablePK2.setDevice_id("VF190913");
+    obdLogTablePK2.setDeviceId("VF190913");
     obdLogTablePK2.setTimeStamp(localDateTime2);
     obdLog2.setObdLogTablePK(obdLogTablePK2);
 
@@ -73,7 +73,7 @@ class ObdLogDataRepositoryTest {
     obdLog3.setRunTime(1.0);
     obdLog3.setRunTimeMIL(1.0);
     obdLog3.setThrottlePos(1.0);
-    obdLogTablePK3.setDevice_id("HD190913");
+    obdLogTablePK3.setDeviceId("HD190913");
     obdLogTablePK3.setTimeStamp(localDateTime3);
     obdLog3.setObdLogTablePK(obdLogTablePK3);
 
@@ -92,7 +92,7 @@ class ObdLogDataRepositoryTest {
     obdLog4.setRunTime(1.0);
     obdLog4.setRunTimeMIL(1.0);
     obdLog4.setThrottlePos(1.0);
-    obdLogTablePK4.setDevice_id("HD190913");
+    obdLogTablePK4.setDeviceId("HD190913");
     obdLogTablePK4.setTimeStamp(localDateTime4);
     obdLog4.setObdLogTablePK(obdLogTablePK4);
 
@@ -111,7 +111,7 @@ class ObdLogDataRepositoryTest {
     obdLog5.setRunTime(1.0);
     obdLog5.setRunTimeMIL(1.0);
     obdLog5.setThrottlePos(1.0);
-    obdLogTablePK5.setDevice_id("HD190913");
+    obdLogTablePK5.setDeviceId("HD190913");
     obdLogTablePK5.setTimeStamp(localDateTime5);
     obdLog5.setObdLogTablePK(obdLogTablePK5);
 
