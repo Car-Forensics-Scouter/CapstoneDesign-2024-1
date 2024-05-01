@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Box, Button, TextField } from "@mui/material";
 
-const LogIn = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [id, setID] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // 화면 이동 객체
 
   const handleLogin = async (e) => {
     e.preventDefault(); // form 컴포넌트에서 버튼을 클릭하면 생기는 새로고침을 막아줌.
 
     try {
-      // reponse 변수는 백엔드 서버의 로그인 로직과 통신합니다.
+      // 백엔드 서버의 로그인 로직과 통신하는 과정.
       const response = await fetch("로그인 서버 주소", {
         method: "POST",
         headers: {
@@ -32,7 +32,7 @@ const LogIn = () => {
         navigate("/MainBoard");
       } else {
         const errorData = await response.json();
-        alert("로그인 실패. 아이디와 비밀번호를 확인해주세요.");
+        alert("아이디와 비밀번호를 다시 확인해주세요.");
       }
     } catch (error) {
       console.error("로그인 요청 중 오류 발생 : ", error);
@@ -74,8 +74,10 @@ const LogIn = () => {
               placeholder="ID"
               value={id}
               onChange={(e) => setID(e.target.value)}
-              fullWidth
-              sx={{ borderRadius: "25px", border: "7px solid black" }}
+              InputProps={{
+                sx: { borderRadius: 20, border: "2px solid black" },
+                style: { width: "270px", paddingLeft: 10 },
+              }}
             />
           </Box>
 
@@ -85,8 +87,10 @@ const LogIn = () => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              fullWidth
-              sx={{ borderRadius: "25px", border: "7px solid black" }}
+              InputProps={{
+                sx: { borderRadius: 10, border: "2px solid black" },
+                style: { width: "270px", paddingLeft: 10 },
+              }}
             />
           </Box>
 
@@ -134,7 +138,7 @@ const LogIn = () => {
           ></div>
           <p style={{ marginTop: "10px", textAlign: "center" }}>
             계정이 없으신가요?{" "}
-            <Link to="/SignUpForm" style={{ color: "#C224DC" }}>
+            <Link to="/SignUp" style={{ color: "#C224DC" }}>
               회원가입
             </Link>
           </p>
@@ -144,4 +148,4 @@ const LogIn = () => {
   );
 };
 
-export default LogIn;
+export default Login;
