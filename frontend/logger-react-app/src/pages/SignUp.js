@@ -16,12 +16,6 @@ const SignUp = () => {
 
   const navigate = useNavigate();
 
-  // 차종 선택
-  const handleCarSelect = (selectedCar) => {
-    setCar(selectedCar);
-    setShowDropdown(false); // 목록 선택 후 드롭다운을 닫습니다.
-  };
-
   // 비밀번호 입력
   const handlePassword = (e) => {
     const { value } = e.target;
@@ -182,10 +176,9 @@ const SignUp = () => {
                   type="name"
                   placeholder="Name"
                   value={name}
-                  sx={{
-                    borderRadius: "25px",
-                    border: "7px solid black",
-                    width: "300px",
+                  InputProps={{
+                    sx: { borderRadius: 20, border: "2px solid black" },
+                    style: { width: "270px", paddingLeft: 10 },
                   }}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -207,10 +200,9 @@ const SignUp = () => {
                   type="email"
                   placeholder="Email"
                   value={email}
-                  sx={{
-                    borderRadius: "25px",
-                    border: "7px solid black",
-                    width: "300px",
+                  InputProps={{
+                    sx: { borderRadius: 20, border: "2px solid black" },
+                    style: { width: "270px", paddingLeft: 10 },
                   }}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -237,11 +229,9 @@ const SignUp = () => {
                 placeholder="차종을 선택하세요"
                 value={car}
                 onChange={(e) => setCar(e.target.value)}
-                sx={{
-                  borderRadius: "25px",
-                  border: "7px solid black",
-                  width: "300px",
-                  textAlign: "left",
+                InputProps={{
+                  sx: { borderRadius: 20, border: "2px solid black" },
+                  style: { width: "270px", paddingLeft: 10, textAlign: "left" },
                 }}
                 onClick={() => setShowDropdown(true)} // 입력 필드 클릭 시 드롭다운 표시
                 select // TextField를 select 모드로 변경
@@ -284,24 +274,27 @@ const SignUp = () => {
                   type="text"
                   placeholder="ID"
                   value={id}
-                  sx={{
-                    borderRadius: "25px",
-                    border: "7px solid black",
-                    width: "300px",
+                  InputProps={{
+                    sx: { borderRadius: 20, border: "2px solid black" },
+                    style: { width: "270px", paddingLeft: 10 },
                   }}
                   onChange={(e) => setID(e.target.value)}
                 />
                 <Button
                   variant="contained"
                   type="button"
-                  sx={{
-                    backgroundColor: "#3AE6B2",
-                    borderRadius: "10px",
-                    marginTop: "15px",
-                    marginLeft: "-110px",
-                    "&:hover": {
-                      backgroundColor: "#1976d2",
+                  InputProps={{
+                    sx: {
+                      borderRadius: 20,
+                      border: "2px solid black",
+                      backgroundColor: "#3AE6B2",
+                      marginTop: "15px",
+                      marginLeft: "-110px",
+                      "&:hover": {
+                        backgroundColor: "#1976d2",
+                      },
                     },
+                    style: { width: "270px", paddingLeft: 10 },
                   }}
                   onClick={() => checkDuplication(id)}
                 >
@@ -325,10 +318,9 @@ const SignUp = () => {
                   type="password"
                   placeholder="Password"
                   value={password}
-                  sx={{
-                    borderRadius: "25px",
-                    border: "7px solid black",
-                    width: "300px",
+                  InputProps={{
+                    sx: { borderRadius: 20, border: "2px solid black" },
+                    style: { width: "270px", paddingLeft: 10 },
                   }}
                   onChange={handlePassword}
                 />
@@ -351,10 +343,9 @@ const SignUp = () => {
                     type="passwordConfirm"
                     placeholder="PasswordComfirm"
                     value={passwordConfirm}
-                    sx={{
-                      borderRadius: "25px",
-                      border: "7px solid black",
-                      width: "300px",
+                    InputProps={{
+                      sx: { borderRadius: 20, border: "2px solid black" },
+                      style: { width: "270px", paddingLeft: 10 },
                     }}
                     onChange={handlePasswordConfirm}
                   />
