@@ -14,6 +14,6 @@ public class UserDTO {
     private String password;
     private String name;
     private String email;
-    private String car_name;
-    private String device_id;
+    private String carName;
+    private String deviceId;
 }

@@ -14,7 +14,7 @@ public class UserService {
     // 회원 가입
     public UserEntity signup(UserEntity userEntity) {
         if (userEntity == null) {
-            throw new RuntimeException("아이디를 입력하세요");
+            throw new RuntimeException("정보를 모두 입력하세요");
         }
         // 회원 상태 변경
         userEntity.setStatus("activated");
@@ -30,25 +30,31 @@ public class UserService {
 
     // 아이디 중복검사
     public boolean checkId(String id) {
-        Optional<UserEntity> user = userRepository.findById(id);
-        if(user.isPresent()) return true;
-        return false;
+        return userRepository.findById(id).isPresent();
     }
 
     // 사용자 정보
     public UserEntity getUserInfo(String id) {
-        Optional<UserEntity> user = userRepository.findById(id);
-        if(user.isPresent()) return user.get();
-        return null;
+        UserEntity user = userRepository.findById(id).orElse(null);
+        if (user == null) {
+            throw new RuntimeException("정보 없음");
+        }
+        return user;
     }
 
-    // 회원정보 수정 (고려중) -> 비밀번호, 차종, 제품 일련번호
+    // 회원정보 수정 -> 비밀번호, 차종, 제품 일련번호
 
-    // 아이디 비밀번호 찾기
+    // 아이디 찾기
+    public String getUserId(String name, String email) {
+        UserEntity user = userRepository.findByNameAndEmail(name, email);
+        return (user != null) ? user.getId() : null;
+    }
+
+    // 비밀번호 찾기 & 수정
 
     // 회원 탈퇴
-    public String deleteUser(String id, String email) {
-        UserEntity user = userRepository.findByIdAndPassword(id, email);
+    public String deleteUser(String id, String password) {
+        UserEntity user = userRepository.findByIdAndPassword(id, password);
         if (user == null) {
             throw new RuntimeException("입력이 잘못되었습니다.");
         }
