@@ -14,7 +14,7 @@ public interface ObdLogDataRepository extends JpaRepository<ObdLog, ObdLogTableP
   List<ObdLog> findObdLogByDay(@Param("startDate") LocalDateTime startDate,
       @Param("endDate") LocalDateTime endDate);
 
-  @Query("SELECT obdLog FROM ObdLog obdLog WHERE obdLog.obdLogTablePK.deviceId = :deviceId AND obdLog.obdLogTablePK.timeStamp >= :startDate AND obdLog.obdLogTablePK.timeStamp <= :endDate")
+  @Query("SELECT obdLog FROM ObdLog obdLog WHERE obdLog.obdLogTablePK.device_id = :deviceId AND obdLog.obdLogTablePK.timeStamp >= :startDate AND obdLog.obdLogTablePK.timeStamp <= :endDate")
   List<ObdLog> findObdLogByDeviceidAndDay(@Param("deviceId") String deviceId,
       @Param("startDate") LocalDateTime startDate,
       @Param("endDate") LocalDateTime endDate);

@@ -17,13 +17,13 @@ import lombok.ToString;
 public class ObdLogTablePK implements Serializable {
 
   @Column(name = "DEVICE_ID", length = 8, nullable = false)
-  private String deviceId;
+  private String device_id;
 
   @Column(name = "TIME_STAMP", nullable = false)
   private LocalDateTime timeStamp;
 
   public ObdLogTablePK(String deviceId, LocalDateTime timeStamp) {
-    this.deviceId = deviceId;
+    this.device_id = deviceId;
     this.timeStamp = timeStamp;
   }
 }
