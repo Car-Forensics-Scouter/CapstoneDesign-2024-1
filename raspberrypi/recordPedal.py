@@ -1,5 +1,8 @@
 import picamera
 import time
+import obd
+
+connection = obd.OBD()  # 차량과 연결
 
 # 녹화할 동영상 파일명
 output_file = 'video.h264'
@@ -7,15 +10,9 @@ output_file = 'video.h264'
 # 카메라 초기화
 camera = picamera.PiCamera()
 
-# 전원 감지 콜백 함수
-def power_off_callback(channel):
-    print("전원이 꺼집니다. 녹화를 중지합니다.")
-    camera.stop_recording()
-    camera.close()
-    GPIO.cleanup()
-    exit()
+class EngineOff(Exception):
+    pass
 
-# 위와 비슷한 별도의 중지 매커니즘이 필요함
 
 try:
     # 녹화 시작
@@ -24,9 +21,14 @@ try:
     # 무한 루프
     while True:
         time.sleep(1)  # CPU 자원을 낭비하지 않기 위해 대기
+        if(connection.status() == obd.OBDStatus.CAR_CONNECTED):
+            raise EngineOff
+
+except EngineOff:
+    camera.stop_recording()
+    camera.close()
 
 except KeyboardInterrupt:
     # 사용자가 Ctrl+C를 눌러 프로그램을 종료한 경우
     camera.stop_recording()
     camera.close()
-    GPIO.cleanup()

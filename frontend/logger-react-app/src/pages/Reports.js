@@ -70,15 +70,15 @@ function Reports(props) {
                 value: "none",
                 unit: ""
                 // 논 값 나오는 거 2개 대신 barometric_pressure evap vapor pressure 대기압 그거랑
-            },
-            {
-                GPS: [
-                    [12.12423, 54.23452],
-                    [14.23453, 56.23542]
-                ]
             }
         ]
-    )
+    );
+
+    const [GPS, setGPS] = useState([
+        [37.4526437, 126.49236],
+        [37.4768068, 126.4847975],
+        [37.4988237, 126.4960839]
+    ]);
 
     const handleStartTimeChange = (e) => {
         setStartTime(e.target.value);
@@ -93,17 +93,28 @@ function Reports(props) {
     }, []);
 
     const mapRef = useRef();
-    const lat = 37.3595704;
-    const lng = 127.105399;
+    const lat = GPS[0][0];  // 배열 길치 체크 후 가운데 값 부여
+    const lng = GPS[0][1];  // 배열 길이 체크 후 가운데 값 부여
+
+    // 위도, 경도 최대 최소 구한 후 줌 구현
 
     useEffect(() => {
         const { naver } = window;
+        const polylinePath = GPS.map(gps => new naver.maps.LatLng(gps[0], gps[1]));
+        console.log(polylinePath);
         if(mapRef.current && naver) {
             const location = new naver.maps.LatLng(lat, lng);
             const map = new naver.maps.Map(mapRef.current, {
                 center: location,
                 zoom: 17,
             });
+            const polyline = new naver.maps.Polyline({
+                path: polylinePath,
+                strokeColor: "#FF0000",
+                strokeOpacity: 0.8,
+                strokeWeight: 6,
+                map
+            })
             new naver.maps.Marker({
                 position: location,
                 map,

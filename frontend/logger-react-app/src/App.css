@@ -315,3 +315,16 @@ a {
 .OneToOne .unit {
   font-size: 24px;
 }
+
+
+/* 회원가입, 로그인, 아이디랑 비번찾기 화면에서 */
+.test {
+  background-color: #FFFFFF;
+  position: absolute;
+  z-index: 2;
+  width: 1267px;
+  min-width: 1267px;
+  border-radius: 18.47px;
+  height: auto;
+  min-height: 692px;
+}
