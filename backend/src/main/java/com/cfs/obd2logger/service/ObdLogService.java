@@ -32,7 +32,7 @@ public class ObdLogService {
   /**
    * 유저의 특정 날짜의 ObdLog 조회
    */
-  public List<ObdLog> findObdLogByDeviceAndDay(String deviceId, LocalDateTime date) {
+  public List<ObdLog> findObdLogOnDate(String deviceId, LocalDateTime date) {
     int year = date.getYear();
     int month = date.getMonthValue();
     int day = date.getDayOfMonth();
@@ -41,17 +41,10 @@ public class ObdLogService {
     LocalDateTime endDate = LocalDateTime.of(year, month, day, 23, 59, 59);
 
     try {
-      return obdLogDataRepository.findObdLogByDeviceidAndDay(deviceId, startDate, endDate);
+      return obdLogDataRepository.findObdLogByDeviceIdAndTimeStamp(deviceId, startDate, endDate);
     } catch (Exception e) {
       return null;
     }
-  }
-
-  /**
-   * 로그 다운로드 파일 생성
-   */
-  public void createLogDownloadFile() {
-    // TODO : 로그 다운로드 (특정 기간? 전체?)
   }
 
   /**
