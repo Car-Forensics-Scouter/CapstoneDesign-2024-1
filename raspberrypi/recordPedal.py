@@ -2,10 +2,10 @@ import picamera
 import time
 import obd
 
-connection = obd.OBD()  # 차량과 연결
+connection = obd.OBD("/dev?ttyUSB2")  # 차량과 연결
 
 # 녹화할 동영상 파일명
-output_file = 'video.h264'
+output_file = "video.h264."
 
 # 카메라 초기화
 camera = picamera.PiCamera()
@@ -21,7 +21,7 @@ try:
     # 무한 루프
     while True:
         time.sleep(1)  # CPU 자원을 낭비하지 않기 위해 대기
-        if(connection.status() == obd.OBDStatus.CAR_CONNECTED):
+        if(connection.status() != obd.OBDStatus.CAR_CONNECTED):
             raise EngineOff
 
 except EngineOff:

@@ -1,3 +1,5 @@
+# 하기 전에 소켓 켜야함!!!
+
 from gps import *
 import time
 

@@ -9,9 +9,9 @@ import time
 # 제품 일련번호도 맨처음에
 # 동영상 전송 부분도 구현해야 함
 
-connection = obd.OBD()  # 차량과 연결
+connection = obd.OBD("/dev/ttyUSB2")  # 차량과 연결
 
-VIN = str(connection.query(obd.commands.VIN).value.magnitude)  # 차량의 VIN
+VIN = str(connection.query(obd.commands.VIN).value)  # 차량의 VIN
 
 serialNumber = "F1234"  # 제품 일련번호
 
