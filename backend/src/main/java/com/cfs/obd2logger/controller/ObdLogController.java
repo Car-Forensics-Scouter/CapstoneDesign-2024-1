@@ -1,6 +1,5 @@
 package com.cfs.obd2logger.controller;
 
-import com.cfs.obd2logger.dto.ObdLogDTO;
 import com.cfs.obd2logger.entity.ObdLog;
 import com.cfs.obd2logger.service.ObdLogService;
 import java.time.LocalDateTime;
@@ -11,10 +10,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/api/obd")
 @RequiredArgsConstructor
 public class ObdLogController {
 
@@ -27,7 +28,9 @@ public class ObdLogController {
    * 라즈베리 파이로부터 json 데이터 저장
    */
   @PostMapping("")
-  public ResponseEntity<?> saveObdLog(@RequestParam ObdLogDTO)
+  public ResponseEntity<?> saveObdLog(@RequestParam String deviceId) {
+    return ResponseEntity.ok().body("true");
+  }
 
   /**
    * 로그 날짜 별로 조회

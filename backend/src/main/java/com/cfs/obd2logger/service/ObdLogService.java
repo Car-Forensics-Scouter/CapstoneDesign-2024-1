@@ -1,10 +1,13 @@
 package com.cfs.obd2logger.service;
 
 import com.cfs.obd2logger.entity.ObdLog;
+import com.cfs.obd2logger.entity.UserEntity;
 import com.cfs.obd2logger.repository.ObdLogDataRepository;
 import com.cfs.obd2logger.repository.UserRepository;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,12 +36,9 @@ public class ObdLogService {
    * 유저의 특정 날짜의 ObdLog 조회
    */
   public List<ObdLog> findObdLogOnDate(String deviceId, LocalDateTime date) {
-    int year = date.getYear();
-    int month = date.getMonthValue();
-    int day = date.getDayOfMonth();
-
-    LocalDateTime startDate = LocalDateTime.of(year, month, day, 00, 00, 00);
-    LocalDateTime endDate = LocalDateTime.of(year, month, day, 23, 59, 59);
+    DateRange dateRange = new DateRange(date);
+    LocalDateTime startDate = dateRange.getStartDate();
+    LocalDateTime endDate = dateRange.getEndDate();
 
     try {
       return obdLogDataRepository.findObdLogByDeviceIdAndTimeStamp(deviceId, startDate, endDate);
@@ -47,15 +47,80 @@ public class ObdLogService {
     }
   }
 
+  // TODO : 테스트 필요
+
+  /**
+   * 특정 날짜의 로그의 거리 계산 후 반환 (Killometer)
+   */
+  public double calDistance(String deviceId, LocalDateTime date) {
+    DateRange dateRange = new DateRange(date);
+    LocalDateTime startDate = dateRange.getStartDate();
+    LocalDateTime endDate = dateRange.getEndDate();
+
+    List<Double> lonList = obdLogDataRepository.findLonByDeviceAndTimeStamp(deviceId, startDate,
+        endDate);
+    List<Double> latList = obdLogDataRepository.findLatByDeviceAndTimeStamp(deviceId, startDate,
+        endDate);
+
+    // 로그가 0~1개일 경우, 0 반환
+    int size = lonList.size();
+    if (size < 2) {
+      return 0;
+    }
+
+    double earthRadius = 6371000;                   // 미터 단위
+    double dLat = 0.0;
+    double dLon = 0.0;
+    double lon1 = 0.0;
+    double lat1 = 0.0;
+    double lon2 = 0.0;
+    double lat2 = 0.0;
+    double a = 0.0;
+    double c = 0.0;
+    double dist = 0.0;
+
+    // TODO : 추후 성능 개선하여 유지 보수할 것
+    for (int i = 0; i < size - 1; i++) {
+      lon1 = lonList.get(i);
+      lat1 = latList.get(i);
+      lon2 = lonList.get(i + 1);
+      lat2 = latList.get(i + 1);
+
+      dLat = Math.toRadians(lat2 - lat1);
+      dLon = Math.toRadians(lon2 - lon1);
+      a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(Math.toRadians(lat1)) * Math.cos(
+          Math.toRadians(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      dist += earthRadius * c;
+    }
+    dist = dist / 1000.0;       // KM 단위 변환
+    return dist;
+  }
+
+
   /**
    * 유효한 deviceId 인지 검사하는 함수
    */
   private boolean isValidDeviceId(String deviceId) {
     try {
-      // UserEntity user = userRepository.findByDeviceId(deviceId);
+      UserEntity user = userRepository.findByDeviceId(deviceId);
       return true;
     } catch (Exception e) {
       return false;
     }
+  }
+
+  // 하루 날짜의 시작-끝 범위
+  @Getter
+  public class DateRange {
+
+    private final LocalDateTime startDate;
+    private final LocalDateTime endDate;
+
+    public DateRange(LocalDateTime date) {
+      this.startDate = date.toLocalDate().atTime(LocalTime.MIN);
+      this.endDate = date.toLocalDate().atTime(LocalTime.MAX);
+    }
+
   }
 }
