@@ -3,15 +3,19 @@ package com.cfs.obd2logger.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 
 @Entity
 @Getter
-@Setter
+@Builder
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class ObdLog {
 
   @EmbeddedId

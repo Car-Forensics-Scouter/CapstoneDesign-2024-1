@@ -24,12 +24,13 @@ public class ObdLogService {
   /**
    * 라즈베리파이로부터 로그 받아서 저장
    */
-  public void saveLog(ObdLog obdLog) {
+  public boolean saveLog(ObdLog obdLog) {
     // 유효한 deviceId가 아닐 경우 저장하지 않음
     if (!isValidDeviceId(obdLog.getObdLogTablePK().getDeviceId())) {
-      return;
+      return false;
     }
     obdLogDataRepository.save(obdLog);
+    return true;
   }
 
   /**

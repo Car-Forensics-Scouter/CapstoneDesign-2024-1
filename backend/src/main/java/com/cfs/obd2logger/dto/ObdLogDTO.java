@@ -1,5 +1,7 @@
 package com.cfs.obd2logger.dto;
 
+import com.cfs.obd2logger.entity.ObdLog;
+import com.cfs.obd2logger.entity.ObdLogTablePK;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,4 +28,26 @@ public class ObdLogDTO {
   private double runTimeMIL;        // 경고등 이후 엔진 작동 시간
   private double lat;               // GPS 위도
   private double lon;               // GPS 경도
+
+  /**
+   * DTO --> Entity 변환
+   */
+  public ObdLog toEntity() {
+    ObdLogTablePK obdLogTablePK = new ObdLogTablePK(deviceId, timeStamp);
+    return ObdLog.builder()
+        .obdLogTablePK(obdLogTablePK)
+        .vin(vin)
+        .speed(speed)
+        .rpm(rpm)
+        .engineLoad(engineLoad)
+        .fuelLevel(fuelLevel)
+        .oilTemp(oilTemp)
+        .coolantTemp(coolantTemp)
+        .throttlePos(throttlePos)
+        .distance(distance)
+        .runTime(runTime)
+        .runTimeMIL(runTimeMIL)
+        .lat(lat)
+        .lon(lon).build();
+  }
 }
