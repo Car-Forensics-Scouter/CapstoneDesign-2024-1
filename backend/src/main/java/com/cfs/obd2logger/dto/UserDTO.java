@@ -16,4 +16,5 @@ public class UserDTO {
     private String email;
     private String carName;
     private String deviceId;
+    private String token;
 }
