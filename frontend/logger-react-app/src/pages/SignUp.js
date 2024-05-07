@@ -1,7 +1,11 @@
+import "./SignUp.css";
+import "../App.css";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Box, TextField, Select, MenuItem, Button } from "@mui/material";
 import TextFields from "@mui/material/TextField";
+import CFS_logo from "../assets/CFS_logo.png";
+
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -103,253 +107,114 @@ const SignUp = () => {
   };
 
   return (
-    <div>
-      <div style={{ textAlign: "left" }}>
-        <img
-          src="/logo.png"
-          alt="로고"
-          style={{
-            width: "200px",
-            height: "auto",
-            paddingRight: "40px",
-          }}
-        />
-        <h1
-          style={{
-            fontSize: "32px",
-            fontWeight: "bolder",
-            paddingLeft: "95px",
-            margin: "0",
-          }}
-        >
-          회원가입
-        </h1>
-        <p
-          style={{
-            fontSize: "20px",
-            paddingLeft: "100px",
-            margin: "0",
-            marginBottom: "2px",
-          }}
-        >
-          회원이 되어 다양한 정보를 접해 보세요!
-        </p>
-      </div>
+    <div className="hide_banner">
+      <div className="SignUp">
+        <div className="header_center">
+          <img className="logo" src={CFS_logo} alt="로고"/>
+          <h1 className="header1">회원가입</h1>
+          <p className="header2">회원이 되어 다양한 정보를 접해 보세요!</p>
+        </div>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <form
-          className="signup-form"
-          onSubmit={handleSignUp}
-          style={{ width: "1000px" }}
-        >
-          <div
-            style={{
-              float: "left",
-              marginLeft: "120px",
-              marginTop: "25px",
-            }}
-          >
-            <div>
-              <div
-                style={{
-                  marginBottom: "1px",
-                  float: "left",
-                  marginLeft: "5px",
-                }}
-              >
-                이름
-              </div>
-              <Box
-                sx={{
-                  marginBottom: 1,
-                  borderRadius: "10px",
-                  borderRadius: "25px",
-                }}
-              >
-                <TextFields
-                  type="name"
-                  placeholder="Name"
-                  value={name}
-                  InputProps={{
-                    sx: { borderRadius: 20, border: "2px solid black" },
-                    style: { width: "270px", paddingLeft: 10 },
-                  }}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </Box>
-            </div>
-
-            <div>
-              <div
-                style={{
-                  marginBottom: "1px",
-                  float: "left",
-                  marginLeft: "5px",
-                }}
-              >
-                이메일
-              </div>
-              <Box sx={{ marginBottom: 1, borderRadius: "10px" }}>
-                <TextFields
-                  type="email"
-                  placeholder="Email"
-                  value={email}
-                  InputProps={{
-                    sx: { borderRadius: 20, border: "2px solid black" },
-                    style: { width: "270px", paddingLeft: 10 },
-                  }}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </Box>
-            </div>
-
-            <div>
-              <div
-                style={{
-                  marginBottom: "1px",
-                  float: "left",
-                  marginLeft: "5px",
-                  cursor: "pointer", // 클릭 가능하도록 커서 모양 변경
-                }}
-                onClick={() => setShowDropdown(!showDropdown)}
-                // 클릭 시 드롭다운 토글
-              >
-                차종 선택
-              </div>
-            </div>
-            <Box sx={{ marginBottom: 2, borderRadius: "10px" }}>
-              <TextField
-                type="text"
-                placeholder="차종을 선택하세요"
-                value={car}
-                onChange={(e) => setCar(e.target.value)}
-                InputProps={{
-                  sx: { borderRadius: 20, border: "2px solid black" },
-                  style: { width: "270px", paddingLeft: 10, textAlign: "left" },
-                }}
-                onClick={() => setShowDropdown(true)} // 입력 필드 클릭 시 드롭다운 표시
-                select // TextField를 select 모드로 변경
-              >
-                {showDropdown &&
-                  carList.map((carType) => (
-                    <MenuItem key={carType} value={carType}>
-                      {carType}
-                    </MenuItem>
-                  ))}
-              </TextField>
-            </Box>
-          </div>
-
-          <div
-            style={{
-              float: "left",
-              marginLeft: "75px",
-              marginTop: "25px",
-            }}
-          >
-            <div>
-              <div
-                style={{
-                  marginBottom: "1px",
-                  float: "left",
-                  marginLeft: "15px",
-                }}
-              >
-                아이디
-              </div>
-              <Box
-                sx={{
-                  marginBottom: 1,
-                  borderRadius: "10px",
-                  marginRight: 2,
-                }}
-              >
-                <TextFields
-                  type="text"
-                  placeholder="ID"
-                  value={id}
-                  InputProps={{
-                    sx: { borderRadius: 20, border: "2px solid black" },
-                    style: { width: "270px", paddingLeft: 10 },
-                  }}
-                  onChange={(e) => setID(e.target.value)}
-                />
-                <Button
-                  variant="contained"
-                  type="button"
-                  InputProps={{
-                    sx: {
-                      borderRadius: 20,
-                      border: "2px solid black",
-                      backgroundColor: "#3AE6B2",
-                      marginTop: "15px",
-                      marginLeft: "-110px",
-                      "&:hover": {
-                        backgroundColor: "#1976d2",
-                      },
-                    },
-                    style: { width: "270px", paddingLeft: 10 },
-                  }}
-                  onClick={() => checkDuplication(id)}
-                >
-                  중복 확인
-                </Button>
-              </Box>
-            </div>
-
-            <div>
-              <div
-                style={{
-                  marginBottom: "1px",
-                  float: "left",
-                  marginLeft: "15px",
-                }}
-              >
-                비밀번호
-              </div>
-              <Box sx={{ borderRadius: "100px", padding: "10px" }}>
-                <TextFields
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  InputProps={{
-                    sx: { borderRadius: 20, border: "2px solid black" },
-                    style: { width: "270px", paddingLeft: 10 },
-                  }}
-                  onChange={handlePassword}
-                />
-              </Box>
-            </div>
-
-            <div>
-              <div>
-                <div
-                  style={{
-                    marginBottom: "1px",
-                    float: "left",
-                    marginLeft: "15px",
-                  }}
-                >
-                  비밀번호 확인
-                </div>
-                <Box sx={{ marginBottom: 2, borderRadius: "20px" }}>
+        <div className="input_center">
+          <form className="signup_form" onSubmit={handleSignUp} >
+            <div className="left_side">
+              <div className="data_name">이름 </div>
+                <Box className="input_box">
                   <TextFields
-                    type="passwordConfirm"
-                    placeholder="PasswordComfirm"
-                    value={passwordConfirm}
-                    InputProps={{
-                      sx: { borderRadius: 20, border: "2px solid black" },
-                      style: { width: "270px", paddingLeft: 10 },
-                    }}
-                    onChange={handlePasswordConfirm}
+                    type="name"
+                    placeholder="Name"
+                    value={name}
+                    InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
+                    onChange={(e) => setName(e.target.value)}
                   />
                 </Box>
+
+              <div>
+                <div className="data_name">이메일 </div>
+                  <Box className="input_box">
+                    <TextFields
+                      type="email"
+                      placeholder="Email"
+                      value={email}
+                      InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </Box>
+              </div>
+
+              <div className="data_name">차종 선택
+                <div className="menu"
+                  onClick={() => setShowDropdown(!showDropdown)}   // 클릭 시 드롭다운 토글  
+                >
+              </div>
+                <Box className="input_box">
+                  <TextField
+                    type="text"
+                    placeholder="차종을 선택하세요"
+                    value={car}
+                    onChange={(e) => setCar(e.target.value)}
+                    InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
+                    onClick={() => setShowDropdown(true)} // 입력 필드 클릭 시 드롭다운 표시
+                    select // TextField를 select 모드로 변경
+                  >
+                    {showDropdown &&
+                      carList.map((carType) => (
+                        <MenuItem key={carType} value={carType}>
+                          {carType}
+                        </MenuItem>
+                      ))}
+                  </TextField>
+                </Box>
+              </div>
+            </div>
+
+            <div className="right_side">
+              <div>
+                <div className="data_name">아이디 </div>
+                <Box className="input_box">
+                  <TextFields
+                    type="text"
+                    placeholder="ID"
+                    value={id}
+                    InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
+                    onChange={(e) => setID(e.target.value)}
+                  />
+                  <Button
+                    variant="contained"
+                    type="button"
+                    className="dedicating_button"
+                    InputProps={{ sx: { "&:hover": { backgroundColor: "#1976d2" } } }}
+                    onClick={() => checkDuplication(id)}
+                  >중복 확인
+                  </Button>
+                </Box>
+              </div>
+
+              <div>
+                <div className="data_name">비밀번호 </div>
+                  <Box className="input_box">
+                    <TextFields
+                      type="password"
+                      placeholder="Password"
+                      value={password}
+                      InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
+                      onChange={handlePassword}
+                    />
+                  </Box>
+              </div>
+
+              <div>
+                <div className="data_name" >비밀번호 확인 </div>
+                  <Box className="input_box">
+                    <TextFields
+                      type="passwordConfirm"
+                      placeholder="PasswordComfirm"
+                      value={passwordConfirm}
+                      InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
+                      className="text_box"
+                      onChange={handlePasswordConfirm}
+                    />
+                  </Box>
               </div>
               {!passwordMatch && password !== "" && (
                 <div style={{ color: "red", marginLeft: "15px" }}>
@@ -362,52 +227,27 @@ const SignUp = () => {
                 </div>
               )}
             </div>
-          </div>
-        </form>
-      </div>
+          </form>
+        </div>
 
-      <Button
-        type="submit"
-        variant="contained"
-        sx={{
-          width: "40%",
-          backgroundColor: "#3AE6B2",
-          padding: "10px",
-          borderRadius: "25px",
-          fontSize: "20px",
-          "&:hover": {
-            backgroundColor: "#1976d2",
-          },
-          marginTop: 3,
-          marginLeft: 10,
-        }}
-      >
-        회원가입
-      </Button>
+        <Button
+          className="signup_button"
+          type="submit"
+          variant="contained"
+          sx={{ "&:hover": { backgroundColor: "#1976d2" } }}
+        >회원가입
+        </Button>
 
-      <div>
-        <p style={{ fontWeight: "bolder", fontSize: "25px", marginLeft: 60 }}>
-          서비스 이용을 위해 회원가입 해주세요.
-        </p>
-        <p style={{ textAlign: "center", marginLeft: 60 }}>
-          아이디/비밀번호를 잊으셨나요?{"  "}
-          <Link to="/SignUp" style={{ color: "#C224DC" }}>
-            아이디/비밀번호 찾기
-          </Link>
-        </p>
-        <div
-          style={{
-            width: "60%",
-            borderTop: "2.5px solid",
-            marginLeft: "200px",
-          }}
-        ></div>
-        <p style={{ marginTop: "10px", textAlign: "center", marginLeft: 60 }}>
-          이미 계정이 있으신가요?{"  "}
-          <Link to="/" style={{ color: "#C224DC" }}>
-            로그인
-          </Link>
-        </p>
+        <div className="tail_center">
+          <p className="tail1">서비스 이용을 위해 회원가입 해주세요. </p>
+          <p className="tail2">아이디/비밀번호를 잊으셨나요?{"  "}
+            <Link to="/SignUp" style={{ color: "#C224DC" }}>아이디/비밀번호 찾기 </Link>
+          </p>
+          <div className="line"/>
+          <p className="tail2">이미 계정이 있으신가요?{"  "}
+            <Link to="/" style={{ color: "#C224DC" }}>로그인</Link>
+          </p>
+        </div>
       </div>
     </div>
   );

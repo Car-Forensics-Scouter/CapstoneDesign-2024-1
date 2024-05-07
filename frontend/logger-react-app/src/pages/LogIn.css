@@ -1,0 +1,71 @@
+.Login {
+    margin-left: 5%;
+}
+
+.Login .text_center {
+    text-align: center;
+}
+
+.Login .text_center .logo {
+    margin-top: 50px;
+    width: 600px;
+}
+
+.Login .top_empty_space {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40hv;
+    margin-top: 30px;
+}
+
+.Login .top_empty_space .login_form {
+    width: 400px;
+}
+
+.Login .top_empty_space .login_form .input_box {
+    margin-left: 10px;
+    margin-bottom: 3px;
+    width: 90%;
+}
+
+.Login .top_empty_space .login_form .input_box .text_box {
+    border-radius: 30px;
+    border: 5px black;
+    width: 270px;
+    margin-bottom: 5px;
+}
+  
+
+.Login .top_empty_space .login_form .submit_button {
+    width: 90%;
+    background-color: #3AE6B2;
+    padding: 12px 10px;
+    border-radius: 25px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.Login .top_empty_space .login_form .service_text {
+    margin-Top: 10px;
+    text-Align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.Login .top_empty_space .login_form .find_id_password {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.Login .top_empty_space .login_form .sign_up {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.Login .top_empty_space .login_form .bottom_empty_space {
+    width: 100%;
+    border-top: 2.5px solid;
+    margin: 10px 0;
+}
