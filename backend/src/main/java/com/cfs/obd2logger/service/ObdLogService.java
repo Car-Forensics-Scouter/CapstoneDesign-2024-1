@@ -1,13 +1,12 @@
 package com.cfs.obd2logger.service;
 
+import com.cfs.obd2logger.entity.DateRange;
 import com.cfs.obd2logger.entity.ObdLog;
 import com.cfs.obd2logger.entity.UserEntity;
 import com.cfs.obd2logger.repository.ObdLogDataRepository;
 import com.cfs.obd2logger.repository.UserRepository;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,10 +41,22 @@ public class ObdLogService {
     LocalDateTime endDate = dateRange.getEndDate();
 
     try {
-      return obdLogDataRepository.findObdLogByDeviceIdAndTimeStamp(deviceId, startDate, endDate);
+      return obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId, startDate, endDate);
     } catch (Exception e) {
       return null;
     }
+  }
+
+  /**
+   * 유저의 로그 전체 삭제
+   */
+  public boolean deleteObdLog(String deviceId) {
+    // 유효한 deviceId가 아닐 경우 삭제하지 않음
+    if (!isValidDeviceId(deviceId)) {
+      return false;
+    }
+    obdLogDataRepository.deleteByDeviceId(deviceId);
+    return true;
   }
 
   // TODO : 테스트 필요
@@ -109,19 +120,5 @@ public class ObdLogService {
     } catch (Exception e) {
       return false;
     }
-  }
-
-  // 하루 날짜의 시작-끝 범위
-  @Getter
-  public class DateRange {
-
-    private final LocalDateTime startDate;
-    private final LocalDateTime endDate;
-
-    public DateRange(LocalDateTime date) {
-      this.startDate = date.toLocalDate().atTime(LocalTime.MIN);
-      this.endDate = date.toLocalDate().atTime(LocalTime.MAX);
-    }
-
   }
 }

@@ -4,11 +4,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Getter
+@Builder
 @ToString
 @Embeddable
 @NoArgsConstructor

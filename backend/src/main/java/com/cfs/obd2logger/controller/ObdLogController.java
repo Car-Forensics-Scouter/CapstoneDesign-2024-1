@@ -24,6 +24,8 @@ public class ObdLogController {
   @Autowired
   private final ObdLogService obdLogService;
 
+  // TODO : 테스팅 필요
+
   /**
    * 라즈베리 파이로부터 json 데이터 저장
    */
@@ -52,6 +54,8 @@ public class ObdLogController {
       return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가
     }
   }
+
+  // TODO : 테스팅 필요
 
   /**
    * 특정 날짜의 거리 계산

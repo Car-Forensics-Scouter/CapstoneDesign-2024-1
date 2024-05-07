@@ -131,15 +131,15 @@ class ObdLogDataRepositoryTest {
     LocalDateTime end240411 = LocalDateTime.of(2024, 04, 11, 23, 59, 59);
 
     // deviceId1의 240401 날짜의 모든 로그 출력 (expected: 2)
-    List<ObdLog> dvId01and240401 = obdLogDataRepository.findObdLogByDeviceIdAndTimeStamp(deviceId1,
+    List<ObdLog> dvId01and240401 = obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId1,
         start240401, end240401);
 
     // deviceId2의 240401 날짜의 모든 로그 출력 (expected: 2)
-    List<ObdLog> dvId02and240401 = obdLogDataRepository.findObdLogByDeviceIdAndTimeStamp(deviceId1,
+    List<ObdLog> dvId02and240401 = obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId1,
         start240401, end240401);
 
     // 240411 날짜의 모든 로그 출력 (expected: 1)
-    List<ObdLog> dvId02and240411 = obdLogDataRepository.findObdLogByDeviceIdAndTimeStamp(deviceId2,
+    List<ObdLog> dvId02and240411 = obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId2,
         start240411, end240411);
 
     assertThat(dvId01and240401.size()).isEqualTo(2);    // deviceId01 의 240401 날짜 로그가 2개가 아니라면, 오류

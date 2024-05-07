@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-// TODO : HTTP API 통신에 맞춰 DTO 구현
 @Getter
 @Builder
 @AllArgsConstructor
@@ -33,7 +32,9 @@ public class ObdLogDTO {
    * DTO --> Entity 변환
    */
   public ObdLog toEntity() {
-    ObdLogTablePK obdLogTablePK = new ObdLogTablePK(deviceId, timeStamp);
+    ObdLogTablePK obdLogTablePK = ObdLogTablePK.builder()
+        .deviceId(deviceId)
+        .timeStamp(timeStamp).build();
     return ObdLog.builder()
         .obdLogTablePK(obdLogTablePK)
         .vin(vin)
