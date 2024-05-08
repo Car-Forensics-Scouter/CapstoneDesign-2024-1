@@ -318,7 +318,7 @@ a {
 
 
 /* 회원가입, 로그인, 아이디랑 비번찾기 화면에서 */
-.test {
+.hide_banner {
   background-color: #FFFFFF;
   position: absolute;
   z-index: 2;
