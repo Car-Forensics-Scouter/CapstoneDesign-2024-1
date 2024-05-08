@@ -93,7 +93,7 @@ const Login = () => {
 
             <p className="find_id_password">
               아이디/비밀번호를 잊으셨나요?{" "}
-              <Link to="/SignUpForm" style={{ color: "#C224DC" }}>
+              <Link to="/FindIdPassword" style={{ color: "#C224DC" }}>
                 아이디/비밀번호 찾기
               </Link>
             </p>
