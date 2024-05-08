@@ -32,8 +32,8 @@ const SignUp = () => {
     setPasswordConfirm(value);
     setPasswordMatch(password === value);
   };
-
-  // ID 중복 확인 요청
+  
+ // ID 중복 확인 요청
   const checkDuplication = async (props) => {
     try {
       const response = await fetch("http://localhost:8080/user/check_id", {
@@ -42,20 +42,20 @@ const SignUp = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          value: props,
+          userid: props,
         }),
       });
-
-      if (response.status == 201) {
-        const data = await response.json();
-        if (data.isDuplicate) {
-          // 여기에 백엔드에서 처리한 로직을 연결
-          alert("이미 사용중인 ID입니다.");
-        } else {
-          alert("사용할 수 있는 ID입니다.");
-        }
-      } else {
+  
+      if (!response.ok) {
         throw new Error("중복 확인 요청에 실패했습니다.");
+      }
+  
+      const data = await response.json();
+      
+      if (data === false) {
+        alert("사용 가능한 아이디입니다.");
+      } else {
+        alert("중복된 아이디입니다. 다시 시도하세요.");
       }
     } catch (error) {
       console.error("중복 확인 에러:", error);
@@ -79,7 +79,6 @@ const SignUp = () => {
       // 기본 정보 입력.
       if (password === passwordConfirm) {
         alert("회원가입이 완료되었습니다!");
-        // 여기서 추가적인 회원가입 로직을 작성할 수 있습니다 (예: 서버로 회원가입 정보 전송)
       } else {
         alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
       }
