@@ -16,7 +16,7 @@ const Login = () => {
 
     try {
       // 백엔드 서버의 로그인 로직과 통신하는 과정.
-      const response = await fetch("로그인 서버 주소", {
+      const response = await fetch("http://localhost:8080/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
