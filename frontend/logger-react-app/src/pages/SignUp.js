@@ -36,7 +36,7 @@ const SignUp = () => {
   // ID 중복 확인 요청
   const checkDuplication = async (props) => {
     try {
-      const response = await fetch("백엔드 서버 주소/중복 확인", {
+      const response = await fetch("http://localhost:8080/user/check_id", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
