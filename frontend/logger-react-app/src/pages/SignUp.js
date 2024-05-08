@@ -207,7 +207,7 @@ const SignUp = () => {
                 <div className="data_name" >비밀번호 확인 </div>
                   <Box className="input_box">
                     <TextFields
-                      type="passwordConfirm"
+                      type="password"
                       placeholder="PasswordComfirm"
                       value={passwordConfirm}
                       InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
