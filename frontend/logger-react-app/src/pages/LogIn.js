@@ -16,7 +16,7 @@ const Login = () => {
 
     try {
       // 백엔드 서버의 로그인 로직과 통신하는 과정.
-      const response = await fetch("http://localhost:8080/user/login", {
+      const response = await fetch("로그인 서버 주소", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -87,20 +87,16 @@ const Login = () => {
               로그인
             </Button>
 
-            <p className="service_text">
-              서비스 이용을 위해 로그인 해주세요.
-            </p>
-
+            <p className="service_text">서비스 이용을 위해 로그인 해주세요.</p>
             <p className="find_id_password">
               아이디/비밀번호를 잊으셨나요?{" "}
-              <Link to="/FindIdPassword" style={{ color: "#C224DC" }}>
+              <Link to="/SignUpForm" style={{ color: "#C224DC" }}>
                 아이디/비밀번호 찾기
               </Link>
             </p>
 
-            <div className="bottom_empty_space"></div>
-            <p className="sign_up">
-              계정이 없으신가요?{" "}
+            <div className="line"></div>
+            <p className="sign_up">계정이 없으신가요?{" "}
               <Link to="/SignUp" style={{ color: "#C224DC" }}>
                 회원가입
               </Link>

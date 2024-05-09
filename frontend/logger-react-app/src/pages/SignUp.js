@@ -2,7 +2,7 @@ import "./SignUp.css";
 import "../App.css";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Box, TextField, Select, MenuItem, Button } from "@mui/material";
+import { Box, TextField, MenuItem, Button } from "@mui/material";
 import TextFields from "@mui/material/TextField";
 import CFS_logo from "../assets/CFS_logo.png";
 
@@ -13,6 +13,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(true); // 비밀번호 일치 여부 상태
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [isDuplication, setIsDuplication] = useState("");
   const [name, setName] = useState("");
   const [car, setCar] = useState("");
   const [showDropdown, setShowDropdown] = useState(false); // 차종 선택 목록에 쓰이는 변수
@@ -32,8 +33,8 @@ const SignUp = () => {
     setPasswordConfirm(value);
     setPasswordMatch(password === value);
   };
-  
- // ID 중복 확인 요청
+
+  // ID 중복 확인 요청
   const checkDuplication = async (props) => {
     try {
       const response = await fetch("http://localhost:8080/user/check_id", {
@@ -54,6 +55,7 @@ const SignUp = () => {
       
       if (data === false) {
         alert("사용 가능한 아이디입니다.");
+        setIsDuplication(true)
       } else {
         alert("중복된 아이디입니다. 다시 시도하세요.");
       }
@@ -77,14 +79,14 @@ const SignUp = () => {
 
     try {
       // 기본 정보 입력.
-      if (password === passwordConfirm) {
+      if ((password === passwordConfirm) && (isDuplication === true)) {
         alert("회원가입이 완료되었습니다!");
       } else {
         alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
       }
 
       // reponse 변수는 백엔드 서버의 회원가입 로직과 통신.
-      const response = await fetch("로그인 서버 주소", {
+      const response = await fetch("http://localhost:8080/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -95,7 +97,7 @@ const SignUp = () => {
       if (response.status === 201) {
         const data = await response.json();
         console.log("회원가입 성공:", data);
-        navigate("/LoginForm");
+        navigate("/LogIn");
       } else {
         throw new Error("회원가입 요청 실패");
       }
@@ -116,130 +118,131 @@ const SignUp = () => {
 
         <div className="input_center">
           <form className="signup_form" onSubmit={handleSignUp} >
-            <div className="left_side">
-              <div className="data_name">이름 </div>
-                <Box className="input_box">
-                  <TextFields
-                    type="name"
-                    placeholder="Name"
-                    value={name}
-                    InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </Box>
-
-              <div>
-                <div className="data_name">이메일 </div>
+            <div>
+              <div className="left_side">
+                <div className="data_name">이름 </div>
                   <Box className="input_box">
                     <TextFields
-                      type="email"
-                      placeholder="Email"
-                      value={email}
+                      type="name"
+                      placeholder="Name"
+                      value={name}
                       InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={(e) => setName(e.target.value)}
                     />
                   </Box>
-              </div>
 
-              <div className="data_name">차종 선택
-                <div className="menu"
-                  onClick={() => setShowDropdown(!showDropdown)}   // 클릭 시 드롭다운 토글  
-                >
-              </div>
-                <Box className="input_box">
-                  <TextField
-                    type="text"
-                    placeholder="차종을 선택하세요"
-                    value={car}
-                    onChange={(e) => setCar(e.target.value)}
-                    InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
-                    onClick={() => setShowDropdown(true)} // 입력 필드 클릭 시 드롭다운 표시
-                    select // TextField를 select 모드로 변경
+                <div>
+                  <div className="data_name">이메일 </div>
+                    <Box className="input_box">
+                      <TextFields
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </Box>
+                </div>
+
+                <div className="data_name">차종 선택
+                  <div className="menu"
+                    onClick={() => setShowDropdown(!showDropdown)}   // 클릭 시 드롭다운 토글  
                   >
-                    {showDropdown &&
-                      carList.map((carType) => (
-                        <MenuItem key={carType} value={carType}>
-                          {carType}
-                        </MenuItem>
-                      ))}
-                  </TextField>
-                </Box>
-              </div>
-            </div>
-
-            <div className="right_side">
-              <div>
-                <div className="data_name">아이디 </div>
-                <Box className="input_box">
-                  <TextFields
-                    type="text"
-                    placeholder="ID"
-                    value={id}
-                    InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
-                    onChange={(e) => setID(e.target.value)}
-                  />
-                  <Button
-                    variant="contained"
-                    type="button"
-                    className="dedicating_button"
-                    InputProps={{ sx: { "&:hover": { backgroundColor: "#1976d2" } } }}
-                    onClick={() => checkDuplication(id)}
-                  >중복 확인
-                  </Button>
-                </Box>
+                </div>
+                  <Box className="input_box">
+                    <TextField
+                      type="text"
+                      placeholder="차종을 선택하세요"
+                      value={car}
+                      onChange={(e) => setCar(e.target.value)}
+                      InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
+                      onClick={() => setShowDropdown(true)} // 입력 필드 클릭 시 드롭다운 표시
+                      select // TextField를 select 모드로 변경
+                    >
+                      {showDropdown &&
+                        carList.map((carType) => (
+                          <MenuItem key={carType} value={carType}>
+                            {carType}
+                          </MenuItem>
+                        ))}
+                    </TextField>
+                  </Box>
+                </div>
               </div>
 
-              <div>
-                <div className="data_name">비밀번호 </div>
+              <div className="right_side">
+                <div>
+                  <div className="data_name">아이디 </div>
                   <Box className="input_box">
                     <TextFields
-                      type="password"
-                      placeholder="Password"
-                      value={password}
+                      type="text"
+                      placeholder="ID"
+                      value={id}
                       InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
-                      onChange={handlePassword}
+                      onChange={(e) => setID(e.target.value)}
                     />
+                    <Button
+                      variant="contained"
+                      type="button"
+                      className="dedicating_button"
+                      InputProps={{ sx: { "&:hover": { backgroundColor: "#1976d2" } } }}
+                      onClick={() => checkDuplication(id)}
+                    >중복 확인
+                    </Button>
                   </Box>
-              </div>
+                </div>
 
-              <div>
-                <div className="data_name" >비밀번호 확인 </div>
-                  <Box className="input_box">
-                    <TextFields
-                      type="password"
-                      placeholder="PasswordComfirm"
-                      value={passwordConfirm}
-                      InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
-                      className="text_box"
-                      onChange={handlePasswordConfirm}
-                    />
-                  </Box>
+                <div>
+                  <div className="data_name">비밀번호 </div>
+                    <Box className="input_box">
+                      <TextFields
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
+                        onChange={handlePassword}
+                      />
+                    </Box>
+                </div>
+
+                <div>
+                  <div className="data_name" >비밀번호 확인 </div>
+                    <Box className="input_box">
+                      <TextFields
+                        type="password"
+                        placeholder="PasswordComfirm"
+                        value={passwordConfirm}
+                        InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
+                        className="text_box"
+                        onChange={handlePasswordConfirm}
+                      />
+                    </Box>
+                </div>
+                {!passwordMatch && password !== "" && (
+                  <div style={{ color: "red", marginLeft: "15px" }}>
+                    비밀번호가 일치하지 않습니다.
+                  </div>
+                )}
+                {passwordMatch && passwordConfirm && password !== "" && (
+                  <div style={{ color: "green", marginLeft: "15px" }}>
+                    비밀번호가 일치합니다.
+                  </div>
+                )}
               </div>
-              {!passwordMatch && password !== "" && (
-                <div style={{ color: "red", marginLeft: "15px" }}>
-                  비밀번호가 일치하지 않습니다.
-                </div>
-              )}
-              {passwordMatch && password !== "" && (
-                <div style={{ color: "green", marginLeft: "15px" }}>
-                  비밀번호가 일치합니다.
-                </div>
-              )}
             </div>
+            <Button
+              className="signup_button"
+              type="submit"
+              variant="contained"
+              sx={{ "&:hover": { backgroundColor: "#1976d2" } }}
+            >회원가입
+            </Button>
           </form>
         </div>
 
-        <Button
-          className="signup_button"
-          type="submit"
-          variant="contained"
-          sx={{ "&:hover": { backgroundColor: "#1976d2" } }}
-        >회원가입
-        </Button>
-
         <div className="tail_center">
-          <p className="tail1">서비스 이용을 위해 회원가입 해주세요. </p>
-          <p className="tail2">아이디/비밀번호를 잊으셨나요?{"  "}
+          <p className="service_text">서비스 이용을 위해 회원가입 해주세요. </p>
+          <p className="find_id_password">아이디/비밀번호를 잊으셨나요?{"  "}
             <Link to="/SignUp" style={{ color: "#C224DC" }}>아이디/비밀번호 찾기 </Link>
           </p>
           <div className="line"/>

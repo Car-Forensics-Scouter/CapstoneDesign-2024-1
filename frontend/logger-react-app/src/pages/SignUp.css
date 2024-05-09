@@ -32,12 +32,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 50px;
+    margin-right: 150px;
     margin-bottom: 25px;
 }
 
 .SignUp .input_center .signup_form {
-    width: 1200px;
+    width: 900px;
 }
 
 .SignUp .input_center .signup_form .left_side {
@@ -63,9 +63,9 @@
 }
 
 .SignUp .input_center .signup_form .right_side {
-    float: left;
+    float: right;
     text-align: left;
-    margin-left: 75px;
+    margin-left: 0px;
     margin-top: 25px;
 }
 
@@ -77,7 +77,6 @@
 .SignUp .input_center .signup_form .right_side .data_name .input_box {
     width: 500px;
 }
-
 
 
 .SignUp .input_center .signup_form .right_side .input_box .dedicating_button {
@@ -95,30 +94,31 @@
     padding: 10px;
     border-radius: 25px;
     font-size: 20px;
-    margin-left: 10;
-    margin-bottom: 5;
+    margin-left: 250px;
+    margin-top: 10px;
 }
 
 .SignUp .tail_center {
     width: 100%;
 }
 
-.SignUp .tail_center .tail1 {
+.SignUp .tail_center .service_text {
     font-weight: bolder;
     font-size: 25px;
     margin-top: 15px;
     margin-left: 60;
 }
 
-.SignUp .tail_center .tail2 {
+.SignUp .tail_center .find_id_password {
     text-align: center;
-    margin-top: 20px;
-    margin-left: 60;
+    margin-top: 10px;
+    margin-left: 65;
 }
 
 .SignUp .tail_center .line {
     width: 60%;
     border-top: 2.5px solid;
-    margin-left: 200px;
+    margin-left: 270px;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
