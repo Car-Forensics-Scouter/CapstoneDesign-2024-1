@@ -18,6 +18,7 @@ const Login = () => {
       // 백엔드 서버의 로그인 로직과 통신하는 과정.
       const response = await fetch("로그인 서버 주소", {
         method: "POST",
+        mode: "cors",
         headers: {
           "Content-Type": "application/json",
         },
@@ -30,7 +31,7 @@ const Login = () => {
         const result = await response.json();
         console.log(result);
 
-        navigate("/MainBoard");
+        navigate("/Reports");
       } else {
         const errorData = await response.json();
         alert("아이디와 비밀번호를 다시 확인해주세요.");

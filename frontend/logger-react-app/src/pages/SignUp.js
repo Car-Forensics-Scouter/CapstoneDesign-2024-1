@@ -39,6 +39,7 @@ const SignUp = () => {
     try {
       const response = await fetch("http://localhost:8080/user/check_id", {
         method: "POST",
+        mode: "cors",
         headers: {
           "Content-Type": "application/json",
         },
@@ -88,6 +89,7 @@ const SignUp = () => {
       // reponse 변수는 백엔드 서버의 회원가입 로직과 통신.
       const response = await fetch("http://localhost:8080/user/login", {
         method: "POST",
+        mode: "cors",
         headers: {
           "Content-Type": "application/json",
         },
