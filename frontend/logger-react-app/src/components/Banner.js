@@ -1,5 +1,4 @@
 import CFS_logo from "../assets/CFS_logo.png";
-import '../App.css';
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 

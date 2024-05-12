@@ -1,5 +1,3 @@
-import '../App.css';
-
 function OneToOne(props) {
     const fontSize = props.fontSize;
     // tooltip 구현 예정
