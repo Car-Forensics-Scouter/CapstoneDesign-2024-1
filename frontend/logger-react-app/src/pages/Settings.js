@@ -16,7 +16,7 @@ function Settings() {
                             <div className="save">저장</div>
                         </div>
                         <div className="input">
-                            입력 칸
+                            <input type="password" value="Seongbin1!" id="password"/>
                        </div>
                     </div>
                     <div className="templete">
@@ -25,7 +25,10 @@ function Settings() {
                             <div className="save">저장</div>
                         </div>
                         <div className="input">
-                            입력 칸
+                            <select>
+                                <option value="1">아반떼</option>
+                                <option value="2">그랜저</option>
+                            </select>
                        </div>
                     </div>
                     <div className="templete">
@@ -34,7 +37,7 @@ function Settings() {
                             <div className="save">저장</div>
                         </div>
                         <div className="input">
-                            입력 칸
+                            <input type="text" placeholder="F124235" id="serialNumber"/>
                        </div>
                     </div>
                 </div>
