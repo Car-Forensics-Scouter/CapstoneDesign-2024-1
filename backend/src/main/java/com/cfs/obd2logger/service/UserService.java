@@ -3,6 +3,7 @@ package com.cfs.obd2logger.service;
 import com.cfs.obd2logger.dto.UserDTO;
 import com.cfs.obd2logger.entity.UserEntity;
 import com.cfs.obd2logger.repository.UserRepository;
+import jakarta.persistence.Entity;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -48,6 +49,10 @@ public class UserService {
     }
 
     // 비밀번호 찾기
+    public String getUserPassword(String id, String name, String email) {
+        UserEntity user = userRepository.findByIdAndNameAndEmail(id, name, email);
+        return (user != null) ? user.getPassword() : null;
+    }
 
     // 사용자 정보 조회
     public UserEntity getUserInfo(String id) {
@@ -59,14 +64,24 @@ public class UserService {
     }
 
     // 회원정보 수정
-    public UserEntity editUserInfo(UserEntity userEntity) {
+    public void editUserInfo(UserEntity userEntity) {
         if (userEntity == null) {
             throw new RuntimeException("엔티티가 잘못되었습니다.");
         }
-        return userRepository.save(userEntity);
+        userRepository.save(userEntity);
     }
 
-    // 회원정보 수정 코드 추가
+    // 회원정보 수정 (차량 이름, 장치 아이디)
+    public UserEntity editCarNameAndDeviceId(UserDTO userDTO) {
+        Optional<UserEntity> userOptional = userRepository.findById(userDTO.getId());
+        if (userOptional.isPresent()) {
+            UserEntity user = userOptional.get();
+            user.setCarName(userDTO.getCarName());
+            user.setDeviceId(userDTO.getDeviceId());
+            return userRepository.save(user);
+        }
+        return null;
+    }
 
     // 회원 탈퇴
     public String deleteUser(String id, String password) {

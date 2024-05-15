@@ -39,7 +39,7 @@ public class WebSecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
             .authorizeHttpRequests(authorize->authorize
-                .requestMatchers("/user/**").permitAll()
+                .requestMatchers("/user/**", "/api/obd_log/**").permitAll()
                 .anyRequest().authenticated()
             );
 
@@ -53,7 +53,7 @@ public class WebSecurityConfig {
 
         // cors 설정
         config.setAllowCredentials(true);
-        config.setAllowedOriginPatterns(List.of("*"));
+        config.setAllowedOriginPatterns(List.of("http://localhost:8080","http://localhost:3000"));
         config.setAllowedMethods(Arrays.asList("HEAD","POST","GET","DELETE","PUT", "PATCH"));
         config.setAllowedHeaders(List.of("*"));
 
@@ -62,5 +62,5 @@ public class WebSecurityConfig {
         source.registerCorsConfiguration("/**", config);
 
         return source;
-    };
+    }
 }

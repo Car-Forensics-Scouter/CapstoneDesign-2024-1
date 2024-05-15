@@ -24,7 +24,7 @@ public class UserController {
     TokenProvider tokenProvider;
 
     // 회원가입
-    @PostMapping("")
+    @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody UserDTO userDTO) {
         try {
             UserEntity user = UserEntity.builder()
@@ -84,7 +84,7 @@ public class UserController {
     }
 
     // 아이디 찾기
-    @GetMapping("")
+    @GetMapping("find_id")
     public ResponseEntity<String> findUserId(@RequestParam String name, @RequestParam String email) {
         String userId = userService.getUserId(name, email);
         if (userId != null) {
@@ -95,6 +95,15 @@ public class UserController {
     }
 
     // 비밀번호 찾기
+    @GetMapping("find_password")
+    public ResponseEntity<String> findUserPassword(@RequestParam String id, @RequestParam String name, @RequestParam String email) {
+        String userPassword = userService.getUserPassword(id, name, email);
+        if (userPassword != null) {
+            return ResponseEntity.ok(userPassword);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("존재하지 않는 계정입니다.");
+        }
+    }
 
     // 사용자 정보 조회
     @GetMapping("")
@@ -139,12 +148,26 @@ public class UserController {
         }
     }
 
-    // 회원 정보 수정 (비밀번호, 차종)
-    // 회원 정보 수정 (비밀번호, 일련번호)
-    // 회원 정보 수정 (차총, 제품 일련번호)
-    // 회원 정보 수정 (비밀번호)
-    // 회원 정보 수정 (차총)
-    // 회원 정보 수정 (일련번호)
+    @PatchMapping("/carName_deviceId")
+    public ResponseEntity<?> updateCarNameAndDeviceId(@RequestBody UserDTO userDTO) {
+        try {
+            UserEntity updateUser = userService.editCarNameAndDeviceId(userDTO);
+            if (updateUser == null) {
+                return ResponseEntity.ok().body("존재하지 않는 유저입니다.");
+            }
+            String token = tokenProvider.create(updateUser);
+
+            UserDTO responseUserDTO = UserDTO.builder()
+                .id(updateUser.getId())
+                .carName(updateUser.getCarName())
+                .deviceId(updateUser.getDeviceId())
+                .token(token)
+                .build();
+            return ResponseEntity.ok().body(responseUserDTO);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
     // 회원 탈퇴
     @DeleteMapping("")
