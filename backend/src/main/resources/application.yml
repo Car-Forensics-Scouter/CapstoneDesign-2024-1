@@ -4,12 +4,12 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/mydb?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: root
-    password: 0921
+    password: ${PASSWORD}
 
   # spring data jpa 설정
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
@@ -18,3 +18,8 @@ logging:
   level:
     org.hibernate.SQL: debug
 #    org.hibernate.type: trace
+
+  # JWT 속성 설정
+jwt:
+  issuer: ${USER_KEY}
+  secret_key: ${SECRET_KEY}
