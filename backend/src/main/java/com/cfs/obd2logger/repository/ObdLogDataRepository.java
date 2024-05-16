@@ -17,7 +17,7 @@ public interface ObdLogDataRepository extends JpaRepository<ObdLog, ObdLogTableP
    * deviceId가 일치하는 모든 obdLog를 조회하는 쿼리 메소드
    */
   @Query("SELECT obdLog FROM ObdLog obdLog WHERE obdLog.obdLogTablePK.deviceId = :deviceId")
-  List<ObdLog> findByDeviceId(@Param("deviceId") String deviceId);
+  List<ObdLog> findAllByDeviceId(@Param("deviceId") String deviceId);
 
   /**
    * deviceId가 일치하는 모든 obdLog를 삭제하고 삭제된 컬럼 갯수를 반환하는 쿼리 메소드
@@ -25,7 +25,7 @@ public interface ObdLogDataRepository extends JpaRepository<ObdLog, ObdLogTableP
   @Modifying
   @Transactional
   @Query("DELETE FROM ObdLog obdLog WHERE obdLog.obdLogTablePK.deviceId = :deviceId")
-  int deleteByDeviceId(@Param("deviceId") String deviceId);
+  int deleteAllByDeviceId(@Param("deviceId") String deviceId);
 
 
   /**

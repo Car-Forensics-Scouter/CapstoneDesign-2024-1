@@ -1,5 +1,6 @@
 package com.cfs.obd2logger.service;
 
+import com.cfs.obd2logger.dto.ObdLogDTO;
 import com.cfs.obd2logger.entity.DateRange;
 import com.cfs.obd2logger.entity.ObdLog;
 import com.cfs.obd2logger.entity.UserEntity;
@@ -7,6 +8,7 @@ import com.cfs.obd2logger.repository.ObdLogDataRepository;
 import com.cfs.obd2logger.repository.UserRepository;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,7 +69,7 @@ public class ObdLogService {
     if (!isValidDeviceId(deviceId)) {
       return false;
     }
-    obdLogDataRepository.deleteByDeviceId(deviceId);
+    obdLogDataRepository.deleteAllByDeviceId(deviceId);
     return true;
   }
 
@@ -121,7 +123,7 @@ public class ObdLogService {
     return dist;
   }
 
-
+  
   /**
    * 유효한 deviceId 인지 검사하는 함수
    */
@@ -132,5 +134,14 @@ public class ObdLogService {
     } catch (Exception e) {
       return false;
     }
+  }
+
+  /**
+   * obdLogEntity 리스트 --> obdLogDTO 리스트
+   */
+  private List<ObdLogDTO> ListEntityToListDTO(List<ObdLog> obdLogList) {
+    return obdLogList.stream()
+        .map(ObdLog::toDTO)
+        .collect(Collectors.toList());
   }
 }

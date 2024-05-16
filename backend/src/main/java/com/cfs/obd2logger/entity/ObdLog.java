@@ -1,5 +1,6 @@
 package com.cfs.obd2logger.entity;
 
+import com.cfs.obd2logger.dto.ObdLogDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -59,4 +60,25 @@ public class ObdLog {
 
   @Column(name = "LON", nullable = false)
   private double lon;        // GPS 경도
+
+
+  public ObdLogDTO toDTO() {
+    return ObdLogDTO.builder()
+        .deviceId(obdLogTablePK.getDeviceId())
+        .timeStamp(obdLogTablePK.getTimeStamp())
+        .vin(vin)
+        .speed(speed)
+        .rpm(rpm)
+        .engineLoad(engineLoad)
+        .fuelLevel(fuelLevel)
+        .oilTemp(oilTemp)
+        .coolantTemp(coolantTemp)
+        .throttlePos(throttlePos)
+        .distance(distance)
+        .runTime(runTime)
+        .runTimeMIL(runTimeMIL)
+        .lat(lat)
+        .lon(lon).build();
+  }
+
 }

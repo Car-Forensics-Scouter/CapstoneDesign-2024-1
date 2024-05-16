@@ -85,4 +85,16 @@ public class ObdLogController {
       return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가
     }
   }
+
+//  /**
+//   * 로그 파일 다운로드
+//   */
+//  @GetMapping("/download")
+//  public ResponseEntity<?> downloadObdLog(@RequestParam String deviceId) {
+//    try {
+//      // TODO : 다운로드 서비스 연결
+//    } catch (Exception e) {
+//
+//    }
+//  }
 }
