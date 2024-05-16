@@ -42,13 +42,28 @@ public class ObdLogController {
   }
 
   /**
-   * 특정 날짜의 로그 조회
+   * 특정 날짜의 로그 조회 (1일)
    */
   @GetMapping("/")
   public ResponseEntity<?> getObdLogOnDate(@RequestParam String deviceId,
       @RequestParam @DateTimeFormat(pattern = "yyyy/MM/dd") LocalDateTime date) {
     try {
       List<ObdLog> obdLogsOnDate = obdLogService.findObdLogOnDate(deviceId, date);
+      return ResponseEntity.ok().body(obdLogsOnDate);
+    } catch (Exception e) {
+      return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가
+    }
+  }
+
+  /**
+   * 특정 날짜의 로그 조회 (특정 시작일~특정 끝일)
+   */
+  @GetMapping("/")
+  public ResponseEntity<?> getObdLogOnDate(@RequestParam String deviceId,
+      @RequestParam @DateTimeFormat(pattern = "yyyy/MM/dd") LocalDateTime startDate,
+      @RequestParam @DateTimeFormat(pattern = "yyyy/MM/dd") LocalDateTime endDate) {
+    try {
+      List<ObdLog> obdLogsOnDate = obdLogService.findObdLogOnDate(deviceId, startDate, endDate);
       return ResponseEntity.ok().body(obdLogsOnDate);
     } catch (Exception e) {
       return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가

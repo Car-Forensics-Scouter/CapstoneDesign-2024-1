@@ -33,13 +33,25 @@ public class ObdLogService {
   }
 
   /**
-   * 유저의 특정 날짜의 ObdLog 조회
+   * 유저의 특정 날짜의 ObdLog 조회 (1일)
    */
   public List<ObdLog> findObdLogOnDate(String deviceId, LocalDateTime date) {
     DateRange dateRange = new DateRange(date);
     LocalDateTime startDate = dateRange.getStartDate();
     LocalDateTime endDate = dateRange.getEndDate();
 
+    try {
+      return obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId, startDate, endDate);
+    } catch (Exception e) {
+      return null;
+    }
+  }
+
+  /**
+   * 유저의 특정 날짜의 ObdLog 조회 (특정 시작일~특정 끝일)
+   */
+  public List<ObdLog> findObdLogOnDate(String deviceId, LocalDateTime startDate,
+      LocalDateTime endDate) {
     try {
       return obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId, startDate, endDate);
     } catch (Exception e) {

@@ -15,4 +15,9 @@ public class DateRange {
     this.startDate = date.toLocalDate().atTime(LocalTime.MIN);
     this.endDate = date.toLocalDate().atTime(LocalTime.MAX);
   }
+
+  public DateRange(LocalDateTime startDate, LocalDateTime endDate) {
+    this.startDate = startDate;
+    this.endDate = endDate;
+  }
 }
