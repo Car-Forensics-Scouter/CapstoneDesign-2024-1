@@ -30,8 +30,8 @@ public class ObdLogController {
    * 라즈베리 파이로부터 json 데이터 저장
    */
   @PostMapping("/save")
-  public ResponseEntity<?> saveObdLog(@RequestBody ObdLogDTO obdLogDTO) {
-    boolean isInvalid = obdLogService.saveLog(obdLogDTO.toEntity());
+  public ResponseEntity<?> saveObdLog(@RequestBody List<ObdLogDTO> obdLogDTOList) {
+    boolean isInvalid = obdLogService.saveLog(obdLogDTOList);
 
     // 유효한 DeviceId
     if (isInvalid) {
@@ -44,9 +44,9 @@ public class ObdLogController {
   /**
    * 특정 날짜의 로그 조회 (1일)
    */
-  @GetMapping("/")
+  @GetMapping("/date")
   public ResponseEntity<?> getObdLogOnDate(@RequestParam String deviceId,
-      @RequestParam @DateTimeFormat(pattern = "yyyy/MM/dd") LocalDateTime date) {
+      @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime date) {
     try {
       List<ObdLog> obdLogsOnDate = obdLogService.findObdLogOnDate(deviceId, date);
       return ResponseEntity.ok().body(obdLogsOnDate);
@@ -58,10 +58,10 @@ public class ObdLogController {
   /**
    * 특정 날짜의 로그 조회 (특정 시작일~특정 끝일)
    */
-  @GetMapping("/")
+  @GetMapping("/date-range")
   public ResponseEntity<?> getObdLogOnDate(@RequestParam String deviceId,
-      @RequestParam @DateTimeFormat(pattern = "yyyy/MM/dd") LocalDateTime startDate,
-      @RequestParam @DateTimeFormat(pattern = "yyyy/MM/dd") LocalDateTime endDate) {
+      @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime startDate,
+      @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime endDate) {
     try {
       List<ObdLog> obdLogsOnDate = obdLogService.findObdLogOnDate(deviceId, startDate, endDate);
       return ResponseEntity.ok().body(obdLogsOnDate);
@@ -77,9 +77,10 @@ public class ObdLogController {
    */
   @GetMapping("/distance")
   public ResponseEntity<?> getDistanceOnDate(@RequestParam String deviceId,
-      @RequestParam @DateTimeFormat(pattern = "yyyy/MM/dd") LocalDateTime date) {
+      @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime startDate,
+      @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime endDate) {
     try {
-      double distance = obdLogService.calDistance(deviceId, date);
+      double distance = obdLogService.calDistance(deviceId, startDate, endDate);
       return ResponseEntity.ok().body(distance);
     } catch (Exception e) {
       return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가

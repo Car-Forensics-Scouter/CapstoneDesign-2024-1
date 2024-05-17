@@ -6,6 +6,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
@@ -24,9 +25,13 @@ import lombok.Setter;
 public class Video {
 
   @Id
+  @Column(name = "DEVICE_ID")
+  private String deviceId;  // 라즈베리파이 식별번호 (외래키: UserEntity)
+
+  @MapsId
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "DEVICE_ID")
-  private UserEntity user;                      // 라즈베리파이 식별번호 (외래키: UserEntity)
+  @JoinColumn(name = "DEVICE_ID", referencedColumnName = "DEVICE_ID")
+  private UserEntity user;
 
   @Column(name = "FILE_PATH", length = 512, nullable = false)
   private String filePath;                      // 동영상 파일 경로
