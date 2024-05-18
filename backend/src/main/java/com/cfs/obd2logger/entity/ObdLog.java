@@ -55,11 +55,11 @@ public class ObdLog {
   @Column(name = "RUN_TIME_MIL", nullable = false)
   private double runTimeMIL;        // 경고등 이후 엔진 작동 시간
 
-  @Column(name = "LAT", nullable = false)
-  private double lat;        // GPS 위도
-
   @Column(name = "LON", nullable = false)
   private double lon;        // GPS 경도
+
+  @Column(name = "LAT", nullable = false)
+  private double lat;        // GPS 위도
 
 
   public ObdLogDTO toDTO() {

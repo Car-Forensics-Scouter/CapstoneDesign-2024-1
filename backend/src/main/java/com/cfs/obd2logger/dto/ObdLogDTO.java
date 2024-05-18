@@ -25,8 +25,8 @@ public class ObdLogDTO {
   private double distance;          // 주행 거리
   private double runTime;           // 주행 시간
   private double runTimeMIL;        // 경고등 이후 엔진 작동 시간
-  private double lat;               // GPS 위도
   private double lon;               // GPS 경도
+  private double lat;               // GPS 위도
 
   /**
    * DTO --> Entity 변환

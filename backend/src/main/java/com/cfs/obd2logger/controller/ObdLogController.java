@@ -3,11 +3,15 @@ package com.cfs.obd2logger.controller;
 import com.cfs.obd2logger.dto.ObdLogDTO;
 import com.cfs.obd2logger.entity.ObdLog;
 import com.cfs.obd2logger.service.ObdLogService;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +28,7 @@ public class ObdLogController {
   @Autowired
   private final ObdLogService obdLogService;
 
-  // TODO : 테스팅 필요
+  // TODO : 컨트롤러 테스팅 필요
 
   /**
    * 라즈베리 파이로부터 json 데이터 저장
@@ -70,8 +74,6 @@ public class ObdLogController {
     }
   }
 
-  // TODO : 테스팅 필요
-
   /**
    * 특정 날짜의 거리 계산
    */
@@ -87,15 +89,27 @@ public class ObdLogController {
     }
   }
 
-//  /**
-//   * 로그 파일 다운로드
-//   */
-//  @GetMapping("/download")
-//  public ResponseEntity<?> downloadObdLog(@RequestParam String deviceId) {
-//    try {
-//      // TODO : 다운로드 서비스 연결
-//    } catch (Exception e) {
-//
-//    }
-//  }
+  /**
+   * 로그 파일 다운로드
+   */
+  @GetMapping("/download")
+  public ResponseEntity<?> downloadObdLog(@RequestParam String deviceId,
+      @RequestParam String name) {
+    try {
+      ByteArrayResource excelFile = obdLogService.createLogToExcel(deviceId, name);
+      String filename = URLEncoder.encode(name + "_CFS_LOG.xlsx", StandardCharsets.UTF_8);
+
+      HttpHeaders headers = new HttpHeaders();
+      headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename);
+      headers.add(HttpHeaders.CONTENT_TYPE,
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+      return ResponseEntity.ok()
+          .headers(headers)
+          .body(excelFile);
+
+    } catch (Exception e) {
+      return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가
+    }
+  }
 }

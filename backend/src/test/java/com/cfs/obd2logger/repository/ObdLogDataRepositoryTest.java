@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
@@ -25,6 +26,32 @@ class ObdLogDataRepositoryTest {
   // 테스트용 deviceId, 추후 테스팅 자동화 할 것
   String deviceId1 = "VF190913";
   String deviceId2 = "HD190913";
+
+  @Test
+  public void testDownalod() {
+    testDataGenerator();
+
+    // 로그 -> 엑셀 파일화 실행
+    ByteArrayResource excelContents = obdLogService.createLogToExcel(deviceId2, "henry");
+
+    byte[] sampleBytes = {0x50, 0x4B, 0x03, 0x04}; // 엑셀 파일 시작
+    System.out.println("CREATE EXCEL!!");
+
+    byte[] bytes = excelContents.getByteArray();
+
+    System.out.println("EXCEL LENGTH: " + bytes.length);
+
+    // HEX 출력
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < bytes.length; i++) {
+      sb.append(String.format("%02X ", bytes[i]));
+      if ((i + 1) % 16 == 0) {
+        sb.append("\n");
+      }
+    }
+
+    System.out.println("HEX DUMP:\n" + sb);
+  }
 
   @Test
   public void testRemoveAll() {

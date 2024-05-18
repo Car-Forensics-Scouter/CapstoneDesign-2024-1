@@ -6,10 +6,17 @@ import com.cfs.obd2logger.entity.ObdLog;
 import com.cfs.obd2logger.entity.UserEntity;
 import com.cfs.obd2logger.repository.ObdLogDataRepository;
 import com.cfs.obd2logger.repository.UserRepository;
+import java.io.ByteArrayOutputStream;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -139,33 +146,103 @@ public class ObdLogService {
   /**
    * 로그 DB를 엑셀 파일화
    */
-//  private String createLogToExcel(String deviceId, String name) {
-//    try {
-//      // 사용자의 OBD 로그 불러오기
-//      List<ObdLog> obdLogList = obdLogDataRepository.findAllByDeviceId(deviceId);
-//
-//      // Create File
-//      Workbook workbook = new XSSFWorkbook();
-//      String fileName = "%s_CFS_LOG";
-//      fileName = String.format(fileName, name);
-//
-//      // Create Sheet
-//      Sheet sheet = workbook.createSheet(fileName);
-//      ByteArrayOutputStream out = new ByteArrayOutputStream();
-//      String[] headerStrings = {}
-//
-//      // Write File
-//      int listSize = obdLogList.size();
-//      Row dataRow = null;
-//
-//      for (int i = 0; i < listSize; i++) {
-//        // 반복하며 행 작성
-//      }
-//
-//    } catch (Exception e) {
-//
-//    }
-//  }
+  public ByteArrayResource createLogToExcel(String deviceId, String name) {
+    try {
+      // 사용자의 OBD 로그 불러오기
+      List<ObdLog> obdLogList = obdLogDataRepository.findAllByDeviceId(deviceId);
+      List<ObdLogDTO> obdLogDTOList = ListEntityToListDTO(obdLogList);
+
+      // 파일 생성
+      Workbook workbook = new XSSFWorkbook();
+
+      // 시트 생성
+      String sheetFile = name + "_CFS_LOG";
+      Sheet sheet = workbook.createSheet(sheetFile);
+      String[] headerStrings = {
+          "DEVICE_ID", "TIME_STAMP",
+          "VIN", "SPEED", "RPM",
+          "ENGINE_LOAD", "FUEL_LEVEL",
+          "OIL_TEMP", "COOLANT_TEMP",
+          "THROTTLE_POSE", "DISTANCE",
+          "RUN_TIME", "RUN_TIME_MIL",
+          "LON", "LAT"};
+
+      // 파일 작성 준비
+      Row dataRow = null;
+      Cell dataCell = null;
+
+      // 헤더 작성
+      int i = 0;
+      int headerSize = headerStrings.length;
+      dataRow = sheet.createRow(i);
+      for (i = 0; i < headerSize; i++) {
+        dataCell = dataRow.createCell(i);
+        dataCell.setCellValue(headerStrings[i]);
+      }
+
+      // 데이터 행(i번째 행) 작성,
+      i = 1;
+      for (ObdLogDTO dto : obdLogDTOList) {
+        dataRow = sheet.createRow(i);
+
+        dataCell = dataRow.createCell(0);
+        dataCell.setCellValue(dto.getDeviceId());
+
+        dataCell = dataRow.createCell(1);
+        dataCell.setCellValue(dto.getTimeStamp());
+
+        dataCell = dataRow.createCell(2);
+        dataCell.setCellValue(dto.getVin());
+
+        dataCell = dataRow.createCell(3);
+        dataCell.setCellValue(dto.getSpeed());
+
+        dataCell = dataRow.createCell(4);
+        dataCell.setCellValue(dto.getRpm());
+
+        dataCell = dataRow.createCell(5);
+        dataCell.setCellValue(dto.getEngineLoad());
+
+        dataCell = dataRow.createCell(6);
+        dataCell.setCellValue(dto.getFuelLevel());
+
+        dataCell = dataRow.createCell(7);
+        dataCell.setCellValue(dto.getOilTemp());
+
+        dataCell = dataRow.createCell(8);
+        dataCell.setCellValue(dto.getCoolantTemp());
+
+        dataCell = dataRow.createCell(9);
+        dataCell.setCellValue(dto.getThrottlePos());
+
+        dataCell = dataRow.createCell(10);
+        dataCell.setCellValue(dto.getDistance());
+
+        dataCell = dataRow.createCell(11);
+        dataCell.setCellValue(dto.getRunTime());
+
+        dataCell = dataRow.createCell(12);
+        dataCell.setCellValue(dto.getRunTimeMIL());
+
+        dataCell = dataRow.createCell(13);
+        dataCell.setCellValue(dto.getLon());
+
+        dataCell = dataRow.createCell(14);
+        dataCell.setCellValue(dto.getLat());
+      }
+
+      // Response
+      ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+      workbook.write(byteArrayOutputStream);
+      workbook.close();
+
+      byte[] excelBytes = byteArrayOutputStream.toByteArray();
+      return new ByteArrayResource(excelBytes);
+
+    } catch (Exception e) {
+      return null;
+    }
+  }
 
 
   /**
