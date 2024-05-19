@@ -1,0 +1,2970 @@
+Index: frontend/logger-react-app/node_modules/babel-plugin-polyfill-corejs2/node_modules/.bin/semver
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/babel-plugin-polyfill-corejs2/node_modules/.bin/semver b/frontend/logger-react-app/node_modules/babel-plugin-polyfill-corejs2/node_modules/.bin/semver
+--- a/frontend/logger-react-app/node_modules/babel-plugin-polyfill-corejs2/node_modules/.bin/semver	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/babel-plugin-polyfill-corejs2/node_modules/.bin/semver	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../semver/bin/semver.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../semver/bin/semver.js" "$@"
++else 
++  exec node  "$basedir/../semver/bin/semver.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/eslint/node_modules/.bin/js-yaml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/eslint/node_modules/.bin/js-yaml b/frontend/logger-react-app/node_modules/eslint/node_modules/.bin/js-yaml
+--- a/frontend/logger-react-app/node_modules/eslint/node_modules/.bin/js-yaml	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/eslint/node_modules/.bin/js-yaml	(date 1715178258874)
+@@ -1,1 +1,16 @@
+-../js-yaml/bin/js-yaml.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../js-yaml/bin/js-yaml.js" "$@"
++else 
++  exec node  "$basedir/../js-yaml/bin/js-yaml.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/make-dir/node_modules/.bin/semver
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/make-dir/node_modules/.bin/semver b/frontend/logger-react-app/node_modules/make-dir/node_modules/.bin/semver
+--- a/frontend/logger-react-app/node_modules/make-dir/node_modules/.bin/semver	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/make-dir/node_modules/.bin/semver	(date 1715178258894)
+@@ -1,1 +1,16 @@
+-../semver/bin/semver.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../semver/bin/semver.js" "$@"
++else 
++  exec node  "$basedir/../semver/bin/semver.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/@babel/helper-compilation-targets/node_modules/.bin/semver
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/@babel/helper-compilation-targets/node_modules/.bin/semver b/frontend/logger-react-app/node_modules/@babel/helper-compilation-targets/node_modules/.bin/semver
+--- a/frontend/logger-react-app/node_modules/@babel/helper-compilation-targets/node_modules/.bin/semver	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/@babel/helper-compilation-targets/node_modules/.bin/semver	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../semver/bin/semver.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../semver/bin/semver.js" "$@"
++else 
++  exec node  "$basedir/../semver/bin/semver.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/regjsparser
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/regjsparser b/frontend/logger-react-app/node_modules/.bin/regjsparser
+--- a/frontend/logger-react-app/node_modules/.bin/regjsparser	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/regjsparser	(date 1715178258885)
+@@ -1,1 +1,16 @@
+-../regjsparser/bin/parser
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../regjsparser/bin/parser" "$@"
++else 
++  exec node  "$basedir/../regjsparser/bin/parser" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/node-which
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/node-which b/frontend/logger-react-app/node_modules/.bin/node-which
+--- a/frontend/logger-react-app/node_modules/.bin/node-which	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/node-which	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../which/bin/node-which
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../which/bin/node-which" "$@"
++else 
++  exec node  "$basedir/../which/bin/node-which" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/mkdirp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/mkdirp b/frontend/logger-react-app/node_modules/.bin/mkdirp
+--- a/frontend/logger-react-app/node_modules/.bin/mkdirp	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/mkdirp	(date 1715178258885)
+@@ -1,1 +1,16 @@
+-../mkdirp/bin/cmd.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../mkdirp/bin/cmd.js" "$@"
++else 
++  exec node  "$basedir/../mkdirp/bin/cmd.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/jsesc
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/jsesc b/frontend/logger-react-app/node_modules/.bin/jsesc
+--- a/frontend/logger-react-app/node_modules/.bin/jsesc	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/jsesc	(date 1715178258885)
+@@ -1,1 +1,16 @@
+-../jsesc/bin/jsesc
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../jsesc/bin/jsesc" "$@"
++else 
++  exec node  "$basedir/../jsesc/bin/jsesc" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/detect
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/detect b/frontend/logger-react-app/node_modules/.bin/detect
+--- a/frontend/logger-react-app/node_modules/.bin/detect	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/detect	(date 1715178258879)
+@@ -1,1 +1,16 @@
+-../detect-port-alt/bin/detect-port
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../detect-port-alt/bin/detect-port" "$@"
++else 
++  exec node  "$basedir/../detect-port-alt/bin/detect-port" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/jsonpath/node_modules/.bin/esparse
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/jsonpath/node_modules/.bin/esparse b/frontend/logger-react-app/node_modules/jsonpath/node_modules/.bin/esparse
+--- a/frontend/logger-react-app/node_modules/jsonpath/node_modules/.bin/esparse	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/jsonpath/node_modules/.bin/esparse	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../esprima/bin/esparse.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../esprima/bin/esparse.js" "$@"
++else 
++  exec node  "$basedir/../esprima/bin/esparse.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/svgo
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/svgo b/frontend/logger-react-app/node_modules/.bin/svgo
+--- a/frontend/logger-react-app/node_modules/.bin/svgo	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/svgo	(date 1715178258887)
+@@ -1,1 +1,16 @@
+-../svgo/bin/svgo
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../svgo/bin/svgo" "$@"
++else 
++  exec node  "$basedir/../svgo/bin/svgo" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/ejs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/ejs b/frontend/logger-react-app/node_modules/.bin/ejs
+--- a/frontend/logger-react-app/node_modules/.bin/ejs	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/ejs	(date 1715178258880)
+@@ -1,1 +1,16 @@
+-../ejs/bin/cli.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../ejs/bin/cli.js" "$@"
++else 
++  exec node  "$basedir/../ejs/bin/cli.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/escodegen
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/escodegen b/frontend/logger-react-app/node_modules/.bin/escodegen
+--- a/frontend/logger-react-app/node_modules/.bin/escodegen	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/escodegen	(date 1715178258880)
+@@ -1,1 +1,16 @@
+-../escodegen/bin/escodegen.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../escodegen/bin/escodegen.js" "$@"
++else 
++  exec node  "$basedir/../escodegen/bin/escodegen.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/ansi-html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/ansi-html b/frontend/logger-react-app/node_modules/.bin/ansi-html
+--- a/frontend/logger-react-app/node_modules/.bin/ansi-html	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/ansi-html	(date 1715178258874)
+@@ -1,1 +1,16 @@
+-../ansi-html-community/bin/ansi-html
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../ansi-html-community/bin/ansi-html" "$@"
++else 
++  exec node  "$basedir/../ansi-html-community/bin/ansi-html" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/multicast-dns
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/multicast-dns b/frontend/logger-react-app/node_modules/.bin/multicast-dns
+--- a/frontend/logger-react-app/node_modules/.bin/multicast-dns	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/multicast-dns	(date 1715178258885)
+@@ -1,1 +1,16 @@
+-../multicast-dns/cli.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../multicast-dns/cli.js" "$@"
++else 
++  exec node  "$basedir/../multicast-dns/cli.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/acorn
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/acorn b/frontend/logger-react-app/node_modules/.bin/acorn
+--- a/frontend/logger-react-app/node_modules/.bin/acorn	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/acorn	(date 1715178258874)
+@@ -1,1 +1,16 @@
+-../acorn/bin/acorn
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../acorn/bin/acorn" "$@"
++else 
++  exec node  "$basedir/../acorn/bin/acorn" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/jake
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/jake b/frontend/logger-react-app/node_modules/.bin/jake
+--- a/frontend/logger-react-app/node_modules/.bin/jake	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/jake	(date 1715178258884)
+@@ -1,1 +1,16 @@
+-../jake/bin/cli.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../jake/bin/cli.js" "$@"
++else 
++  exec node  "$basedir/../jake/bin/cli.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/is-docker
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/is-docker b/frontend/logger-react-app/node_modules/.bin/is-docker
+--- a/frontend/logger-react-app/node_modules/.bin/is-docker	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/is-docker	(date 1715178258882)
+@@ -1,1 +1,16 @@
+-../is-docker/cli.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../is-docker/cli.js" "$@"
++else 
++  exec node  "$basedir/../is-docker/cli.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/import-local-fixture
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/import-local-fixture b/frontend/logger-react-app/node_modules/.bin/import-local-fixture
+--- a/frontend/logger-react-app/node_modules/.bin/import-local-fixture	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/import-local-fixture	(date 1715178258882)
+@@ -1,1 +1,16 @@
+-../import-local/fixtures/cli.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../import-local/fixtures/cli.js" "$@"
++else 
++  exec node  "$basedir/../import-local/fixtures/cli.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/sucrase
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/sucrase b/frontend/logger-react-app/node_modules/.bin/sucrase
+--- a/frontend/logger-react-app/node_modules/.bin/sucrase	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/sucrase	(date 1715178258887)
+@@ -1,1 +1,16 @@
+-../sucrase/bin/sucrase
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../sucrase/bin/sucrase" "$@"
++else 
++  exec node  "$basedir/../sucrase/bin/sucrase" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/detect-port
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/detect-port b/frontend/logger-react-app/node_modules/.bin/detect-port
+--- a/frontend/logger-react-app/node_modules/.bin/detect-port	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/detect-port	(date 1715178258874)
+@@ -1,1 +1,16 @@
+-../detect-port-alt/bin/detect-port
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../detect-port-alt/bin/detect-port" "$@"
++else 
++  exec node  "$basedir/../detect-port-alt/bin/detect-port" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/regjsparser/node_modules/.bin/jsesc
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/regjsparser/node_modules/.bin/jsesc b/frontend/logger-react-app/node_modules/regjsparser/node_modules/.bin/jsesc
+--- a/frontend/logger-react-app/node_modules/regjsparser/node_modules/.bin/jsesc	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/regjsparser/node_modules/.bin/jsesc	(date 1715178258874)
+@@ -1,1 +1,16 @@
+-../jsesc/bin/jsesc
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../jsesc/bin/jsesc" "$@"
++else 
++  exec node  "$basedir/../jsesc/bin/jsesc" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/@babel/helper-create-class-features-plugin/node_modules/.bin/semver
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/@babel/helper-create-class-features-plugin/node_modules/.bin/semver b/frontend/logger-react-app/node_modules/@babel/helper-create-class-features-plugin/node_modules/.bin/semver
+--- a/frontend/logger-react-app/node_modules/@babel/helper-create-class-features-plugin/node_modules/.bin/semver	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/@babel/helper-create-class-features-plugin/node_modules/.bin/semver	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../semver/bin/semver.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../semver/bin/semver.js" "$@"
++else 
++  exec node  "$basedir/../semver/bin/semver.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/@babel/core/node_modules/.bin/semver
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/@babel/core/node_modules/.bin/semver b/frontend/logger-react-app/node_modules/@babel/core/node_modules/.bin/semver
+--- a/frontend/logger-react-app/node_modules/@babel/core/node_modules/.bin/semver	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/@babel/core/node_modules/.bin/semver	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../semver/bin/semver.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../semver/bin/semver.js" "$@"
++else 
++  exec node  "$basedir/../semver/bin/semver.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/acorn-globals/node_modules/.bin/acorn
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/acorn-globals/node_modules/.bin/acorn b/frontend/logger-react-app/node_modules/acorn-globals/node_modules/.bin/acorn
+--- a/frontend/logger-react-app/node_modules/acorn-globals/node_modules/.bin/acorn	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/acorn-globals/node_modules/.bin/acorn	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../acorn/bin/acorn
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../acorn/bin/acorn" "$@"
++else 
++  exec node  "$basedir/../acorn/bin/acorn" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/@babel/helper-create-regexp-features-plugin/node_modules/.bin/semver
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/@babel/helper-create-regexp-features-plugin/node_modules/.bin/semver b/frontend/logger-react-app/node_modules/@babel/helper-create-regexp-features-plugin/node_modules/.bin/semver
+--- a/frontend/logger-react-app/node_modules/@babel/helper-create-regexp-features-plugin/node_modules/.bin/semver	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/@babel/helper-create-regexp-features-plugin/node_modules/.bin/semver	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../semver/bin/semver.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../semver/bin/semver.js" "$@"
++else 
++  exec node  "$basedir/../semver/bin/semver.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/@babel/preset-env/node_modules/.bin/semver
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/@babel/preset-env/node_modules/.bin/semver b/frontend/logger-react-app/node_modules/@babel/preset-env/node_modules/.bin/semver
+--- a/frontend/logger-react-app/node_modules/@babel/preset-env/node_modules/.bin/semver	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/@babel/preset-env/node_modules/.bin/semver	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../semver/bin/semver.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../semver/bin/semver.js" "$@"
++else 
++  exec node  "$basedir/../semver/bin/semver.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.cache/.eslintcache
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.cache/.eslintcache b/frontend/logger-react-app/node_modules/.cache/.eslintcache
+--- a/frontend/logger-react-app/node_modules/.cache/.eslintcache	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.cache/.eslintcache	(date 1715180940190)
+@@ -1,1 +1,1 @@
+-[{"/Users/choseongbin/Desktop/react-workspace/CapstoneDesign-2024-1/frontend/logger-react-app/src/index.js":"1","/Users/choseongbin/Desktop/react-workspace/CapstoneDesign-2024-1/frontend/logger-react-app/src/App.js":"2","/Users/choseongbin/Desktop/react-workspace/CapstoneDesign-2024-1/frontend/logger-react-app/src/reportWebVitals.js":"3","/Users/choseongbin/Desktop/react-workspace/CapstoneDesign-2024-1/frontend/logger-react-app/src/pages/GraphDashboard.js":"4","/Users/choseongbin/Desktop/react-workspace/CapstoneDesign-2024-1/frontend/logger-react-app/src/pages/Library.js":"5","/Users/choseongbin/Desktop/react-workspace/CapstoneDesign-2024-1/frontend/logger-react-app/src/pages/SignUp.js":"6","/Users/choseongbin/Desktop/react-workspace/CapstoneDesign-2024-1/frontend/logger-react-app/src/pages/Settings.js":"7","/Users/choseongbin/Desktop/react-workspace/CapstoneDesign-2024-1/frontend/logger-react-app/src/pages/LogIn.js":"8","/Users/choseongbin/Desktop/react-workspace/CapstoneDesign-2024-1/frontend/logger-react-app/src/components/Banner.js":"9","/Users/choseongbin/Desktop/Capstone/CapstoneDesign-2024-1/frontend/logger-react-app/src/index.js":"10","/Users/choseongbin/Desktop/Capstone/CapstoneDesign-2024-1/frontend/logger-react-app/src/App.js":"11","/Users/choseongbin/Desktop/Capstone/CapstoneDesign-2024-1/frontend/logger-react-app/src/reportWebVitals.js":"12","/Users/choseongbin/Desktop/Capstone/CapstoneDesign-2024-1/frontend/logger-react-app/src/pages/LogIn.js":"13","/Users/choseongbin/Desktop/Capstone/CapstoneDesign-2024-1/frontend/logger-react-app/src/pages/Settings.js":"14","/Users/choseongbin/Desktop/Capstone/CapstoneDesign-2024-1/frontend/logger-react-app/src/components/Banner.js":"15","/Users/choseongbin/Desktop/Capstone/CapstoneDesign-2024-1/frontend/logger-react-app/src/pages/GraphDashboard.js":"16","/Users/choseongbin/Desktop/Capstone/CapstoneDesign-2024-1/frontend/logger-react-app/src/pages/SignUp.js":"17","/Users/choseongbin/Desktop/Capstone/CapstoneDesign-2024-1/frontend/logger-react-app/src/pages/Library.js":"18","/Users/choseongbin/Desktop/Capstone/CapstoneDesign-2024-1/frontend/logger-react-app/src/pages/Reports.js":"19","/Users/choseongbin/Desktop/Capstone/CapstoneDesign-2024-1/frontend/logger-react-app/src/components/OneToOne.js":"20"},{"size":535,"mtime":1710768245345,"results":"21","hashOfConfig":"22"},{"size":979,"mtime":1712470284642,"results":"23","hashOfConfig":"22"},{"size":362,"mtime":1710768245346,"results":"24","hashOfConfig":"22"},{"size":165,"mtime":1712468144248,"results":"25","hashOfConfig":"22"},{"size":145,"mtime":1712468174804,"results":"26","hashOfConfig":"22"},{"size":140,"mtime":1712468321505,"results":"27","hashOfConfig":"22"},{"size":151,"mtime":1712468282838,"results":"28","hashOfConfig":"22"},{"size":242,"mtime":1712470283634,"results":"29","hashOfConfig":"22"},{"size":283,"mtime":1712470062711,"results":"30","hashOfConfig":"22"},{"size":535,"mtime":1712584731141,"results":"31","hashOfConfig":"32"},{"size":1186,"mtime":1712904455723,"results":"33","hashOfConfig":"32"},{"size":362,"mtime":1712584731142,"results":"34","hashOfConfig":"32"},{"size":4280,"mtime":1714818799972,"results":"35","hashOfConfig":"32"},{"size":151,"mtime":1712904375131,"results":"36","hashOfConfig":"32"},{"size":2683,"mtime":1712730091563,"results":"37","hashOfConfig":"32"},{"size":165,"mtime":1714488184511,"results":"38","hashOfConfig":"32"},{"size":12690,"mtime":1714637261259,"results":"39","hashOfConfig":"32"},{"size":145,"mtime":1712584731141,"results":"40","hashOfConfig":"32"},{"size":6767,"mtime":1714527565973,"results":"41","hashOfConfig":"32"},{"size":531,"mtime":1713098405358,"results":"42","hashOfConfig":"32"},{"filePath":"43","messages":"44","suppressedMessages":"45","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},"1y24pu1",{"filePath":"46","messages":"47","suppressedMessages":"48","errorCount":0,"fatalErrorCount":0,"warningCount":1,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},{"filePath":"49","messages":"50","suppressedMessages":"51","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"52","messages":"53","suppressedMessages":"54","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"55","messages":"56","suppressedMessages":"57","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"58","messages":"59","suppressedMessages":"60","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"61","messages":"62","suppressedMessages":"63","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"64","messages":"65","suppressedMessages":"66","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"67","messages":"68","suppressedMessages":"69","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"70","messages":"71","suppressedMessages":"72","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},"1ql17f0",{"filePath":"73","messages":"74","suppressedMessages":"75","errorCount":0,"fatalErrorCount":0,"warningCount":2,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},{"filePath":"76","messages":"77","suppressedMessages":"78","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"79","messages":"80","suppressedMessages":"81","errorCount":0,"fatalErrorCount":0,"warningCount":2,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},{"filePath":"82","messages":"83","suppressedMessages":"84","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"85","messages":"86","suppressedMessages":"87","errorCount":0,"fatalErrorCount":0,"warningCount":4,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},{"filePath":"88","messages":"89","suppressedMessages":"90","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"91","messages":"92","suppressedMessages":"93","errorCount":0,"fatalErrorCount":0,"warningCount":3,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},{"filePath":"94","messages":"95","suppressedMessages":"96","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"97","messages":"98","suppressedMessages":"99","errorCount":0,"fatalErrorCount":0,"warningCount":4,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},{"filePath":"100","messages":"101","suppressedMessages":"102","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},"/Users/choseongbin/Desktop/react-workspace/CapstoneDesign-2024-1/frontend/logger-react-app/src/index.js",[],[],"/Users/choseongbin/Desktop/react-workspace/CapstoneDesign-2024-1/frontend/logger-react-app/src/App.js",["103"],[],"/Users/choseongbin/Desktop/react-workspace/CapstoneDesign-2024-1/frontend/logger-react-app/src/reportWebVitals.js",[],[],"/Users/choseongbin/Desktop/react-workspace/CapstoneDesign-2024-1/frontend/logger-react-app/src/pages/GraphDashboard.js",[],[],"/Users/choseongbin/Desktop/react-workspace/CapstoneDesign-2024-1/frontend/logger-react-app/src/pages/Library.js",[],[],"/Users/choseongbin/Desktop/react-workspace/CapstoneDesign-2024-1/frontend/logger-react-app/src/pages/SignUp.js",[],[],"/Users/choseongbin/Desktop/react-workspace/CapstoneDesign-2024-1/frontend/logger-react-app/src/pages/Settings.js",[],[],"/Users/choseongbin/Desktop/react-workspace/CapstoneDesign-2024-1/frontend/logger-react-app/src/pages/LogIn.js",[],[],"/Users/choseongbin/Desktop/react-workspace/CapstoneDesign-2024-1/frontend/logger-react-app/src/components/Banner.js",[],[],"/Users/choseongbin/Desktop/Capstone/CapstoneDesign-2024-1/frontend/logger-react-app/src/index.js",[],[],"/Users/choseongbin/Desktop/Capstone/CapstoneDesign-2024-1/frontend/logger-react-app/src/App.js",["104","105"],[],"/Users/choseongbin/Desktop/Capstone/CapstoneDesign-2024-1/frontend/logger-react-app/src/reportWebVitals.js",[],[],"/Users/choseongbin/Desktop/Capstone/CapstoneDesign-2024-1/frontend/logger-react-app/src/pages/LogIn.js",["106","107"],[],"/Users/choseongbin/Desktop/Capstone/CapstoneDesign-2024-1/frontend/logger-react-app/src/pages/Settings.js",[],[],"/Users/choseongbin/Desktop/Capstone/CapstoneDesign-2024-1/frontend/logger-react-app/src/components/Banner.js",["108","109","110","111"],[],"/Users/choseongbin/Desktop/Capstone/CapstoneDesign-2024-1/frontend/logger-react-app/src/pages/GraphDashboard.js",[],[],"/Users/choseongbin/Desktop/Capstone/CapstoneDesign-2024-1/frontend/logger-react-app/src/pages/SignUp.js",["112","113","114"],[],"/Users/choseongbin/Desktop/Capstone/CapstoneDesign-2024-1/frontend/logger-react-app/src/pages/Library.js",[],[],"/Users/choseongbin/Desktop/Capstone/CapstoneDesign-2024-1/frontend/logger-react-app/src/pages/Reports.js",["115","116","117","118"],[],"/Users/choseongbin/Desktop/Capstone/CapstoneDesign-2024-1/frontend/logger-react-app/src/components/OneToOne.js",[],[],{"ruleId":"119","severity":1,"message":"120","line":3,"column":10,"nodeType":"121","messageId":"122","endLine":3,"endColumn":14},{"ruleId":"119","severity":1,"message":"120","line":4,"column":10,"nodeType":"121","messageId":"122","endLine":4,"endColumn":14},{"ruleId":"119","severity":1,"message":"123","line":15,"column":17,"nodeType":"121","messageId":"122","endLine":15,"endColumn":25},{"ruleId":"119","severity":1,"message":"124","line":6,"column":17,"nodeType":"121","messageId":"122","endLine":6,"endColumn":25},{"ruleId":"119","severity":1,"message":"125","line":34,"column":15,"nodeType":"121","messageId":"122","endLine":34,"endColumn":24},{"ruleId":"126","severity":1,"message":"127","line":25,"column":57,"nodeType":"128","messageId":"129","endLine":25,"endColumn":59},{"ruleId":"126","severity":1,"message":"127","line":31,"column":57,"nodeType":"128","messageId":"129","endLine":31,"endColumn":59},{"ruleId":"126","severity":1,"message":"127","line":37,"column":64,"nodeType":"128","messageId":"129","endLine":37,"endColumn":66},{"ruleId":"126","severity":1,"message":"127","line":46,"column":58,"nodeType":"128","messageId":"129","endLine":46,"endColumn":60},{"ruleId":"119","severity":1,"message":"130","line":3,"column":26,"nodeType":"121","messageId":"122","endLine":3,"endColumn":32},{"ruleId":"126","severity":1,"message":"127","line":45,"column":27,"nodeType":"128","messageId":"129","endLine":45,"endColumn":29},{"ruleId":"131","severity":1,"message":"132","line":172,"column":19,"nodeType":"133","messageId":"129","endLine":172,"endColumn":31},{"ruleId":"119","severity":1,"message":"134","line":14,"column":21,"nodeType":"121","messageId":"122","endLine":14,"endColumn":31},{"ruleId":"119","severity":1,"message":"135","line":77,"column":17,"nodeType":"121","messageId":"122","endLine":77,"endColumn":23},{"ruleId":"119","severity":1,"message":"136","line":111,"column":19,"nodeType":"121","messageId":"122","endLine":111,"endColumn":27},{"ruleId":"137","severity":1,"message":"138","line":123,"column":8,"nodeType":"139","endLine":123,"endColumn":10,"suggestions":"140"},"no-unused-vars","'Link' is defined but never used.","Identifier","unusedVar","'setPhoto' is assigned a value but never used.","'setEmail' is assigned a value but never used.","'errorData' is assigned a value but never used.","eqeqeq","Expected '===' and instead saw '=='.","BinaryExpression","unexpected","'Select' is defined but never used.","no-dupe-keys","Duplicate key 'borderRadius'.","ObjectExpression","'setOBDData' is assigned a value but never used.","'setGPS' is assigned a value but never used.","'polyline' is assigned a value but never used.","react-hooks/exhaustive-deps","React Hook useEffect has missing dependencies: 'GPS', 'lat', and 'lng'. Either include them or remove the dependency array.","ArrayExpression",["141"],{"desc":"142","fix":"143"},"Update the dependencies array to be: [GPS, lat, lng]",{"range":"144","text":"145"},[3238,3240],"[GPS, lat, lng]"]
+\ No newline at end of file
++[{"C:\\spring-boot\\CapstoneDesign-2024-1\\frontend\\logger-react-app\\src\\index.js":"1","C:\\spring-boot\\CapstoneDesign-2024-1\\frontend\\logger-react-app\\src\\App.js":"2","C:\\spring-boot\\CapstoneDesign-2024-1\\frontend\\logger-react-app\\src\\reportWebVitals.js":"3","C:\\spring-boot\\CapstoneDesign-2024-1\\frontend\\logger-react-app\\src\\components\\Banner.js":"4","C:\\spring-boot\\CapstoneDesign-2024-1\\frontend\\logger-react-app\\src\\pages\\Library.js":"5","C:\\spring-boot\\CapstoneDesign-2024-1\\frontend\\logger-react-app\\src\\pages\\LogIn.js":"6","C:\\spring-boot\\CapstoneDesign-2024-1\\frontend\\logger-react-app\\src\\pages\\Settings.js":"7","C:\\spring-boot\\CapstoneDesign-2024-1\\frontend\\logger-react-app\\src\\pages\\GraphDashboard.js":"8","C:\\spring-boot\\CapstoneDesign-2024-1\\frontend\\logger-react-app\\src\\pages\\Reports.js":"9","C:\\spring-boot\\CapstoneDesign-2024-1\\frontend\\logger-react-app\\src\\pages\\SignUp.js":"10","C:\\spring-boot\\CapstoneDesign-2024-1\\frontend\\logger-react-app\\src\\components\\OneToOne.js":"11"},{"size":552,"mtime":1712923646990,"results":"12","hashOfConfig":"13"},{"size":1222,"mtime":1713079419289,"results":"14","hashOfConfig":"13"},{"size":375,"mtime":1712923647000,"results":"15","hashOfConfig":"13"},{"size":2747,"mtime":1712923646989,"results":"16","hashOfConfig":"13"},{"size":154,"mtime":1715176604805,"results":"17","hashOfConfig":"13"},{"size":3523,"mtime":1715176604808,"results":"18","hashOfConfig":"13"},{"size":160,"mtime":1715176604811,"results":"19","hashOfConfig":"13"},{"size":174,"mtime":1715176604804,"results":"20","hashOfConfig":"13"},{"size":6951,"mtime":1715176604809,"results":"21","hashOfConfig":"13"},{"size":9171,"mtime":1715180939809,"results":"22","hashOfConfig":"13"},{"size":548,"mtime":1713353376494,"results":"23","hashOfConfig":"13"},{"filePath":"24","messages":"25","suppressedMessages":"26","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},"19p1fv2",{"filePath":"27","messages":"28","suppressedMessages":"29","errorCount":0,"fatalErrorCount":0,"warningCount":2,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},{"filePath":"30","messages":"31","suppressedMessages":"32","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"33","messages":"34","suppressedMessages":"35","errorCount":0,"fatalErrorCount":0,"warningCount":4,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},{"filePath":"36","messages":"37","suppressedMessages":"38","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"39","messages":"40","suppressedMessages":"41","errorCount":0,"fatalErrorCount":0,"warningCount":1,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},{"filePath":"42","messages":"43","suppressedMessages":"44","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"45","messages":"46","suppressedMessages":"47","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"48","messages":"49","suppressedMessages":"50","errorCount":0,"fatalErrorCount":0,"warningCount":4,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},{"filePath":"51","messages":"52","suppressedMessages":"53","errorCount":0,"fatalErrorCount":0,"warningCount":1,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},{"filePath":"54","messages":"55","suppressedMessages":"56","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},"C:\\spring-boot\\CapstoneDesign-2024-1\\frontend\\logger-react-app\\src\\index.js",[],[],"C:\\spring-boot\\CapstoneDesign-2024-1\\frontend\\logger-react-app\\src\\App.js",["57","58"],[],"C:\\spring-boot\\CapstoneDesign-2024-1\\frontend\\logger-react-app\\src\\reportWebVitals.js",[],[],"C:\\spring-boot\\CapstoneDesign-2024-1\\frontend\\logger-react-app\\src\\components\\Banner.js",["59","60","61","62"],[],"C:\\spring-boot\\CapstoneDesign-2024-1\\frontend\\logger-react-app\\src\\pages\\Library.js",[],[],"C:\\spring-boot\\CapstoneDesign-2024-1\\frontend\\logger-react-app\\src\\pages\\LogIn.js",["63"],[],"C:\\spring-boot\\CapstoneDesign-2024-1\\frontend\\logger-react-app\\src\\pages\\Settings.js",[],[],"C:\\spring-boot\\CapstoneDesign-2024-1\\frontend\\logger-react-app\\src\\pages\\GraphDashboard.js",[],[],"C:\\spring-boot\\CapstoneDesign-2024-1\\frontend\\logger-react-app\\src\\pages\\Reports.js",["64","65","66","67"],[],"C:\\spring-boot\\CapstoneDesign-2024-1\\frontend\\logger-react-app\\src\\pages\\SignUp.js",["68"],[],"C:\\spring-boot\\CapstoneDesign-2024-1\\frontend\\logger-react-app\\src\\components\\OneToOne.js",[],[],{"ruleId":"69","severity":1,"message":"70","line":4,"column":10,"nodeType":"71","messageId":"72","endLine":4,"endColumn":14},{"ruleId":"69","severity":1,"message":"73","line":15,"column":17,"nodeType":"71","messageId":"72","endLine":15,"endColumn":25},{"ruleId":"74","severity":1,"message":"75","line":25,"column":57,"nodeType":"76","messageId":"77","endLine":25,"endColumn":59},{"ruleId":"74","severity":1,"message":"75","line":31,"column":57,"nodeType":"76","messageId":"77","endLine":31,"endColumn":59},{"ruleId":"74","severity":1,"message":"75","line":37,"column":64,"nodeType":"76","messageId":"77","endLine":37,"endColumn":66},{"ruleId":"74","severity":1,"message":"75","line":46,"column":58,"nodeType":"76","messageId":"77","endLine":46,"endColumn":60},{"ruleId":"69","severity":1,"message":"78","line":35,"column":15,"nodeType":"71","messageId":"72","endLine":35,"endColumn":24},{"ruleId":"69","severity":1,"message":"79","line":14,"column":21,"nodeType":"71","messageId":"72","endLine":14,"endColumn":31},{"ruleId":"69","severity":1,"message":"80","line":77,"column":17,"nodeType":"71","messageId":"72","endLine":77,"endColumn":23},{"ruleId":"69","severity":1,"message":"81","line":111,"column":19,"nodeType":"71","messageId":"72","endLine":111,"endColumn":27},{"ruleId":"82","severity":1,"message":"83","line":123,"column":8,"nodeType":"84","endLine":123,"endColumn":10,"suggestions":"85"},{"ruleId":"69","severity":1,"message":"86","line":5,"column":26,"nodeType":"71","messageId":"72","endLine":5,"endColumn":32},"no-unused-vars","'Link' is defined but never used.","Identifier","unusedVar","'setPhoto' is assigned a value but never used.","eqeqeq","Expected '===' and instead saw '=='.","BinaryExpression","unexpected","'errorData' is assigned a value but never used.","'setOBDData' is assigned a value but never used.","'setGPS' is assigned a value but never used.","'polyline' is assigned a value but never used.","react-hooks/exhaustive-deps","React Hook useEffect has missing dependencies: 'GPS', 'lat', and 'lng'. Either include them or remove the dependency array.","ArrayExpression",["87"],"'Select' is defined but never used.",{"desc":"88","fix":"89"},"Update the dependencies array to be: [GPS, lat, lng]",{"range":"90","text":"91"},[3360,3362],"[GPS, lat, lng]"]
+\ No newline at end of file
+Index: frontend/logger-react-app/node_modules/istanbul-lib-instrument/node_modules/.bin/semver
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/istanbul-lib-instrument/node_modules/.bin/semver b/frontend/logger-react-app/node_modules/istanbul-lib-instrument/node_modules/.bin/semver
+--- a/frontend/logger-react-app/node_modules/istanbul-lib-instrument/node_modules/.bin/semver	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/istanbul-lib-instrument/node_modules/.bin/semver	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../semver/bin/semver.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../semver/bin/semver.js" "$@"
++else 
++  exec node  "$basedir/../semver/bin/semver.js" "$@"
++fi
+Index: backend/src/main/java/com/cfs/obd2logger/service/UserService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/src/main/java/com/cfs/obd2logger/service/UserService.java b/backend/src/main/java/com/cfs/obd2logger/service/UserService.java
+--- a/backend/src/main/java/com/cfs/obd2logger/service/UserService.java	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/backend/src/main/java/com/cfs/obd2logger/service/UserService.java	(date 1715176900638)
+@@ -1,81 +1,80 @@
+ package com.cfs.obd2logger.service;
+ 
+-import com.cfs.obd2logger.dto.UserDTO;
+ import com.cfs.obd2logger.entity.UserEntity;
+ import com.cfs.obd2logger.repository.UserRepository;
+-import java.util.Optional;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+ import org.springframework.stereotype.Service;
+ 
+ @Service
+ public class UserService {
+-    @Autowired
+-    UserRepository userRepository;
++
++  @Autowired
++  UserRepository userRepository;
+ 
+-    @Autowired
+-    BCryptPasswordEncoder passwordEncoder;
++  @Autowired
++  BCryptPasswordEncoder passwordEncoder;
+ 
+-    // 회원 가입
+-    public UserEntity signup(UserEntity userEntity) {
+-        if (userEntity == null) {
+-            throw new RuntimeException("정보를 모두 입력하세요");
+-        }
+-        // 회원 상태 변경
+-        userEntity.setStatus("activated");
+-        return userRepository.save(userEntity);
+-    }
++  // 회원 가입
++  public UserEntity signup(UserEntity userEntity) {
++    if (userEntity == null) {
++      throw new RuntimeException("정보를 모두 입력하세요");
++    }
++    // 회원 상태 변경
++    userEntity.setStatus("activated");
++    return userRepository.save(userEntity);
++  }
+ 
+-    // 아이디 중복검사
+-    public boolean checkId(String id) {
+-        return userRepository.findById(id).isPresent();
+-    }
++  // 아이디 중복검사
++  public boolean checkId(String id) {
++    return userRepository.findById(id).isPresent();
++  }
+ 
+-    // 로그인
+-    public UserEntity login(String id, String password) {
+-        UserEntity user = userRepository.findById(id).get();
++  // 로그인
++  public UserEntity login(String id, String password) {
++    UserEntity user = userRepository.findById(id).get();
+ 
+-        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+-            return user;
+-        }
+-        return null;
+-    }
++    if (user != null && passwordEncoder.matches(password, user.getPassword())) {
++      return user;
++    }
++    return null;
++  }
+ 
+-    // 아이디 찾기
+-    public String getUserId(String name, String email) {
+-        UserEntity user = userRepository.findByNameAndEmail(name, email);
+-        return (user != null) ? user.getId() : null;
+-    }
++  // 아이디 찾기
++  public String getUserId(String name, String email) {
++    UserEntity user = userRepository.findByNameAndEmail(name, email);
++    return (user != null) ? user.getId() : null;
++  }
+ 
+-    // 비밀번호 찾기
++  // 비밀번호 찾기
+ 
+-    // 사용자 정보 조회
+-    public UserEntity getUserInfo(String id) {
+-        UserEntity user = userRepository.findById(id).orElse(null);
+-        if (user == null) {
+-            throw new RuntimeException("정보 없음");
+-        }
+-        return user;
+-    }
++  // 사용자 정보 조회
++  public UserEntity getUserInfo(String id) {
++    UserEntity user = userRepository.findById(id).orElse(null);
++    if (user == null) {
++      throw new RuntimeException("정보 없음");
++    }
++    return user;
++  }
+ 
+-    // 회원정보 수정
+-    public UserEntity editUserInfo(UserEntity userEntity) {
+-        if (userEntity == null) {
+-            throw new RuntimeException("엔티티가 잘못되었습니다.");
+-        }
+-        return userRepository.save(userEntity);
+-    }
++  // 회원정보 수정
++  public void editUserInfo(UserEntity userEntity) {
++    if (userEntity == null) {
++      throw new RuntimeException("엔티티가 잘못되었습니다.");
++    }
++    userRepository.save(userEntity);
++  }
+ 
+-    // 회원정보 수정 코드 추가
++  // 회원정보 수정 코드 추가
+ 
+-    // 회원 탈퇴
+-    public String deleteUser(String id, String password) {
+-        UserEntity user = userRepository.findByIdAndPassword(id, password);
+-        if (user == null) {
+-            throw new RuntimeException("입력이 잘못되었습니다.");
+-        }
+-        user.setStatus("deactivated");
+-        userRepository.save(user);
+-        return "탈퇴 완료.";
+-    }
++  // 회원 탈퇴
++  public String deleteUser(String id, String password) {
++    UserEntity user = userRepository.findByIdAndPassword(id, password);
++    if (user == null) {
++      throw new RuntimeException("입력이 잘못되었습니다.");
++    }
++    user.setStatus("deactivated");
++    userRepository.save(user);
++    return "탈퇴 완료.";
++  }
+ }
+\ No newline at end of file
+Index: backend/src/test/java/com/cfs/obd2logger/repository/ObdLogDataRepositoryTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/src/test/java/com/cfs/obd2logger/repository/ObdLogDataRepositoryTest.java b/backend/src/test/java/com/cfs/obd2logger/repository/ObdLogDataRepositoryTest.java
+--- a/backend/src/test/java/com/cfs/obd2logger/repository/ObdLogDataRepositoryTest.java	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/backend/src/test/java/com/cfs/obd2logger/repository/ObdLogDataRepositoryTest.java	(date 1715176670110)
+@@ -1,149 +1,148 @@
+-package com.cfs.obd2logger.repository;
+-
+-import static org.assertj.core.api.Assertions.assertThat;
+-
+-import com.cfs.obd2logger.entity.ObdLog;
+-import com.cfs.obd2logger.entity.ObdLogTablePK;
+-import java.time.LocalDateTime;
+-import java.util.List;
+-import org.junit.jupiter.api.Test;
+-import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.boot.test.context.SpringBootTest;
+-import org.springframework.transaction.annotation.Transactional;
+-
+-@SpringBootTest
+-@Transactional
+-class ObdLogDataRepositoryTest {
+-
+-  @Autowired
+-  ObdLogDataRepository obdLogDataRepository;
+-
+-  @Test
+-  public void testSelectLogByDeviceidAndDay() {
+-    // VF190913 유저의 2024.04.01 로그1
+-    ObdLog obdLog1 = new ObdLog();
+-    ObdLogTablePK obdLogTablePK1 = new ObdLogTablePK();
+-    LocalDateTime localDateTime1 = LocalDateTime.of(2024, 04, 01, 12, 12, 12);
+-    obdLog1.setDistance(1.0);
+-    obdLog1.setRpm(1.0);
+-    obdLog1.setCoolantTemp(1.0);
+-    obdLog1.setSpeed(1.0);
+-    obdLog1.setVin("A12345");
+-    obdLog1.setEngineLoad(1.0);
+-    obdLog1.setFuelLevel(1.0);
+-    obdLog1.setOilTemp(1.0);
+-    obdLog1.setRunTime(1.0);
+-    obdLog1.setRunTimeMIL(1.0);
+-    obdLog1.setThrottlePos(1.0);
+-    obdLogTablePK1.setDeviceId("VF190913");
+-    obdLogTablePK1.setTimeStamp(localDateTime1);
+-    obdLog1.setObdLogTablePK(obdLogTablePK1);
+-
+-    // VF190913 유저의 2024.04.01 로그2
+-    ObdLog obdLog2 = new ObdLog();
+-    ObdLogTablePK obdLogTablePK2 = new ObdLogTablePK();
+-    LocalDateTime localDateTime2 = LocalDateTime.of(2024, 04, 01, 12, 15, 12);
+-    obdLog2.setDistance(1.0);
+-    obdLog2.setRpm(1.0);
+-    obdLog2.setCoolantTemp(1.0);
+-    obdLog2.setSpeed(1.0);
+-    obdLog2.setVin("A12345");
+-    obdLog2.setEngineLoad(1.0);
+-    obdLog2.setFuelLevel(1.0);
+-    obdLog2.setOilTemp(1.0);
+-    obdLog2.setRunTime(1.0);
+-    obdLog2.setRunTimeMIL(1.0);
+-    obdLog2.setThrottlePos(1.0);
+-    obdLogTablePK2.setDeviceId("VF190913");
+-    obdLogTablePK2.setTimeStamp(localDateTime2);
+-    obdLog2.setObdLogTablePK(obdLogTablePK2);
+-
+-    // HD190913 유저의 2024.04.01 로그1
+-    ObdLog obdLog3 = new ObdLog();
+-    ObdLogTablePK obdLogTablePK3 = new ObdLogTablePK();
+-    LocalDateTime localDateTime3 = LocalDateTime.of(2024, 04, 01, 12, 12, 12);
+-    obdLog3.setDistance(1.0);
+-    obdLog3.setRpm(1.0);
+-    obdLog3.setCoolantTemp(1.0);
+-    obdLog3.setSpeed(1.0);
+-    obdLog3.setVin("A12345");
+-    obdLog3.setEngineLoad(1.0);
+-    obdLog3.setFuelLevel(1.0);
+-    obdLog3.setOilTemp(1.0);
+-    obdLog3.setRunTime(1.0);
+-    obdLog3.setRunTimeMIL(1.0);
+-    obdLog3.setThrottlePos(1.0);
+-    obdLogTablePK3.setDeviceId("HD190913");
+-    obdLogTablePK3.setTimeStamp(localDateTime3);
+-    obdLog3.setObdLogTablePK(obdLogTablePK3);
+-
+-    // HD190913 유저의 2024.04.01 로그2
+-    ObdLog obdLog4 = new ObdLog();
+-    ObdLogTablePK obdLogTablePK4 = new ObdLogTablePK();
+-    LocalDateTime localDateTime4 = LocalDateTime.of(2024, 04, 01, 12, 15, 12);
+-    obdLog4.setDistance(1.0);
+-    obdLog4.setRpm(1.0);
+-    obdLog4.setCoolantTemp(1.0);
+-    obdLog4.setSpeed(1.0);
+-    obdLog4.setVin("A12345");
+-    obdLog4.setEngineLoad(1.0);
+-    obdLog4.setFuelLevel(1.0);
+-    obdLog4.setOilTemp(1.0);
+-    obdLog4.setRunTime(1.0);
+-    obdLog4.setRunTimeMIL(1.0);
+-    obdLog4.setThrottlePos(1.0);
+-    obdLogTablePK4.setDeviceId("HD190913");
+-    obdLogTablePK4.setTimeStamp(localDateTime4);
+-    obdLog4.setObdLogTablePK(obdLogTablePK4);
+-
+-    // HD190913 유저의 2024.04.11 로그1
+-    ObdLog obdLog5 = new ObdLog();
+-    ObdLogTablePK obdLogTablePK5 = new ObdLogTablePK();
+-    LocalDateTime localDateTime5 = LocalDateTime.of(2024, 04, 11, 17, 15, 12);
+-    obdLog5.setDistance(1.0);
+-    obdLog5.setRpm(1.0);
+-    obdLog5.setCoolantTemp(1.0);
+-    obdLog5.setSpeed(1.0);
+-    obdLog5.setVin("A12345");
+-    obdLog5.setEngineLoad(1.0);
+-    obdLog5.setFuelLevel(1.0);
+-    obdLog5.setOilTemp(1.0);
+-    obdLog5.setRunTime(1.0);
+-    obdLog5.setRunTimeMIL(1.0);
+-    obdLog5.setThrottlePos(1.0);
+-    obdLogTablePK5.setDeviceId("HD190913");
+-    obdLogTablePK5.setTimeStamp(localDateTime5);
+-    obdLog5.setObdLogTablePK(obdLogTablePK5);
+-
+-    obdLogDataRepository.save(obdLog1);
+-    obdLogDataRepository.save(obdLog2);
+-    obdLogDataRepository.save(obdLog3);
+-    obdLogDataRepository.save(obdLog4);
+-    obdLogDataRepository.save(obdLog5);
+-
+-    String deviceId1 = "VF190913";
+-    String deviceId2 = "HD190913";
+-
+-    LocalDateTime start240401 = LocalDateTime.of(2024, 04, 01, 00, 00, 00);
+-    LocalDateTime end240401 = LocalDateTime.of(2024, 04, 01, 23, 59, 59);
+-
+-    LocalDateTime start240411 = LocalDateTime.of(2024, 04, 11, 00, 00, 00);
+-    LocalDateTime end240411 = LocalDateTime.of(2024, 04, 11, 23, 59, 59);
+-
+-    // deviceId1의 240401 날짜의 모든 로그 출력 (expected: 2)
+-    List<ObdLog> dvId01and240401 = obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId1,
+-        start240401, end240401);
+-
+-    // deviceId2의 240401 날짜의 모든 로그 출력 (expected: 2)
+-    List<ObdLog> dvId02and240401 = obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId1,
+-        start240401, end240401);
+-
+-    // 240411 날짜의 모든 로그 출력 (expected: 1)
+-    List<ObdLog> dvId02and240411 = obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId2,
+-        start240411, end240411);
+-
+-    assertThat(dvId01and240401.size()).isEqualTo(2);    // deviceId01 의 240401 날짜 로그가 2개가 아니라면, 오류
+-    assertThat(dvId02and240401.size()).isEqualTo(2);    // deviceId02 의 240401 날짜 로그가 2개가 아니라면, 오류
+-    assertThat(dvId02and240411.size()).isEqualTo(1);    // deviceId02 의 240411 날짜 로그가 1개가 아니라면, 오류
+-  }
+-}
+\ No newline at end of file
++//package com.cfs.obd2logger.repository;
++//
++//import static org.assertj.core.api.Assertions.assertThat;
++//
++//import com.cfs.obd2logger.entity.ObdLog;
++//import com.cfs.obd2logger.entity.ObdLogTablePK;
++//import java.time.LocalDateTime;
++//import java.util.List;
++//import org.junit.jupiter.api.Test;
++//import org.springframework.beans.factory.annotation.Autowired;
++//import org.springframework.boot.test.context.SpringBootTest;
++//import org.springframework.transaction.annotation.Transactional;
++//
++//@SpringBootTest
++//@Transactional
++//class ObdLogDataRepositoryTest {
++//
++//  @Autowired
++//  ObdLogDataRepository obdLogDataRepository;
++//
++//  @Test
++//  public void testSelectLogByDeviceidAndDay() {
++//    // VF190913 유저의 2024.04.01 로그1
++//    LocalDateTime localDateTime1 = LocalDateTime.of(2024, 04, 01, 12, 12, 12);
++//    ObdLogTablePK obdLogTablePK1 = ObdLogTablePK.builder()
++//        .deviceId("VF190913")
++//        .timeStamp(localDateTime1).build();
++//    ObdLog obdLog1 = ObdLog.builder()
++//        .distance(1.0)
++//        .rpm(1.0)
++//        .coolantTemp(1.0)
++//        .speed(1.0)
++//        .vin("A12345")
++//        .engineLoad(1.0)
++//        .fuelLevel(1.0)
++//        .oilTemp(1.0)
++//        .runTime(1.0)
++//        .runTimeMIL(1.0)
++//        .throttlePos(1.0).build();
++//
++//    // VF190913 유저의 2024.04.01 로그2
++//    LocalDateTime localDateTime2 = LocalDateTime.of(2024, 04, 01, 12, 15, 12);
++//    ObdLogTablePK obdLogTablePK2 = ObdLogTablePK.builder()
++//        .deviceId("VF190913")
++//        .timeStamp(localDateTime1).build();
++//
++//    ObdLog obdLog2 = ObdLog.builder()
++//        .distance(1.0)
++//        .rpm(1.0)
++//        .coolantTemp(1.0)
++//        .speed(1.0)
++//        .vin("A12345")
++//        .engineLoad(1.0)
++//        .fuelLevel(1.0)
++//        .oilTemp(1.0)
++//        .runTime(1.0)
++//        .runTimeMIL(1.0)
++//        .throttlePos(1.0).build();
++//
++//    // HD190913 유저의 2024.04.01 로그1
++//    ObdLog obdLog3 = new ObdLog();
++//    ObdLogTablePK obdLogTablePK3 = new ObdLogTablePK();
++//    LocalDateTime localDateTime3 = LocalDateTime.of(2024, 04, 01, 12, 12, 12);
++//    obdLog3.setDistance(1.0);
++//    obdLog3.setRpm(1.0);
++//    obdLog3.setCoolantTemp(1.0);
++//    obdLog3.setSpeed(1.0);
++//    obdLog3.setVin("A12345");
++//    obdLog3.setEngineLoad(1.0);
++//    obdLog3.setFuelLevel(1.0);
++//    obdLog3.setOilTemp(1.0);
++//    obdLog3.setRunTime(1.0);
++//    obdLog3.setRunTimeMIL(1.0);
++//    obdLog3.setThrottlePos(1.0);
++//    obdLogTablePK3.setDeviceId("HD190913");
++//    obdLogTablePK3.setTimeStamp(localDateTime3);
++//    obdLog3.setObdLogTablePK(obdLogTablePK3);
++//
++//    // HD190913 유저의 2024.04.01 로그2
++//    ObdLog obdLog4 = new ObdLog();
++//    ObdLogTablePK obdLogTablePK4 = new ObdLogTablePK();
++//    LocalDateTime localDateTime4 = LocalDateTime.of(2024, 04, 01, 12, 15, 12);
++//    obdLog4.setDistance(1.0);
++//    obdLog4.setRpm(1.0);
++//    obdLog4.setCoolantTemp(1.0);
++//    obdLog4.setSpeed(1.0);
++//    obdLog4.setVin("A12345");
++//    obdLog4.setEngineLoad(1.0);
++//    obdLog4.setFuelLevel(1.0);
++//    obdLog4.setOilTemp(1.0);
++//    obdLog4.setRunTime(1.0);
++//    obdLog4.setRunTimeMIL(1.0);
++//    obdLog4.setThrottlePos(1.0);
++//    obdLogTablePK4.setDeviceId("HD190913");
++//    obdLogTablePK4.setTimeStamp(localDateTime4);
++//    obdLog4.setObdLogTablePK(obdLogTablePK4);
++//
++//    // HD190913 유저의 2024.04.11 로그1
++//    ObdLog obdLog5 = new ObdLog();
++//    ObdLogTablePK obdLogTablePK5 = new ObdLogTablePK();
++//    LocalDateTime localDateTime5 = LocalDateTime.of(2024, 04, 11, 17, 15, 12);
++//    obdLog5.setDistance(1.0);
++//    obdLog5.setRpm(1.0);
++//    obdLog5.setCoolantTemp(1.0);
++//    obdLog5.setSpeed(1.0);
++//    obdLog5.setVin("A12345");
++//    obdLog5.setEngineLoad(1.0);
++//    obdLog5.setFuelLevel(1.0);
++//    obdLog5.setOilTemp(1.0);
++//    obdLog5.setRunTime(1.0);
++//    obdLog5.setRunTimeMIL(1.0);
++//    obdLog5.setThrottlePos(1.0);
++//    obdLogTablePK5.setDeviceId("HD190913");
++//    obdLogTablePK5.setTimeStamp(localDateTime5);
++//    obdLog5.setObdLogTablePK(obdLogTablePK5);
++//
++//    obdLogDataRepository.save(obdLog1);
++//    obdLogDataRepository.save(obdLog2);
++//    obdLogDataRepository.save(obdLog3);
++//    obdLogDataRepository.save(obdLog4);
++//    obdLogDataRepository.save(obdLog5);
++//
++//    String deviceId1 = "VF190913";
++//    String deviceId2 = "HD190913";
++//
++//    LocalDateTime start240401 = LocalDateTime.of(2024, 04, 01, 00, 00, 00);
++//    LocalDateTime end240401 = LocalDateTime.of(2024, 04, 01, 23, 59, 59);
++//
++//    LocalDateTime start240411 = LocalDateTime.of(2024, 04, 11, 00, 00, 00);
++//    LocalDateTime end240411 = LocalDateTime.of(2024, 04, 11, 23, 59, 59);
++//
++//    // deviceId1의 240401 날짜의 모든 로그 출력 (expected: 2)
++//    List<ObdLog> dvId01and240401 = obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId1,
++//        start240401, end240401);
++//
++//    // deviceId2의 240401 날짜의 모든 로그 출력 (expected: 2)
++//    List<ObdLog> dvId02and240401 = obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId1,
++//        start240401, end240401);
++//
++//    // 240411 날짜의 모든 로그 출력 (expected: 1)
++//    List<ObdLog> dvId02and240411 = obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId2,
++//        start240411, end240411);
++//
++//    assertThat(dvId01and240401.size()).isEqualTo(2);    // deviceId01 의 240401 날짜 로그가 2개가 아니라면, 오류
++//    assertThat(dvId02and240401.size()).isEqualTo(2);    // deviceId02 의 240401 날짜 로그가 2개가 아니라면, 오류
++//    assertThat(dvId02and240411.size()).isEqualTo(1);    // deviceId02 의 240411 날짜 로그가 1개가 아니라면, 오류
++//  }
++//}
+\ No newline at end of file
+Index: frontend/logger-react-app/node_modules/sucrase/node_modules/.bin/glob
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/sucrase/node_modules/.bin/glob b/frontend/logger-react-app/node_modules/sucrase/node_modules/.bin/glob
+--- a/frontend/logger-react-app/node_modules/sucrase/node_modules/.bin/glob	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/sucrase/node_modules/.bin/glob	(date 1715178258874)
+@@ -1,1 +1,16 @@
+-../glob/dist/esm/bin.mjs
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../glob/dist/esm/bin.mjs" "$@"
++else 
++  exec node  "$basedir/../glob/dist/esm/bin.mjs" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/postcss-load-config/node_modules/.bin/yaml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/postcss-load-config/node_modules/.bin/yaml b/frontend/logger-react-app/node_modules/postcss-load-config/node_modules/.bin/yaml
+--- a/frontend/logger-react-app/node_modules/postcss-load-config/node_modules/.bin/yaml	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/postcss-load-config/node_modules/.bin/yaml	(date 1715178258894)
+@@ -1,1 +1,16 @@
+-../yaml/bin.mjs
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../yaml/bin.mjs" "$@"
++else 
++  exec node  "$basedir/../yaml/bin.mjs" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/tsc
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/tsc b/frontend/logger-react-app/node_modules/.bin/tsc
+--- a/frontend/logger-react-app/node_modules/.bin/tsc	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/tsc	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../typescript/bin/tsc
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../typescript/bin/tsc" "$@"
++else 
++  exec node  "$basedir/../typescript/bin/tsc" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/js-yaml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/js-yaml b/frontend/logger-react-app/node_modules/.bin/js-yaml
+--- a/frontend/logger-react-app/node_modules/.bin/js-yaml	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/js-yaml	(date 1715178258884)
+@@ -1,1 +1,16 @@
+-../js-yaml/bin/js-yaml.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../js-yaml/bin/js-yaml.js" "$@"
++else 
++  exec node  "$basedir/../js-yaml/bin/js-yaml.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/lz-string
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/lz-string b/frontend/logger-react-app/node_modules/.bin/lz-string
+--- a/frontend/logger-react-app/node_modules/.bin/lz-string	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/lz-string	(date 1715178258885)
+@@ -1,1 +1,16 @@
+-../lz-string/bin/bin.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../lz-string/bin/bin.js" "$@"
++else 
++  exec node  "$basedir/../lz-string/bin/bin.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/parser
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/parser b/frontend/logger-react-app/node_modules/.bin/parser
+--- a/frontend/logger-react-app/node_modules/.bin/parser	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/parser	(date 1715178258874)
+@@ -1,1 +1,16 @@
+-../@babel/parser/bin/babel-parser.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../@babel/parser/bin/babel-parser.js" "$@"
++else 
++  exec node  "$basedir/../@babel/parser/bin/babel-parser.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/semver
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/semver b/frontend/logger-react-app/node_modules/.bin/semver
+--- a/frontend/logger-react-app/node_modules/.bin/semver	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/semver	(date 1715178258887)
+@@ -1,1 +1,16 @@
+-../semver/bin/semver.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../semver/bin/semver.js" "$@"
++else 
++  exec node  "$basedir/../semver/bin/semver.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/jiti
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/jiti b/frontend/logger-react-app/node_modules/.bin/jiti
+--- a/frontend/logger-react-app/node_modules/.bin/jiti	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/jiti	(date 1715178258885)
+@@ -1,1 +1,16 @@
+-../jiti/bin/jiti.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../jiti/bin/jiti.js" "$@"
++else 
++  exec node  "$basedir/../jiti/bin/jiti.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/uuid
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/uuid b/frontend/logger-react-app/node_modules/.bin/uuid
+--- a/frontend/logger-react-app/node_modules/.bin/uuid	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/uuid	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../uuid/dist/bin/uuid
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../uuid/dist/bin/uuid" "$@"
++else 
++  exec node  "$basedir/../uuid/dist/bin/uuid" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/webpack
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/webpack b/frontend/logger-react-app/node_modules/.bin/webpack
+--- a/frontend/logger-react-app/node_modules/.bin/webpack	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/webpack	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../webpack/bin/webpack.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../webpack/bin/webpack.js" "$@"
++else 
++  exec node  "$basedir/../webpack/bin/webpack.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/resolve
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/resolve b/frontend/logger-react-app/node_modules/.bin/resolve
+--- a/frontend/logger-react-app/node_modules/.bin/resolve	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/resolve	(date 1715178258887)
+@@ -1,1 +1,16 @@
+-../resolve/bin/resolve
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../resolve/bin/resolve" "$@"
++else 
++  exec node  "$basedir/../resolve/bin/resolve" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/eslint
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/eslint b/frontend/logger-react-app/node_modules/.bin/eslint
+--- a/frontend/logger-react-app/node_modules/.bin/eslint	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/eslint	(date 1715178258882)
+@@ -1,1 +1,16 @@
+-../eslint/bin/eslint.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../eslint/bin/eslint.js" "$@"
++else 
++  exec node  "$basedir/../eslint/bin/eslint.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/tailwindcss
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/tailwindcss b/frontend/logger-react-app/node_modules/.bin/tailwindcss
+--- a/frontend/logger-react-app/node_modules/.bin/tailwindcss	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/tailwindcss	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../tailwindcss/lib/cli.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../tailwindcss/lib/cli.js" "$@"
++else 
++  exec node  "$basedir/../tailwindcss/lib/cli.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/autoprefixer
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/autoprefixer b/frontend/logger-react-app/node_modules/.bin/autoprefixer
+--- a/frontend/logger-react-app/node_modules/.bin/autoprefixer	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/autoprefixer	(date 1715178258874)
+@@ -1,1 +1,16 @@
+-../autoprefixer/bin/autoprefixer
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../autoprefixer/bin/autoprefixer" "$@"
++else 
++  exec node  "$basedir/../autoprefixer/bin/autoprefixer" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/eslint-plugin-import/node_modules/.bin/semver
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/eslint-plugin-import/node_modules/.bin/semver b/frontend/logger-react-app/node_modules/eslint-plugin-import/node_modules/.bin/semver
+--- a/frontend/logger-react-app/node_modules/eslint-plugin-import/node_modules/.bin/semver	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/eslint-plugin-import/node_modules/.bin/semver	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../semver/bin/semver.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../semver/bin/semver.js" "$@"
++else 
++  exec node  "$basedir/../semver/bin/semver.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/esparse
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/esparse b/frontend/logger-react-app/node_modules/.bin/esparse
+--- a/frontend/logger-react-app/node_modules/.bin/esparse	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/esparse	(date 1715178258882)
+@@ -1,1 +1,16 @@
+-../esprima/bin/esparse.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../esprima/bin/esparse.js" "$@"
++else 
++  exec node  "$basedir/../esprima/bin/esparse.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/tailwind
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/tailwind b/frontend/logger-react-app/node_modules/.bin/tailwind
+--- a/frontend/logger-react-app/node_modules/.bin/tailwind	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/tailwind	(date 1715178258887)
+@@ -1,1 +1,16 @@
+-../tailwindcss/lib/cli.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../tailwindcss/lib/cli.js" "$@"
++else 
++  exec node  "$basedir/../tailwindcss/lib/cli.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/jsonpath/node_modules/.bin/esvalidate
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/jsonpath/node_modules/.bin/esvalidate b/frontend/logger-react-app/node_modules/jsonpath/node_modules/.bin/esvalidate
+--- a/frontend/logger-react-app/node_modules/jsonpath/node_modules/.bin/esvalidate	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/jsonpath/node_modules/.bin/esvalidate	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../esprima/bin/esvalidate.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../esprima/bin/esvalidate.js" "$@"
++else 
++  exec node  "$basedir/../esprima/bin/esvalidate.js" "$@"
++fi
+Index: frontend/logger-react-app/src/pages/SignUp.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/src/pages/SignUp.js b/frontend/logger-react-app/src/pages/SignUp.js
+--- a/frontend/logger-react-app/src/pages/SignUp.js	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/src/pages/SignUp.js	(date 1715180939808)
+@@ -84,7 +84,8 @@
+       }
+ 
+       // reponse 변수는 백엔드 서버의 회원가입 로직과 통신.
+-      const response = await fetch("로그인 서버 주소", {
++      // 수정
++      const response = await fetch("http://localhost:8080/user/register", {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/json",
+@@ -95,7 +96,7 @@
+       if (response.status === 201) {
+         const data = await response.json();
+         console.log("회원가입 성공:", data);
+-        navigate("/LoginForm");
++        navigate("/LogIn");
+       } else {
+         throw new Error("회원가입 요청 실패");
+       }
+Index: backend/src/main/java/com/cfs/obd2logger/controller/UserController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/src/main/java/com/cfs/obd2logger/controller/UserController.java b/backend/src/main/java/com/cfs/obd2logger/controller/UserController.java
+--- a/backend/src/main/java/com/cfs/obd2logger/controller/UserController.java	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/backend/src/main/java/com/cfs/obd2logger/controller/UserController.java	(date 1715180914752)
+@@ -8,152 +8,161 @@
+ import org.springframework.http.HttpStatus;
+ import org.springframework.http.ResponseEntity;
+ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+-import org.springframework.web.bind.annotation.*;
++import org.springframework.web.bind.annotation.DeleteMapping;
++import org.springframework.web.bind.annotation.GetMapping;
++import org.springframework.web.bind.annotation.PatchMapping;
++import org.springframework.web.bind.annotation.PostMapping;
++import org.springframework.web.bind.annotation.RequestBody;
++import org.springframework.web.bind.annotation.RequestMapping;
++import org.springframework.web.bind.annotation.RequestParam;
++import org.springframework.web.bind.annotation.RestController;
+ 
+ @RestController
+ @RequestMapping("/user")
+ public class UserController {
+ 
+-    @Autowired
+-    UserService userService;
++  @Autowired
++  UserService userService;
+ 
+-    @Autowired
+-    BCryptPasswordEncoder passwordEncoder;
++  @Autowired
++  BCryptPasswordEncoder passwordEncoder;
+ 
+-    @Autowired
+-    TokenProvider tokenProvider;
++  @Autowired
++  TokenProvider tokenProvider;
+ 
+-    // 회원가입
+-    @PostMapping("")
+-    public ResponseEntity<?> registerUser(@RequestBody UserDTO userDTO) {
+-        try {
+-            UserEntity user = UserEntity.builder()
+-                .name(userDTO.getName())
+-                .email(userDTO.getEmail())
+-                .carName(userDTO.getCarName())
+-                .id(userDTO.getId())
+-                .password(passwordEncoder.encode(userDTO.getPassword()))
+-                .status("activated") // 회원가입 시 활성 상태로 설정
+-                .build();
++  // 회원가입
++  // 수정
++  @PostMapping("/register")
++  public ResponseEntity<?> registerUser(@RequestBody UserDTO userDTO) {
++    try {
++      UserEntity user = UserEntity.builder()
++          .name(userDTO.getName())
++          .email(userDTO.getEmail())
++          .carName(userDTO.getCarName())
++          .id(userDTO.getId())
++          .password(passwordEncoder.encode(userDTO.getPassword()))
++          .status("activated") // 회원가입 시 활성 상태로 설정
++          .build();
+ 
+-            UserEntity responseUser = userService.signup(user);
++      UserEntity responseUser = userService.signup(user);
+ 
+-            return ResponseEntity.ok().body("회원가입 성공");
+-        } catch (Exception e) {
+-            return ResponseEntity.badRequest().body(e.getMessage());
+-        }
+-    }
++      return ResponseEntity.ok().body("회원가입 성공");
++    } catch (Exception e) {
++      return ResponseEntity.badRequest().body(e.getMessage());
++    }
++  }
+ 
+-    // 아이디 중복검사
+-    @PostMapping("/check-id")
+-    public ResponseEntity<?> duplicateCheckId(@RequestBody UserDTO userDTO) {
+-        try {
+-            return ResponseEntity.ok().body(userService.checkId(userDTO.getId()));
+-        } catch (Exception e) {
+-            return ResponseEntity.badRequest().body(e.getMessage());
+-        }
+-    }
++  // 아이디 중복검사
++  @PostMapping("/check_id")
++  public ResponseEntity<?> duplicateCheckId(@RequestBody UserDTO userDTO) {
++    try {
++      return ResponseEntity.ok().body(userService.checkId(userDTO.getId()));
++    } catch (Exception e) {
++      return ResponseEntity.badRequest().body(e.getMessage());
++    }
++  }
+ 
+-    // 로그인
+-    @PostMapping("/login")
+-    public ResponseEntity<?> loginUser(@RequestBody UserDTO userDTO) {
+-        try {
+-            UserEntity user = userService.login(userDTO.getId(), userDTO.getPassword());
++  // 로그인
++  @PostMapping("/login")
++  public ResponseEntity<?> loginUser(@RequestBody UserDTO userDTO) {
++    try {
++      UserEntity user = userService.login(userDTO.getId(), userDTO.getPassword());
+ 
+-            if(user == null) {
+-                throw new RuntimeException("로그인 실패");
+-            }
++      if (user == null) {
++        throw new RuntimeException("로그인 실패");
++      }
+ 
+-            // 사용자 상태가 "deactivated"인 경우 로그인 불가
+-            if ("deactivated".equals(user.getStatus())) {
+-                throw new RuntimeException("비활성화된 계정입니다.");
+-            }
++      // 사용자 상태가 "deactivated"인 경우 로그인 불가
++      if ("deactivated".equals(user.getStatus())) {
++        throw new RuntimeException("비활성화된 계정입니다.");
++      }
+ 
+-            String token = tokenProvider.create(user);
++      String token = tokenProvider.create(user);
+ 
+-            UserDTO responseUserDTO = UserDTO.builder()
+-                .name(user.getName())
+-                .email(user.getEmail())
+-                .id(user.getId())
+-                .token(token)
+-                .build();
+-            return ResponseEntity.ok().body(responseUserDTO);
+-        } catch (Exception e){
+-            return ResponseEntity.badRequest().body(e.getMessage());
+-        }
+-    }
++      UserDTO responseUserDTO = UserDTO.builder()
++          .name(user.getName())
++          .email(user.getEmail())
++          .id(user.getId())
++          .token(token)
++          .build();
++      return ResponseEntity.ok().body(responseUserDTO);
++    } catch (Exception e) {
++      return ResponseEntity.badRequest().body(e.getMessage());
++    }
++  }
+ 
+-    // 아이디 찾기
+-    @GetMapping("")
+-    public ResponseEntity<String> findUserId(@RequestParam String name, @RequestParam String email) {
+-        String userId = userService.getUserId(name, email);
+-        if (userId != null) {
+-            return ResponseEntity.ok(userId);
+-        } else {
+-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("아이디가 존재하지 않습니다.");
+-        }
+-    }
++  // 아이디 찾기
++  @GetMapping("/find_id")
++  public ResponseEntity<String> findUserId(@RequestParam String name, @RequestParam String email) {
++    String userId = userService.getUserId(name, email);
++    if (userId != null) {
++      return ResponseEntity.ok(userId);
++    } else {
++      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("아이디가 존재하지 않습니다.");
++    }
++  }
+ 
+-    // 비밀번호 찾기
++  // 비밀번호 찾기
+ 
+-    // 사용자 정보 조회
+-    @GetMapping("")
+-    public ResponseEntity<?> getUserProfile(@RequestParam String id) {
+-        try {
+-            UserEntity user = userService.getUserInfo(id);
++  // 사용자 정보 조회
++  // 수정
++  @GetMapping("/list")
++  public ResponseEntity<?> getUserProfile(@RequestParam String id) {
++    try {
++      UserEntity user = userService.getUserInfo(id);
+ 
+-            UserDTO responseUser = UserDTO.builder()
+-                .name(user.getName())
+-                .carName(user.getCarName())
+-                .build();
+-            return ResponseEntity.ok().body(responseUser);
+-        } catch (Exception e) {
+-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+-        }
+-    }
++      UserDTO responseUser = UserDTO.builder()
++          .name(user.getName())
++          .carName(user.getCarName())
++          .build();
++      return ResponseEntity.ok().body(responseUser);
++    } catch (Exception e) {
++      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
++    }
++  }
+ 
+-    // 회원정보 수정 (비밀번호, 차종, 제품 일련번호)
+-    @PatchMapping("")
+-    public ResponseEntity<?> updateUserProfile(@RequestBody UserDTO userDTO) {
+-        try {
+-            UserEntity user = UserEntity.builder()
+-                .id(userDTO.getId())
+-                .carName(userDTO.getCarName())
+-                .deviceId(userDTO.getDeviceId())
+-                .password(passwordEncoder.encode(userDTO.getPassword()))
+-                .status("activated")
+-                .build();
+-            userService.editUserInfo(user);
++  // 회원정보 수정 (비밀번호, 차종, 제품 일련번호)
++  @PatchMapping("")
++  public ResponseEntity<?> updateUserProfile(@RequestBody UserDTO userDTO) {
++    try {
++      UserEntity user = UserEntity.builder()
++          .id(userDTO.getId())
++          .carName(userDTO.getCarName())
++          .deviceId(userDTO.getDeviceId())
++          .password(passwordEncoder.encode(userDTO.getPassword()))
++          .status("activated")
++          .build();
++      userService.editUserInfo(user);
+ 
+-            String token = tokenProvider.create(user);
++      String token = tokenProvider.create(user);
+ 
+-            UserDTO responseUserDTO = UserDTO.builder()
+-                .id(user.getId())
+-                .carName(user.getCarName())
+-                .deviceId(user.getDeviceId())
+-                .token(token)
+-                .build();
+-            return ResponseEntity.ok().body(responseUserDTO);
+-        } catch (Exception e) {
+-            return ResponseEntity.badRequest().body(e.getMessage());
+-        }
+-    }
++      UserDTO responseUserDTO = UserDTO.builder()
++          .id(user.getId())
++          .carName(user.getCarName())
++          .deviceId(user.getDeviceId())
++          .token(token)
++          .build();
++      return ResponseEntity.ok().body(responseUserDTO);
++    } catch (Exception e) {
++      return ResponseEntity.badRequest().body(e.getMessage());
++    }
++  }
+ 
+-    // 회원 정보 수정 (비밀번호, 차종)
+-    // 회원 정보 수정 (비밀번호, 일련번호)
+-    // 회원 정보 수정 (차총, 제품 일련번호)
+-    // 회원 정보 수정 (비밀번호)
+-    // 회원 정보 수정 (차총)
+-    // 회원 정보 수정 (일련번호)
++  // 회원 정보 수정 (비밀번호, 차종)
++  // 회원 정보 수정 (비밀번호, 일련번호)
++  // 회원 정보 수정 (차총, 제품 일련번호)
++  // 회원 정보 수정 (비밀번호)
++  // 회원 정보 수정 (차총)
++  // 회원 정보 수정 (일련번호)
+ 
+-    // 회원 탈퇴
+-    @DeleteMapping("")
+-    public ResponseEntity<?> deleteUser(@RequestBody UserDTO userDTO) {
+-        try {
+-            String msg = userService.deleteUser(userDTO.getId(), userDTO.getPassword());
+-            return ResponseEntity.ok().body(msg);
+-        } catch (Exception e) {
+-            return ResponseEntity.badRequest().body(e.getMessage());
+-        }
+-    }
++  // 회원 탈퇴
++  @DeleteMapping("")
++  public ResponseEntity<?> deleteUser(@RequestBody UserDTO userDTO) {
++    try {
++      String msg = userService.deleteUser(userDTO.getId(), userDTO.getPassword());
++      return ResponseEntity.ok().body(msg);
++    } catch (Exception e) {
++      return ResponseEntity.badRequest().body(e.getMessage());
++    }
++  }
+ }
+\ No newline at end of file
+Index: backend/src/main/java/com/cfs/obd2logger/entity/Video.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/src/main/java/com/cfs/obd2logger/entity/Video.java b/backend/src/main/java/com/cfs/obd2logger/entity/Video.java
+--- a/backend/src/main/java/com/cfs/obd2logger/entity/Video.java	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/backend/src/main/java/com/cfs/obd2logger/entity/Video.java	(date 1715093154421)
+@@ -2,7 +2,10 @@
+ 
+ import jakarta.persistence.Column;
+ import jakarta.persistence.Entity;
++import jakarta.persistence.FetchType;
+ import jakarta.persistence.Id;
++import jakarta.persistence.JoinColumn;
++import jakarta.persistence.ManyToOne;
+ import jakarta.persistence.Table;
+ import java.time.LocalDateTime;
+ import lombok.AllArgsConstructor;
+@@ -21,8 +24,9 @@
+ public class Video {
+ 
+   @Id
+-  @Column(name = "DEVICE_ID", length = 8, nullable = false)
+-  private String deviceId;        // 라즈베리파이 식별번호
++  @ManyToOne(fetch = FetchType.LAZY)
++  @JoinColumn(name = "DEVICE_ID")
++  private UserEntity user;                      // 라즈베리파이 식별번호 (외래키: UserEntity)
+ 
+   @Column(name = "FILE_PATH", length = 512, nullable = false)
+   private String filePath;                      // 동영상 파일 경로
+Index: frontend/logger-react-app/node_modules/@babel/plugin-transform-runtime/node_modules/.bin/semver
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/@babel/plugin-transform-runtime/node_modules/.bin/semver b/frontend/logger-react-app/node_modules/@babel/plugin-transform-runtime/node_modules/.bin/semver
+--- a/frontend/logger-react-app/node_modules/@babel/plugin-transform-runtime/node_modules/.bin/semver	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/@babel/plugin-transform-runtime/node_modules/.bin/semver	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../semver/bin/semver.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../semver/bin/semver.js" "$@"
++else 
++  exec node  "$basedir/../semver/bin/semver.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/eslint-plugin-react/node_modules/.bin/semver
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/eslint-plugin-react/node_modules/.bin/semver b/frontend/logger-react-app/node_modules/eslint-plugin-react/node_modules/.bin/semver
+--- a/frontend/logger-react-app/node_modules/eslint-plugin-react/node_modules/.bin/semver	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/eslint-plugin-react/node_modules/.bin/semver	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../semver/bin/semver.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../semver/bin/semver.js" "$@"
++else 
++  exec node  "$basedir/../semver/bin/semver.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/json5
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/json5 b/frontend/logger-react-app/node_modules/.bin/json5
+--- a/frontend/logger-react-app/node_modules/.bin/json5	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/json5	(date 1715178258885)
+@@ -1,1 +1,16 @@
+-../json5/lib/cli.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../json5/lib/cli.js" "$@"
++else 
++  exec node  "$basedir/../json5/lib/cli.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/cssesc
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/cssesc b/frontend/logger-react-app/node_modules/.bin/cssesc
+--- a/frontend/logger-react-app/node_modules/.bin/cssesc	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/cssesc	(date 1715178258882)
+@@ -1,1 +1,16 @@
+-../cssesc/bin/cssesc
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../cssesc/bin/cssesc" "$@"
++else 
++  exec node  "$basedir/../cssesc/bin/cssesc" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/jest
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/jest b/frontend/logger-react-app/node_modules/.bin/jest
+--- a/frontend/logger-react-app/node_modules/.bin/jest	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/jest	(date 1715178258884)
+@@ -1,1 +1,16 @@
+-../jest/bin/jest.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../jest/bin/jest.js" "$@"
++else 
++  exec node  "$basedir/../jest/bin/jest.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/sucrase-node
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/sucrase-node b/frontend/logger-react-app/node_modules/.bin/sucrase-node
+--- a/frontend/logger-react-app/node_modules/.bin/sucrase-node	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/sucrase-node	(date 1715178258887)
+@@ -1,1 +1,16 @@
+-../sucrase/bin/sucrase-node
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../sucrase/bin/sucrase-node" "$@"
++else 
++  exec node  "$basedir/../sucrase/bin/sucrase-node" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/rollup
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/rollup b/frontend/logger-react-app/node_modules/.bin/rollup
+--- a/frontend/logger-react-app/node_modules/.bin/rollup	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/rollup	(date 1715178258887)
+@@ -1,1 +1,16 @@
+-../rollup/dist/bin/rollup
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../rollup/dist/bin/rollup" "$@"
++else 
++  exec node  "$basedir/../rollup/dist/bin/rollup" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/esvalidate
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/esvalidate b/frontend/logger-react-app/node_modules/.bin/esvalidate
+--- a/frontend/logger-react-app/node_modules/.bin/esvalidate	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/esvalidate	(date 1715178258882)
+@@ -1,1 +1,16 @@
+-../esprima/bin/esvalidate.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../esprima/bin/esvalidate.js" "$@"
++else 
++  exec node  "$basedir/../esprima/bin/esvalidate.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/react-scripts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/react-scripts b/frontend/logger-react-app/node_modules/.bin/react-scripts
+--- a/frontend/logger-react-app/node_modules/.bin/react-scripts	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/react-scripts	(date 1715178258885)
+@@ -1,1 +1,16 @@
+-../react-scripts/bin/react-scripts.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../react-scripts/bin/react-scripts.js" "$@"
++else 
++  exec node  "$basedir/../react-scripts/bin/react-scripts.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/loose-envify
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/loose-envify b/frontend/logger-react-app/node_modules/.bin/loose-envify
+--- a/frontend/logger-react-app/node_modules/.bin/loose-envify	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/loose-envify	(date 1715178258885)
+@@ -1,1 +1,16 @@
+-../loose-envify/cli.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../loose-envify/cli.js" "$@"
++else 
++  exec node  "$basedir/../loose-envify/cli.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/css-blank-pseudo
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/css-blank-pseudo b/frontend/logger-react-app/node_modules/.bin/css-blank-pseudo
+--- a/frontend/logger-react-app/node_modules/.bin/css-blank-pseudo	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/css-blank-pseudo	(date 1715178258874)
+@@ -1,1 +1,16 @@
+-../css-blank-pseudo/dist/cli.cjs
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../css-blank-pseudo/dist/cli.cjs" "$@"
++else 
++  exec node  "$basedir/../css-blank-pseudo/dist/cli.cjs" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/tsserver
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/tsserver b/frontend/logger-react-app/node_modules/.bin/tsserver
+--- a/frontend/logger-react-app/node_modules/.bin/tsserver	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/tsserver	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../typescript/bin/tsserver
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../typescript/bin/tsserver" "$@"
++else 
++  exec node  "$basedir/../typescript/bin/tsserver" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/mime
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/mime b/frontend/logger-react-app/node_modules/.bin/mime
+--- a/frontend/logger-react-app/node_modules/.bin/mime	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/mime	(date 1715178258885)
+@@ -1,1 +1,16 @@
+-../mime/cli.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../mime/cli.js" "$@"
++else 
++  exec node  "$basedir/../mime/cli.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/update-browserslist-db
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/update-browserslist-db b/frontend/logger-react-app/node_modules/.bin/update-browserslist-db
+--- a/frontend/logger-react-app/node_modules/.bin/update-browserslist-db	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/update-browserslist-db	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../update-browserslist-db/cli.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../update-browserslist-db/cli.js" "$@"
++else 
++  exec node  "$basedir/../update-browserslist-db/cli.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/terser
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/terser b/frontend/logger-react-app/node_modules/.bin/terser
+--- a/frontend/logger-react-app/node_modules/.bin/terser	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/terser	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../terser/bin/terser
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../terser/bin/terser" "$@"
++else 
++  exec node  "$basedir/../terser/bin/terser" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/nanoid
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/nanoid b/frontend/logger-react-app/node_modules/.bin/nanoid
+--- a/frontend/logger-react-app/node_modules/.bin/nanoid	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/nanoid	(date 1715178258885)
+@@ -1,1 +1,16 @@
+-../nanoid/bin/nanoid.cjs
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../nanoid/bin/nanoid.cjs" "$@"
++else 
++  exec node  "$basedir/../nanoid/bin/nanoid.cjs" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/css-has-pseudo
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/css-has-pseudo b/frontend/logger-react-app/node_modules/.bin/css-has-pseudo
+--- a/frontend/logger-react-app/node_modules/.bin/css-has-pseudo	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/css-has-pseudo	(date 1715178258880)
+@@ -1,1 +1,16 @@
+-../css-has-pseudo/dist/cli.cjs
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../css-has-pseudo/dist/cli.cjs" "$@"
++else 
++  exec node  "$basedir/../css-has-pseudo/dist/cli.cjs" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/html-minifier-terser
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/html-minifier-terser b/frontend/logger-react-app/node_modules/.bin/html-minifier-terser
+--- a/frontend/logger-react-app/node_modules/.bin/html-minifier-terser	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/html-minifier-terser	(date 1715178258882)
+@@ -1,1 +1,16 @@
+-../html-minifier-terser/cli.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../html-minifier-terser/cli.js" "$@"
++else 
++  exec node  "$basedir/../html-minifier-terser/cli.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/rimraf
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/rimraf b/frontend/logger-react-app/node_modules/.bin/rimraf
+--- a/frontend/logger-react-app/node_modules/.bin/rimraf	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/rimraf	(date 1715178258887)
+@@ -1,1 +1,16 @@
+-../rimraf/bin.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../rimraf/bin.js" "$@"
++else 
++  exec node  "$basedir/../rimraf/bin.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/esgenerate
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/esgenerate b/frontend/logger-react-app/node_modules/.bin/esgenerate
+--- a/frontend/logger-react-app/node_modules/.bin/esgenerate	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/esgenerate	(date 1715178258882)
+@@ -1,1 +1,16 @@
+-../escodegen/bin/esgenerate.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../escodegen/bin/esgenerate.js" "$@"
++else 
++  exec node  "$basedir/../escodegen/bin/esgenerate.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/browserslist
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/browserslist b/frontend/logger-react-app/node_modules/.bin/browserslist
+--- a/frontend/logger-react-app/node_modules/.bin/browserslist	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/browserslist	(date 1715178258874)
+@@ -1,1 +1,16 @@
+-../browserslist/cli.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../browserslist/cli.js" "$@"
++else 
++  exec node  "$basedir/../browserslist/cli.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/tsconfig-paths/node_modules/.bin/json5
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/tsconfig-paths/node_modules/.bin/json5 b/frontend/logger-react-app/node_modules/tsconfig-paths/node_modules/.bin/json5
+--- a/frontend/logger-react-app/node_modules/tsconfig-paths/node_modules/.bin/json5	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/tsconfig-paths/node_modules/.bin/json5	(date 1715178258897)
+@@ -1,1 +1,16 @@
+-../json5/lib/cli.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../json5/lib/cli.js" "$@"
++else 
++  exec node  "$basedir/../json5/lib/cli.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/postcss-svgo/node_modules/.bin/svgo
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/postcss-svgo/node_modules/.bin/svgo b/frontend/logger-react-app/node_modules/postcss-svgo/node_modules/.bin/svgo
+--- a/frontend/logger-react-app/node_modules/postcss-svgo/node_modules/.bin/svgo	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/postcss-svgo/node_modules/.bin/svgo	(date 1715178258894)
+@@ -1,1 +1,16 @@
+-../svgo/bin/svgo
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../svgo/bin/svgo" "$@"
++else 
++  exec node  "$basedir/../svgo/bin/svgo" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/global-prefix/node_modules/.bin/which
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/global-prefix/node_modules/.bin/which b/frontend/logger-react-app/node_modules/global-prefix/node_modules/.bin/which
+--- a/frontend/logger-react-app/node_modules/global-prefix/node_modules/.bin/which	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/global-prefix/node_modules/.bin/which	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../which/bin/which
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../which/bin/which" "$@"
++else 
++  exec node  "$basedir/../which/bin/which" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/static-eval/node_modules/.bin/escodegen
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/static-eval/node_modules/.bin/escodegen b/frontend/logger-react-app/node_modules/static-eval/node_modules/.bin/escodegen
+--- a/frontend/logger-react-app/node_modules/static-eval/node_modules/.bin/escodegen	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/static-eval/node_modules/.bin/escodegen	(date 1715178258894)
+@@ -1,1 +1,16 @@
+-../escodegen/bin/escodegen.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../escodegen/bin/escodegen.js" "$@"
++else 
++  exec node  "$basedir/../escodegen/bin/escodegen.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/@eslint/eslintrc/node_modules/.bin/js-yaml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/@eslint/eslintrc/node_modules/.bin/js-yaml b/frontend/logger-react-app/node_modules/@eslint/eslintrc/node_modules/.bin/js-yaml
+--- a/frontend/logger-react-app/node_modules/@eslint/eslintrc/node_modules/.bin/js-yaml	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/@eslint/eslintrc/node_modules/.bin/js-yaml	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../js-yaml/bin/js-yaml.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../js-yaml/bin/js-yaml.js" "$@"
++else 
++  exec node  "$basedir/../js-yaml/bin/js-yaml.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/static-eval/node_modules/.bin/esgenerate
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/static-eval/node_modules/.bin/esgenerate b/frontend/logger-react-app/node_modules/static-eval/node_modules/.bin/esgenerate
+--- a/frontend/logger-react-app/node_modules/static-eval/node_modules/.bin/esgenerate	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/static-eval/node_modules/.bin/esgenerate	(date 1715178258894)
+@@ -1,1 +1,16 @@
+-../escodegen/bin/esgenerate.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../escodegen/bin/esgenerate.js" "$@"
++else 
++  exec node  "$basedir/../escodegen/bin/esgenerate.js" "$@"
++fi
+Index: frontend/logger-react-app/package-lock.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/package-lock.json b/frontend/logger-react-app/package-lock.json
+--- a/frontend/logger-react-app/package-lock.json	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/package-lock.json	(date 1715178261154)
+@@ -20,7 +20,7 @@
+         "react": "^18.2.0",
+         "react-dom": "^18.2.0",
+         "react-router-dom": "^6.22.3",
+-        "react-scripts": "5.0.1",
++        "react-scripts": "^5.0.1",
+         "web-vitals": "^2.1.4"
+       }
+     },
+Index: frontend/logger-react-app/package.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/package.json b/frontend/logger-react-app/package.json
+--- a/frontend/logger-react-app/package.json	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/package.json	(date 1715178259804)
+@@ -15,7 +15,7 @@
+     "react": "^18.2.0",
+     "react-dom": "^18.2.0",
+     "react-router-dom": "^6.22.3",
+-    "react-scripts": "5.0.1",
++    "react-scripts": "^5.0.1",
+     "web-vitals": "^2.1.4"
+   },
+   "scripts": {
+Index: frontend/logger-react-app/node_modules/eslint-plugin-react/node_modules/.bin/resolve
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/eslint-plugin-react/node_modules/.bin/resolve b/frontend/logger-react-app/node_modules/eslint-plugin-react/node_modules/.bin/resolve
+--- a/frontend/logger-react-app/node_modules/eslint-plugin-react/node_modules/.bin/resolve	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/eslint-plugin-react/node_modules/.bin/resolve	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../resolve/bin/resolve
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../resolve/bin/resolve" "$@"
++else 
++  exec node  "$basedir/../resolve/bin/resolve" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/webpack-dev-server
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>../webpack-dev-server/bin/webpack-dev-server.js
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/webpack-dev-server b/frontend/logger-react-app/node_modules/.bin/webpack-dev-server
+--- a/frontend/logger-react-app/node_modules/.bin/webpack-dev-server	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/webpack-dev-server	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../webpack-dev-server/bin/webpack-dev-server.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../webpack-dev-server/bin/webpack-dev-server.js" "$@"
++else 
++  exec node  "$basedir/../webpack-dev-server/bin/webpack-dev-server.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/@babel/eslint-parser/node_modules/.bin/semver
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>../semver/bin/semver.js
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/@babel/eslint-parser/node_modules/.bin/semver b/frontend/logger-react-app/node_modules/@babel/eslint-parser/node_modules/.bin/semver
+--- a/frontend/logger-react-app/node_modules/@babel/eslint-parser/node_modules/.bin/semver	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/@babel/eslint-parser/node_modules/.bin/semver	(date 1715178258889)
+@@ -1,1 +1,16 @@
+-../semver/bin/semver.js
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../semver/bin/semver.js" "$@"
++else 
++  exec node  "$basedir/../semver/bin/semver.js" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/he
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>../he/bin/he
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/he b/frontend/logger-react-app/node_modules/.bin/he
+--- a/frontend/logger-react-app/node_modules/.bin/he	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/he	(date 1715178258882)
+@@ -1,1 +1,16 @@
+-../he/bin/he
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../he/bin/he" "$@"
++else 
++  exec node  "$basedir/../he/bin/he" "$@"
++fi
+Index: frontend/logger-react-app/node_modules/.bin/css-prefers-color-scheme
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>../css-prefers-color-scheme/dist/cli.cjs
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/logger-react-app/node_modules/.bin/css-prefers-color-scheme b/frontend/logger-react-app/node_modules/.bin/css-prefers-color-scheme
+--- a/frontend/logger-react-app/node_modules/.bin/css-prefers-color-scheme	(revision f564f8e856f9bd51abaf8ae8a370839d4b1052be)
++++ b/frontend/logger-react-app/node_modules/.bin/css-prefers-color-scheme	(date 1715178258880)
+@@ -1,1 +1,16 @@
+-../css-prefers-color-scheme/dist/cli.cjs
+\ No newline at end of file
++#!/bin/sh
++basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
++
++case `uname` in
++    *CYGWIN*|*MINGW*|*MSYS*)
++        if command -v cygpath > /dev/null 2>&1; then
++            basedir=`cygpath -w "$basedir"`
++        fi
++    ;;
++esac
++
++if [ -x "$basedir/node" ]; then
++  exec "$basedir/node"  "$basedir/../css-prefers-color-scheme/dist/cli.cjs" "$@"
++else 
++  exec node  "$basedir/../css-prefers-color-scheme/dist/cli.cjs" "$@"
++fi
