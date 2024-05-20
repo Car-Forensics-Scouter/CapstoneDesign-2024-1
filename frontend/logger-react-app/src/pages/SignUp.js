@@ -6,7 +6,6 @@ import { Box, TextField, MenuItem, Button } from "@mui/material";
 import TextFields from "@mui/material/TextField";
 import CFS_logo from "../assets/CFS_logo.png";
 
-
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [id, setID] = useState("");
@@ -37,7 +36,7 @@ const SignUp = () => {
   // ID 중복 확인 요청
   const checkDuplication = async (props) => {
     try {
-      const response = await fetch("http://localhost:8080/user/check_id", {
+      const response = await fetch("http://localhost:8080/check_id", {
         method: "POST",
         mode: "cors",
         headers: {
@@ -55,10 +54,11 @@ const SignUp = () => {
       const data = await response.json();
       
       if (data === false) {
-        alert("사용 가능한 아이디입니다.");
-        setIsDuplication(true)
-      } else {
         alert("중복된 아이디입니다. 다시 시도하세요.");
+        setIsDuplication(true);
+      } else {
+        alert("사용 가능한 아이디입니다.");
+        setIsDuplication(false);
       }
     } catch (error) {
       console.error("중복 확인 에러:", error);
@@ -79,15 +79,8 @@ const SignUp = () => {
     };
 
     try {
-      // 기본 정보 입력.
-      if ((password === passwordConfirm) && (isDuplication === true)) {
-        alert("회원가입이 완료되었습니다!");
-      } else {
-        alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
-      }
-
       // reponse 변수는 백엔드 서버의 회원가입 로직과 통신.
-      const response = await fetch("http://localhost:8080/user/login", {
+      const response = await fetch("http://localhost:8080/signup", {
         method: "POST",
         mode: "cors",
         headers: {
@@ -96,10 +89,37 @@ const SignUp = () => {
         body: JSON.stringify(payload),
       });
 
-      if (response.status === 201) {
+      if (response.ok) {
         const data = await response.json();
-        console.log("회원가입 성공:", data);
-        navigate("/LogIn");
+
+        // 회원가입 시 로그인에 대한 accessToken 발급받으면 로컬 스토리지에 저장.
+        if (data.accessToken) {
+          localStorage.setItem('login-token', response);
+        }
+        
+
+        if (password === "") { // 1차 체크 : password
+          alert("비밀번호를 입력해주세요.")
+        } else {
+          console.log("비밀번호 입력 완료");
+          if (password === passwordConfirm) { // 2차 체크 : password confirm
+            console.log("비밀번호 검증 완료");
+            if (isDuplication === true) {     // 3차 체크 : 중복 확인
+              console.log("중복 확인 완료");
+              console.log("회원가입 성공:", data);
+
+              localStorage.setItem("token", token); // 토큰 저장 (여기서는 로컬 스토리지에 저장하는 예시)              
+
+              alert("환영합니다! 회원가입이 되셨습니다. 로그인 화면으로 이동해 로그인 해주시기 바랍니다.")
+              navigate("/LogIn");
+            } else{
+              alert("중복 확인이 되지 않았습니다. 다시 확인해주세요.");
+            }
+          } else {
+            alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
+          }
+        }
+
       } else {
         throw new Error("회원가입 요청 실패");
       }
@@ -133,18 +153,18 @@ const SignUp = () => {
                     />
                   </Box>
 
-                <div>
-                  <div className="data_name">이메일 </div>
-                    <Box className="input_box">
-                      <TextFields
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
-                    </Box>
-                </div>
+                
+                <div className="data_name">이메일 </div>
+                  <Box className="input_box">
+                    <TextFields
+                      type="email"
+                      placeholder="Email"
+                      value={email}
+                      InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </Box>
+              
 
                 <div className="data_name">차종 선택
                   <div className="menu"
@@ -173,26 +193,28 @@ const SignUp = () => {
               </div>
 
               <div className="right_side">
-                <div>
-                  <div className="data_name">아이디 </div>
-                  <Box className="input_box">
-                    <TextFields
-                      type="text"
-                      placeholder="ID"
-                      value={id}
-                      InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
-                      onChange={(e) => setID(e.target.value)}
-                    />
-                    <Button
-                      variant="contained"
-                      type="button"
-                      className="dedicating_button"
-                      InputProps={{ sx: { "&:hover": { backgroundColor: "#1976d2" } } }}
-                      onClick={() => checkDuplication(id)}
-                    >중복 확인
-                    </Button>
-                  </Box>
-                </div>
+                <form onSubmit={checkDuplication}>
+                  <div>
+                    <div className="data_name">아이디 </div>
+                    <Box className="input_box">
+                      <TextFields
+                        type="text"
+                        placeholder="ID"
+                        value={id}
+                        InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
+                        onChange={(e) => setID(e.target.value)}
+                      />
+                      <Button
+                        variant="contained"
+                        type="button"
+                        className="dedicating_button"
+                        InputProps={{ sx: { "&:hover": { backgroundColor: "#1976d2" } } }}
+                        onClick={() => checkDuplication(id)}
+                      >중복 확인
+                      </Button>
+                    </Box>
+                  </div>
+                </form>
 
                 <div>
                   <div className="data_name">비밀번호 </div>
@@ -208,7 +230,11 @@ const SignUp = () => {
                 </div>
 
                 <div>
-                  <div className="data_name" >비밀번호 확인 </div>
+                  <div className="data_name">비밀번호 확인{password !== "" && (
+                    <span style={{ color: passwordMatch ? "#40bb96" : "red", marginLeft: "20px" }}>
+                        {passwordMatch ? "비밀번호 일치" : "비밀번호 일치하지 않음."}
+                    </span>
+                    )}
                     <Box className="input_box">
                       <TextFields
                         type="password"
@@ -219,17 +245,8 @@ const SignUp = () => {
                         onChange={handlePasswordConfirm}
                       />
                     </Box>
+                  </div>
                 </div>
-                {!passwordMatch && password !== "" && (
-                  <div style={{ color: "red", marginLeft: "15px" }}>
-                    비밀번호가 일치하지 않습니다.
-                  </div>
-                )}
-                {passwordMatch && passwordConfirm && password !== "" && (
-                  <div style={{ color: "green", marginLeft: "15px" }}>
-                    비밀번호가 일치합니다.
-                  </div>
-                )}
               </div>
             </div>
             <Button
@@ -245,7 +262,7 @@ const SignUp = () => {
         <div className="tail_center">
           <p className="service_text">서비스 이용을 위해 회원가입 해주세요. </p>
           <p className="find_id_password">아이디/비밀번호를 잊으셨나요?{"  "}
-            <Link to="/SignUp" style={{ color: "#C224DC" }}>아이디/비밀번호 찾기 </Link>
+            <Link to="/FindIdPassword" style={{ color: "#C224DC" }}>아이디/비밀번호 찾기 </Link>
           </p>
           <div className="line"/>
           <p className="tail2">이미 계정이 있으신가요?{"  "}

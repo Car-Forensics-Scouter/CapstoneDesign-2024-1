@@ -16,7 +16,9 @@ const Login = () => {
 
     try {
       // 백엔드 서버의 로그인 로직과 통신하는 과정.
-      const response = await fetch("로그인 서버 주소", {
+      // 향후 서버에서 데이터를 가져오는 등 인가 과정이 필요할 때, 로컬 스토리지에서 
+      // 토큰을 뽑아 와서 함께 전달하면 된다.
+      await fetch("http://localhost:8080/login", {
         method: "POST",
         mode: "cors",
         headers: {
@@ -26,10 +28,16 @@ const Login = () => {
           id: id,
           password: password,
         }),
+      }).then(response => response.json())
+      .then(response => {
+        if(response.ACCESS_TOKEN) {
+          localStorage.setItem('login-token', response.ACCESS_TOKEN);
+        }
       });
+
       if (response.ok) {
         const result = await response.json();
-        console.log(result);
+        console.log("로그인 완료: ", result);
 
         navigate("/Reports");
       } else {
@@ -46,63 +54,56 @@ const Login = () => {
     <div className="hide_banner">
       <div className="Login">
         <div className="text_center">
-          <img
-            src={CFS_logo}
-            alt="로고"
-            className="logo"
-            />
-        </div>
-        <div className="top_empty_space">
-          <form
-            className="login_form"
-            onSubmit={handleLogin}
-          >
-            <Box className="input_box">
-              <TextField
-                type="text"
-                placeholder="ID"
-                value={id}
-                onChange={(e) => setID(e.target.value)}
-                className="text_box"
-                InputProps={{ sx: { borderRadius: "25px" }}}
-              />
-            </Box>
+          <img className="logo" src={CFS_logo} alt="로고"/>
+          <div className="top_empty_space">
+            <form className="login_form" onSubmit={handleLogin}>
+              <Box className="input_box">
+                <TextField
+                  type="text"
+                  placeholder="ID"
+                  value={id}
+                  onChange={(e) => setID(e.target.value)}
+                  className="text_box"
+                  InputProps={{ sx: { borderRadius: "25px" }}}
+                />
+              </Box>
 
-            <Box className="input_box">
-              <TextField
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="text_box"
-                InputProps={{ sx: { borderRadius: "25px"} }}
-              />
-            </Box>
+              <Box className="input_box">
+                <TextField
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="text_box"
+                  InputProps={{ sx: { borderRadius: "25px"} }}
+                />
+              </Box>
 
-            <Button
-              marginTop= "10px"
-              type="submit"
-              variant="contained"
-              className="submit_button"
-            >
-              로그인
-            </Button>
+              <Button
+                marginTop= "10px"
+                type="submit"
+                variant="contained"
+                className="submit_button"
+              >
+                로그인
+              </Button>
 
-            <p className="service_text">서비스 이용을 위해 로그인 해주세요.</p>
-            <p className="find_id_password">
-              아이디/비밀번호를 잊으셨나요?{" "}
-              <Link to="/SignUpForm" style={{ color: "#C224DC" }}>
-                아이디/비밀번호 찾기
-              </Link>
-            </p>
+              <p className="service_text">서비스 이용을 위해 로그인 해주세요.</p>
+              <p className="find_id_password">
+                아이디/비밀번호를 잊으셨나요?{" "}
+                <Link to="/FindIdPassword" style={{ color: "#C224DC" }}>
+                  아이디/비밀번호 찾기
+                </Link>
+              </p>
 
-            <div className="line"></div>
-            <p className="sign_up">계정이 없으신가요?{" "}
-              <Link to="/SignUp" style={{ color: "#C224DC" }}>
-                회원가입
-              </Link>
-            </p>
-          </form>
+              <div className="line"></div>
+              <p className="sign_up">계정이 없으신가요?{" "}
+                <Link to="/SignUp" style={{ color: "#C224DC" }}>
+                  회원가입
+                </Link>
+              </p>
+            </form>
+          </div>
         </div>
       </div>
     </div>

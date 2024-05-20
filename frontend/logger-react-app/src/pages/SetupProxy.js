@@ -11,6 +11,7 @@ module.exports = function (app) {
       	"/user" : "http://localhost:3080",
         "/user/check_id" : "http://localhost:3080",
         "/user/login" : "http://localhost:3080",
+        "/user/signup" : "http://localhost:3080"
         }
     })
   );

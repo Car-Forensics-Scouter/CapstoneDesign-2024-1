@@ -20,7 +20,7 @@
 }
 
 .Login .top_empty_space .login_form {
-    width: 400px;
+    width: 450px;
 }
 
 .Login .top_empty_space .login_form .input_box {
@@ -38,12 +38,12 @@
   
 
 .Login .top_empty_space .login_form .submit_button {
-    width: 90%;
+    width: 75%;
     background-color: #3AE6B2;
     padding: 12px 10px;
     border-radius: 25px;
-    margin-top: 10px;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 15px;
     margin-right: 20px;
 }
 
