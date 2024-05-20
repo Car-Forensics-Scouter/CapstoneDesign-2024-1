@@ -2,7 +2,7 @@ import picamera
 import time
 import obd
 
-connection = obd.OBD("/dev?ttyUSB2")  # 차량과 연결
+connection = obd.OBD("/dev/ttyUSB2")  # 차량과 연결
 
 # 녹화할 동영상 파일명
 output_file = "video.h264."
