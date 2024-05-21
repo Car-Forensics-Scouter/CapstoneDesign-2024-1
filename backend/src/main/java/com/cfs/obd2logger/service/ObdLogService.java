@@ -22,7 +22,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class ObdLogService {
 
-  // TODO : 추후 스프링빈 최적화
   @Autowired
   ObdLogDataRepository obdLogDataRepository;
 
@@ -61,13 +60,15 @@ public class ObdLogService {
   /**
    * 유저의 특정 날짜의 ObdLog 조회 (1일)
    */
-  public List<ObdLog> findObdLogOnDate(String deviceId, LocalDateTime date) {
+  public List<ObdLogDTO> findObdLogOnDate(String deviceId, LocalDateTime date) {
     DateRange dateRange = new DateRange(date);
     LocalDateTime startDate = dateRange.getStartDate();
     LocalDateTime endDate = dateRange.getEndDate();
 
     try {
-      return obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId, startDate, endDate);
+      List<ObdLog> obdLogList = obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId, startDate,
+          endDate);
+      return ListEntityToListDTO(obdLogList);
     } catch (Exception e) {
       return null;
     }
@@ -76,10 +77,12 @@ public class ObdLogService {
   /**
    * 유저의 특정 날짜의 ObdLog 조회 (특정 시작일~특정 끝일)
    */
-  public List<ObdLog> findObdLogOnDate(String deviceId, LocalDateTime startDate,
+  public List<ObdLogDTO> findObdLogOnDate(String deviceId, LocalDateTime startDate,
       LocalDateTime endDate) {
     try {
-      return obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId, startDate, endDate);
+      List<ObdLog> obdLogList = obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId, startDate,
+          endDate);
+      return ListEntityToListDTO(obdLogList);
     } catch (Exception e) {
       return null;
     }
@@ -123,7 +126,6 @@ public class ObdLogService {
     double c = 0.0;
     double dist = 0.0;
 
-    // TODO : 추후 성능 개선하여 유지 보수할 것
     for (int i = 0; i < size - 1; i++) {
       lon1 = lonList.get(i);
       lat1 = latList.get(i);
@@ -180,7 +182,7 @@ public class ObdLogService {
         dataCell.setCellValue(headerStrings[i]);
       }
 
-      // 데이터 행(i번째 행) 작성,
+      // 데이터 행(i번째 행) 작성
       i = 1;
       for (ObdLogDTO dto : obdLogDTOList) {
         dataRow = sheet.createRow(i);

@@ -1,7 +1,6 @@
 package com.cfs.obd2logger.controller;
 
 import com.cfs.obd2logger.dto.ObdLogDTO;
-import com.cfs.obd2logger.entity.ObdLog;
 import com.cfs.obd2logger.service.ObdLogService;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -52,7 +51,7 @@ public class ObdLogController {
   public ResponseEntity<?> getObdLogOnDate(@RequestParam String deviceId,
       @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime date) {
     try {
-      List<ObdLog> obdLogsOnDate = obdLogService.findObdLogOnDate(deviceId, date);
+      List<ObdLogDTO> obdLogsOnDate = obdLogService.findObdLogOnDate(deviceId, date);
       return ResponseEntity.ok().body(obdLogsOnDate);
     } catch (Exception e) {
       return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가
@@ -67,7 +66,7 @@ public class ObdLogController {
       @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime startDate,
       @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime endDate) {
     try {
-      List<ObdLog> obdLogsOnDate = obdLogService.findObdLogOnDate(deviceId, startDate, endDate);
+      List<ObdLogDTO> obdLogsOnDate = obdLogService.findObdLogOnDate(deviceId, startDate, endDate);
       return ResponseEntity.ok().body(obdLogsOnDate);
     } catch (Exception e) {
       return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가
