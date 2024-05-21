@@ -2,14 +2,49 @@ import '../App.css';
 import React, { useEffect, useState, useRef } from "react";
 import OneToOne from "../components/OneToOne";
 
-
 function Reports(props) {
-    const downloadData = () => {
-        // 다운로드 기능 구현
+    function call(api, method, request) {
+        let options = {
+            headers: new Headers({
+                "Content-Type": "application/json",
+            }),
+            url: "백엔드 기본 주소" + api,
+            method: method,
+        };
+
+        if(request) {
+            // GET METHOD
+            options.body = JSON.stringify(request);
+        }
+
+        return fetch(options.url, options).then((response) => {
+            if(response.status = 200) {
+                return response;
+            }
+        }).catch((error) => {
+            console.log("http error");
+            console.log(error);
+        })
     };
 
-    const [startTime, setStartTime] = useState("");
-    const [finishTime, setFinishTime] = useState("");
+    // 임시 데이터
+    const deviceId = "F1234";
+
+    const downloadData = () => {
+        const url = "API 주소";
+        const reponse = call(`${url}?deviceId=${encodeURIComponent(deviceId)}&startDate=${encodeURIComponent(startTime)}&endDate=${encodeURIComponent(finishTime)}`, "GET", null);
+        reponse.blob().then((blob) => {
+            const blobUrl = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = blobUrl;
+            link.download = "CFS_REPORT.xlsx";
+            link.click();
+            window.URL.revokeObjectURL(blobUrl);
+        }).catch((e) => console.error("Download error:", e));
+    };
+
+    const [startTime, setStartTime] = useState(document.getElementById("start"));
+    const [finishTime, setFinishTime] = useState(document.getElementById("finish"));
 
     const [OBDData, setOBDData] = useState(
         // 초기 테스트 값
@@ -89,7 +124,13 @@ function Reports(props) {
     };
 
     useEffect(() => {
-        // 서버에 데이터 요청하는 코드
+        const url = "API 주소";
+        const reponse = call(`${url}?deviceId=${encodeURIComponent(deviceId)}&startDate=${encodeURIComponent(startTime)}&endDate=${encodeURIComponent(finishTime)}`, "GET", null);
+        reponse.then((reponse) => reponse.json()).then((data) => {
+            console.log(data);
+        }).catch((error) => {
+            console.error("Error fetching data:", error);
+        });
     }, []);
 
     const mapRef = useRef();
