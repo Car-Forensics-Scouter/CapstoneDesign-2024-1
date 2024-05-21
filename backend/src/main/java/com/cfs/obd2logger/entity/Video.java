@@ -1,5 +1,6 @@
 package com.cfs.obd2logger.entity;
 
+import com.cfs.obd2logger.dto.VideoDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -36,15 +37,25 @@ public class Video {
   @Column(name = "FILE_PATH", length = 512, nullable = false)
   private String filePath;                      // 동영상 파일 경로
 
-  @Column(name = "THUMBNAIL", length = 512, nullable = false)
+  @Column(name = "THUMBNAIL", length = 512, nullable = true)
   private String thumbnail;                      // 썸네일 파일 경로
 
-  @Column(name = "TITLE", length = 40, nullable = false)
+  @Column(name = "TITLE", length = 256, nullable = false)
   private String title;                         // 동영상 이름
 
   @Column(name = "DURATION", nullable = false)
   private int duration;                         // 동영상 길이
 
-  @Column(name = "DATE")
+  @Column(name = "DATE", nullable = false)
   private LocalDateTime date;          // 업로드 날짜
+
+  public VideoDTO toDTO() {
+    return VideoDTO.builder()
+        .deviceId(deviceId)            // 라즈베리파이 식별번호
+        .filePath(filePath)            // 동영상 파일 경로
+        .thumbnail(thumbnail)          // 썸네일 파일 경로
+        .title(title)                 // 동영상 이름
+        .duration(duration)           // 동영상 길이
+        .date(date).build();         // 업로드 날짜
+  }
 }
