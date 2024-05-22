@@ -78,7 +78,7 @@ public class VideoController {
    * 동영상 다운로드
    */
   @GetMapping("/download")
-  public ResponseEntity<?> findVideo(@RequestParam("deviceId") String deviceId,
+  public ResponseEntity<?> downloadVideo(@RequestParam("deviceId") String deviceId,
       @RequestParam("videoName") String videoName) {
     try {
       String videoUrl = videoService.downloadVideo(deviceId, videoName);
