@@ -2,7 +2,7 @@ import "./SignUp.css";
 import "../App.css";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Box, TextField, MenuItem, Button } from "@mui/material";
+import { Box, TextField, Menu, MenuItem, Button } from "@mui/material";
 import TextFields from "@mui/material/TextField";
 import CFS_logo from "../assets/CFS_logo.png";
 
@@ -16,7 +16,8 @@ const SignUp = () => {
   const [name, setName] = useState("");
   const [car, setCar] = useState("");
   const [showDropdown, setShowDropdown] = useState(false); // 차종 선택 목록에 쓰이는 변수
-  const [carList] = useState(["Sedan", "SUV", "Hatchback", "Coupe"]); // 선택할 차종 목록
+  const [anchorEl, setAnchorEl] = useState(null);   // 토글다운 활성화 여부
+  const [carList] = useState(["그랜저 IG", "아반떼 CN7", "쏘렌토 MQ4", "K5 DL3"]); // 선택할 차종 목록
 
   const navigate = useNavigate();
 
@@ -36,7 +37,7 @@ const SignUp = () => {
   // ID 중복 확인 요청
   const checkDuplication = async (props) => {
     try {
-      const response = await fetch("http://localhost:8080/check_id", {
+      const response = await fetch("http://localhost:8080/user/check_id", {
         method: "POST",
         mode: "cors",
         headers: {
@@ -80,7 +81,7 @@ const SignUp = () => {
 
     try {
       // reponse 변수는 백엔드 서버의 회원가입 로직과 통신.
-      const response = await fetch("http://localhost:8080/signup", {
+      const response = await fetch("http://localhost:8080/user/signup", {
         method: "POST",
         mode: "cors",
         headers: {
@@ -93,8 +94,9 @@ const SignUp = () => {
         const data = await response.json();
 
         // 회원가입 시 로그인에 대한 accessToken 발급받으면 로컬 스토리지에 저장.
+        // 후에 accessToken 뿐 아니라 refreshToken까지 구현해야 함.
         if (data.accessToken) {
-          localStorage.setItem('login-token', response);
+          localStorage.setItem('login-token', data.accessToken);
         }
         
 
@@ -108,8 +110,6 @@ const SignUp = () => {
               console.log("중복 확인 완료");
               console.log("회원가입 성공:", data);
 
-              localStorage.setItem("token", token); // 토큰 저장 (여기서는 로컬 스토리지에 저장하는 예시)              
-
               alert("환영합니다! 회원가입이 되셨습니다. 로그인 화면으로 이동해 로그인 해주시기 바랍니다.")
               navigate("/LogIn");
             } else{
@@ -121,7 +121,8 @@ const SignUp = () => {
         }
 
       } else {
-        throw new Error("회원가입 요청 실패");
+        console.error("회원가입 요청 중 오류 발생");
+        alert("회원가입 요청 실패");
       }
     } catch (error) {
       console.error("회원가입 에러:", error);
@@ -172,22 +173,29 @@ const SignUp = () => {
                   >
                 </div>
                   <Box className="input_box">
-                    <TextField
-                      type="text"
-                      placeholder="차종을 선택하세요"
-                      value={car}
-                      onChange={(e) => setCar(e.target.value)}
-                      InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
-                      onClick={() => setShowDropdown(true)} // 입력 필드 클릭 시 드롭다운 표시
-                      select // TextField를 select 모드로 변경
+                    <Button
+                      variant="outlined"
+                      onClick={(e) => setAnchorEl(e.currentTarget)}
+                      sx={{ borderRadius: 20, width: "300px", height:"55px" ,
+                       textAlign: "left", color:"black" }}
                     >
-                      {showDropdown &&
-                        carList.map((carType) => (
-                          <MenuItem key={carType} value={carType}>
+                      {car || "차종을 선택하세요"}
+                    </Button>
+                    <Menu
+                      anchorEl={anchorEl}
+                      open={Boolean(anchorEl)}
+                      onClose={() => setAnchorEl(null)}
+                    >
+                      { carList.map((carType) => (
+                          <MenuItem key={carType} 
+                            onClick={() => {
+                              setCar(carType);
+                              setAnchorEl(null);
+                            }}>
                             {carType}
                           </MenuItem>
                         ))}
-                    </TextField>
+                    </Menu>
                   </Box>
                 </div>
               </div>

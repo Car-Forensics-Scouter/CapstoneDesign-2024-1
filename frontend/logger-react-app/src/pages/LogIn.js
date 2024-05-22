@@ -16,9 +16,9 @@ const Login = () => {
 
     try {
       // 백엔드 서버의 로그인 로직과 통신하는 과정.
-      // 향후 서버에서 데이터를 가져오는 등 인가 과정이 필요할 때, 로컬 스토리지에서 
-      // 토큰을 뽑아 와서 함께 전달하면 된다.
-      await fetch("http://localhost:8080/login", {
+      // 로그인 성공 시 서버에서 생성한 토큰을 받아옴.
+      // 향후 서버에서 데이터를 가져오는 등 인가 과정이 필요할 때, 로컬 스토리지에서 토큰을 뽑아 와서 함께 전달하면 된다.
+      const response = await fetch("http://localhost:8080/user/login", {
         method: "POST",
         mode: "cors",
         headers: {
@@ -28,25 +28,25 @@ const Login = () => {
           id: id,
           password: password,
         }),
-      }).then(response => response.json())
-      .then(response => {
-        if(response.ACCESS_TOKEN) {
-          localStorage.setItem('login-token', response.ACCESS_TOKEN);
-        }
-      });
+      })
 
       if (response.ok) {
-        const result = await response.json();
-        console.log("로그인 완료: ", result);
+        const data = await response.json();
 
+        // 로그인에 성공했으면 accessToken을 발급받음.(유효 시간은 10분)
+        if (data.accessToken) {
+          localStorage.setItem('login-token', data.accessToken);
+        }
+
+        console.log("로그인 완료: ", result);
         navigate("/Reports");
       } else {
-        const errorData = await response.json();
+        console.error("로그인 요청에서 오류 발생");
         alert("아이디와 비밀번호를 다시 확인해주세요.");
       }
     } catch (error) {
-      console.error("로그인 요청 중 오류 발생 : ", error);
-      alert("로그인 요청 중 오류가 발생했습니다.");
+      console.error("로그인 에러: ", error);
+      alert("로그인 중 에러가 발생했습니다.");
     }
   };
 
@@ -98,8 +98,12 @@ const Login = () => {
 
               <div className="line"></div>
               <p className="sign_up">계정이 없으신가요?{" "}
-                <Link to="/SignUp" style={{ color: "#C224DC" }}>
+                {/* <Link to="/SignUp" style={{ color: "#C224DC" }}>
                   회원가입
+                </Link> */}
+
+                <Link to="/GraphDashboard" style={{ color: "#C224DC" }}>
+                  회원가입 (임시 코드)
                 </Link>
               </p>
             </form>
