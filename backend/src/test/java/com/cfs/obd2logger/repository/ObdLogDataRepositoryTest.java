@@ -30,9 +30,12 @@ class ObdLogDataRepositoryTest {
   @Test
   public void testDownalod() {
     testDataGenerator();
+    LocalDateTime start240411 = LocalDateTime.of(2024, 04, 11, 00, 00, 00);
+    LocalDateTime end240411 = LocalDateTime.of(2024, 04, 11, 23, 59, 59);
 
     // 로그 -> 엑셀 파일화 실행
-    ByteArrayResource excelContents = obdLogService.createLogToExcel(deviceId2, "henry");
+    ByteArrayResource excelContents = obdLogService.createLogToExcel(deviceId2, "henry",
+        start240411, end240411);
 
     byte[] sampleBytes = {0x50, 0x4B, 0x03, 0x04}; // 엑셀 파일 시작
     System.out.println("CREATE EXCEL!!");

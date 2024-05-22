@@ -13,7 +13,7 @@ import lombok.Getter;
 public class ObdLogDTO {
 
   private String deviceId;          // 라즈베리 파이 식별 번호
-  private LocalDateTime timeStamp;  // 타임 스탬프
+  private LocalDateTime timeStamp;  // 타임 스탬프 (yyyy-MM-ddTHH:mm:ss 포맷)
   private String vin;               // 차량 식별 번호
   private double speed;             // 속도
   private double rpm;               // RPM (엔진 분당 회전 속도)

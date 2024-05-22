@@ -146,12 +146,14 @@ public class ObdLogService {
   // TODO : 파일 생성, 크기에 따른 성능 최적화
 
   /**
-   * 로그 DB를 엑셀 파일화
+   * 특정 기간의 로그 DB를 엑셀 파일화
    */
-  public ByteArrayResource createLogToExcel(String deviceId, String name) {
+  public ByteArrayResource createLogToExcel(String deviceId, String name, LocalDateTime startDate,
+      LocalDateTime endDate) {
     try {
       // 사용자의 OBD 로그 불러오기
-      List<ObdLog> obdLogList = obdLogDataRepository.findAllByDeviceId(deviceId);
+      List<ObdLog> obdLogList = obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId, startDate,
+          endDate);
       List<ObdLogDTO> obdLogDTOList = ListEntityToListDTO(obdLogList);
 
       // 파일 생성
@@ -222,10 +224,10 @@ public class ObdLogService {
         dataCell = dataRow.createCell(11);
         dataCell.setCellValue(dto.getRunTime());
 
-        dataCell = dataRow.createCell(13);
+        dataCell = dataRow.createCell(12);
         dataCell.setCellValue(dto.getLon());
 
-        dataCell = dataRow.createCell(14);
+        dataCell = dataRow.createCell(13);
         dataCell.setCellValue(dto.getLat());
       }
 
