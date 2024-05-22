@@ -46,8 +46,11 @@ public class Video {
   @Column(name = "DURATION", nullable = false)
   private int duration;                         // 동영상 길이
 
-  @Column(name = "DATE", nullable = false)
-  private LocalDateTime date;          // 업로드 날짜
+  @Column(name = "CREATED_DATE", nullable = false)
+  private LocalDateTime createdDate;          // 생성 날짜
+
+  @Column(name = "END_DATE", nullable = false)
+  private LocalDateTime endDate;          // 녹화 종료 날짜
 
   public VideoDTO toDTO() {
     return VideoDTO.builder()
@@ -56,6 +59,7 @@ public class Video {
         .thumbnail(thumbnail)          // 썸네일 파일 경로
         .title(title)                 // 동영상 이름
         .duration(duration)           // 동영상 길이
-        .date(date).build();         // 업로드 날짜
+        .createdDate(createdDate)            // 생성 날짜
+        .endDate(endDate).build();       // 녹화 종료 날짜
   }
 }
