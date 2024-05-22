@@ -2,7 +2,6 @@ package com.cfs.obd2logger.controller;
 
 import com.cfs.obd2logger.dto.VideoDTO;
 import com.cfs.obd2logger.service.VideoService;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -25,14 +24,31 @@ public class VideoController {
   private final VideoService videoService;
 
   /**
+   * 파일 업로드 (Pre-signed URL 발급  방식)
+   */
+  @GetMapping("/URL-upload")
+  public ResponseEntity<?> uploadUrlVideo(@RequestParam("deviceId") String deviceId,
+      @RequestParam("fileName") String fileName, @RequestParam("extension") String extension,
+      @RequestParam("createdDate") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime createdDate,
+      @RequestParam("duration") int duration) {
+    try {
+      String uuidFileName = videoService.generateFileName(fileName) + "." + extension;
+      String URL = videoService.uploadUrlVideo(deviceId, uuidFileName);
+      videoService.handleAfterUrlUpload(deviceId, createdDate, duration, uuidFileName);
+      return ResponseEntity.ok().body(URL);
+    } catch (Exception e) {
+      return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가
+    }
+  }
+
+  /**
    * 파일 업로드 (MultipartFile 방식)
    */
   @PostMapping("/upload")
   public ResponseEntity<?> uploadVideo(@RequestParam("video") MultipartFile video,
       @RequestParam("deviceId") String deviceId,
       @RequestParam("createdDate") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime createdDate,
-      @RequestParam("duration") int duration)
-      throws IOException {
+      @RequestParam("duration") int duration) {
     try {
       // 동영상 업로드
       String videoName = video.getOriginalFilename();
