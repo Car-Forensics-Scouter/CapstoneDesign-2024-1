@@ -164,10 +164,9 @@ public class ObdLogService {
           "DEVICE_ID", "TIME_STAMP",
           "VIN", "SPEED", "RPM",
           "ENGINE_LOAD", "FUEL_LEVEL",
-          "OIL_TEMP", "COOLANT_TEMP",
+          "BAROMETRIC_PRESSURE", "COOLANT_TEMP",
           "THROTTLE_POSE", "DISTANCE",
-          "RUN_TIME", "RUN_TIME_MIL",
-          "LON", "LAT"};
+          "RUN_TIME", "LON", "LAT"};
 
       // 파일 작성 준비
       Row dataRow = null;
@@ -209,7 +208,7 @@ public class ObdLogService {
         dataCell.setCellValue(dto.getFuelLevel());
 
         dataCell = dataRow.createCell(7);
-        dataCell.setCellValue(dto.getOilTemp());
+        dataCell.setCellValue(dto.getBarometricPressure());
 
         dataCell = dataRow.createCell(8);
         dataCell.setCellValue(dto.getCoolantTemp());
@@ -222,9 +221,6 @@ public class ObdLogService {
 
         dataCell = dataRow.createCell(11);
         dataCell.setCellValue(dto.getRunTime());
-
-        dataCell = dataRow.createCell(12);
-        dataCell.setCellValue(dto.getRunTimeMIL());
 
         dataCell = dataRow.createCell(13);
         dataCell.setCellValue(dto.getLon());
