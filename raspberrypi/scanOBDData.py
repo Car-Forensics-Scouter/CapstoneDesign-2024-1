@@ -1,6 +1,8 @@
 import obd
 import datetime
 import time
+import json
+import requests
 
 # 1초마다 OBD 데이터를 수집
 # 타임스탬프도 찍기
@@ -53,8 +55,13 @@ while True:
 
         time.sleep(1)
     
-    # 전송 부분 구현
-    print(json_dict)  # test
+    result = json.dumps(json_dict)
+
+    url = ""
+
+    reponse = requests.post(url, data=result)
+
+    print(reponse.text)
 
 
 

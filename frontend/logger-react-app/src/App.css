@@ -172,6 +172,7 @@ a {
   color: #4D4D4D;
   font-size: small;
   align-items: center;
+  cursor: pointer;
 }
 
 .App .Frame .Reports .wrap .head .download-button .download {
@@ -446,8 +447,30 @@ a {
 
 .OneToOne .detail-button {
   position: relative;
-  left: 60px;
+  left: 128px;
   top: 5px;
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+.OneToOne .detail-button .tooltip {
+  visibility: hidden;
+  width: auto;
+  background-color: #FFFFFF;
+  color: #808080;
+  text-align: center;
+  border-radius: 6px;
+  border: 1px solid #3AE055;
+  margin-left: 3px;
+  top: -10px;
+  padding: 10px 10px;
+  position: absolute;
+  z-index: 1;
+}
+
+.OneToOne .detail-button:hover .tooltip {
+  visibility: visible;
 }
 
 .OneToOne .detail-button i {

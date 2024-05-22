@@ -1,11 +1,12 @@
 import picamera
 import time
 import obd
+import requests
 
-connection = obd.OBD("/dev?ttyUSB2")  # 차량과 연결
+connection = obd.OBD("/dev/ttyUSB2")  # 차량과 연결
 
 # 녹화할 동영상 파일명
-output_file = "video.h264."
+output_file = "video.h264"
 
 # 카메라 초기화
 camera = picamera.PiCamera()
@@ -27,6 +28,9 @@ try:
 except EngineOff:
     camera.stop_recording()
     camera.close()
+    url = "API 주소"
+    files = { "file": open("video.h264", "rb") }
+    reponse = requests.post(url, files=files)
 
 except KeyboardInterrupt:
     # 사용자가 Ctrl+C를 눌러 프로그램을 종료한 경우
