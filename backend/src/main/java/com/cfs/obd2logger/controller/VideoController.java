@@ -73,4 +73,18 @@ public class VideoController {
       return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가
     }
   }
+
+  /**
+   * 동영상 다운로드
+   */
+  @GetMapping("/download")
+  public ResponseEntity<?> findVideo(@RequestParam("deviceId") String deviceId,
+      @RequestParam("videoName") String videoName) {
+    try {
+      String videoUrl = videoService.downloadVideo(deviceId, videoName);
+      return ResponseEntity.ok().body(videoUrl);
+    } catch (Exception e) {
+      return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가
+    }
+  }
 }

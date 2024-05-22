@@ -84,6 +84,14 @@ public class VideoService {
    */
   public String uploadVideo(MultipartFile file, String deviceId) throws Exception {
     return s3Service.uploadMultiFile(file, deviceId);
+    // TODO : 동영상 처리
+  }
+
+  /**
+   * 동영상 다운로드
+   */
+  public String downloadVideo(String deviceId, String fileName) {
+    return s3Service.downloadFile(deviceId + "/" + fileName);
   }
 
   /**
@@ -93,6 +101,7 @@ public class VideoService {
   public void handleAfterUrlUpload(String deviceId, LocalDateTime createdDate,
       int duration, String fileName) {
     saveVideo(deviceId, null, fileName, duration, createdDate);
+    // 썸네일 처리
   }
 
   /**
