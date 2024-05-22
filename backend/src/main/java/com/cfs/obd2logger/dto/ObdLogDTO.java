@@ -19,12 +19,11 @@ public class ObdLogDTO {
   private double rpm;               // RPM (엔진 분당 회전 속도)
   private double engineLoad;        // 엔진 부하 정보
   private double fuelLevel;         // 연료 정보 (퍼센트)
-  private double oilTemp;           // 엔진오일 온도
+  private double barometricPressure; // 공기압
   private double coolantTemp;       // 냉각수 온도
   private double throttlePos;       // 스로틀 위치 정보 (퍼센트)
   private double distance;          // 주행 거리
   private double runTime;           // 주행 시간
-  private double runTimeMIL;        // 경고등 이후 엔진 작동 시간
   private double lon;               // GPS 경도
   private double lat;               // GPS 위도
 
@@ -42,12 +41,11 @@ public class ObdLogDTO {
         .rpm(rpm)
         .engineLoad(engineLoad)
         .fuelLevel(fuelLevel)
-        .oilTemp(oilTemp)
+        .barometricPressure(barometricPressure)
         .coolantTemp(coolantTemp)
         .throttlePos(throttlePos)
         .distance(distance)
         .runTime(runTime)
-        .runTimeMIL(runTimeMIL)
         .lat(lat)
         .lon(lon).build();
   }

@@ -37,8 +37,8 @@ public class ObdLog {
   @Column(name = "FUEL_LEVEL", nullable = false)
   private double fuelLevel;         // 연료 정보 (퍼센트)
 
-  @Column(name = "OIL_TEMP", nullable = false)
-  private double oilTemp;           // 엔진오일 온도
+  @Column(name = "BAROMETRIC_PRESSURE", nullable = false)
+  private double barometricPressure; // 대기압
 
   @Column(name = "COOLANT_TEMP", nullable = false)
   private double coolantTemp;       // 냉각수 온도
@@ -51,9 +51,6 @@ public class ObdLog {
 
   @Column(name = "RUN_TIME", nullable = false)
   private double runTime;           // 주행 시간
-
-  @Column(name = "RUN_TIME_MIL", nullable = false)
-  private double runTimeMIL;        // 경고등 이후 엔진 작동 시간
 
   @Column(name = "LON", nullable = false)
   private double lon;        // GPS 경도
@@ -71,12 +68,11 @@ public class ObdLog {
         .rpm(rpm)
         .engineLoad(engineLoad)
         .fuelLevel(fuelLevel)
-        .oilTemp(oilTemp)
+        .barometricPressure(barometricPressure)
         .coolantTemp(coolantTemp)
         .throttlePos(throttlePos)
         .distance(distance)
         .runTime(runTime)
-        .runTimeMIL(runTimeMIL)
         .lat(lat)
         .lon(lon).build();
   }
