@@ -34,15 +34,19 @@ public class ThumbnailService {
         "." + thumbExtension);
 
     try {
+      System.out.println("START FRAMEGRAB");
       FrameGrab frameGrab = FrameGrab.createFrameGrab(NIOUtils.readableChannel(videoFile));
       frameGrab.seekToSecondPrecise(0);       // 0초의 프레임
+      System.out.println("START PICTURE");
       Picture thumbnailPic = frameGrab.getNativeFrame();
 
       BufferedImage bi = AWTUtil.toBufferedImage(thumbnailPic);
       ImageIO.write(bi, thumbExtension, thumbnail);
+      System.out.println("THUMB FILE: " + thumbnail);
       return thumbnail;
     } catch (Exception e) {
-      return null;            // TODO : 에러 처리
+      System.out.println(e);
+      return null;
     }
   }
 

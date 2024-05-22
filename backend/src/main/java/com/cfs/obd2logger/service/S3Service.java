@@ -4,7 +4,10 @@ import com.amazonaws.HttpMethod;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.transfer.TransferManager;
+import com.amazonaws.services.s3.transfer.TransferManagerBuilder;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
@@ -27,12 +30,14 @@ public class S3Service {
    * 파일 업로드 (MultipartFile 방식) 후 파일의 퍼블릭 URL 반환
    */
   public String uploadMultiFile(MultipartFile file, String deviceId) throws IOException {
+    TransferManager transferManager = TransferManagerBuilder.standard()
+        .withS3Client(amazonS3Client).build();
+
     // 메타 데이터 설정
     ObjectMetadata metadata = new ObjectMetadata();
     metadata.setContentLength(file.getSize());              // 콘텐츠 길이 설정
     metadata.setContentType(file.getContentType());
 
-    // String fileName = generateFileName(file, deviceId);     // 파일명 생성
     String fileName = file.getOriginalFilename();            // 파일명 획득
     String dir = deviceId + "/";                            // 디렉토리+파일명
     try (InputStream inputStream = file.getInputStream()) {
@@ -47,8 +52,16 @@ public class S3Service {
    * 파일 업로드 (File 방식) 후 URL 반환
    */
   public String uploadFile(File uploadFile, String fileName) {
-    amazonS3Client.putObject(bucket, fileName, uploadFile);
-    return amazonS3Client.getUrl(bucket, fileName).toString();
+    // 메타 데이터 설정
+    ObjectMetadata metadata = new ObjectMetadata();
+    metadata.setContentLength(uploadFile.length());
+
+    try (InputStream inputStream = new FileInputStream(uploadFile)) {
+      amazonS3Client.putObject(bucket, fileName, inputStream, metadata);
+      return amazonS3Client.getUrl(bucket, fileName).toString();
+    } catch (IOException e) {
+      return e.toString();
+    }
   }
 
 
@@ -59,16 +72,16 @@ public class S3Service {
     if (!amazonS3Client.doesObjectExist(bucket, filePath)) {
       return "No Exists";
     }
-    return generateURL(filePath);
+    return generateGetURL(filePath, 60 * 24);
   }
 
   /**
    * AWS Pre-signed URL 생성
    */
-  private String generateURL(String filePath) {
+  public String generateGetURL(String filePath, int minutes) {
     Date expiration = new Date();
     long expTimeMillis = expiration.getTime();
-    expTimeMillis += 1000 * 60 * 60 * 24;           // Access 만료 기한 1일
+    expTimeMillis += 1000 * 60 * (long) minutes;           // Access 만료 기한 1일
     expiration.setTime(expTimeMillis);
 
     GeneratePresignedUrlRequest generatePresignedUrlRequest =
@@ -78,10 +91,19 @@ public class S3Service {
     return amazonS3Client.generatePresignedUrl(generatePresignedUrlRequest).toString();
   }
 
-//  /**
-//   * 파일 제목+UUID 생성
-//   */
-//  private String generateFileName(MultipartFile file, String deviceId) {
-//    return file.getOriginalFilename() + "_" + UUID.randomUUID();
-//  }
+  /**
+   * AWS Pre-signed URL 생성
+   */
+  public String generatePutURL(String filePath, int minutes) {
+    Date expiration = new Date();
+    long expTimeMillis = expiration.getTime();
+    expTimeMillis += 1000 * 60 * (long) minutes;           // Access 만료 기한 1일
+    expiration.setTime(expTimeMillis);
+
+    GeneratePresignedUrlRequest generatePresignedUrlRequest =
+        new GeneratePresignedUrlRequest(bucket, filePath)
+            .withMethod(HttpMethod.PUT)           // 파일 다운로드 URL (GET)
+            .withExpiration(expiration);
+    return amazonS3Client.generatePresignedUrl(generatePresignedUrlRequest).toString();
+  }
 }
