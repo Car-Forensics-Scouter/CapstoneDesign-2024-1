@@ -1,5 +1,6 @@
 package com.cfs.obd2logger.repository;
 
+import com.cfs.obd2logger.dto.ObdLogSummaryListDTO;
 import com.cfs.obd2logger.entity.ObdLog;
 import com.cfs.obd2logger.entity.ObdLogTablePK;
 import java.time.LocalDateTime;
@@ -28,12 +29,20 @@ public interface ObdLogDataRepository extends JpaRepository<ObdLog, ObdLogTableP
   @Query("DELETE FROM ObdLog obdLog WHERE obdLog.obdLogTablePK.deviceId = :deviceId")
   int deleteAllByDeviceId(@Param("deviceId") String deviceId);
 
+  /**
+   * 특정 device의 startDate에서 endDate 사이에서 요약 정보(List) 조회하는 메소드
+   */
+  @Query("SELECT new com.cfs.obd2logger.dto.ObdLogSummaryListDTO(o.speed, o.throttlePos, o.lon, o.lat) FROM ObdLog o")
+  List<ObdLogSummaryListDTO> findObdLogSummaryAvgByDeviceIdAndTimeStamp(
+      @Param("deviceId") String deviceId,
+      @Param("startDate") LocalDateTime startDate,
+      @Param("endDate") LocalDateTime endDate);
 
   /**
    * 특정 deviceId의 startDate에서 endDate 사이의 Lon을 조회하는 쿼리 메소드
    */
   @Query("SELECT obdLog.lon FROM ObdLog obdLog WHERE obdLog.obdLogTablePK.deviceId = :deviceId AND obdLog.obdLogTablePK.timeStamp >= :startDate AND obdLog.obdLogTablePK.timeStamp <= :endDate")
-  List<Double> findLonByDeviceAndTimeStamp(@Param("deviceId") String deviceId,
+  List<Double> findLonByDeviceIdAndTimeStamp(@Param("deviceId") String deviceId,
       @Param("startDate") LocalDateTime startDate,
       @Param("endDate") LocalDateTime endDate);
 
@@ -41,7 +50,7 @@ public interface ObdLogDataRepository extends JpaRepository<ObdLog, ObdLogTableP
    * 특정 deviceId의 startDate에서 endDate 사이의 Lat을 조회하는 쿼리 메소드
    */
   @Query("SELECT obdLog.lat FROM ObdLog obdLog WHERE obdLog.obdLogTablePK.deviceId = :deviceId AND obdLog.obdLogTablePK.timeStamp >= :startDate AND obdLog.obdLogTablePK.timeStamp <= :endDate")
-  List<Double> findLatByDeviceAndTimeStamp(@Param("deviceId") String deviceId,
+  List<Double> findLatByDeviceIdAndTimeStamp(@Param("deviceId") String deviceId,
       @Param("startDate") LocalDateTime startDate,
       @Param("endDate") LocalDateTime endDate);
 

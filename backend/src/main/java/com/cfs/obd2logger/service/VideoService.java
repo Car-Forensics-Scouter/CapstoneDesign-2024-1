@@ -4,7 +4,6 @@ import com.cfs.obd2logger.dto.VideoDTO;
 import com.cfs.obd2logger.entity.Video;
 import com.cfs.obd2logger.repository.VideoRepository;
 import jakarta.annotation.Nullable;
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -112,15 +111,15 @@ public class VideoService {
       int duration, String fileName) throws IOException {
     System.out.println("START THUMBNAIL GENERATE");
     // 썸네일 생성
-    File thumbnail = thumbnailService.generateVideoThumbnail(file,
-        fileName);
-    System.out.println("START THUMBNAIL UPLOAD");
-    // 썸네일 업로드
-    String thumbnailURL = thumbnailService.uploadThumbnail(thumbnail, fileName,
-        deviceId);
+//    File thumbnail = thumbnailService.generateVideoThumbnail(file,
+//        fileName);
+//    System.out.println("START THUMBNAIL UPLOAD");
+//    // 썸네일 업로드
+//    String thumbnailURL = thumbnailService.uploadThumbnail(thumbnail, fileName,
+//        deviceId);
     System.out.println("START VIDEO SAVE");
     // DB에 비디오 저장
-    saveVideo(deviceId, thumbnailURL, fileName, duration, createdDate);
+    saveVideo(deviceId, null, fileName, duration, createdDate);
   }
 
   /**

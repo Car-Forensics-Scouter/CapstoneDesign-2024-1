@@ -1,6 +1,8 @@
 package com.cfs.obd2logger.controller;
 
 import com.cfs.obd2logger.dto.ObdLogDTO;
+import com.cfs.obd2logger.dto.ObdLogSummaryAvgDTO;
+import com.cfs.obd2logger.dto.ObdLogSummaryListDTO;
 import com.cfs.obd2logger.service.ObdLogService;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -26,8 +28,6 @@ public class ObdLogController {
 
   @Autowired
   private final ObdLogService obdLogService;
-
-  // TODO : 컨트롤러 테스팅 필요
 
   /**
    * 라즈베리 파이로부터 json 데이터 저장
@@ -74,15 +74,33 @@ public class ObdLogController {
   }
 
   /**
-   * 특정 날짜의 거리 계산
+   * 특정 날짜의 요약 정보 계산(리스트)
    */
-  @GetMapping("/distance")
-  public ResponseEntity<?> getDistanceOnDate(@RequestParam String deviceId,
+  @GetMapping("/summary-list")
+  public ResponseEntity<?> getListSummaryOnDate(@RequestParam String deviceId,
       @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime startDate,
       @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime endDate) {
     try {
-      double distance = obdLogService.calDistance(deviceId, startDate, endDate);
-      return ResponseEntity.ok().body(distance);
+      List<ObdLogSummaryListDTO> logSummaryDTO = obdLogService.getSummaryList(deviceId, startDate,
+          endDate);
+      return ResponseEntity.ok()
+          .body(logSummaryDTO);
+    } catch (Exception e) {
+      return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가
+    }
+  }
+
+  /**
+   * 특정 날짜의 요약 정보 계산(평균)
+   */
+  @GetMapping("/summary-avg")
+  public ResponseEntity<?> getAvgSummaryOnDate(@RequestParam String deviceId,
+      @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime startDate,
+      @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime endDate) {
+    try {
+      ObdLogSummaryAvgDTO logSummaryDTO = obdLogService.getSummaryAvg(deviceId, startDate, endDate);
+      return ResponseEntity.ok()
+          .body(logSummaryDTO);
     } catch (Exception e) {
       return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가
     }

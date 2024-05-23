@@ -1,6 +1,8 @@
 package com.cfs.obd2logger.service;
 
 import com.cfs.obd2logger.dto.ObdLogDTO;
+import com.cfs.obd2logger.dto.ObdLogSummaryAvgDTO;
+import com.cfs.obd2logger.dto.ObdLogSummaryListDTO;
 import com.cfs.obd2logger.entity.DateRange;
 import com.cfs.obd2logger.entity.ObdLog;
 import com.cfs.obd2logger.entity.UserEntity;
@@ -9,6 +11,7 @@ import com.cfs.obd2logger.repository.UserRepository;
 import java.io.ByteArrayOutputStream;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -101,12 +104,61 @@ public class ObdLogService {
   }
 
   /**
-   * 특정 시간 range의 로그의 거리 계산 후 반환 (Killometer)
+   * 요약 정보 (리스트)
+   */
+  public List<ObdLogSummaryListDTO> getSummaryList(String deviceId, LocalDateTime startDate,
+      LocalDateTime endDate) {
+    List<ObdLogSummaryListDTO> summaryListDTO = obdLogDataRepository.findObdLogSummaryAvgByDeviceIdAndTimeStamp(
+        deviceId, startDate, endDate);
+    return summaryListDTO;
+  }
+
+  /**
+   * 요약 정보 (평균)
+   */
+  public ObdLogSummaryAvgDTO getSummaryAvg(String deviceId, LocalDateTime startDate,
+      LocalDateTime endDate) {
+    List<ObdLogDTO> obdLogDTOList = findObdLogOnDate(deviceId, startDate, endDate);
+    int len = obdLogDTOList.size();
+    double speed = calAvg(obdLogDTOList, ObdLogDTO::getSpeed, len);
+    double rpm = calAvg(obdLogDTOList, ObdLogDTO::getRpm, len);
+    double engineLoad = calAvg(obdLogDTOList, ObdLogDTO::getEngineLoad, len);
+    double fuelLevel = calAvg(obdLogDTOList, ObdLogDTO::getFuelLevel, len);
+    double throttlePos = calAvg(obdLogDTOList, ObdLogDTO::getThrottlePos, len);
+    double distance = calDistance(deviceId, startDate, endDate);
+    String vin = obdLogDTOList.get(0).getVin();
+    return ObdLogSummaryAvgDTO.builder()
+        .speed(speed)
+        .rpm(rpm)
+        .engineLoad(engineLoad)
+        .fuelLevel(fuelLevel)
+        .throttlePos(throttlePos)
+        .distance(distance)
+        .vin(vin).build();
+  }
+
+  /**
+   * 공통 평균값 계산
+   */
+  public double calAvg(List<ObdLogDTO> obdLogDTOList, ToDoubleFunction<ObdLogDTO> mapper,
+      int len) {
+    if (len == 0) {
+      return 0.0;
+    }
+    double total = 0.0;
+    for (ObdLogDTO obdLogDTO : obdLogDTOList) {
+      total += mapper.applyAsDouble(obdLogDTO);
+    }
+    return total / len;
+  }
+
+  /**
+   * 특정 시간의 총 거리 계산 후 반환 (Killometer)
    */
   public double calDistance(String deviceId, LocalDateTime startDate, LocalDateTime endDate) {
-    List<Double> lonList = obdLogDataRepository.findLonByDeviceAndTimeStamp(deviceId, startDate,
+    List<Double> lonList = obdLogDataRepository.findLonByDeviceIdAndTimeStamp(deviceId, startDate,
         endDate);
-    List<Double> latList = obdLogDataRepository.findLatByDeviceAndTimeStamp(deviceId, startDate,
+    List<Double> latList = obdLogDataRepository.findLatByDeviceIdAndTimeStamp(deviceId, startDate,
         endDate);
 
     // 로그가 0~1개일 경우, 0 반환
