@@ -12,42 +12,7 @@ const Login = () => {
   const navigate = useNavigate(); // 화면 이동 객체
 
   const handleLogin = async (e) => {
-    e.preventDefault(); // form 컴포넌트에서 버튼을 클릭하면 생기는 새로고침을 막아줌.
-
-    try {
-      // 백엔드 서버의 로그인 로직과 통신하는 과정.
-      // 로그인 성공 시 서버에서 생성한 토큰을 받아옴.
-      // 향후 서버에서 데이터를 가져오는 등 인가 과정이 필요할 때, 로컬 스토리지에서 토큰을 뽑아 와서 함께 전달하면 된다.
-      const response = await fetch("http://localhost:8080/user/login", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: id,
-          password: password,
-        }),
-      })
-
-      if (response.ok) {
-        const data = await response.json();
-
-        // 로그인에 성공했으면 accessToken을 발급받음.(유효 시간은 10분)
-        if (data.accessToken) {
-          localStorage.setItem('login-token', data.accessToken);
-        }
-
-        console.log("로그인 완료: ", result);
-        navigate("/Reports");
-      } else {
-        console.error("로그인 요청에서 오류 발생");
-        alert("아이디와 비밀번호를 다시 확인해주세요.");
-      }
-    } catch (error) {
-      console.error("로그인 에러: ", error);
-      alert("로그인 중 에러가 발생했습니다.");
-    }
+    
   };
 
   return (

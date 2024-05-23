@@ -124,7 +124,7 @@ function Reports(props) {
     };
 
     useEffect(() => {
-        const url = "API 주소";
+        const url = "http://localhost:8080/api/obdlog/summary-avg";
         const reponse = call(`${url}?deviceId=${encodeURIComponent(deviceId)}&startDate=${encodeURIComponent(startTime)}&endDate=${encodeURIComponent(finishTime)}`, "GET", null);
         reponse.then((reponse) => reponse.json()).then((data) => {
             console.log(data);

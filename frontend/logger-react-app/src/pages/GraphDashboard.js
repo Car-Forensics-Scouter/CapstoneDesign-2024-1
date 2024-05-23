@@ -1,7 +1,6 @@
 import "./GraphDashboard.css";
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
-import moment from "moment";
 
 const series = {
     monthDataSeries1: {
