@@ -202,8 +202,8 @@ function Reports(props) {
                         </div>
                         <div className="car-status-left">
                             <OneToOne className="OneToOne" title={OBDData[1].type} value={OBDData[1].value} unit={OBDData[1].unit} fontSize="24px" tooltip="지정 시간대의 평균 속도입니다."/>
-                            <OneToOne className="OneToOne" title={OBDData[2].type} value={OBDData[2].value} unit={OBDData[2].unit} fontSize="24px"/>
-                            <OneToOne className="OneToOne" title={OBDData[3].type} value={OBDData[3].value} unit={OBDData[3].unit} fontSize="20px"/>
+                            <OneToOne className="OneToOne" title={OBDData[2].type} value={OBDData[2].value} unit={OBDData[2].unit} fontSize="24px" tooltip="지정 시간대의 평균 RPM입니다."/>
+                            <OneToOne className="OneToOne" title={OBDData[3].type} value={OBDData[3].value} unit={OBDData[3].unit} fontSize="20px" tooltip="지정 시간대의 엔진 부하량의 평균값입니다. 엔진 부하란 엔진에 부하가 가해지는 정도를 말하며, 값이 커질수록 엔진회전수가 증가한다."/>
                             <OneToOne className="OneToOne" title={OBDData[4].type} value={OBDData[4].value} unit={OBDData[4].unit} fontSize="20px"/>
                         </div>
                     </div>
