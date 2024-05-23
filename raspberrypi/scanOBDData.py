@@ -61,7 +61,9 @@ while True:
 
     reponse = requests.post(url, data=result)
 
-    print(reponse.text)
+
+
+    print(reponse.content.decode("utf-8"))
 
 
 
