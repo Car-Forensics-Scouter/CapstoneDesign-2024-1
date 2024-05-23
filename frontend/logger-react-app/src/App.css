@@ -456,9 +456,9 @@ a {
 
 .OneToOne .detail-button .tooltip {
   visibility: hidden;
-  width: auto;
   background-color: #FFFFFF;
   color: #808080;
+  min-width: 120px;
   text-align: center;
   border-radius: 6px;
   border: 1px solid #3AE055;
