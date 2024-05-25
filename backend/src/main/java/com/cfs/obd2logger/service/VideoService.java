@@ -83,7 +83,6 @@ public class VideoService {
    */
   public String uploadVideo(MultipartFile file, String deviceId) throws Exception {
     return s3Service.uploadMultiFile(file, deviceId);
-    // TODO : 동영상 처리
   }
 
   /**
