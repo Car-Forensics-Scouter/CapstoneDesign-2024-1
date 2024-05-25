@@ -22,11 +22,6 @@ public class S3Config {
   @Value("${cloud.aws.credentials.secret-key}")
   private String secretKey;
 
-  @Bean
-  public BCryptPasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
-  }
-
   // AWS S3 Client 생성
   @Bean
   public AmazonS3Client amazonS3() {

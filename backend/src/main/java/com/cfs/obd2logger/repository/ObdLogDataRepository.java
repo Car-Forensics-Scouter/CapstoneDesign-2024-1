@@ -1,6 +1,6 @@
 package com.cfs.obd2logger.repository;
 
-import com.cfs.obd2logger.dto.ObdLogSummaryListDTO;
+import com.cfs.obd2logger.dto.ObdLogGpsDTO;
 import com.cfs.obd2logger.entity.ObdLog;
 import com.cfs.obd2logger.entity.ObdLogTablePK;
 import java.time.LocalDateTime;
@@ -18,7 +18,7 @@ public interface ObdLogDataRepository extends JpaRepository<ObdLog, ObdLogTableP
   /**
    * deviceId가 일치하는 모든 obdLog를 조회하는 쿼리 메소드
    */
-  @Query("SELECT obdLog FROM ObdLog obdLog WHERE obdLog.obdLogTablePK.deviceId = :deviceId")
+  @Query("SELECT o FROM ObdLog o WHERE o.obdLogTablePK.deviceId = :deviceId")
   List<ObdLog> findAllByDeviceId(@Param("deviceId") String deviceId);
 
   /**
@@ -26,38 +26,32 @@ public interface ObdLogDataRepository extends JpaRepository<ObdLog, ObdLogTableP
    */
   @Modifying
   @Transactional
-  @Query("DELETE FROM ObdLog obdLog WHERE obdLog.obdLogTablePK.deviceId = :deviceId")
+  @Query("DELETE FROM ObdLog o WHERE o.obdLogTablePK.deviceId = :deviceId")
   int deleteAllByDeviceId(@Param("deviceId") String deviceId);
 
   /**
    * 특정 device의 startDate에서 endDate 사이에서 요약 정보(List) 조회하는 메소드
    */
-  @Query("SELECT new com.cfs.obd2logger.dto.ObdLogSummaryListDTO(o.speed, o.throttlePos, o.lon, o.lat) FROM ObdLog o")
-  List<ObdLogSummaryListDTO> findObdLogSummaryAvgByDeviceIdAndTimeStamp(
+  @Query("SELECT new com.cfs.obd2logger.dto.ObdLogSummaryAvgDTO(o.speed, o.rpm, o.engineLoad, o.fuelLevel, o.throttlePos, o.barometricPressure, o.coolantTemp, 0.0, o.vin) FROM ObdLog o WHERE o.obdLogTablePK.deviceId = :deviceId AND o.obdLogTablePK.timeStamp >= :startDate AND o.obdLogTablePK.timeStamp <= :endDate")
+  List<ObdLogGpsDTO> findObdLogSummaryAvgByDeviceIdAndTimeStamp(
       @Param("deviceId") String deviceId,
       @Param("startDate") LocalDateTime startDate,
       @Param("endDate") LocalDateTime endDate);
 
   /**
-   * 특정 deviceId의 startDate에서 endDate 사이의 Lon을 조회하는 쿼리 메소드
+   * 특정 device의 startDate에서 endDate 사이에서 GPS 정보(List) 조회하는 메소드
    */
-  @Query("SELECT obdLog.lon FROM ObdLog obdLog WHERE obdLog.obdLogTablePK.deviceId = :deviceId AND obdLog.obdLogTablePK.timeStamp >= :startDate AND obdLog.obdLogTablePK.timeStamp <= :endDate")
-  List<Double> findLonByDeviceIdAndTimeStamp(@Param("deviceId") String deviceId,
+  @Query("SELECT new com.cfs.obd2logger.dto.ObdLogGpsDTO(o.lon, o.lat) FROM ObdLog o WHERE o.obdLogTablePK.deviceId = :deviceId AND o.obdLogTablePK.timeStamp >= :startDate AND o.obdLogTablePK.timeStamp <= :endDate")
+  List<ObdLogGpsDTO> findObdLogGPSByDeviceIdAndTimeStamp(
+      @Param("deviceId") String deviceId,
       @Param("startDate") LocalDateTime startDate,
       @Param("endDate") LocalDateTime endDate);
 
-  /**
-   * 특정 deviceId의 startDate에서 endDate 사이의 Lat을 조회하는 쿼리 메소드
-   */
-  @Query("SELECT obdLog.lat FROM ObdLog obdLog WHERE obdLog.obdLogTablePK.deviceId = :deviceId AND obdLog.obdLogTablePK.timeStamp >= :startDate AND obdLog.obdLogTablePK.timeStamp <= :endDate")
-  List<Double> findLatByDeviceIdAndTimeStamp(@Param("deviceId") String deviceId,
-      @Param("startDate") LocalDateTime startDate,
-      @Param("endDate") LocalDateTime endDate);
 
   /**
    * 특정 deviceId의 startDate에서 endDate 사이의 obdLog를 조회하는 쿼리 메소드
    */
-  @Query("SELECT obdLog FROM ObdLog obdLog WHERE obdLog.obdLogTablePK.deviceId = :deviceId AND obdLog.obdLogTablePK.timeStamp >= :startDate AND obdLog.obdLogTablePK.timeStamp <= :endDate")
+  @Query("SELECT o FROM ObdLog o WHERE o.obdLogTablePK.deviceId = :deviceId AND o.obdLogTablePK.timeStamp >= :startDate AND o.obdLogTablePK.timeStamp <= :endDate")
   List<ObdLog> findByDeviceIdAndTimeStamp(@Param("deviceId") String deviceId,
       @Param("startDate") LocalDateTime startDate,
       @Param("endDate") LocalDateTime endDate);

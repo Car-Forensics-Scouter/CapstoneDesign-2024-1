@@ -2,7 +2,7 @@ package com.cfs.obd2logger.service;
 
 import com.cfs.obd2logger.dto.ObdLogDTO;
 import com.cfs.obd2logger.dto.ObdLogSummaryAvgDTO;
-import com.cfs.obd2logger.dto.ObdLogSummaryListDTO;
+import com.cfs.obd2logger.dto.ObdLogGpsDTO;
 import com.cfs.obd2logger.entity.DateRange;
 import com.cfs.obd2logger.entity.ObdLog;
 import com.cfs.obd2logger.entity.UserEntity;
@@ -10,13 +10,20 @@ import com.cfs.obd2logger.repository.ObdLogDataRepository;
 import com.cfs.obd2logger.repository.UserRepository;
 import java.io.ByteArrayOutputStream;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -49,14 +56,12 @@ public class ObdLogService {
    * 라즈베리파이로부터 로그 리스트 받아서 저장
    */
   public boolean saveLog(List<ObdLogDTO> obdLogDTOList) {
-    // 유효한 deviceId가 아닐 경우 저장하지 않음
     if (!isValidDeviceId(obdLogDTOList)) {
       return false;
     }
 
-    List<ObdLog> newObdLogList = ListDTOToListEntity(obdLogDTOList);
-
-    obdLogDataRepository.saveAll(newObdLogList);
+    List<ObdLog> obdLogList = ListDTOToListEntity(obdLogDTOList);
+    obdLogDataRepository.saveAll(obdLogList);
     return true;
   }
 
@@ -92,7 +97,7 @@ public class ObdLogService {
   }
 
   /**
-   * 유저의 로그 전체 삭제
+   * 유저의 로그 전체 삭제 // TODO : CASCADE로 자동으로 삭제되게끔
    */
   public boolean deleteObdLog(String deviceId) {
     // 유효한 deviceId가 아닐 경우 삭제하지 않음
@@ -106,9 +111,9 @@ public class ObdLogService {
   /**
    * 요약 정보 (리스트)
    */
-  public List<ObdLogSummaryListDTO> getSummaryList(String deviceId, LocalDateTime startDate,
+  public List<ObdLogGpsDTO> getSummaryList(String deviceId, LocalDateTime startDate,
       LocalDateTime endDate) {
-    List<ObdLogSummaryListDTO> summaryListDTO = obdLogDataRepository.findObdLogSummaryAvgByDeviceIdAndTimeStamp(
+    List<ObdLogGpsDTO> summaryListDTO = obdLogDataRepository.findObdLogSummaryAvgByDeviceIdAndTimeStamp(
         deviceId, startDate, endDate);
     return summaryListDTO;
   }
@@ -125,6 +130,8 @@ public class ObdLogService {
     double engineLoad = calAvg(obdLogDTOList, ObdLogDTO::getEngineLoad, len);
     double fuelLevel = calAvg(obdLogDTOList, ObdLogDTO::getFuelLevel, len);
     double throttlePos = calAvg(obdLogDTOList, ObdLogDTO::getThrottlePos, len);
+    double barometicPressure = calAvg(obdLogDTOList, ObdLogDTO::getBarometricPressure, len);
+    double coolantTemp = calAvg(obdLogDTOList, ObdLogDTO::getCoolantTemp, len);
     double distance = calDistance(deviceId, startDate, endDate);
     String vin = obdLogDTOList.get(0).getVin();
     return ObdLogSummaryAvgDTO.builder()
@@ -133,6 +140,8 @@ public class ObdLogService {
         .engineLoad(engineLoad)
         .fuelLevel(fuelLevel)
         .throttlePos(throttlePos)
+        .barometricPressure(barometicPressure)
+        .coolantTemp(coolantTemp)
         .distance(distance)
         .vin(vin).build();
   }
@@ -156,13 +165,9 @@ public class ObdLogService {
    * 특정 시간의 총 거리 계산 후 반환 (Killometer)
    */
   public double calDistance(String deviceId, LocalDateTime startDate, LocalDateTime endDate) {
-    List<Double> lonList = obdLogDataRepository.findLonByDeviceIdAndTimeStamp(deviceId, startDate,
-        endDate);
-    List<Double> latList = obdLogDataRepository.findLatByDeviceIdAndTimeStamp(deviceId, startDate,
-        endDate);
-
+    List<ObdLogGpsDTO> GPSList = obdLogDataRepository.findObdLogGPSByDeviceIdAndTimeStamp(deviceId, startDate, endDate);
     // 로그가 0~1개일 경우, 0 반환
-    int size = lonList.size();
+    int size = GPSList.size();
     if (size < 2) {
       return 0;
     }
@@ -179,10 +184,10 @@ public class ObdLogService {
     double dist = 0.0;
 
     for (int i = 0; i < size - 1; i++) {
-      lon1 = lonList.get(i);
-      lat1 = latList.get(i);
-      lon2 = lonList.get(i + 1);
-      lat2 = latList.get(i + 1);
+      lon1 = GPSList.get(i).getLon();
+      lat1 = GPSList.get(i).getLat();
+      lon2 = GPSList.get(i + 1).getLon();
+      lat2 = GPSList.get(i + 1).getLat();
 
       dLat = Math.toRadians(lat2 - lat1);
       dLon = Math.toRadians(lon2 - lon1);
@@ -195,7 +200,6 @@ public class ObdLogService {
     return dist;
   }
 
-  // TODO : 파일 생성, 크기에 따른 성능 최적화
 
   /**
    * 특정 기간의 로그 DB를 엑셀 파일화
@@ -226,61 +230,46 @@ public class ObdLogService {
       Row dataRow = null;
       Cell dataCell = null;
 
+      // 헤더 스타일 생성
+      CellStyle headerStyle = workbook.createCellStyle();
+      Font font = workbook.createFont();
+      font.setBold(true);                       // 볼드체
+      font.setFontHeightInPoints((short) 13);   // 폰트 크기
+      headerStyle.setFont(font);
+      headerStyle.setBorderBottom(BorderStyle.THICK);
+      headerStyle.setFillForegroundColor(IndexedColors.LIGHT_TURQUOISE.getIndex());
+      headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
       // 헤더 작성
       int i = 0;
       int headerSize = headerStrings.length;
+      sheet.createFreezePane(0, 1);
       dataRow = sheet.createRow(i);
       for (i = 0; i < headerSize; i++) {
         dataCell = dataRow.createCell(i);
         dataCell.setCellValue(headerStrings[i]);
+        dataCell.setCellStyle(headerStyle);                             // 헤더 셀 스타일 적용
+        sheet.setColumnWidth(i, (sheet.getColumnWidth(i))+512);    // 셀 너비 확장
       }
-
       // 데이터 행(i번째 행) 작성
       i = 1;
       for (ObdLogDTO dto : obdLogDTOList) {
         dataRow = sheet.createRow(i);
-
-        dataCell = dataRow.createCell(0);
-        dataCell.setCellValue(dto.getDeviceId());
-
-        dataCell = dataRow.createCell(1);
-        dataCell.setCellValue(dto.getTimeStamp());
-
-        dataCell = dataRow.createCell(2);
-        dataCell.setCellValue(dto.getVin());
-
-        dataCell = dataRow.createCell(3);
-        dataCell.setCellValue(dto.getSpeed());
-
-        dataCell = dataRow.createCell(4);
-        dataCell.setCellValue(dto.getRpm());
-
-        dataCell = dataRow.createCell(5);
-        dataCell.setCellValue(dto.getEngineLoad());
-
-        dataCell = dataRow.createCell(6);
-        dataCell.setCellValue(dto.getFuelLevel());
-
-        dataCell = dataRow.createCell(7);
-        dataCell.setCellValue(dto.getBarometricPressure());
-
-        dataCell = dataRow.createCell(8);
-        dataCell.setCellValue(dto.getCoolantTemp());
-
-        dataCell = dataRow.createCell(9);
-        dataCell.setCellValue(dto.getThrottlePos());
-
-        dataCell = dataRow.createCell(10);
-        dataCell.setCellValue(dto.getDistance());
-
-        dataCell = dataRow.createCell(11);
-        dataCell.setCellValue(dto.getRunTime());
-
-        dataCell = dataRow.createCell(12);
-        dataCell.setCellValue(dto.getLon());
-
-        dataCell = dataRow.createCell(13);
-        dataCell.setCellValue(dto.getLat());
+        dataRow.createCell(0).setCellValue(dto.getDeviceId());
+        dataRow.createCell(1).setCellValue(dto.getTimeStamp().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        dataRow.createCell(2).setCellValue(dto.getVin());
+        dataRow.createCell(3).setCellValue(dto.getSpeed());
+        dataRow.createCell(4).setCellValue(dto.getRpm());
+        dataRow.createCell(5).setCellValue(dto.getEngineLoad());
+        dataRow.createCell(6).setCellValue(dto.getFuelLevel());
+        dataRow.createCell(7).setCellValue(dto.getBarometricPressure());
+        dataRow.createCell(8).setCellValue(dto.getCoolantTemp());
+        dataRow.createCell(9).setCellValue(dto.getThrottlePos());
+        dataRow.createCell(10).setCellValue(dto.getDistance());
+        dataRow.createCell(11).setCellValue(dto.getRunTime());
+        dataRow.createCell(12).setCellValue(dto.getLon());
+        dataRow.createCell(13).setCellValue(dto.getLat());
+        i++;
       }
 
       // Response
