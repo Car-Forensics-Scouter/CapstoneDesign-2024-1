@@ -2,6 +2,8 @@ package com.cfs.obd2logger.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
@@ -15,7 +17,7 @@ import lombok.*;
 @AllArgsConstructor
 public class UserEntity {
 
-  @Id
+  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "USER_ID", length = 20, nullable = false)
   private String id;
 
@@ -35,5 +37,5 @@ public class UserEntity {
   private String deviceId;
 
   @Column(name = "STATUS", length = 20, nullable = false)
-  private String status = "activated";
+  private String status;
 }
