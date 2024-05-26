@@ -7,14 +7,16 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 
 @Component
+@RequiredArgsConstructor
 public class TokenProvider {
-    @Autowired
-    JwtProperties jwtProperties;
+
+    private final JwtProperties jwtProperties;
+
     public String create(UserEntity userEntity) {
         Date expireDate = Date.from(Instant.now().plus(1, ChronoUnit.DAYS));
 

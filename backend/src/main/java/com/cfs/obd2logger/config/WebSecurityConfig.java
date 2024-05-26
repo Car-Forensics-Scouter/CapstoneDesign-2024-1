@@ -2,7 +2,7 @@ package com.cfs.obd2logger.config;
 
 import com.cfs.obd2logger.security.CustomAuthFilter;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -21,9 +21,10 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class WebSecurityConfig {
-    @Autowired
-    CustomAuthFilter jwtAuthFilter;
+
+    private final CustomAuthFilter jwtAuthFilter;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -39,7 +40,7 @@ public class WebSecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
             .authorizeHttpRequests(authorize->authorize
-                .requestMatchers("/user/**", "/api/obd_log/**").permitAll()
+                .requestMatchers("/user/**", "/api/obdlog/**","/video/**").permitAll()
                 .anyRequest().authenticated()
             );
 
@@ -54,7 +55,7 @@ public class WebSecurityConfig {
         // cors 설정
         config.setAllowCredentials(true);
         config.setAllowedOriginPatterns(List.of("http://localhost:8080","http://localhost:3000"));
-        config.setAllowedMethods(Arrays.asList("HEAD","POST","GET","DELETE","PUT", "PATCH"));
+        config.setAllowedMethods(List.of("HEAD","POST","GET","DELETE","PUT", "PATCH"));
         config.setAllowedHeaders(List.of("*"));
 
 

@@ -4,24 +4,22 @@ import com.cfs.obd2logger.dto.UserDTO;
 import com.cfs.obd2logger.entity.UserEntity;
 import com.cfs.obd2logger.security.TokenProvider;
 import com.cfs.obd2logger.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    BCryptPasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    @Autowired
-    TokenProvider tokenProvider;
+    private final TokenProvider tokenProvider;
 
     // 회원가입
     @PostMapping("/signup")
@@ -32,6 +30,7 @@ public class UserController {
                 .email(userDTO.getEmail())
                 .carName(userDTO.getCarName())
                 .id(userDTO.getId())
+                .deviceId(userDTO.getDeviceId())
                 .password(passwordEncoder.encode(userDTO.getPassword()))
                 .status("activated") // 회원가입 시 활성 상태로 설정
                 .build();

@@ -17,7 +17,10 @@ import lombok.*;
 @AllArgsConstructor
 public class UserEntity {
 
-  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Id
+  @Column(name = "DEVICE_ID", length = 8, nullable = false)
+  private String deviceId;
+
   @Column(name = "USER_ID", length = 20, nullable = false)
   private String id;
 
@@ -32,9 +35,6 @@ public class UserEntity {
 
   @Column(name = "CAR_NAME", length = 20, nullable = false)
   private String carName;
-
-  @Column(name = "DEVICE_ID", length = 8, nullable = false)
-  private String deviceId;
 
   @Column(name = "STATUS", length = 20, nullable = false)
   private String status;
