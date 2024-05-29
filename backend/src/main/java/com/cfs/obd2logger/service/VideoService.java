@@ -67,6 +67,7 @@ public class VideoService {
    * 사용자의 모든 동영상 삭제
    */
   public int deleteVideo(String deviceId) {
+    s3Service.deleteFolder(deviceId);
     return videoRepository.deleteAllByDeviceId(deviceId);
   }
 
@@ -99,6 +100,7 @@ public class VideoService {
   public void handleAfterUrlUpload(String deviceId, LocalDateTime createdDate,
       int duration, String fileName) {
     saveVideo(deviceId, null, fileName, duration, createdDate);
+    System.out.println("FINISH VIDEO"); // TODO 삭제
     // 썸네일 처리
   }
 

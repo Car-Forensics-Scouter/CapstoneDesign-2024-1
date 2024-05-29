@@ -5,16 +5,22 @@ import com.cfs.obd2logger.service.VideoService;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/video")
+@RequiredArgsConstructor
 public class VideoController {
 
+  @Autowired
   private final VideoService videoService;
 
   /**
@@ -77,6 +83,19 @@ public class VideoController {
     try {
       String videoUrl = videoService.downloadVideo(deviceId, videoName);
       return ResponseEntity.ok().body(videoUrl);
+    } catch (Exception e) {
+      return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가
+    }
+  }
+
+  /**
+   * 사용자의 전체 동영상 삭제
+   */
+  @GetMapping("/delete")
+  public ResponseEntity<?> deleteVideo(@RequestParam("deviceId") String deviceId) {
+    try {
+      int deleted = videoService.deleteVideo(deviceId);
+      return ResponseEntity.ok().body(deleted);
     } catch (Exception e) {
       return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가
     }

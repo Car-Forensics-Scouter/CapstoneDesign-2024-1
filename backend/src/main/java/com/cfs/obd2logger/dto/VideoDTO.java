@@ -11,7 +11,6 @@ import lombok.Getter;
 public class VideoDTO {
 
   private String deviceId;                      // 라즈베리파이 식별번호 (외래키: UserEntity)
-  private String filePath;                      // 동영상 파일 경로
   private String thumbnail;                      // 썸네일 파일 경로
   private String title;                         // 동영상 이름
   private int duration;                         // 동영상 길이

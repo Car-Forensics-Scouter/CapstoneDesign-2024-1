@@ -2,8 +2,11 @@ package com.cfs.obd2logger.service;
 
 import com.amazonaws.HttpMethod;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.DeleteObjectsRequest;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
+import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.TransferManagerBuilder;
 import java.io.File;
@@ -11,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -105,5 +109,21 @@ public class S3Service {
             .withMethod(HttpMethod.PUT)           // 파일 다운로드 URL (GET)
             .withExpiration(expiration);
     return amazonS3Client.generatePresignedUrl(generatePresignedUrlRequest).toString();
+  }
+
+  /**
+   * 유저의 모든 동영상 삭제 (폴더 삭제)
+   */
+  public void deleteFolder(String deviceId) {
+    ObjectListing objectList = amazonS3Client.listObjects(bucket, deviceId);
+    List<S3ObjectSummary> objectSummeryList = objectList.getObjectSummaries();
+    String[] keysList = new String[objectSummeryList.size()];
+    int count = 0;
+    for (S3ObjectSummary summery : objectSummeryList) {
+      keysList[count++] = summery.getKey();
+    }
+    DeleteObjectsRequest deleteObjectsRequest = new DeleteObjectsRequest(bucket).withKeys(
+        keysList);
+    amazonS3Client.deleteObjects(deleteObjectsRequest);
   }
 }

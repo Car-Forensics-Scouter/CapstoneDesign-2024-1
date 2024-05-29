@@ -15,7 +15,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
+@ToString   // TODO 테스트 후 삭제
 @Entity
 @Getter
 @Setter
@@ -55,7 +57,6 @@ public class Video {
   public VideoDTO toDTO() {
     return VideoDTO.builder()
         .deviceId(deviceId)            // 라즈베리파이 식별번호
-        .filePath(filePath)            // 동영상 파일 경로
         .thumbnail(thumbnail)          // 썸네일 파일 경로
         .title(title)                 // 동영상 이름
         .duration(duration)           // 동영상 길이

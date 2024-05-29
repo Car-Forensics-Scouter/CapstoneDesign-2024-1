@@ -1,8 +1,8 @@
 package com.cfs.obd2logger.service;
 
 import com.cfs.obd2logger.dto.ObdLogDTO;
-import com.cfs.obd2logger.dto.ObdLogSummaryAvgDTO;
 import com.cfs.obd2logger.dto.ObdLogGpsDTO;
+import com.cfs.obd2logger.dto.ObdLogSummaryAvgDTO;
 import com.cfs.obd2logger.entity.DateRange;
 import com.cfs.obd2logger.entity.ObdLog;
 import com.cfs.obd2logger.entity.UserEntity;
@@ -14,16 +14,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
-import org.apache.poi.ss.usermodel.FillPatternType;
-import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -113,7 +112,7 @@ public class ObdLogService {
    */
   public List<ObdLogGpsDTO> getSummaryList(String deviceId, LocalDateTime startDate,
       LocalDateTime endDate) {
-    List<ObdLogGpsDTO> summaryListDTO = obdLogDataRepository.findObdLogSummaryAvgByDeviceIdAndTimeStamp(
+    List<ObdLogGpsDTO> summaryListDTO = obdLogDataRepository.findObdLogGPSByDeviceIdAndTimeStamp(
         deviceId, startDate, endDate);
     return summaryListDTO;
   }
@@ -165,7 +164,8 @@ public class ObdLogService {
    * 특정 시간의 총 거리 계산 후 반환 (Killometer)
    */
   public double calDistance(String deviceId, LocalDateTime startDate, LocalDateTime endDate) {
-    List<ObdLogGpsDTO> GPSList = obdLogDataRepository.findObdLogGPSByDeviceIdAndTimeStamp(deviceId, startDate, endDate);
+    List<ObdLogGpsDTO> GPSList = obdLogDataRepository.findObdLogGPSByDeviceIdAndTimeStamp(deviceId,
+        startDate, endDate);
     // 로그가 0~1개일 경우, 0 반환
     int size = GPSList.size();
     if (size < 2) {
@@ -249,14 +249,15 @@ public class ObdLogService {
         dataCell = dataRow.createCell(i);
         dataCell.setCellValue(headerStrings[i]);
         dataCell.setCellStyle(headerStyle);                             // 헤더 셀 스타일 적용
-        sheet.setColumnWidth(i, (sheet.getColumnWidth(i))+512);    // 셀 너비 확장
+        sheet.setColumnWidth(i, (sheet.getColumnWidth(i)) + 512);    // 셀 너비 확장
       }
       // 데이터 행(i번째 행) 작성
       i = 1;
       for (ObdLogDTO dto : obdLogDTOList) {
         dataRow = sheet.createRow(i);
         dataRow.createCell(0).setCellValue(dto.getDeviceId());
-        dataRow.createCell(1).setCellValue(dto.getTimeStamp().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        dataRow.createCell(1).setCellValue(
+            dto.getTimeStamp().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         dataRow.createCell(2).setCellValue(dto.getVin());
         dataRow.createCell(3).setCellValue(dto.getSpeed());
         dataRow.createCell(4).setCellValue(dto.getRpm());
