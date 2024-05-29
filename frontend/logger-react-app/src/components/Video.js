@@ -26,6 +26,8 @@ function Video(props) {
         })
     };
 
+    const deviceId = "F1234";
+
     const downloadVideo = () => {
         const url = "API 주소";
         const reponse = call(`${url}?deviceId=${encodeURIComponent(deviceId)}&videoIndex=${encodeURIComponent(props.number)}`, "GET", null);
