@@ -71,9 +71,11 @@ public class UserController {
             String token = tokenProvider.create(user);
 
             UserDTO responseUserDTO = UserDTO.builder()
+                .id(user.getId())
                 .name(user.getName())
                 .email(user.getEmail())
-                .id(user.getId())
+                .carName(user.getCarName())
+                .deviceId(user.getDeviceId())
                 .token(token)
                 .build();
             return ResponseEntity.ok().body(responseUserDTO);

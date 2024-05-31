@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -35,11 +36,20 @@ public class UserService {
 
     // 로그인
     public UserEntity login(String id, String password) {
-        UserEntity user = userRepository.findById(id).get();
+        Optional<UserEntity> responseUser = userRepository.findById(id);
 
-        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-            return user;
+        if (responseUser.isPresent()) {
+            UserEntity user = responseUser.get();
+            System.out.println("객체가 존재합니다");
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                return user;
+            } else {
+                System.out.println("비밀번호가 잘못되엇습니다.");
+            }
         }
+        else{
+            System.out.println("해당 id에 해당하는 사용자가 존재하지 않습니다.");
+            }
         return null;
     }
 

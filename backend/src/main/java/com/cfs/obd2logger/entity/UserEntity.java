@@ -16,11 +16,11 @@ import lombok.*;
 public class UserEntity {
 
   @Id
-  @Column(name = "DEVICE_ID", length = 20, nullable = false)
-  private String deviceId;
-
   @Column(name = "USER_ID", length = 20, nullable = false)
   private String id;
+
+  @Column(name = "DEVICE_ID", length = 20, unique = true, nullable = false)
+  private String deviceId;
 
   @Column(name = "PASSWORD", nullable = false)
   private String password;
