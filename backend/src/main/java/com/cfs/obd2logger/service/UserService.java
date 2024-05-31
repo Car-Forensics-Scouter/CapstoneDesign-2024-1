@@ -5,17 +5,18 @@ import com.cfs.obd2logger.entity.UserEntity;
 import com.cfs.obd2logger.repository.UserRepository;
 import jakarta.persistence.Entity;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
-    @Autowired
-    UserRepository userRepository;
 
-    @Autowired
-    BCryptPasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+
+    private final BCryptPasswordEncoder passwordEncoder;
 
     // 회원 가입
     public UserEntity signup(UserEntity userEntity) {
@@ -52,15 +53,6 @@ public class UserService {
     public String getUserPassword(String id, String name, String email) {
         UserEntity user = userRepository.findByIdAndNameAndEmail(id, name, email);
         return (user != null) ? user.getPassword() : null;
-    }
-
-    // 사용자 정보 조회
-    public UserEntity getUserInfo(String id) {
-        UserEntity user = userRepository.findById(id).orElse(null);
-        if (user == null) {
-            throw new RuntimeException("정보 없음");
-        }
-        return user;
     }
 
     // 회원정보 수정

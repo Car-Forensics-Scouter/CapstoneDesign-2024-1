@@ -104,22 +104,6 @@ public class UserController {
         }
     }
 
-    // 사용자 정보 조회
-    @GetMapping("")
-    public ResponseEntity<?> getUserProfile(@RequestParam String id) {
-        try {
-            UserEntity user = userService.getUserInfo(id);
-
-            UserDTO responseUser = UserDTO.builder()
-                .name(user.getName())
-                .carName(user.getCarName())
-                .build();
-            return ResponseEntity.ok().body(responseUser);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
-    }
-
     // 회원정보 수정 (비밀번호, 차종, 제품 일련번호)
     @PatchMapping("")
     public ResponseEntity<?> updateUserProfile(@RequestBody UserDTO userDTO) {
