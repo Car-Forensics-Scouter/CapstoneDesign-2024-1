@@ -15,19 +15,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
+@RequiredArgsConstructor
 public class S3Service {
 
   @Value("${cloud.aws.s3.bucket}")
   private String bucket;
 
-  @Autowired
-  private AmazonS3Client amazonS3Client;
+  private final AmazonS3Client amazonS3Client;
 
 
   /**

@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -24,18 +25,15 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class ObdLogService {
 
-  @Autowired
-  ObdLogDataRepository obdLogDataRepository;
-
-  @Autowired
-  UserRepository userRepository;
+  private final ObdLogDataRepository obdLogDataRepository;
+  private final UserRepository userRepository;
 
   /**
    * 라즈베리파이로부터 로그 받아서 저장

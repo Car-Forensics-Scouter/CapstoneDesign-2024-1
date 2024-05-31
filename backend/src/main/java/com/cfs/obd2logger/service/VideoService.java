@@ -9,22 +9,18 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
+@RequiredArgsConstructor
 public class VideoService {
 
-  @Autowired
-  private VideoRepository videoRepository;
-
-  @Autowired
-  private S3Service s3Service;
-
-  @Autowired
-  private ThumbnailService thumbnailService;
+  private final VideoRepository videoRepository;
+  private final S3Service s3Service;
+  private final ThumbnailService thumbnailService;
 
   /**
    * 동영상 DB에 동영상 정보 저장
@@ -67,8 +63,11 @@ public class VideoService {
    * 사용자의 모든 동영상 삭제
    */
   public int deleteVideo(String deviceId) {
-    s3Service.deleteFolder(deviceId);
-    return videoRepository.deleteAllByDeviceId(deviceId);
+    int deleted = videoRepository.deleteAllByDeviceId(deviceId);
+    if (deleted > 0) {
+      s3Service.deleteFolder(deviceId);
+    }
+    return deleted;
   }
 
   /**
@@ -100,7 +99,6 @@ public class VideoService {
   public void handleAfterUrlUpload(String deviceId, LocalDateTime createdDate,
       int duration, String fileName) {
     saveVideo(deviceId, null, fileName, duration, createdDate);
-    System.out.println("FINISH VIDEO"); // TODO 삭제
     // 썸네일 처리
   }
 

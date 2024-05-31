@@ -4,20 +4,20 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import lombok.RequiredArgsConstructor;
 import org.jcodec.api.FrameGrab;
 import org.jcodec.common.io.NIOUtils;
 import org.jcodec.common.model.Picture;
 import org.jcodec.scale.AWTUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 
 @Service
+@RequiredArgsConstructor
 public class ThumbnailService {
 
-  @Autowired
-  private S3Service s3Service;
+  private final S3Service s3Service;
 
   /**
    * 동영상에서 썸네일 추출

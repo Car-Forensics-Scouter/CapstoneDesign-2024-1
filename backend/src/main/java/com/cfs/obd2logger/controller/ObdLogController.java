@@ -1,8 +1,8 @@
 package com.cfs.obd2logger.controller;
 
 import com.cfs.obd2logger.dto.ObdLogDTO;
-import com.cfs.obd2logger.dto.ObdLogSummaryAvgDTO;
 import com.cfs.obd2logger.dto.ObdLogGpsDTO;
+import com.cfs.obd2logger.dto.ObdLogSummaryAvgDTO;
 import com.cfs.obd2logger.service.ObdLogService;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -13,7 +13,12 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
@@ -38,8 +43,7 @@ public class ObdLogController {
   }
 
   /**
-   * 특정 날짜의 로그 조회 (1일)
-   * (요청 날짜 포맷: yyyy-mm-hhThh:mm:ss)
+   * 특정 날짜의 로그 조회 (1일) (요청 날짜 포맷: yyyy-mm-hhThh:mm:ss) ex) 2020-11-11T12:34:56
    */
   @GetMapping("/date")
   public ResponseEntity<?> getObdLogOnDate(@RequestParam String deviceId,
@@ -53,8 +57,7 @@ public class ObdLogController {
   }
 
   /**
-   * 특정 날짜의 로그 조회 (특정 시작일~특정 끝일)
-   * (요청 날짜 포맷: yyyy-mm-hhThh:mm:ss)
+   * 특정 날짜의 로그 조회 (특정 시작일~특정 끝일) (요청 날짜 포맷: yyyy-mm-hhThh:mm:ss) ex) 2020-11-11T12:34:56
    */
   @GetMapping("/date-range")
   public ResponseEntity<?> getObdLogOnDate(@RequestParam String deviceId,
@@ -69,8 +72,7 @@ public class ObdLogController {
   }
 
   /**
-   * 특정 날짜의 요약 정보 계산(리스트)
-   * (요청 날짜 포맷: yyyy-mm-hhThh:mm:ss)
+   * 특정 날짜의 요약 정보 계산(리스트) (요청 날짜 포맷: yyyy-mm-hhThh:mm:ss) ex) 2020-11-11T12:34:56
    */
   @GetMapping("/summary-list")
   public ResponseEntity<?> getListSummaryOnDate(@RequestParam String deviceId,
@@ -87,8 +89,7 @@ public class ObdLogController {
   }
 
   /**
-   * 특정 날짜의 요약 정보 계산(평균)
-   * (요청 날짜 포맷: yyyy-mm-hhThh:mm:ss)
+   * 특정 날짜의 요약 정보 계산(평균) (요청 날짜 포맷: yyyy-mm-hhThh:mm:ss) ex) 2020-11-11T12:34:56
    */
   @GetMapping("/summary-avg")
   public ResponseEntity<?> getAvgSummaryOnDate(@RequestParam String deviceId,
@@ -104,8 +105,7 @@ public class ObdLogController {
   }
 
   /**
-   * 특정 기간의 로그 파일 다운로드
-   * (요청 날짜 포맷: yyyy-mm-hhThh:mm:ss)
+   * 특정 기간의 로그 파일 다운로드 (요청 날짜 포맷: yyyy-mm-hhThh:mm:ss) ex) 2020-11-11T12:34:56
    */
   @GetMapping("/download")
   public ResponseEntity<?> downloadObdLog(@RequestParam String deviceId,

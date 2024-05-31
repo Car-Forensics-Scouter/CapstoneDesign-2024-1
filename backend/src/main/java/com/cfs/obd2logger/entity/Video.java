@@ -1,6 +1,7 @@
 package com.cfs.obd2logger.entity;
 
 import com.cfs.obd2logger.dto.VideoDTO;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -32,7 +33,7 @@ public class Video {
   private String deviceId;  // 라즈베리파이 식별번호 (외래키: UserEntity)
 
   @MapsId
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
   @JoinColumn(name = "DEVICE_ID", referencedColumnName = "DEVICE_ID")
   private UserEntity user;
 
