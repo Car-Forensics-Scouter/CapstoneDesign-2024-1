@@ -95,9 +95,9 @@ public class UserController {
         }
     }
 
-    // 비밀번호 찾기
+    // 비밀번호 재발급
     @GetMapping("find_password")
-    public ResponseEntity<String> findUserPassword(@RequestParam String id, @RequestParam String name, @RequestParam String email) {
+    public ResponseEntity<String> generateTempPassword(@RequestParam String id, @RequestParam String name, @RequestParam String email) {
         String userPassword = userService.getUserPassword(id, name, email);
         if (userPassword != null) {
             return ResponseEntity.ok(userPassword);
