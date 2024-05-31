@@ -1,4 +1,4 @@
-import Thumbnail from "../assets/CFS_logo.png";
+import Thumbnail from "../assets/sample_image.png";
 
 function Video(props) {
 
@@ -7,7 +7,7 @@ function Video(props) {
             headers: new Headers({
                 "Content-Type": "application/json",
             }),
-            url: "백엔드 기본 주소" + api,
+            url: "http://localhost:8080" + api,
             method: method,
         };
 
@@ -17,8 +17,11 @@ function Video(props) {
         }
 
         return fetch(options.url, options).then((response) => {
-            if(response.status = 200) {
+            if(response.ok) {
                 return response;
+            }
+            else {
+                throw new Error("Network response was not ok.");
             }
         }).catch((error) => {
             console.log("http error");
@@ -28,6 +31,7 @@ function Video(props) {
 
     const deviceId = "F1234";
 
+    /*
     const downloadVideo = () => {
         const url = "API 주소";
         const reponse = call(`${url}?deviceId=${encodeURIComponent(deviceId)}&videoIndex=${encodeURIComponent(props.number)}`, "GET", null);
@@ -40,13 +44,14 @@ function Video(props) {
             window.URL.revokeObjectURL(blobUrl);
         }).catch((e) => console.error("Download error:", e));
     };
+*/
 
     return (
         <div className="Video">
             <img src={Thumbnail}/>
             <div className="main">
                 <div className="index">#{props.number}</div>
-                <div className="download-button" onClick={downloadVideo}>
+                <div className="download-button">
                     <i class="fa-solid fa-download"/>
                     <div className="download">Download</div>
                 </div>
