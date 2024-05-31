@@ -1,4 +1,31 @@
+import React, { useState } from "react";
+import axios from "axios";
+import { Box, TextField, Menu, MenuItem, Button } from "@mui/material";
+import TextFields from "@mui/material/TextField";
+
 function Settings() {
+
+    const handleSettingPW = async (e) => {
+        e.preventDefault();
+        const payload_pw = {
+
+        };
+
+    }
+
+    const handleSettingCar = async (e) => {
+        e.preventDefault();
+        const payload_car = {
+
+        };
+    }
+
+    const handleSettingSerial = async (e) => {
+        e.preventDefault();
+        const payload_serial = {
+
+        };
+    }
 
     return  (
         <div className="Settings">
@@ -26,8 +53,10 @@ function Settings() {
                         </div>
                         <div className="input">
                             <select>
-                                <option value="1">아반떼</option>
-                                <option value="2">그랜저</option>
+                                <option value="1">그랜저 IG</option>
+                                <option value="2">아반떼 CN7</option>
+                                <option value="3">쏘렌토 MQ4</option>
+                                <option value="4">K5 DL3</option>
                             </select>
                        </div>
                     </div>
