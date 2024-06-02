@@ -97,7 +97,7 @@
     border-radius: 25px;
     font-size: 20px;
     margin-left: 175px;
-    margin-top: 25px;
+    margin-top: 15px;
 }
 
 .SignUp .tail_center {
@@ -107,7 +107,7 @@
 .SignUp .tail_center .service_text {
     font-weight: bolder;
     font-size: 25px;
-    margin-top: 15px;
+    margin-top: 10px;
     margin-left: 60;
 }
 
@@ -117,10 +117,6 @@
     margin-left: 65;
 }
 
-.SignUp .tail_center .line {
-    width: 60%;
-    border-top: 2.5px solid;
-    margin-left: 270px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+.SignUp .tail_center .tail2 {
+    margin-top: 7px;
 }

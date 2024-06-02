@@ -3,10 +3,9 @@ package com.cfs.obd2logger.service;
 import com.cfs.obd2logger.dto.UserDTO;
 import com.cfs.obd2logger.entity.UserEntity;
 import com.cfs.obd2logger.repository.UserRepository;
-import jakarta.persistence.Entity;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +13,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
 
+    @Value("${random_characters}")
+    private String characters;
+
     private final UserRepository userRepository;
 
     private final BCryptPasswordEncoder passwordEncoder;
+
 
     // 회원 가입
     public UserEntity signup(UserEntity userEntity) {
@@ -35,10 +38,19 @@ public class UserService {
 
     // 로그인
     public UserEntity login(String id, String password) {
-        UserEntity user = userRepository.findById(id).get();
+        Optional<UserEntity> responseUser = userRepository.findById(id);
 
-        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-            return user;
+        if (responseUser.isPresent()) {
+            UserEntity user = responseUser.get();
+            System.out.println("객체가 존재합니다");
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                return user;
+            } else {
+                System.out.println("비밀번호가 잘못되엇습니다.");
+            }
+        }
+        else{
+            System.out.println("해당 id에 해당하는 사용자가 존재하지 않습니다.");
         }
         return null;
     }
@@ -49,10 +61,33 @@ public class UserService {
         return (user != null) ? user.getId() : null;
     }
 
-    // 비밀번호 찾기
+    // 비밀번호 재발급
     public String getUserPassword(String id, String name, String email) {
         UserEntity user = userRepository.findByIdAndNameAndEmail(id, name, email);
-        return (user != null) ? user.getPassword() : null;
+        if (user != null) {
+            String newTempPassword = generateRandomPassword();
+            user.setPassword(passwordEncoder.encode(newTempPassword));
+            userRepository.save(user);
+            return newTempPassword;
+        } else {
+            return null;
+        }
+    }
+
+    private String generateRandomPassword() {
+        // 비밀번호 길이
+        int length = 10;
+
+        // 임시 비밀번호 생성
+        StringBuilder newPassword = new StringBuilder();
+
+        // 랜덤한 문자열 선택
+        for (int i = 0; i < length; i++) {
+            int index = (int)(Math.random() * characters.length());
+            newPassword.append(characters.charAt(index));
+        }
+
+        return newPassword.toString();
     }
 
     // 회원정보 수정

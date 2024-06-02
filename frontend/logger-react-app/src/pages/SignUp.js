@@ -2,6 +2,7 @@ import "./SignUp.css";
 import "../App.css";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { Box, TextField, Menu, MenuItem, Button } from "@mui/material";
 import TextFields from "@mui/material/TextField";
 import CFS_logo from "../assets/CFS_logo.png";
@@ -9,6 +10,7 @@ import CFS_logo from "../assets/CFS_logo.png";
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [id, setID] = useState("");
+  const [device_id, setDeviceId] = useState("");
   const [password, setPassword] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(true); // 비밀번호 일치 여부 상태
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -35,35 +37,46 @@ const SignUp = () => {
   };
 
   // ID 중복 확인 요청
-  const checkDuplication = async (props) => {
+  const checkDuplication = async (e) => {    
     try {
-      const response = await fetch("http://localhost:8080/user/check_id", {
-        method: "POST",
-        mode: "cors",
+      const id_data = {
+        id: id
+      }
+
+      const response = await axios.post('http://localhost:8080/user/check-id',
+       id_data, {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          userid: props,
-        }),
+        withCredentials: true,
       });
   
-      if (!response.ok) {
-        throw new Error("중복 확인 요청에 실패했습니다.");
-      }
-  
-      const data = await response.json();
-      
-      if (data === false) {
-        alert("중복된 아이디입니다. 다시 시도하세요.");
-        setIsDuplication(true);
-      } else {
-        alert("사용 가능한 아이디입니다.");
-        setIsDuplication(false);
+      if (response.status === 200) {
+        const data = response.data;
+        if (data === false) {
+          console.log("중복 확인이 완료되었습니다.", data);
+          alert("사용 가능한 아이디입니다.");
+          setIsDuplication(false);
+        }
+        else {
+          alert("중복된 아이디입니다.");
+          console.log("중복 확인 과정에서 오류가 발생했습니다.");
+          setIsDuplication(true);
+        }
       }
     } catch (error) {
-      console.error("중복 확인 에러:", error);
-      alert("중복 확인 중 에러가 발생했습니다.");
+      if (error.response) {
+        console.error("응답 오류: ", error.response.data);
+        console.error("응답 상태: ", error.response.status);
+        console.error("응답 헤더: ", error.response.headers);
+        alert(`중복 확인 실패: ${error.response.data}`);
+      } else if (error.request) {
+        console.error("요청 오류: ", error.request);
+        alert("서버 응답이 없습니다. 나중에 다시 시도해주세요.");
+      } else {
+        console.error("로그인 요청 중 오류 발생: ", error.message);
+        alert("중복 확인 요청 중 오류가 발생했습니다.");
+      }
     }
   };
 
@@ -76,59 +89,61 @@ const SignUp = () => {
       id: id,
       password: password,
       name: name,
-      car: car,
+      carName: car,
+      deviceId: device_id
     };
 
-    try {
-      // reponse 변수는 백엔드 서버의 회원가입 로직과 통신.
-      const response = await fetch("http://localhost:8080/user/signup", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+    if (password === "") { // 1차 체크 : password
+      alert("비밀번호를 입력해주세요.")
+    } else {
+      console.log("비밀번호 입력 완료");
+      if (password === passwordConfirm) { // 2차 체크 : password confirm
+        console.log("비밀번호 검증 완료");
+        if (isDuplication === false) {     // 3차 체크 : 중복 확인
+          // 중복 체크까지 완료하면 request 보냄.     
+          
+          try {
+          const response = await axios.post('http://localhost:8080/user/signup',
+            payload, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+            });
+          
+          if (response.status === 200) {
+            const data = response.data;
+  
+            console.log("중복 확인 완료");
+            console.log("회원가입 성공:", data);
 
-      if (response.ok) {
-        const data = await response.json();
-
-        // 회원가입 시 로그인에 대한 accessToken 발급받으면 로컬 스토리지에 저장.
-        // 후에 accessToken 뿐 아니라 refreshToken까지 구현해야 함.
-        if (data.accessToken) {
-          localStorage.setItem('login-token', data.accessToken);
-        }
-        
-
-        if (password === "") { // 1차 체크 : password
-          alert("비밀번호를 입력해주세요.")
-        } else {
-          console.log("비밀번호 입력 완료");
-          if (password === passwordConfirm) { // 2차 체크 : password confirm
-            console.log("비밀번호 검증 완료");
-            if (isDuplication === true) {     // 3차 체크 : 중복 확인
-              console.log("중복 확인 완료");
-              console.log("회원가입 성공:", data);
-
-              alert("환영합니다! 회원가입이 되셨습니다. 로그인 화면으로 이동해 로그인 해주시기 바랍니다.")
-              navigate("/LogIn");
-            } else{
-              alert("중복 확인이 되지 않았습니다. 다시 확인해주세요.");
-            }
-          } else {
-            alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
+            alert("환영합니다! 회원가입이 되셨습니다. 로그인 화면으로 이동해 로그인 해주시기 바랍니다.")
+            navigate("/");
           }
         }
-
+      
+        catch (error) {
+          if (error.response) {
+            console.error("응답 오류: ", error.response.data);
+            console.error("응답 상태: ", error.response.status);
+            console.error("응답 헤더: ", error.response.headers);
+            alert(`회원가입 실패: ${error.response.data}`);
+          } else if (error.request) {
+            console.error("요청 오류: ", error.request);
+            alert("서버 응답이 없습니다. 나중에 다시 시도해주세요.");
+          } else {
+            console.error("로그인 요청 중 오류 발생: ", error.message);
+            alert("회원가입 요청 중 오류가 발생했습니다.");
+          }
+        }
+      } else{
+          alert("중복 확인이 되지 않았습니다. 다시 확인해주세요.");
+        }
       } else {
-        console.error("회원가입 요청 중 오류 발생");
-        alert("회원가입 요청 실패");
+        alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
       }
-    } catch (error) {
-      console.error("회원가입 에러:", error);
-      alert("회원가입 중 에러가 발생했습니다.");
     }
-  };
+  }
 
   return (
     <div className="hide_banner">
@@ -165,6 +180,17 @@ const SignUp = () => {
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </Box>
+
+                <div className="data_name">디바이스 아이디 </div>
+                  <Box className="input_box">
+                      <TextFields
+                        type="device_id"
+                        placeholder="Device ID"
+                        value={device_id}
+                        InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
+                        onChange={(e) => setDeviceId(e.target.value)}
+                      />
+                    </Box>
               
 
                 <div className="data_name">차종 선택
@@ -198,6 +224,7 @@ const SignUp = () => {
                     </Menu>
                   </Box>
                 </div>
+
               </div>
 
               <div className="right_side">
@@ -269,10 +296,6 @@ const SignUp = () => {
 
         <div className="tail_center">
           <p className="service_text">서비스 이용을 위해 회원가입 해주세요. </p>
-          <p className="find_id_password">아이디/비밀번호를 잊으셨나요?{"  "}
-            <Link to="/FindIdPassword" style={{ color: "#C224DC" }}>아이디/비밀번호 찾기 </Link>
-          </p>
-          <div className="line"/>
           <p className="tail2">이미 계정이 있으신가요?{"  "}
             <Link to="/" style={{ color: "#C224DC" }}>로그인</Link>
           </p>

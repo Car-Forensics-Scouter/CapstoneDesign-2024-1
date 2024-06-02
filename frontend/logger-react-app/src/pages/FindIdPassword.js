@@ -1,62 +1,70 @@
 import "./FindIdPassword.css";
 import "../App.css";
 import React, { useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { Box, Button } from "@mui/material";
 import TextFields from "@mui/material/TextField";
 import CFS_logo from "../assets/CFS_logo.png";
 
 const FindIdPassword = () => {
-    const [email, setEmail] = useState("");
+    const [email_for_id, setEmailForID] = useState("");
+    const [email_for_password, setEmailForPassword] = useState("");
+    const [name_for_id, setNameForID] = useState("");
+    const [name_for_password, setNameForPassword] = useState("");
     const [id, setID] = useState("");
-    const [name, setName] = useState("");
 
-    const handleFineID = async (e) => {
+    const handleFindID = async (e) => {
         e.preventDefault();
 
         const payload = {
-            email : email,
-            name : name
+            email : email_for_id,
+            name : name_for_id
         };
 
-        const response = await fetch("http://localhost:8080/FindIdPassword", {
-            method: "POST",
-            mode: "cors",
+        // payload 객체를 쿼리 파라미터로 변환
+        const params = new URLSearchParams(payload).toString();
+        
+        const response = await axios.get(`http://localhost:8080/user/find_id?${params}`, {
             headers: {
-                "Content-Type" : "application/json",
+                "Content-Type": "application/json",
             },
-            body: JSON.stringify(payload),
+            withCredentials: true
         });
 
-        if (response.ok) {
-            const data = await response.json();
-            console.log("ID: ", data.id);
+        if (response.status === 200) {
+            alert("ID: " + response.data);
+        } else {
+            alert("입력하신 내용이 올바르지 않습니다.");
         }
-    };
+    }
 
     const handleFindPassword = async (e) => {
         e.preventDefault();
 
         const payload = {
             id : id,
-            email : email,
-            name : name
+            email : email_for_password,
+            name : name_for_password
         };
 
-        const response = await fetch("http://localhost:8080/FindIdPassword", {
-            method: "POST",
-            mode: "cors",
+        const params = new URLSearchParams(payload).toString();        
+
+        const response = await axios.get(`http://localhost:8080/user/find_password?${params}`, {    
             headers: {
                 "Content-Type" : "application/json",
             },
-            body: JSON.stringify(payload),
+            withCredentials: true
         });
 
-        if (response.ok) {
-            const data = await response.json();
-            console.log("Password", data.password);
+        if (response.status === 200) {
+            alert("New PW: " + response.data);
+        }
+        else{
+            alert("입력하신 내용이 올바르지 않습니다.");
         }
     };
+
 
     return (
         <div className="hide_banner">
@@ -68,17 +76,17 @@ const FindIdPassword = () => {
             </div>
     
             <div className="input_center">
-                <form className="find_form" onSubmit={handleFineID}>
+                <form className="find_form" onSubmit={handleFindID}>
                     <div>
                         <div className="left_side">
                             <div className="data_name">이름 </div>
                             <Box className="input_box">
                                 <TextFields
-                                    type="name"
+                                    type="name_for_id"
                                     placeholder="Name"
-                                    value={name}
+                                    value={name_for_id}
                                     InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
-                                    onChange={(e) => setName(e.target.value)}
+                                    onChange={(e) => setNameForID(e.target.value)}
                                 />
                             </Box>
             
@@ -86,16 +94,17 @@ const FindIdPassword = () => {
                                 <div className="data_name">이메일 </div>
                                 <Box className="input_box">
                                     <TextFields
-                                        type="email"
+                                        type="email_for_id"
                                         placeholder="Email"
-                                        value={email}
+                                        value={email_for_id}
                                         InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        onChange={(e) => setEmailForID(e.target.value)}
                                     />
                                 </Box>
                             </div>
                             
-                            <Button className="find_button"
+                            <Button 
+                                className="find_button"
                                 type="submit"
                                 variant="contained"
                                 sx={{ "&:hover": { backgroundColor: "#1976d2" } }}
@@ -122,11 +131,11 @@ const FindIdPassword = () => {
                             <div className="data_name">이름 </div>
                             <Box className="input_box">
                                 <TextFields
-                                    type="name"
+                                    type="name_for_password"
                                     placeholder="Name"
-                                    value={name}
+                                    value={name_for_password}
                                     InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
-                                    onChange={(e) => setName(e.target.value)}
+                                    onChange={(e) => setNameForPassword(e.target.value)}
                                 />
                             </Box>
             
@@ -134,23 +143,23 @@ const FindIdPassword = () => {
                                 <div className="data_name">이메일 </div>
                                 <Box className="input_box">
                                     <TextFields
-                                        type="email"
+                                        type="email_for_password"
                                         placeholder="Email"
-                                        value={email}
+                                        value={email_for_password}
                                         InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        onChange={(e) => setEmailForPassword(e.target.value)}
                                     />
                                 </Box>
                             </div>
             
                             <Button
-                                    className="find_button"
-                                    variant="contained"
-                                    type="button"
-                                    InputProps={{ sx: { "&:hover": { backgroundColor: "#1976d2" } } }}
-                                    >
-                                    비밀번호 재발급
-                                </Button>
+                                className="find_button"
+                                variant="contained"
+                                type="submit"
+                                InputProps={{ sx: { "&:hover": { backgroundColor: "#1976d2" } } }}
+                                >
+                                비밀번호 재발급
+                            </Button>
                         </div>
                     </div>
                 </form>
@@ -168,7 +177,7 @@ const FindIdPassword = () => {
             </div>
           </div>
         </div>
-      );
+    );
 };
 
 export default FindIdPassword;

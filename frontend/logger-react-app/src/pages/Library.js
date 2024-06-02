@@ -1,35 +1,68 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Video from "../components/Video";
 
 function Library() {
     const [videos, setVideos] = useState(
         [
             {
-                img: "",
-                number: 1,
-                from: "2024.04.04 11:11:11",
-                to: "2024.04.04 11:11:11"
+                deviceId: "123123",
+                thumbnaiil: "234234",
+                title: "asdf",
+                createdDate: "123123",
+                endDate: "2024-01-21T23:23:23"
             },
-            {
-                img: "",
-                number: 2,
-                from: "2024.04.04 11:11:11",
-                to: "2024.04.04 11:11:11"
-            },
-            {
-                img: "",
-                number: 3,
-                from: "2024.04.04 11:11:11",
-                to: "2024.04.04 11:11:11"
-            },
-            {
-                img: "",
-                number: 4,
-                from: "2024.04.04 11:11:11",
-                to: "2024.04.04 11:11:11"
-            }
         ]
     )
+
+    function call(api, method, request) {
+        let options = {
+            headers: new Headers({
+                "Content-Type": "application/json",
+            }),
+            url: "http://localhost:8080" + api,
+            method: method,
+        };
+
+        if(request) {
+            // GET METHOD
+            options.body = JSON.stringify(request);
+        }
+
+        return fetch(options.url, options).then((response) => {
+            if(response.ok) {
+                return response;
+            }
+            else {
+                throw new Error("Network response was not ok.");
+            }
+        }).catch((error) => {
+            console.log("http error");
+            console.log(error);
+        })
+    };
+
+    const deviceId = "asdf1234";
+
+    async function video_view() {
+        const url = "/video/find";
+        try {
+            const response = await call(`${url}?deviceId=${deviceId}`, "GET", null);
+            if(response) {
+                const data = await response.json();
+                setVideos(data);
+                console.log(data);
+            }
+            else {
+                console.error("Response was undefined");
+            }
+        } catch(error) {
+            console.error("Error fetching data:", error);
+        }
+    };
+
+    useEffect(() => {
+        video_view();
+    }, []);
 
     return  (
         <div className="Library">

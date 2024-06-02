@@ -3,6 +3,7 @@ import "../App.css";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Box, Button, TextField } from "@mui/material";
+import axios from 'axios';
 import CFS_logo from "../assets/CFS_logo.png";
 
 const Login = () => {
@@ -18,35 +19,48 @@ const Login = () => {
       // 백엔드 서버의 로그인 로직과 통신하는 과정.
       // 로그인 성공 시 서버에서 생성한 토큰을 받아옴.
       // 향후 서버에서 데이터를 가져오는 등 인가 과정이 필요할 때, 로컬 스토리지에서 토큰을 뽑아 와서 함께 전달하면 된다.
-      const response = await fetch("http://localhost:8080/user/login", {
-        method: "POST",
-        mode: "cors",
+      
+      const userData = {
+        id: id,
+        password: password
+      }
+      
+      const response = await axios.post('http://localhost:8080/user/login',
+       userData, {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          id: id,
-          password: password,
-        }),
-      })
+        withCredentials: true
+      });
 
-      if (response.ok) {
-        const data = await response.json();
-
+      if (response.status === 200) {
+        const data = response.data;
+      
         // 로그인에 성공했으면 accessToken을 발급받음.(유효 시간은 10분)
         if (data.accessToken) {
-          localStorage.setItem('login-token', data.accessToken);
+          localStorage.setItem("login-token", data.accessToken);
+          localStorage.setItem("id", data.id);
         }
-
-        console.log("로그인 완료: ", result);
-        navigate("/Reports");
+      
+        console.log("로그인 완료: ", data);
+        navigate("/Reports"); 
       } else {
         console.error("로그인 요청에서 오류 발생");
         alert("아이디와 비밀번호를 다시 확인해주세요.");
       }
     } catch (error) {
-      console.error("로그인 에러: ", error);
-      alert("로그인 중 에러가 발생했습니다.");
+      if (error.response) {
+        console.error("응답 오류: ", error.response.data);
+        console.error("응답 상태: ", error.response.status);
+        console.error("응답 헤더: ", error.response.headers);
+        alert(`로그인 실패: ${error.response.data}`);
+      } else if (error.request) {
+        console.error("요청 오류: ", error.request);
+        alert("서버 응답이 없습니다. 나중에 다시 시도해주세요.");
+      } else {
+        console.error("로그인 요청 중 오류 발생: ", error.message);
+        alert("로그인 요청 중 오류가 발생했습니다.");
+      }
     }
   };
 
@@ -80,8 +94,8 @@ const Login = () => {
               </Box>
 
               <Button
-                marginTop= "10px"
                 type="submit"
+                marginTop= "10px"
                 variant="contained"
                 className="submit_button"
               >
@@ -98,12 +112,8 @@ const Login = () => {
 
               <div className="line"></div>
               <p className="sign_up">계정이 없으신가요?{" "}
-                {/* <Link to="/SignUp" style={{ color: "#C224DC" }}>
+                <Link to="/SignUp" style={{ color: "#C224DC" }}>
                   회원가입
-                </Link> */}
-
-                <Link to="/GraphDashboard" style={{ color: "#C224DC" }}>
-                  회원가입 (임시 코드)
                 </Link>
               </p>
             </form>
