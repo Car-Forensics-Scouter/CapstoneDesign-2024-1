@@ -2,11 +2,16 @@ package com.cfs.obd2logger.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.cfs.obd2logger.dto.VideoDTO;
 import com.cfs.obd2logger.entity.DateRange;
 import com.cfs.obd2logger.entity.ObdLog;
 import com.cfs.obd2logger.entity.ObdLogTablePK;
+import com.cfs.obd2logger.entity.UserEntity;
 import com.cfs.obd2logger.service.ObdLogService;
+import com.cfs.obd2logger.service.UserService;
+import com.cfs.obd2logger.service.VideoService;
 import java.time.LocalDateTime;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,17 +23,48 @@ import org.springframework.transaction.annotation.Transactional;
 class ObdLogDataRepositoryTest {
 
   @Autowired
+  UserService userService;
+
+  @Autowired
+  UserRepository userRepository;
+
+  @Autowired
   ObdLogService obdLogService;
 
   @Autowired
   ObdLogDataRepository obdLogDataRepository;
+
+  @Autowired
+  VideoService videoService;
+
+  @Autowired
+  VideoRepository videoRepository;
 
   // 테스트용 deviceId, 추후 테스팅 자동화 할 것
   String deviceId1 = "VF190913";
   String deviceId2 = "HD190913";
 
   @Test
-  public void testDownalod() {
+  public void testVideoFind() {
+    UserEntity userEntity = UserEntity.builder()
+        .deviceId(deviceId1)
+        .id(deviceId1)
+        .password(deviceId1)
+        .carName("AVANTE")
+        .email("adsf@gmail.com")
+        .name("VICTOR")
+        .status("activated").build();
+    userService.signup(userEntity);
+    testDataGenerator();
+    System.out.println("SAVE START!!");
+    videoService.saveVideo(deviceId1, "thumbnail", "TESTING_VIDEO", 25,
+        LocalDateTime.of(2024, 05, 05, 10, 10, 10));
+    List<VideoDTO> videoList = videoService.findAllVideo(deviceId1);
+    System.out.println("VIDEO LIST!!" + videoList);
+  }
+
+  @Test
+  public void testDownload() {
     testDataGenerator();
     LocalDateTime start240411 = LocalDateTime.of(2024, 04, 11, 00, 00, 00);
     LocalDateTime end240411 = LocalDateTime.of(2024, 04, 11, 23, 59, 59);

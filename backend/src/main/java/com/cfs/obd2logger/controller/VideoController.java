@@ -22,12 +22,12 @@ public class VideoController {
   private final VideoService videoService;
 
   /**
-   * 파일 업로드 (Pre-signed URL 발급  방식) (요청 날짜 포맷: yyyy-mm-hhThh:mm:ss) ex) 2020-11-11T12:34:56
+   * 파일 업로드 (Pre-signed URL 발급  방식) (요청 날짜 포맷: yyyy-mm-hhThh:mm:ss) ex) 2020-11-11T12:34
    */
   @GetMapping("/URL-upload")
   public ResponseEntity<?> uploadUrlVideo(@RequestParam("deviceId") String deviceId,
       @RequestParam("fileName") String fileName, @RequestParam("extension") String extension,
-      @RequestParam("createdDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") LocalDateTime createdDate,
+      @RequestParam("createdDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime createdDate,
       @RequestParam("duration") int duration) {
     try {
       String uuidFileName = videoService.generateFileName(fileName) + "." + extension;
@@ -40,12 +40,12 @@ public class VideoController {
   }
 
   /**
-   * 파일 업로드 (MultipartFile 방식) (요청 날짜 포맷: yyyy-mm-hhThh:mm:ss) ex) 2020-11-11T12:34:56
+   * 파일 업로드 (MultipartFile 방식) (요청 날짜 포맷: yyyy-mm-hhThh:mm:ss) ex) 2020-11-11T12:34
    */
   @PostMapping("/upload")
   public ResponseEntity<?> uploadVideo(@RequestParam("video") MultipartFile video,
       @RequestParam("deviceId") String deviceId,
-      @RequestParam("createdDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") LocalDateTime createdDate,
+      @RequestParam("createdDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime createdDate,
       @RequestParam("duration") int duration) {
     try {
       // 동영상 업로드

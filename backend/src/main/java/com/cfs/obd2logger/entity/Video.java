@@ -47,7 +47,7 @@ public class Video {
   private String title;                         // 동영상 이름
 
   @Column(name = "DURATION", nullable = false)
-  private int duration;                         // 동영상 길이
+  private long duration;                         // 동영상 길이
 
   @Column(name = "CREATED_DATE", nullable = false)
   private LocalDateTime createdDate;          // 생성 날짜
@@ -60,7 +60,6 @@ public class Video {
         .deviceId(deviceId)            // 라즈베리파이 식별번호
         .thumbnail(thumbnail)          // 썸네일 파일 경로
         .title(title)                 // 동영상 이름
-        .duration(duration)           // 동영상 길이
         .createdDate(createdDate)            // 생성 날짜
         .endDate(endDate).build();       // 녹화 종료 날짜
   }

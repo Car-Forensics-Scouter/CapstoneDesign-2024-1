@@ -1,9 +1,10 @@
 package com.cfs.obd2logger.service;
 
 import com.cfs.obd2logger.dto.VideoDTO;
+import com.cfs.obd2logger.entity.UserEntity;
 import com.cfs.obd2logger.entity.Video;
+import com.cfs.obd2logger.repository.UserRepository;
 import com.cfs.obd2logger.repository.VideoRepository;
-import jakarta.annotation.Nullable;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,19 +20,23 @@ import org.springframework.web.multipart.MultipartFile;
 public class VideoService {
 
   private final VideoRepository videoRepository;
+  private final UserRepository userRepository;
   private final S3Service s3Service;
   private final ThumbnailService thumbnailService;
 
   /**
    * 동영상 DB에 동영상 정보 저장
    */
-  public void saveVideo(String deviceId, @Nullable String thumbnail, String fileName,
-      int duration, LocalDateTime createdDate) {
+  public void saveVideo(String deviceId, String thumbnail, String fileName,
+      long duration, LocalDateTime createdDate) {
     try {
-      LocalDateTime endDate = createdDate.withSecond(duration);
+      LocalDateTime endDate = createdDate.plusSeconds(duration);
+      UserEntity user = userRepository.findByDeviceId(deviceId);
+
       // 동영상 엔티티 생성
       Video video = Video.builder()
           .deviceId(deviceId)
+          .user(user)
           .title(fileName)
           .filePath(deviceId + "/" + fileName)
           .createdDate(createdDate)
@@ -98,7 +103,7 @@ public class VideoService {
   @Async
   public void handleAfterUrlUpload(String deviceId, LocalDateTime createdDate,
       int duration, String fileName) {
-    saveVideo(deviceId, null, fileName, duration, createdDate);
+    saveVideo(deviceId, "NoExists", fileName, duration, createdDate);
     // 썸네일 처리
   }
 
