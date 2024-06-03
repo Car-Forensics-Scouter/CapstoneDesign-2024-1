@@ -91,33 +91,33 @@ public class UserService {
     }
 
     // 회원정보 수정
-    public void editUserInfo(UserEntity userEntity) {
-        if (userEntity == null) {
-            throw new RuntimeException("엔티티가 잘못되었습니다.");
-        }
-        userRepository.save(userEntity);
-    }
-
-    // 회원정보 수정 (차량 이름, 장치 아이디)
-    public UserEntity editCarNameAndDeviceId(UserDTO userDTO) {
+    public UserEntity editPassword(UserDTO userDTO, String newPassword) {
         Optional<UserEntity> userOptional = userRepository.findById(userDTO.getId());
         if (userOptional.isPresent()) {
             UserEntity user = userOptional.get();
-            user.setCarName(userDTO.getCarName());
-            user.setDeviceId(userDTO.getDeviceId());
+            user.setPassword(newPassword); // 암호화된 비밀번호를 설정
             return userRepository.save(user);
         }
         return null;
     }
 
-    // 회원 탈퇴
-    public String deleteUser(String id, String password) {
-        UserEntity user = userRepository.findByIdAndPassword(id, password);
-        if (user == null) {
-            throw new RuntimeException("입력이 잘못되었습니다.");
+    public UserEntity editCarName(UserDTO userDTO) {
+        Optional<UserEntity> userOptional = userRepository.findById(userDTO.getId());
+        if (userOptional.isPresent()) {
+            UserEntity user = userOptional.get();
+            user.setCarName(userDTO.getCarName());
+            return userRepository.save(user);
         }
-        user.setStatus("deactivated");
-        userRepository.save(user);
-        return "탈퇴 완료.";
+        return null;
+    }
+
+    public UserEntity editDeviceId(UserDTO userDTO) {
+        Optional<UserEntity> userOptional = userRepository.findById(userDTO.getId());
+        if (userOptional.isPresent()) {
+            UserEntity user = userOptional.get();
+            user.setDeviceId(userDTO.getDeviceId());
+            return userRepository.save(user);
+        }
+        return null;
     }
 }
