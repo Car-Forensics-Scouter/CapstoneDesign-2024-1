@@ -1,30 +1,87 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { Box, TextField, Menu, MenuItem, Button } from "@mui/material";
-import TextFields from "@mui/material/TextField";
 
 function Settings() {
+    const [password, setPassword] = useState({password: ""});
+    const [car, setCar] = useState("");
+
+    function call(api, method, request) {
+        let options = {
+            headers: new Headers({
+                "Content-Type": "application/json",
+            }),
+            url: "http://localhost:8080" + api,
+            method: method,
+        };
+
+        if(request) {
+            // GET METHOD
+            options.body = JSON.stringify(request);
+        }
+
+        return fetch(options.url, options).then((response) => {
+            if(response.ok) {
+                return response;
+            }
+            else {
+                throw new Error("Network response was not ok.");
+            }
+        }).catch((error) => {
+            console.log("http error");
+            console.log(error);
+        })
+    };
+
+    const [serialNumber, setSerialNumber] = useState("F123124");
 
     const handleSettingPW = async (e) => {
         e.preventDefault();
-        const payload_pw = {
 
-        };
+        const url = "api 주소";
 
+        try {
+            const response = await call(`${url}`, "POST", password);
+            if(response) {
+                const data = await response.data;
+            } else {
+                console.error("Response was undefined");
+            }
+        } catch(error) {
+            console.error("Error fetching data:", error);
+        }
     }
 
     const handleSettingCar = async (e) => {
         e.preventDefault();
-        const payload_car = {
 
-        };
+        const url = "api 주소";
+
+        try {
+            const response = await call(`${url}`, "POST", car);
+            if(response) {
+                const data = await response.data;
+            } else {
+                console.error("Response was undefined");
+            }
+        } catch(error) {
+            console.error("Error fetching data:", error);
+        }
     }
 
     const handleSettingSerial = async (e) => {
         e.preventDefault();
-        const payload_serial = {
 
-        };
+        const url = "api 주소";
+
+        try {
+            const response = await call(`${url}`, "POST", serialNumber);
+            if(response) {
+                const data = await response.data;
+            } else {
+                console.error("Response was undefined");
+            }
+        } catch(error) {
+            console.error("Error fetching data:", error);
+        }
     }
 
     return  (
@@ -39,17 +96,17 @@ function Settings() {
                 <div className="body">
                     <div className="templete">
                         <div className="kind">
-                            <div className="title">비밀번호</div>
-                            <div className="save">저장</div>
+                            <div className="title">새 비밀번호</div>
+                            <div className="save" onClick={handleSettingPW}>저장</div>
                         </div>
                         <div className="input">
-                            <input type="password" value="Seongbin1!" id="password"/>
+                            <input type="password" id="password" onChange={(e) => { setPassword(e.target.value) }}/>
                        </div>
                     </div>
                     <div className="templete">
                         <div className="kind">
                             <div className="title">차종</div>
-                            <div className="save">저장</div>
+                            <div className="save" onClick={handleSettingCar}>저장</div>
                         </div>
                         <div className="input">
                             <select>
@@ -63,10 +120,10 @@ function Settings() {
                     <div className="templete">
                         <div className="kind">
                             <div className="title">제품 일련번호</div>
-                            <div className="save">저장</div>
+                            <div className="save" onClick={handleSettingSerial}>저장</div>
                         </div>
                         <div className="input">
-                            <input type="text" placeholder="F124235" id="serialNumber"/>
+                            <input type="text" placeholder={serialNumber} id="serialNumber"/>
                        </div>
                     </div>
                 </div>
