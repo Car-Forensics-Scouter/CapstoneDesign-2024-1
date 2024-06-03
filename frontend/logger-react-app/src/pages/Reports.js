@@ -8,7 +8,7 @@ function Reports(props) {
             headers: new Headers({
                 "Content-Type": "application/json",
             }),
-            url: "http://localhost:8080" + api,
+            url: "백엔드 기본 주소" + api,
             method: method,
         };
 
@@ -18,11 +18,8 @@ function Reports(props) {
         }
 
         return fetch(options.url, options).then((response) => {
-            if(response.ok) {
+            if(response.status = 200) {
                 return response;
-            }
-            else {
-                throw new Error("Network response was not ok.");
             }
         }).catch((error) => {
             console.log("http error");
@@ -31,119 +28,123 @@ function Reports(props) {
     };
 
     // 임시 데이터
-    const deviceId = "asdf1234";
-    const name = "JACK"
+    const deviceId = "F1234";
 
-    async function downloadData() {
-        console.log("눌림");
-        const url = "/api/obdlog/download";
-        try {
-            const response = await call(`${url}?deviceId=${deviceId}&name=${name}&startDate=${startTime}&endDate=${finishTime}`, "GET", null);
-            if(response) {
-                const blob = await response.blob();
-                const blobUrl = window.URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = blobUrl;
-                link.download = "CFS_REPORT.xlsx";
-                link.click();
-                window.URL.revokeObjectURL(blobUrl);
-            } else {
-                console.error("Response was undefined.");
-            }
-        } catch (e) {
-            console.error("Download error:", e)
-        }
+    const downloadData = () => {
+        const url = "API 주소";
+        const reponse = call(`${url}?deviceId=${encodeURIComponent(deviceId)}&startDate=${encodeURIComponent(startTime)}&endDate=${encodeURIComponent(finishTime)}`, "GET", null);
+        reponse.blob().then((blob) => {
+            const blobUrl = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = blobUrl;
+            link.download = "CFS_REPORT.xlsx";
+            link.click();
+            window.URL.revokeObjectURL(blobUrl);
+        }).catch((e) => console.error("Download error:", e));
     };
 
-    const [startTime, setStartTime] = useState("2024-01-01T01:01");
-    const [finishTime, setFinishTime] = useState("2024-12-31T01:01");
+    const [startTime, setStartTime] = useState(document.getElementById("start"));
+    const [finishTime, setFinishTime] = useState(document.getElementById("finish"));
 
     const [OBDData, setOBDData] = useState(
-        {
-            "speed": 70,
-            "rpm": 123,
-            "engineLoad": 12,
-            "fuelLevel": 12,
-            "throttlePos": 12,
-            "barometricPressure": 12,
-            "coolantTemp": 12,
-            "distance": 23,
-            "vin": "asdf1234"
-        }
-    );
-
-    const [GPS, setGPS] = useState(
+        // 초기 테스트 값
         [
             {
-                "lat": 1.0,
-                "log": 1.0
+                carName: "현대 아반떼",
+                VIN: "F876F7623G234",
+            },
+            {
+                type: "SPEED",
+                value: "76",
+                unit: "km/h"
+            },
+            {
+                type: "RPM",
+                value: "143",
+                unit: "rpm"
+            },
+            {
+                type: "ENGINE LOAD",
+                value: "16.0",
+                unit: "percent(%)"
+            },
+            {
+                type: "FUEL LEVEL",
+                value: "51.3",
+                unit: "percent(%)"
+            },
+            {
+                type: "OIL TEMP",
+                value: "none",
+                unit: ""
+            },
+            {
+                type: "COOLANT TEMP",
+                value: "81",
+                unit: "℃"
+            },
+            {
+                type: "THROTTLE POSITION",
+                value: "20.7",
+                unit: "percent(%)"
+            },
+            {
+                type: "DISTANCE",
+                value: "70",
+                unit: "km"
+                // 차량 기타 정보로 빼야할듯
+            },
+            {
+                type: "RUNTIME",
+                value: "1615",
+                unit: "second"
+                // 차량 기타 정보로 빼야할듯
+            },
+            {
+                type: "RUNTIME(MIL)",
+                value: "none",
+                unit: ""
+                // 논 값 나오는 거 2개 대신 barometric_pressure evap vapor pressure 대기압 그거랑
             }
         ]
     );
 
+    const [GPS, setGPS] = useState([
+        [37.4526437, 126.49236],
+        [37.4768068, 126.4847975],
+        [37.4988237, 126.4960839]
+    ]);
+
     const handleStartTimeChange = (e) => {
         setStartTime(e.target.value);
-        view();
-        gps_view();
     };
 
     const handleFinishTimeChange = (e) => {
         setFinishTime(e.target.value);
-        view();
-        gps_view();
-    };
-
-    async function view() {
-        const url = "/api/obdlog/summary-avg";
-        try {
-            const response = await call(`${url}?deviceId=${deviceId}&startDate=${startTime}&endDate=${finishTime}`, "GET", null);
-            if(response) {
-                const data = await response.json();
-                setOBDData(data);
-                console.log(data);
-            }
-            else {
-                console.error("Response was undefined");
-            }
-        } catch(error) {
-            console.error("Error fetching data:", error);
-        }
-    };
-
-    async function gps_view() {
-        const url = "/api/obdlog/summary-list";
-        try {
-            const response = await call(`${url}?deviceId=${deviceId}&startDate=${startTime}&endDate=${finishTime}`, "GET", null);
-            if(response) {
-                const data = await response.json();
-                setGPS(data);
-                console.log(data);
-            }
-            else {
-                console.error("Response was undefined");
-            }
-        } catch(error) {
-            console.error("Error fetching data:", error);
-        }
     };
 
     useEffect(() => {
-        view();
-        gps_view();
+        const url = "http://localhost:8080/api/obdlog/summary-avg";
+        const reponse = call(`${url}?deviceId=${encodeURIComponent(deviceId)}&startDate=${encodeURIComponent(startTime)}&endDate=${encodeURIComponent(finishTime)}`, "GET", null);
+        reponse.then((reponse) => reponse.json()).then((data) => {
+            console.log(data);
+        }).catch((error) => {
+            console.error("Error fetching data:", error);
+        });
     }, []);
 
     const mapRef = useRef();
-    const lat = GPS[0].lat;  // 배열 길치 체크 후 가운데 값 부여
-    const lon = GPS[0].lon;  // 배열 길이 체크 후 가운데 값 부여
+    const lat = GPS[0][0];  // 배열 길치 체크 후 가운데 값 부여
+    const lng = GPS[0][1];  // 배열 길이 체크 후 가운데 값 부여
 
     // 위도, 경도 최대 최소 구한 후 줌 구현
 
     useEffect(() => {
         const { naver } = window;
-        const polylinePath = GPS.map(gps => new naver.maps.LatLng(gps.lat, gps.lon));
+        const polylinePath = GPS.map(gps => new naver.maps.LatLng(gps[0], gps[1]));
         console.log(polylinePath);
         if(mapRef.current && naver) {
-            const location = new naver.maps.LatLng(lat, lon);
+            const location = new naver.maps.LatLng(lat, lng);
             const map = new naver.maps.Map(mapRef.current, {
                 center: location,
                 zoom: 17,
@@ -170,7 +171,7 @@ function Reports(props) {
                     <div className="title">
                         Reports
                     </div>
-                    <div className="download-button" onClick={downloadData}>
+                    <div className="download-button" onclick={downloadData}>
                         <i class="fa-solid fa-download"/>
                         <div className="download">Download</div>
                     </div>
@@ -194,16 +195,16 @@ function Reports(props) {
                         </div>
                         <div className="car-info">
                             <ul>
-                                <li>차량 이름: "현대 아반떼"</li>
-                                <li>VIN: {OBDData.vin}</li>
+                                <li>차량 이름: {OBDData[0].carName}</li>
+                                <li>VIN: {OBDData[0].VIN}</li>
                                 <li>대충 차량의 기타 정보들</li>
                             </ul>
                         </div>
                         <div className="car-status-left">
-                            <OneToOne className="OneToOne" title="SPEED" value={OBDData.speed} unit="km/h" fontSize="24px" tooltip="지정 시간대의 평균 속도입니다."/>
-                            <OneToOne className="OneToOne" title="RPM" value={OBDData.rpm} unit="rpm" fontSize="24px" tooltip="지정 시간대의 평균 RPM입니다."/>
-                            <OneToOne className="OneToOne" title="ENGINE LOAD" value={OBDData.engineLoad} unit="percent(%)" fontSize="20px" tooltip="지정 시간대의 엔진 부하량의 평균값입니다. 엔진 부하란 엔진에 부하가 가해지는 정도를 말하며, 값이 커질수록 엔진회전수가 증가한다."/>
-                            <OneToOne className="OneToOne" title="FUEL LEVEL" value={OBDData.fuelLevel} unit="percent(%)" fontSize="20px"/>
+                            <OneToOne className="OneToOne" title={OBDData[1].type} value={OBDData[1].value} unit={OBDData[1].unit} fontSize="24px" tooltip="지정 시간대의 평균 속도입니다."/>
+                            <OneToOne className="OneToOne" title={OBDData[2].type} value={OBDData[2].value} unit={OBDData[2].unit} fontSize="24px" tooltip="지정 시간대의 평균 RPM입니다."/>
+                            <OneToOne className="OneToOne" title={OBDData[3].type} value={OBDData[3].value} unit={OBDData[3].unit} fontSize="20px" tooltip="지정 시간대의 엔진 부하량의 평균값입니다. 엔진 부하란 엔진에 부하가 가해지는 정도를 말하며, 값이 커질수록 엔진회전수가 증가한다."/>
+                            <OneToOne className="OneToOne" title={OBDData[4].type} value={OBDData[4].value} unit={OBDData[4].unit} fontSize="20px"/>
                         </div>
                     </div>
                     <div className="right">
@@ -211,9 +212,9 @@ function Reports(props) {
                             <div className="naver-map" ref={mapRef}></div>
                         </div>
                         <div className="car-status-right">
-                            <OneToOne className="OneToOne" title="COOLANT TEMP" value={OBDData.coolantTemp} unit="℃" fontSize="20px"/>
-                            <OneToOne className="OneToOne" title="THROTLE POSITION" value={OBDData.throttlePos} unit="percent(%)" fontSize="18px"/>
-                            <OneToOne className="OneToOne" title="BAROMETRIC PRESSURE" value={OBDData.barometricPressure} unit="percent(%)" fontSize="18px"/>
+                            <OneToOne className="OneToOne" title={OBDData[6].type} value={OBDData[6].value} unit={OBDData[6].unit} fontSize="20px"/>
+                            <OneToOne className="OneToOne" title={OBDData[7].type} value={OBDData[7].value} unit={OBDData[7].unit} fontSize="18px"/>
+                            <OneToOne className="OneToOne" title={OBDData[7].type} value={OBDData[7].value} unit={OBDData[7].unit} fontSize="18px"/>
                         </div>
                     </div>
                 </div>

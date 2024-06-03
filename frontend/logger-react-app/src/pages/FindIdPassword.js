@@ -5,6 +5,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { Box, Button } from "@mui/material";
 import TextFields from "@mui/material/TextField";
+import { errorAlert, successAlert } from "../components/alert";
 import CFS_logo from "../assets/CFS_logo.png";
 
 const FindIdPassword = () => {
@@ -17,6 +18,7 @@ const FindIdPassword = () => {
     const handleFindID = async (e) => {
         e.preventDefault();
 
+        try{
         const payload = {
             email : email_for_id,
             name : name_for_id
@@ -33,36 +35,67 @@ const FindIdPassword = () => {
         });
 
         if (response.status === 200) {
-            alert("ID: " + response.data);
+            console.log("입력하신 ID 관련 정보가 적절합니다.");
+            successAlert("ID: " + response.data);
         } else {
-            alert("입력하신 내용이 올바르지 않습니다.");
+            errorAlert("입력하신 내용이 올바르지 않습니다.");
         }
+    } catch (error) {
+        if (error.response) {
+          console.error("응답 오류: ", error.response.data);
+          console.error("응답 상태: ", error.response.status);
+          console.error("응답 헤더: ", error.response.headers);
+          errorAlert(`중복 확인 실패: ${error.response.data}`);
+        } else if (error.request) {
+          console.error("요청 오류: ", error.request);
+          errorAlert("서버 응답이 없습니다. 나중에 다시 시도해주세요.");
+        } else {
+          console.error("ID 정보 요청 중 오류 발생: ", error.message);
+          errorAlert("ID 정보 확인 요청 중 오류가 발생했습니다.");
+        }
+      }
     }
 
     const handleFindPassword = async (e) => {
         e.preventDefault();
 
-        const payload = {
-            id : id,
-            email : email_for_password,
-            name : name_for_password
-        };
+        try{
+            const payload = {
+                id : id,
+                email : email_for_password,
+                name : name_for_password
+            };
 
-        const params = new URLSearchParams(payload).toString();        
+            const params = new URLSearchParams(payload).toString();        
 
-        const response = await axios.get(`http://localhost:8080/user/find_password?${params}`, {    
-            headers: {
-                "Content-Type" : "application/json",
-            },
-            withCredentials: true
-        });
+            const response = await axios.get(`http://localhost:8080/user/find_password?${params}`, {    
+                headers: {
+                    "Content-Type" : "application/json",
+                },
+                withCredentials: true
+            });
 
-        if (response.status === 200) {
-            alert("New PW: " + response.data);
-        }
-        else{
-            alert("입력하신 내용이 올바르지 않습니다.");
-        }
+            if (response.status === 200) {
+                console.log("입력하신 비밀번호 정보는 적절합니다.");
+                successAlert("New PW: " + response.data);
+            }
+            else{
+                errorAlert("서버로부터 오류 메시지가 발생했습니다.");
+            }
+        } catch (error) {
+            if (error.response) {
+              console.error("응답 오류: ", error.response.data);
+              console.error("응답 상태: ", error.response.status);
+              console.error("응답 헤더: ", error.response.headers);
+              errorAlert(`비밀번호 확인 실패 : ${error.response.data}`);
+            } else if (error.request) {
+              console.error("요청 오류 : ", error.request);
+              errorAlert("서버 응답이 없습니다. 나중에 다시 시도해주세요.");
+            } else {
+              console.error("비밀번호 요청 중 오류 발생 : ", error.message);
+              errorAlert("비밀번호 확인 요청 중 오류가 발생했습니다.");
+            }
+          }
     };
 
 
@@ -94,7 +127,7 @@ const FindIdPassword = () => {
                                 <div className="data_name">이메일 </div>
                                 <Box className="input_box">
                                     <TextFields
-                                        type="email_for_id"
+                                        type="email"
                                         placeholder="Email"
                                         value={email_for_id}
                                         InputProps={{ sx: { borderRadius: 20, width: "300px" } }}
@@ -143,7 +176,7 @@ const FindIdPassword = () => {
                                 <div className="data_name">이메일 </div>
                                 <Box className="input_box">
                                     <TextFields
-                                        type="email_for_password"
+                                        type="email"
                                         placeholder="Email"
                                         value={email_for_password}
                                         InputProps={{ sx: { borderRadius: 20, width: "300px" } }}

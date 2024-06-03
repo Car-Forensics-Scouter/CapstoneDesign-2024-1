@@ -3,8 +3,9 @@ import "../App.css";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Box, TextField, Menu, MenuItem, Button } from "@mui/material";
+import { Box, Menu, MenuItem, Button } from "@mui/material";
 import TextFields from "@mui/material/TextField";
+import { errorAlert, successAlert } from "../components/alert";
 import CFS_logo from "../assets/CFS_logo.png";
 
 const SignUp = () => {
@@ -55,12 +56,12 @@ const SignUp = () => {
         const data = response.data;
         if (data === false) {
           console.log("중복 확인이 완료되었습니다.", data);
-          alert("사용 가능한 아이디입니다.");
+          successAlert("Success!", "사용 가능한 아이디입니다.")
           setIsDuplication(false);
         }
         else {
-          alert("중복된 아이디입니다.");
           console.log("중복 확인 과정에서 오류가 발생했습니다.");
+          errorAlert("Duplication Error!", "중복된 아이디입니다.")
           setIsDuplication(true);
         }
       }
@@ -69,13 +70,13 @@ const SignUp = () => {
         console.error("응답 오류: ", error.response.data);
         console.error("응답 상태: ", error.response.status);
         console.error("응답 헤더: ", error.response.headers);
-        alert(`중복 확인 실패: ${error.response.data}`);
+        errorAlert(`중복 확인 실패: ${error.response.data}`);
       } else if (error.request) {
         console.error("요청 오류: ", error.request);
-        alert("서버 응답이 없습니다. 나중에 다시 시도해주세요.");
+        errorAlert("서버 응답이 없습니다. 나중에 다시 시도해주세요.");
       } else {
         console.error("로그인 요청 중 오류 발생: ", error.message);
-        alert("중복 확인 요청 중 오류가 발생했습니다.");
+        errorAlert("중복 확인 요청 중 오류가 발생했습니다.");
       }
     }
   };
@@ -94,7 +95,7 @@ const SignUp = () => {
     };
 
     if (password === "") { // 1차 체크 : password
-      alert("비밀번호를 입력해주세요.")
+      errorAlert("비밀번호를 입력해주세요.")
     } else {
       console.log("비밀번호 입력 완료");
       if (password === passwordConfirm) { // 2차 체크 : password confirm
@@ -117,7 +118,7 @@ const SignUp = () => {
             console.log("중복 확인 완료");
             console.log("회원가입 성공:", data);
 
-            alert("환영합니다! 회원가입이 되셨습니다. 로그인 화면으로 이동해 로그인 해주시기 바랍니다.")
+            successAlert("환영합니다! 회원가입이 되셨습니다. 로그인 화면으로 이동해 로그인 해주시기 바랍니다.")
             navigate("/");
           }
         }
@@ -127,20 +128,20 @@ const SignUp = () => {
             console.error("응답 오류: ", error.response.data);
             console.error("응답 상태: ", error.response.status);
             console.error("응답 헤더: ", error.response.headers);
-            alert(`회원가입 실패: ${error.response.data}`);
+            errorAlert(`회원가입 실패: ${error.response.data}`);
           } else if (error.request) {
             console.error("요청 오류: ", error.request);
-            alert("서버 응답이 없습니다. 나중에 다시 시도해주세요.");
+            errorAlert("서버 응답이 없습니다. 나중에 다시 시도해주세요.");
           } else {
             console.error("로그인 요청 중 오류 발생: ", error.message);
-            alert("회원가입 요청 중 오류가 발생했습니다.");
+            errorAlert("회원가입 요청 중 오류가 발생했습니다.");
           }
         }
       } else{
-          alert("중복 확인이 되지 않았습니다. 다시 확인해주세요.");
+          errorAlert("중복 확인이 되지 않았습니다. 다시 확인해주세요.");
         }
       } else {
-        alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
+        errorAlert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
       }
     }
   }
@@ -191,40 +192,6 @@ const SignUp = () => {
                         onChange={(e) => setDeviceId(e.target.value)}
                       />
                     </Box>
-              
-
-                <div className="data_name">차종 선택
-                  <div className="menu"
-                    onClick={() => setShowDropdown(!showDropdown)}   // 클릭 시 드롭다운 토글  
-                  >
-                </div>
-                  <Box className="input_box">
-                    <Button
-                      variant="outlined"
-                      onClick={(e) => setAnchorEl(e.currentTarget)}
-                      sx={{ borderRadius: 20, width: "300px", height:"55px" ,
-                       textAlign: "left", color:"black" }}
-                    >
-                      {car || "차종을 선택하세요"}
-                    </Button>
-                    <Menu
-                      anchorEl={anchorEl}
-                      open={Boolean(anchorEl)}
-                      onClose={() => setAnchorEl(null)}
-                    >
-                      { carList.map((carType) => (
-                          <MenuItem key={carType} 
-                            onClick={() => {
-                              setCar(carType);
-                              setAnchorEl(null);
-                            }}>
-                            {carType}
-                          </MenuItem>
-                        ))}
-                    </Menu>
-                  </Box>
-                </div>
-
               </div>
 
               <div className="right_side">
@@ -284,6 +251,37 @@ const SignUp = () => {
                 </div>
               </div>
             </div>
+
+            <div className="car_selection">차종 선택 </div>
+                  <div className="menu"
+                    onClick={() => setShowDropdown(!showDropdown)}   // 클릭 시 드롭다운 토글  
+                  />
+                  <Box className="input_box">
+                    <Button
+                      variant="outlined"
+                      onClick={(e) => setAnchorEl(e.currentTarget)}
+                      sx={{ borderRadius: 20, width: "500px", height:"55px",
+                        color:"black", marginLeft: "300px" }}
+                    >
+                      {car || "차종을 선택하세요"}
+                    </Button>
+                    <Menu
+                      anchorEl={anchorEl}
+                      open={Boolean(anchorEl)}
+                      onClose={() => setAnchorEl(null)}
+                    >
+                      { carList.map((carType) => (
+                          <MenuItem key={carType} 
+                            onClick={() => {
+                              setCar(carType);
+                              setAnchorEl(null);
+                            }}>
+                            {carType}
+                          </MenuItem>
+                        ))}
+                    </Menu>
+                  </Box>
+
             <Button
               className="signup_button"
               type="submit"
