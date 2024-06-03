@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Video from "../components/Video";
+import img from "../assets/sample_image.png";
 
 function Library() {
     const [videos, setVideos] = useState(
@@ -74,7 +75,7 @@ function Library() {
                 </div>
                 <hr color="#E5E5E5"/>
                 <div className="body">
-                    {videos.map((video) => (<Video img={video.img} number={video.number} from={video.from} to={video.to}/>))}
+                    {videos.map((video, index) => (<Video img={img} number={index + 1} from={video.createdDate} to={video.endDate} title={video.title}/>))}
                 </div>
             </div>
         </div>

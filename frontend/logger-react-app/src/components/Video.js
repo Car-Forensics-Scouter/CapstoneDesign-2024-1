@@ -1,6 +1,8 @@
+import { useState } from "react";
 import Thumbnail from "../assets/sample_image.png";
 
 function Video(props) {
+    const [url, setUrl] = useState("url");
 
     function call(api, method, request) {
         let options = {
@@ -31,27 +33,32 @@ function Video(props) {
 
     const deviceId = "F1234";
 
-    /*
-    const downloadVideo = () => {
-        const url = "API 주소";
-        const reponse = call(`${url}?deviceId=${encodeURIComponent(deviceId)}&videoIndex=${encodeURIComponent(props.number)}`, "GET", null);
-        reponse.blob().then((blob) => {
-            const blobUrl = window.URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = blobUrl;
-            link.download = "비디오 파일 이름.확장자";
-            link.click();
-            window.URL.revokeObjectURL(blobUrl);
-        }).catch((e) => console.error("Download error:", e));
+    async function getLink() {
+        const url = "/video/download";
+        try {
+            const response = await call(`${url}?deviceId=${deviceId}&videoName=${props.title}`, "GET", null);
+            if(response) {
+                const data = await response.json();
+                setUrl(data);
+                const link = document.createElement('a');
+                link.href = url;
+                link.click();
+                console.log(data);
+            }
+            else {
+                console.error("Response was undefined");
+            }
+        } catch(error) {
+            console.error("Error fetching data:", error);
+        }
     };
-*/
 
     return (
         <div className="Video">
             <img src={Thumbnail}/>
             <div className="main">
                 <div className="index">#{props.number}</div>
-                <div className="download-button">
+                <div className="download-button" onClick={getLink}>
                     <i class="fa-solid fa-download"/>
                     <div className="download">Download</div>
                 </div>
