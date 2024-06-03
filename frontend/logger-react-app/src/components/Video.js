@@ -38,12 +38,11 @@ function Video(props) {
         try {
             const response = await call(`${url}?deviceId=${deviceId}&videoName=${props.title}`, "GET", null);
             if(response) {
-                const data = await response.json();
-                setUrl(data);
-                const link = document.createElement('a');
-                link.href = url;
-                link.click();
+                const data = await response.data;
                 console.log(data);
+                const link = document.createElement('a');
+                link.href = data;
+                link.click();
             }
             else {
                 console.error("Response was undefined");
