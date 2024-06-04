@@ -55,10 +55,19 @@ class ObdLogDataRepositoryTest {
         .name("VICTOR")
         .status("activated").build();
     userService.signup(userEntity);
-    testDataGenerator();
-    System.out.println("SAVE START!!");
+    System.out.println("SIGNED USER: " + userRepository.findByDeviceId(deviceId1));
     videoService.saveVideo(deviceId1, "thumbnail", "TESTING_VIDEO", 25,
         LocalDateTime.of(2024, 05, 05, 10, 10, 10));
+    System.out.println("FIND VIDEO:" + videoService.findVideo(deviceId1, "TESTING_VIDEO"));
+    videoService.saveVideo(deviceId1, "thumbnail", "TESTING22_VIDEO", 25,
+        LocalDateTime.of(2024, 05, 05, 10, 10, 10));
+    System.out.println("FIND VIDEO:" + videoService.findVideo(deviceId1, "TESTING22_VIDEO"));
+    videoService.saveVideo(deviceId1, "thumbnail", "TESTING33_VIDEO", 25,
+        LocalDateTime.of(2024, 05, 05, 10, 10, 10));
+    System.out.println("FIND VIDEO:" + videoService.findVideo(deviceId1, "TESTING33_VIDEO"));
+    videoService.saveVideo(deviceId1, "thumbnail", "TESTING44_VIDEO", 25,
+        LocalDateTime.of(2024, 05, 05, 10, 10, 10));
+    System.out.println("FIND VIDEO:" + videoService.findVideo(deviceId1, "TESTING44_VIDEO"));
     List<VideoDTO> videoList = videoService.findAllVideo(deviceId1);
     System.out.println("VIDEO LIST!!" + videoList);
   }

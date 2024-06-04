@@ -1,11 +1,13 @@
 package com.cfs.obd2logger.service;
 
+
 import com.cfs.obd2logger.dto.VideoDTO;
 import com.cfs.obd2logger.entity.UserEntity;
 import com.cfs.obd2logger.entity.Video;
 import com.cfs.obd2logger.repository.UserRepository;
 import com.cfs.obd2logger.repository.VideoRepository;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -35,7 +37,6 @@ public class VideoService {
 
       // 동영상 엔티티 생성
       Video video = Video.builder()
-          .deviceId(deviceId)
           .user(user)
           .title(fileName)
           .filePath(deviceId + "/" + fileName)
@@ -53,14 +54,16 @@ public class VideoService {
    * 사용자의 비디오 조회
    */
   public Video findVideo(String deviceId, String title) {
-    return videoRepository.findVideoByDeviceIdAndTitle(deviceId, title);
+    UserEntity user = userRepository.findByDeviceId(deviceId);
+    return videoRepository.findByUserAndTitle(user, title);
   }
 
   /**
    * 사용자의 모든 동영상 조회
    */
   public List<VideoDTO> findAllVideo(String deviceId) {
-    List<Video> videoList = videoRepository.findAllByDeviceId(deviceId);
+    UserEntity user = userRepository.findByDeviceId(deviceId);
+    List<Video> videoList = videoRepository.findAllByUser(user);
     return ListEntityToListDTO(videoList);
   }
 
@@ -68,7 +71,8 @@ public class VideoService {
    * 사용자의 모든 동영상 삭제
    */
   public int deleteVideo(String deviceId) {
-    int deleted = videoRepository.deleteAllByDeviceId(deviceId);
+    UserEntity user = userRepository.findByDeviceId(deviceId);
+    int deleted = videoRepository.deleteAllByUser(user);
     if (deleted > 0) {
       s3Service.deleteFolder(deviceId);
     }
@@ -93,8 +97,14 @@ public class VideoService {
   /**
    * 동영상 다운로드
    */
-  public String downloadVideo(String deviceId, String fileName) {
-    return s3Service.downloadFile(deviceId + "/" + fileName);
+  public String downloadVideo(String deviceId, String fileName)
+      throws UnsupportedEncodingException {
+    String url = s3Service.downloadFile(deviceId + "/" + fileName);
+    if (url != null) {
+      return url;
+    } else {
+      return "Not Exist URL";
+    }
   }
 
   /**
@@ -103,7 +113,7 @@ public class VideoService {
   @Async
   public void handleAfterUrlUpload(String deviceId, LocalDateTime createdDate,
       int duration, String fileName) {
-    saveVideo(deviceId, "NoExists", fileName, duration, createdDate);
+    saveVideo(deviceId, "tempThumb", fileName, duration, createdDate);
     // 썸네일 처리
   }
 

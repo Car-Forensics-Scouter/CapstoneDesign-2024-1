@@ -3,7 +3,9 @@ package com.cfs.obd2logger.controller;
 import com.cfs.obd2logger.dto.VideoDTO;
 import com.cfs.obd2logger.service.VideoService;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -80,7 +82,9 @@ public class VideoController {
       @RequestParam("videoName") String videoName) {
     try {
       String videoUrl = videoService.downloadVideo(deviceId, videoName);
-      return ResponseEntity.ok().body(videoUrl);
+      Map<String, String> response = new HashMap<>();
+      response.put("url", videoUrl);
+      return ResponseEntity.ok().body(response);
     } catch (Exception e) {
       return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가
     }

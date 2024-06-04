@@ -8,7 +8,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
@@ -28,11 +27,6 @@ import lombok.ToString;
 @AllArgsConstructor
 public class Video {
 
-  @Id
-  @Column(name = "DEVICE_ID")
-  private String deviceId;  // 라즈베리파이 식별번호 (외래키: UserEntity)
-
-  @MapsId
   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
   @JoinColumn(name = "DEVICE_ID", referencedColumnName = "DEVICE_ID")
   private UserEntity user;
@@ -43,6 +37,7 @@ public class Video {
   @Column(name = "THUMBNAIL", length = 512, nullable = true)
   private String thumbnail;                      // 썸네일 파일 경로
 
+  @Id
   @Column(name = "TITLE", length = 256, nullable = false)
   private String title;                         // 동영상 이름
 
@@ -57,7 +52,7 @@ public class Video {
 
   public VideoDTO toDTO() {
     return VideoDTO.builder()
-        .deviceId(deviceId)            // 라즈베리파이 식별번호
+        .deviceId(user.getDeviceId())
         .thumbnail(thumbnail)          // 썸네일 파일 경로
         .title(title)                 // 동영상 이름
         .createdDate(createdDate)            // 생성 날짜
