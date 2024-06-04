@@ -59,7 +59,7 @@ public class UserController {
         try {
             UserEntity user = userService.login(userDTO.getId(), userDTO.getPassword());
 
-            if(user == null) {
+            if (user == null) {
                 throw new RuntimeException("로그인 실패");
             }
 
@@ -79,14 +79,15 @@ public class UserController {
                 .token(token)
                 .build();
             return ResponseEntity.ok().body(responseUserDTO);
-        } catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     // 아이디 찾기
     @GetMapping("find_id")
-    public ResponseEntity<String> findUserId(@RequestParam String name, @RequestParam String email) {
+    public ResponseEntity<String> findUserId(@RequestParam String name,
+        @RequestParam String email) {
         String userId = userService.getUserId(name, email);
         if (userId != null) {
             return ResponseEntity.ok(userId);
@@ -97,7 +98,8 @@ public class UserController {
 
     // 비밀번호 재발급
     @GetMapping("find_password")
-    public ResponseEntity<String> generateTempPassword(@RequestParam String id, @RequestParam String name, @RequestParam String email) {
+    public ResponseEntity<String> generateTempPassword(@RequestParam String id,
+        @RequestParam String name, @RequestParam String email) {
         String userPassword = userService.getUserPassword(id, name, email);
         if (userPassword != null) {
             return ResponseEntity.ok(userPassword);
@@ -107,24 +109,20 @@ public class UserController {
     }
 
     // 회원정보 수정 (비밀번호, 차종, 제품 일련번호)
-    @PatchMapping("")
-    public ResponseEntity<?> updateUserProfile(@RequestBody UserDTO userDTO) {
+    @PatchMapping("/password")
+    public ResponseEntity<?> updatePassword(@RequestBody UserDTO userDTO) {
         try {
-            UserEntity user = UserEntity.builder()
-                .id(userDTO.getId())
-                .carName(userDTO.getCarName())
-                .deviceId(userDTO.getDeviceId())
-                .password(passwordEncoder.encode(userDTO.getPassword()))
-                .status("activated")
-                .build();
-            userService.editUserInfo(user);
+            String newPassword = passwordEncoder.encode(userDTO.getPassword()); // 비밀번호 암호화
 
-            String token = tokenProvider.create(user);
+            UserEntity updateUser = userService.editPassword(userDTO, newPassword);
+            if (updateUser == null) {
+                return ResponseEntity.ok().body("존재하지 않는 유저입니다.");
+            }
+            String token = tokenProvider.create(updateUser);
 
             UserDTO responseUserDTO = UserDTO.builder()
-                .id(user.getId())
-                .carName(user.getCarName())
-                .deviceId(user.getDeviceId())
+                .id(updateUser.getId())
+                .password(newPassword)
                 .token(token)
                 .build();
             return ResponseEntity.ok().body(responseUserDTO);
@@ -133,10 +131,10 @@ public class UserController {
         }
     }
 
-    @PatchMapping("/carName_deviceId")
-    public ResponseEntity<?> updateCarNameAndDeviceId(@RequestBody UserDTO userDTO) {
+    @PatchMapping("/carName")
+    public ResponseEntity<?> updateCarName(@RequestBody UserDTO userDTO) {
         try {
-            UserEntity updateUser = userService.editCarNameAndDeviceId(userDTO);
+            UserEntity updateUser = userService.editCarName(userDTO);
             if (updateUser == null) {
                 return ResponseEntity.ok().body("존재하지 않는 유저입니다.");
             }
@@ -145,7 +143,6 @@ public class UserController {
             UserDTO responseUserDTO = UserDTO.builder()
                 .id(updateUser.getId())
                 .carName(updateUser.getCarName())
-                .deviceId(updateUser.getDeviceId())
                 .token(token)
                 .build();
             return ResponseEntity.ok().body(responseUserDTO);
@@ -154,12 +151,21 @@ public class UserController {
         }
     }
 
-    // 회원 탈퇴
-    @DeleteMapping("")
-    public ResponseEntity<?> deleteUser(@RequestBody UserDTO userDTO) {
+    @PatchMapping("/deviceId")
+    public ResponseEntity<?> updateDeviceId(@RequestBody UserDTO userDTO) {
         try {
-            String msg = userService.deleteUser(userDTO.getId(), userDTO.getPassword());
-            return ResponseEntity.ok().body(msg);
+            UserEntity updateUser = userService.editDeviceId(userDTO);
+            if (updateUser == null) {
+                return ResponseEntity.ok().body("존재하지 않는 유저입니다.");
+            }
+            String token = tokenProvider.create(updateUser);
+
+            UserDTO responseUserDTO = UserDTO.builder()
+                .id(updateUser.getId())
+                .deviceId(updateUser.getDeviceId())
+                .token(token)
+                .build();
+            return ResponseEntity.ok().body(responseUserDTO);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
