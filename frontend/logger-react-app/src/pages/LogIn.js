@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Box, Button, TextField } from "@mui/material";
 import axios from 'axios';
+import { successAlert, errorAlert } from "../components/alert";
 import CFS_logo from "../assets/CFS_logo.png";
 
 const Login = () => {
@@ -43,23 +44,24 @@ const Login = () => {
         }
       
         console.log("로그인 완료: ", data);
+        successAlert("로그인이 완료되었습니다!");
         navigate("/Reports"); 
       } else {
         console.error("로그인 요청에서 오류 발생");
-        alert("아이디와 비밀번호를 다시 확인해주세요.");
+        errorAlert("아이디와 비밀번호를 다시 확인해주세요.");
       }
     } catch (error) {
       if (error.response) {
         console.error("응답 오류: ", error.response.data);
         console.error("응답 상태: ", error.response.status);
         console.error("응답 헤더: ", error.response.headers);
-        alert(`로그인 실패: ${error.response.data}`);
+        errorAlert(`로그인 실패: ${error.response.data}`);
       } else if (error.request) {
         console.error("요청 오류: ", error.request);
-        alert("서버 응답이 없습니다. 나중에 다시 시도해주세요.");
+        errorAlert("서버 응답이 없습니다. 나중에 다시 시도해주세요.");
       } else {
         console.error("로그인 요청 중 오류 발생: ", error.message);
-        alert("로그인 요청 중 오류가 발생했습니다.");
+        errorAlert("로그인 요청 중 오류가 발생했습니다.");
       }
     }
   };

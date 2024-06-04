@@ -19,41 +19,41 @@ const FindIdPassword = () => {
         e.preventDefault();
 
         try{
-        const payload = {
-            email : email_for_id,
-            name : name_for_id
-        };
+            const payload = {
+                email : email_for_id,
+                name : name_for_id
+            };
 
-        // payload 객체를 쿼리 파라미터로 변환
-        const params = new URLSearchParams(payload).toString();
-        
-        const response = await axios.get(`http://localhost:8080/user/find_id?${params}`, {
-            headers: {
-                "Content-Type": "application/json",
-            },
-            withCredentials: true
-        });
+            // payload 객체를 쿼리 파라미터로 변환
+            const params = new URLSearchParams(payload).toString();
+            
+            const response = await axios.get(`http://localhost:8080/user/find_id?${params}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                withCredentials: true
+            });
 
-        if (response.status === 200) {
-            console.log("입력하신 ID 관련 정보가 적절합니다.");
-            successAlert("ID: " + response.data);
-        } else {
-            errorAlert("입력하신 내용이 올바르지 않습니다.");
+            if (response.status === 200) {
+                console.log("입력하신 ID 관련 정보가 적절합니다.");
+                successAlert("ID: " + response.data);
+            } else {
+                errorAlert("입력하신 내용이 올바르지 않습니다.");
+            }
+        } catch (error) {
+            if (error.response) {
+            console.error("응답 오류: ", error.response.data);
+            console.error("응답 상태: ", error.response.status);
+            console.error("응답 헤더: ", error.response.headers);
+            errorAlert(`중복 확인 실패: ${error.response.data}`);
+            } else if (error.request) {
+            console.error("요청 오류: ", error.request);
+            errorAlert("서버 응답이 없습니다. 나중에 다시 시도해주세요.");
+            } else {
+            console.error("ID 정보 요청 중 오류 발생: ", error.message);
+            errorAlert("ID 정보 확인 요청 중 오류가 발생했습니다.");
+            }
         }
-    } catch (error) {
-        if (error.response) {
-          console.error("응답 오류: ", error.response.data);
-          console.error("응답 상태: ", error.response.status);
-          console.error("응답 헤더: ", error.response.headers);
-          errorAlert(`중복 확인 실패: ${error.response.data}`);
-        } else if (error.request) {
-          console.error("요청 오류: ", error.request);
-          errorAlert("서버 응답이 없습니다. 나중에 다시 시도해주세요.");
-        } else {
-          console.error("ID 정보 요청 중 오류 발생: ", error.message);
-          errorAlert("ID 정보 확인 요청 중 오류가 발생했습니다.");
-        }
-      }
     }
 
     const handleFindPassword = async (e) => {
