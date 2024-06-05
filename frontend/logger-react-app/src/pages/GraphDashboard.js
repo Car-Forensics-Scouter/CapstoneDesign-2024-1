@@ -1,20 +1,13 @@
 import "./GraphDashboard.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Chart from "react-apexcharts";
 import axios from "axios";
-import { errorAlert, successAlert } from "../components/alert";
+import { errorAlert } from "../components/alert";
 
 function GraphDashboard() {
     const [startTime, setStartTime] = useState();
     const [finishTime, setFinishTime] = useState();
-    const [data, setData] = useState({
-        spped: 0,
-        engine_load: 0,
-        throttle_pos: 0,
-        oil_temp: 0,
-        intake_press: 0,
-        intakee_temp: 0,
-    });   // 가져온 전체 데이터
+    const [data, setData] = useState([]);   // 가져온 전체 데이터
 
     const handleStartTimeChange = (e) => {
         setStartTime(e.target.value);
@@ -24,29 +17,15 @@ function GraphDashboard() {
         setFinishTime(e.target.value);
     };
 
-
-    // 디바이스 아이디 임시 데이터(로그인 시 로컬 스토리지에 저장)
-    const deviceId = "F1234";
-
+    // 디바이스 아이디 : 로그인 시 로컬 스토리지에 저장
+    const deviceId = localStorage.getItem("device-id");
     
-    /* 랜더링될 때 마다 (= startTime/finishTime가 변경될 때마다)
-    fetchData 함수가 수행되도록 함. */
-    useEffect(() => {
-        if (startTime && finishTime){
-            fetchData();
-        }
-    }, [startTime, finishTime]);
-
-    const fetchData = async () => {
-        if (!startTime || !finishTime) return;
-
+    // useCallback은 useEffect
+    const fetchData = useCallback(async () => {
         try {
             // 데이터 가져오는 함수 구성.
             const url = "http://localhost:8080/api/obdlog/date-range";
-            const parameter = `${url}?deviceId=${encodeURIComponent(deviceId)}
-                            &startDate=${encodeURIComponent(startTime)}
-                            &endDate=${encodeURIComponent(finishTime)}`;
-            
+            const parameter = `${url}?deviceId=${encodeURIComponent(deviceId)}&startDate=${encodeURIComponent(startTime)}&endDate=${encodeURIComponent(finishTime)}`;
             const response = await axios.get(parameter, {
                 headers: {
                     "Content-Type": "application/json",
@@ -61,23 +40,37 @@ function GraphDashboard() {
                 return
             }
 
+            // 가져온 데이터들을 Data에 저장.
             const result = await response.json();
             setData(result);
-
+            
         } catch (error) {
-            console.error("Error fetching data: ", error);
+            if (error.response) {
+                console.error("응답 오류: ", error.response.data);
+                console.error("응답 상태: ", error.response.status);
+                console.error("응답 헤더: ", error.response.headers);
+                errorAlert(`데이터 패치 실패: ${error.response.data}`);
+              } else if (error.request) {
+                console.error("요청 오류: ", error.request);
+                errorAlert("서버 응답이 없습니다. 나중에 다시 시도해주세요.");
+              } else {
+                console.error("데이터 요청 중 오류 발생: ", error.message);
+                errorAlert("데이터 요청 중 오류가 발생했습니다.");
+            }
         }
-    };
+    }, [startTime, finishTime, deviceId]);
+
+    // startTime, finishTime 바뀔 때마다 fetchData 실행 
+    useEffect(() => {
+        fetchData();
+    }, [fetchData])
 
 
     // Download 버튼 누를 시 전체 데이터 가져옴.
-    const downloadData = async () => {
+    const downloadData = () => {
         const url = "http://localhost:8080/api/obdlog/~~~";
-        const parameter = `${url}?deviceId=${encodeURIComponent(deviceId)}
-                            &startDate=${encodeURIComponent(startTime)}
-                            &endDate=${encodeURIComponent(finishTime)}`;
-
-        const response = await axios.get(parameter, {
+        const parameter = `${url}?deviceId=${encodeURIComponent(deviceId)}&startDate=${encodeURIComponent(startTime)}&endDate=${encodeURIComponent(finishTime)}`;
+        const response = axios.get(parameter, {
             headers: {
                 "Content-Type": "application/json",
             },
@@ -86,13 +79,14 @@ function GraphDashboard() {
 
         response.blob().then((blob) => {
             const blobUrl = window.URL.createObjectURL(blob);
-            const link = document.createElement('a');
+            const link = document.createElement("a");
             link.href = blobUrl;
             link.download = "CFS_REPORT.xlsx";
             link.click();
             window.URL.revokeObjectURL(blobUrl);
         }).catch((e) => console.error("Download error:", e));
     };
+
  
     // 그래프 기본 옵션(SPEED에 기반해서 나머지 만듦)
     const options = {
@@ -144,27 +138,64 @@ function GraphDashboard() {
     const throttle_pos_options = {
         ...options,
         title: { text: "THROTTLE POSITION" },
-        subtitle: { text: "??"}
+        subtitle: { text: "" }
     }
 
-    const oil_temp_options = {
+    const fuel_level_options = {
         ...options,
-        title: { text: "OIL TEMPERATURE" },
+        title: { text: "FUEL LEVEL" },
+        subtitle: { text: "LEVEL"}
+    }
+
+    const barometric_press_options = {
+        ...options,
+        title: { text: "BAROMETRIC PRESSURE" },
         subtitle: { text: "℃"}
     }
 
-    const intake_press_options = {
+    const run_time_options = {
         ...options,
-        title: { text: "INTAKE PRESSURE" },
-        subtitle: { text: "??"}
+        title: { text: "RUN TIME" },
+        subtitle: { text: "TIME(DAY:HH:MM"}
     }
 
-    const intake_temp_options = {
+    const distance_options = {
         ...options,
-        title: { text: "INTAKE TEMPERATURE" },
+        title: { text: "DISTANCE" },
         subtitle: { text: "℃"}
     }
     
+    const coolant_temp_options = {
+        ...options,
+        title: { text: "COOLANT TEMPERATURE" },
+        subtitle: { text: "℃"}
+    }
+
+    // 데이터 형식 통일 및 시간 데이터 처리
+    const formattedData = data.map(entry => ({
+        x: new Date(entry.timeStamp).getTime(),
+        speed: entry.speed,
+        rpm: entry.rpm,
+        engineLoad: entry.engineLoad,
+        throttlePos: entry.throttlePos,
+        fuelLevel: entry.fuelLevel,
+        barometricPressure: entry.barometricPressure,
+        runTime: entry.runTime,
+        distance: entry.distance,
+        coolantTemp: entry.coolantTemp
+    }));
+
+    // x, y축에 맞춤.
+    const speedSeries = { name: 'Speed', data: formattedData.map(entry => ({ x: entry.x, y: entry.speed })) };
+    const rpmSeries = { name: 'RPM', data: formattedData.map(entry => ({ x: entry.x, y: entry.rpm })) };
+    const engineLoadSeries = { name: 'Engine Load', data: formattedData.map(entry => ({ x: entry.x, y: entry.engineLoad })) };
+    const throttlePosSeries = { name: 'Throttle Position', data: formattedData.map(entry => ({ x: entry.x, y: entry.throttlePos })) };
+    const fuelLevelSeries = { name: 'Fuel Level', data: formattedData.map(entry => ({ x: entry.x, y: entry.fuelLevel })) };
+    const barometricPressureSeries = { name: 'Barometric Pressure', data: formattedData.map(entry => ({ x: entry.x, y: entry.barometricPressure })) };
+    const runTimeSeries = { name: 'Run Time', data: formattedData.map(entry => ({ x: entry.x, y: entry.runTime })) };
+    const distanceSeries = { name: 'Distance', data: formattedData.map(entry => ({ x: entry.x, y: entry.distance })) };
+    const coolantTempSeries = { name: 'Coolant Temperature', data: formattedData.map(entry => ({ x: entry.x, y: entry.coolantTemp })) };
+
 
     return (
     <div className="Graphs">
@@ -173,7 +204,7 @@ function GraphDashboard() {
                 <div className="title">
                     Data Graph
                 </div>
-                <div className="download-button" onclick={downloadData}>
+                <div className="download-button" onClick={downloadData}>
                     <i class="fa-solid fa-download"/>
                     <div className="download">Download</div>
                 </div>
@@ -183,63 +214,24 @@ function GraphDashboard() {
                 <div className="title">TIME RANGE :</div>
                 <div className="from">FROM</div>
                 <div className="start-time">
-                    <input type="datetime-local" id="start" value={startTime || ""} onChange={handleStartTimeChange}/>
+                    <input type="datetime-local" id="start" value={startTime} onChange={handleStartTimeChange}/>
                 </div>
                 <div className="to">TO</div>
                 <div className="finish-time">
-                    <input type="datetime-local" id="finish" value={finishTime || ""} onChange={handleFinishTimeChange}/>
+                    <input type="datetime-local" id="finish" value={finishTime} onChange={handleFinishTimeChange}/>
                 </div>
             </div>
 
             <div className="body">
-                <Chart
-                    options={options}
-                    series={data.speed}
-                    type="area"
-                    height={350}
-                />
-
-                <Chart
-                    options={rpm_options}
-                    series={data.rpm}
-                    type="area"
-                    height={350}
-                />
-
-                <Chart
-                    options={throttle_pos_options}
-                    series={data.throttleO}
-                    type="area"
-                    height={350}
-                />
-
-                <Chart
-                    options={engine_load_options}
-                    series={data.throttleO}
-                    type="area"
-                    height={350}
-                />
-
-                <Chart
-                    options={oil_temp_options}
-                    series={data.throttleO}
-                    type="area"
-                    height={350}
-                />
-
-                <Chart
-                    options={intake_press_options}
-                    series={data.throttleO}
-                    type="area"
-                    height={350}
-                />
-
-                <Chart
-                    options={intake_temp_options}
-                    series={data.throttleO}
-                    type="area"
-                    height={350}
-                />  
+                <Chart options={options} series={[speedSeries]} type="area" height={350}/>
+                <Chart options={rpm_options} series={[rpmSeries]} type="area" height={350}/>
+                <Chart options={engine_load_options} series={[engineLoadSeries]} type="area" height={350}/>
+                <Chart options={throttle_pos_options} series={[throttlePosSeries]} type="area" height={350}/>
+                <Chart options={fuel_level_options} series={[fuelLevelSeries]} type="area" height={350}/>
+                <Chart options={barometric_press_options} series={[barometricPressureSeries]} type="area" height={350}/>
+                <Chart options={runTimeSeries} series={[run_time_options]} type="area" height={350}/>
+                <Chart options={distance_options} series={[distanceSeries]} type="area" height={350}/>
+                <Chart options={coolant_temp_options} series={[coolantTempSeries]} type="area" height={350}/>
             </div>
         </div>
     </div>
