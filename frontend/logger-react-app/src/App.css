@@ -238,6 +238,7 @@ a {
   width: 330px;
   height: 150px;
   border-radius: 18.47px;
+  background-color: #FFFFFF;
 }
 
 .App .Frame .Reports .wrap .body .left .car-info {
@@ -251,13 +252,19 @@ a {
   box-shadow: 2px 2px #878787;
 }
 
+.App .Frame .Reports .wrap .body .left .car-info hr {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  width: 290px;
+}
+
 .App .Frame .Reports .wrap .body .left .car-info ul {
   text-align: left;
   padding: 20px;
 }
 
 .App .Frame .Reports .wrap .body .left .car-info ul li {
-  padding: 10px;
+  padding: 8px;
   font-weight: bold;
 }
 
@@ -409,6 +416,7 @@ a {
   height: 37px;
   border-radius: 9.24px;
   border: 0.5px solid #3AE055;
+  cursor: pointer;
 }
 
 .App .Frame .Settings .wrap .body .templete .input input {
@@ -536,6 +544,7 @@ a {
   color: #4D4D4D;
   font-size: small;
   align-items: center;
+  cursor: pointer;
 }
 
 .Video .main .download-button .download {

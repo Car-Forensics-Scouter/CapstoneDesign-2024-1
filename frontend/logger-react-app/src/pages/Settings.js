@@ -2,7 +2,8 @@ import React, { useState } from "react";
 
 function Settings() {
     const [password, setPassword] = useState({password: ""});
-    const [car, setCar] = useState("");
+    const [car, setCar] = useState("아반떼 CN7");
+    const [serialNumber, setSerialNumber] = useState("F123124");
 
     function call(api, method, request) {
         let options = {
@@ -31,17 +32,26 @@ function Settings() {
         })
     };
 
-    const [serialNumber, setSerialNumber] = useState("F123124");
-
     const handleSettingPW = async (e) => {
         e.preventDefault();
 
-        const url = "api 주소";
+        const url = "/user/password";
+
+        const body = {
+            id: "1234",
+            password: password
+        }
 
         try {
-            const response = await call(`${url}`, "POST", password);
+            const response = await call(`${url}`, "PATCH", body);
             if(response) {
                 const data = await response.data;
+
+                if(data.success) {
+                    alert("패스워드가 성공적으로 변경되었습니다.");
+                } else {
+                    alert("패스워드 변경에 실패하셨습니다.")
+                }
             } else {
                 console.error("Response was undefined");
             }
@@ -53,12 +63,18 @@ function Settings() {
     const handleSettingCar = async (e) => {
         e.preventDefault();
 
-        const url = "api 주소";
+        const url = "/user/carName";
 
         try {
             const response = await call(`${url}`, "POST", car);
             if(response) {
                 const data = await response.data;
+
+                if(data.success) {
+                    alert("차종이 성공적으로 변경되었습니다.");
+                } else {
+                    alert("차종 변경에 실패하셨습니다.")
+                }
             } else {
                 console.error("Response was undefined");
             }
@@ -70,12 +86,18 @@ function Settings() {
     const handleSettingSerial = async (e) => {
         e.preventDefault();
 
-        const url = "api 주소";
+        const url = "/user/deviceId";
 
         try {
             const response = await call(`${url}`, "POST", serialNumber);
             if(response) {
                 const data = await response.data;
+
+                if(data.success) {
+                    alert("일련번호가 성공적으로 변경되었습니다.");
+                } else {
+                    alert("일련번호 변경에 실패하셨습니다.")
+                }
             } else {
                 console.error("Response was undefined");
             }
@@ -100,7 +122,7 @@ function Settings() {
                             <div className="save" onClick={handleSettingPW}>저장</div>
                         </div>
                         <div className="input">
-                            <input type="password" id="password" onChange={(e) => { setPassword(e.target.value) }}/>
+                            <input type="password" id="password" onChange={(e) => { setPassword(e.target.value); }}/>
                        </div>
                     </div>
                     <div className="templete">
@@ -109,11 +131,11 @@ function Settings() {
                             <div className="save" onClick={handleSettingCar}>저장</div>
                         </div>
                         <div className="input">
-                            <select>
-                                <option value="1">그랜저 IG</option>
-                                <option value="2">아반떼 CN7</option>
-                                <option value="3">쏘렌토 MQ4</option>
-                                <option value="4">K5 DL3</option>
+                            <select value={car} onChange={(e) => { setCar(e.target.value); }}>
+                                <option value="그랜저 IG">그랜저 IG</option>
+                                <option value="아반떼 CN7">아반떼 CN7</option>
+                                <option value="쏘렌토 MQ4">쏘렌토 MQ4</option>
+                                <option value="K5 DL3">K5 DL3</option>
                             </select>
                        </div>
                     </div>
@@ -123,7 +145,7 @@ function Settings() {
                             <div className="save" onClick={handleSettingSerial}>저장</div>
                         </div>
                         <div className="input">
-                            <input type="text" placeholder={serialNumber} id="serialNumber"/>
+                            <input type="text" placeholder={serialNumber} id="serialNumber" onChange={(e) => { setSerialNumber(e.target.value); }}/>
                        </div>
                     </div>
                 </div>

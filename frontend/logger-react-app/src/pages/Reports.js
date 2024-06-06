@@ -33,6 +33,7 @@ function Reports(props) {
     // 임시 데이터
     const deviceId = "asdf1234";
     const name = "JACK"
+    const carName = "그랜저 IG"
 
     async function downloadData() {
         console.log("눌림");
@@ -150,7 +151,7 @@ function Reports(props) {
             });
             const polyline = new naver.maps.Polyline({
                 path: polylinePath,
-                strokeColor: "#FF0000",
+                strokeColor: "#3AE055",
                 strokeOpacity: 0.8,
                 strokeWeight: 6,
                 map
@@ -194,16 +195,18 @@ function Reports(props) {
                         </div>
                         <div className="car-info">
                             <ul>
-                                <li>차량 이름: "현대 아반떼"</li>
+                                <li>차량 이름: {carName}</li>
                                 <li>VIN: {OBDData.vin}</li>
-                                <li>대충 차량의 기타 정보들</li>
+                                <hr/>
+                                <li>이동 거리: {OBDData.distance} km</li>
+                                <li>이동 시간: {OBDData.runtime} 초</li>
                             </ul>
                         </div>
                         <div className="car-status-left">
                             <OneToOne className="OneToOne" title="SPEED" value={OBDData.speed} unit="km/h" fontSize="24px" tooltip="지정 시간대의 평균 속도입니다."/>
                             <OneToOne className="OneToOne" title="RPM" value={OBDData.rpm} unit="rpm" fontSize="24px" tooltip="지정 시간대의 평균 RPM입니다."/>
-                            <OneToOne className="OneToOne" title="ENGINE LOAD" value={OBDData.engineLoad} unit="percent(%)" fontSize="20px" tooltip="지정 시간대의 엔진 부하량의 평균값입니다. 엔진 부하란 엔진에 부하가 가해지는 정도를 말하며, 값이 커질수록 엔진회전수가 증가한다."/>
-                            <OneToOne className="OneToOne" title="FUEL LEVEL" value={OBDData.fuelLevel} unit="percent(%)" fontSize="20px"/>
+                            <OneToOne className="OneToOne" title="ENGINE LOAD" value={OBDData.engineLoad} unit="percent(%)" fontSize="20px" tooltip="지정 시간대의 엔진 부하량의 평균값입니다. 엔진 부하란 엔진에 부하가 가해지는 정도를 말하며, 값이 커질수록 엔진회전수가 증가합니다."/>
+                            <OneToOne className="OneToOne" title="FUEL LEVEL" value={OBDData.fuelLevel} unit="percent(%)" fontSize="20px" tooltip="지정 시간대의 연료량의 평균값입니다."/>
                         </div>
                     </div>
                     <div className="right">
@@ -211,9 +214,9 @@ function Reports(props) {
                             <div className="naver-map" ref={mapRef}></div>
                         </div>
                         <div className="car-status-right">
-                            <OneToOne className="OneToOne" title="COOLANT TEMP" value={OBDData.coolantTemp} unit="℃" fontSize="20px"/>
-                            <OneToOne className="OneToOne" title="THROTLE POSITION" value={OBDData.throttlePos} unit="percent(%)" fontSize="18px"/>
-                            <OneToOne className="OneToOne" title="BAROMETRIC PRESSURE" value={OBDData.barometricPressure} unit="percent(%)" fontSize="18px"/>
+                            <OneToOne className="OneToOne" title="COOLANT TEMP" value={OBDData.coolantTemp} unit="℃" fontSize="20px" tooltip="지정 시간대의 냉각수 온도의 평균값입니다."/>
+                            <OneToOne className="OneToOne" title="THROTLE POSITION" value={OBDData.throttlePos} unit="percent(%)" fontSize="18px" tooltip="지정 시간대의 엑셀 위치의 평균값입니다. 엑셀 페달을 누르는 정도에 비례하여 값이 증가합니다."/>
+                            <OneToOne className="OneToOne" title="BAROMETRIC PRESSURE" value={OBDData.barometricPressure} unit="percent(%)" fontSize="18px" tooltip="지정 시간대의 대기압 평균값입니다. 차량은 이 값을 통해 차의 고도를 계산하여 적당한 공연비가 되도록 연료 분사량과 점화시기를 조정합니다."/>
                         </div>
                     </div>
                 </div>

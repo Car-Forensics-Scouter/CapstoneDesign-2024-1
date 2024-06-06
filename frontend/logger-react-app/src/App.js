@@ -9,7 +9,7 @@ import Library from './pages/Library';
 import GraphDashboard from './pages/GraphDashboard';
 import SignUp from './pages/SignUp';
 import Settings from './pages/Settings';
-import car1 from "./assets/car1.jpeg";
+import car1 from "./assets/그랜저 IG.png";
 
 function App() {
   const [photo, setPhoto] = useState(car1);
