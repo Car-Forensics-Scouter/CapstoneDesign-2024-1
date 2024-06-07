@@ -101,7 +101,13 @@ const SignUp = () => {
       if (password === passwordConfirm) { // 2차 체크 : password confirm
         console.log("비밀번호 검증 완료");
         if (isDuplication === false) {     // 3차 체크 : 중복 확인
-          // 중복 체크까지 완료하면 request 보냄.     
+          // 중복 체크까지 완료하면 request 보냄.
+          
+          // 필수 입력 데이터 체크
+          if (!name || !email || !id || !password || !passwordConfirm || !car || !device_id) {
+            errorAlert("모든 필수 항목을 입력해주세요.");
+            return;
+          }
           
           try {
           const response = await axios.post('http://localhost:8080/user/signup',
@@ -261,7 +267,7 @@ const SignUp = () => {
                       variant="outlined"
                       onClick={(e) => setAnchorEl(e.currentTarget)}
                       sx={{ borderRadius: 20, width: "500px", height:"55px",
-                        color:"black", marginLeft: "300px" }}
+                        color:"black", marginLeft: "150px" }}
                     >
                       {car || "차종을 선택하세요"}
                     </Button>

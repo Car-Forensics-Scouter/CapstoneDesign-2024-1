@@ -33,7 +33,7 @@
     justify-content: center;
     align-items: center;
     margin-right: 150px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 .SignUp .input_center .signup_form {
@@ -44,7 +44,6 @@
     float: left;
     text-align: left;
     margin-left: 200px;
-    margin-top: 25px;
     width: 300px;
 }
 
@@ -61,8 +60,6 @@
 .SignUp .input_center .signup_form .right_side {
     float: right;
     text-align: left;
-    margin-left: 0px;
-    margin-top: 25px;
 }
 
 
@@ -87,8 +84,8 @@
 
 .SignUp .car_selection {
     width: 800px;
-    margin-top: 290px;
-    margin-left: px;
+    margin-top: 275px;
+    margin-left: -80px;
 }
 
 .SignUp .data_name .menu {

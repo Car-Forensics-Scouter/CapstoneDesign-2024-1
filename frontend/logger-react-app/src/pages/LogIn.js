@@ -40,7 +40,7 @@ const Login = () => {
         // 로그인에 성공했으면 accessToken을 발급받음.(유효 시간은 10분)
         if (data.accessToken) {
           localStorage.setItem("login-token", data.accessToken);
-          localStorage.setItem("id", data.id);
+          localStorage.setItem("device-id", data.device_id);
         }
       
         console.log("로그인 완료: ", data);
