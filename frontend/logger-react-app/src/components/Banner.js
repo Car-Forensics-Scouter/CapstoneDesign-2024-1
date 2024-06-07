@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 
 function Banner() {
-    const status = true; // 로그인 상태를 저장할 예정, 현재 구현 X
+    const status = true;
 
     const [clickBtn, setClickBtn] = useState("1");
 

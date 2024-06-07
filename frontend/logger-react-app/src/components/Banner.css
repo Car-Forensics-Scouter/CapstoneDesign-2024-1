@@ -1,0 +1,84 @@
+.App .Frame .Banner {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 18.47px;
+    height: auto;
+    position: relative;
+    border: 0.5px solid #808080;
+    z-index: 2;
+  }
+  
+  .App .Banner .Menu {
+    margin-bottom: 100px;
+    text-align: center;
+    padding: 15px;
+  }
+  
+  .App .Banner .Menu i {
+    padding-right: 20px;
+  }
+  
+  .App .Banner .Menu .Bt2 i {
+    padding-right: 15px;
+  }
+  
+  .App .Banner .Menu .LReports, .App .Banner .Menu .LLibrary, .App .Banner .Menu .LGraphDashboard, .App .Banner .Support .LSettings {
+    display: flex;
+    border-radius: 9.24px;
+    padding: 10px;
+    margin: 5px;
+  }
+  
+  .App .Banner .Menu .LReportsactive, .App .Banner .Menu .LLibraryactive, .App .Banner .Menu .LGraphDashboardactive, .App .Banner .Support .LSettingsactive {
+    background-color: #E6F9E9;
+    display: flex;
+    border-radius: 9.24px;
+    padding: 10px;
+    margin: 5px;
+    color: #0AB22F;
+  }
+  
+  .App .Banner .Support i {
+    padding-right: 20px;
+  }
+  
+  .App .Banner .SubTitle {
+    padding: 5px;
+    text-align: left;
+    margin-left: 20px;
+  }
+  
+  .App .Banner .Support {
+    text-align: left;
+    padding: 15px;
+    margin-bottom: 200px;
+  }
+  
+  .App .Banner .Info {
+    position: absolute;
+    bottom: 0%;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+  
+  .App .Banner .Info .Line {
+    border: 1px solid #E5E5E5;
+    width: 100%;
+  }
+  
+  .App .Banner .Info .Contents {
+    text-align: left;
+    padding-top: 50px;
+    padding-bottom: 30px;
+    width: 200%;
+  }
+  
+  .App .Banner .Info .Contents .Intro {
+    font-weight: bold;
+    font-size: small;
+  }
+  
+  .App .Banner .Info .Contents .Contact {
+    font-size: smaller;
+    color: #878787;
+  }

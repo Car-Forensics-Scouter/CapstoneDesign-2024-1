@@ -1,7 +1,7 @@
 import "./GraphDashboard.css";
 import React, { useEffect, useState, useCallback } from "react";
 import Chart from "react-apexcharts";
-import axios from "axios";
+import axios from "axios";  
 import { errorAlert } from "../components/alert";
 
 const defaultData = [
@@ -39,28 +39,23 @@ const defaultData = [
     }
 ]
 
-function GraphDashboard() {
-    const [startTime, setStartTime] = useState("2024-01-01T00:00:00");
-    const [finishTime, setFinishTime] = useState("2024-01-01T00:01:00");
+function GraphDashboard(props) {
     const [data, setData] = useState(defaultData);   // 가져온 전체 데이터
 
     const handleStartTimeChange = (e) => {
-        setStartTime(e.target.value);
+        props.setStartTime(e.target.value);
     };
 
     const handleFinishTimeChange = (e) => {
-        setFinishTime(e.target.value);
+        props.setFinishTime(e.target.value);
     };
-
-    // 디바이스 아이디 : 로그인 시 로컬 스토리지에 저장
-    const deviceId = localStorage.getItem("device-id");
     
     // useCallback은 useEffect
     const fetchData = useCallback(async () => {
         try {
             // 데이터 가져오는 함수 구성.
             const url = "http://localhost:8080/api/obdlog/date-range";
-            const parameter = `${url}?deviceId=${encodeURIComponent(deviceId)}&startDate=${encodeURIComponent(startTime)}&endDate=${encodeURIComponent(finishTime)}`;
+            const parameter = `${url}?deviceId=${encodeURIComponent(props.deviceId)}&startDate=${encodeURIComponent(props.startTime)}&endDate=${encodeURIComponent(props.finishTime)}`;
             const response = await axios.get(parameter, {
                 headers: {
                     "Content-Type": "application/json",
@@ -90,7 +85,7 @@ function GraphDashboard() {
                 console.error("데이터 요청 중 오류 발생: ", error.message);
             }
         }
-    }, [startTime, finishTime, deviceId]);
+    }, [props.startTime, props.finishTime, props.deviceId]);
 
     // startTime, finishTime 바뀔 때마다 fetchData 실행 
     useEffect(() => {
@@ -100,7 +95,7 @@ function GraphDashboard() {
     // Download 버튼 누를 시 전체 데이터 가져옴.
     const downloadData = () => {
         const url = "http://localhost:8080/api/obdlog/download";
-        const parameter = `${url}?deviceId=${encodeURIComponent(deviceId)}&startDate=${encodeURIComponent(startTime)}&endDate=${encodeURIComponent(finishTime)}`;
+        const parameter = `${url}?deviceId=${encodeURIComponent(props.deviceId)}&startDate=${encodeURIComponent(props.startTime)}&endDate=${encodeURIComponent(props.finishTime)}`;
         const response = axios.get(parameter, {
             headers: {
                 "Content-Type": "application/json",
@@ -126,7 +121,7 @@ function GraphDashboard() {
         stroke: { curve: "straight" },
         title: { text: "SPEED", align: "left" },    // 데이터 이름
         subtitle: { text: "km/h", align: "left" },  // 데이터 단위
-        labels: [startTime, finishTime],
+        labels: [props.startTime, props.finishTime],
         xaxis: { type: "datetime", },
         yaxis: { opposite: false, },
         legend: { horizontalAlign: "left" }
@@ -175,11 +170,11 @@ function GraphDashboard() {
                 <div className="title">TIME RANGE :</div>
                 <div className="from">FROM</div>
                 <div className="start-time">
-                    <input type="datetime-local" id="start" value={startTime} onChange={handleStartTimeChange}/>
+                    <input type="datetime-local" id="start" value={props.startTime} onChange={handleStartTimeChange}/>
                 </div>
                 <div className="to">TO</div>
                 <div className="finish-time">
-                    <input type="datetime-local" id="finish" value={finishTime} onChange={handleFinishTimeChange}/>
+                    <input type="datetime-local" id="finish" value={props.finishTime} onChange={handleFinishTimeChange}/>
                 </div>
             </div>
 

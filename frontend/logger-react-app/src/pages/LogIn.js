@@ -7,7 +7,7 @@ import axios from 'axios';
 import { successAlert, errorAlert } from "../components/alert";
 import CFS_logo from "../assets/CFS_logo.png";
 
-const Login = () => {
+const Login = (props) => {
   const [id, setID] = useState("");
   const [password, setPassword] = useState("");
 
@@ -36,11 +36,13 @@ const Login = () => {
 
       if (response.status === 200) {
         const data = response.data;
-      
-        // 로그인에 성공했으면 accessToken을 발급받음.(유효 시간은 10분)
-        if (data.accessToken) {
-          localStorage.setItem("login-token", data.accessToken);
-          localStorage.setItem("device-id", data.device_id);
+    
+        // 로그인에 성공했으면 accessToken을 발급받음.
+        if (data.token) {
+          localStorage.setItem("login-token", data.token);
+          // localStorage.setItem("deviceId", data.deviceId); 
+          props.setCarName(data.carName);
+          props.setDeviceId(data.deviceId);
         }
       
         console.log("로그인 완료: ", data);

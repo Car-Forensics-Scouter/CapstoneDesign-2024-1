@@ -2,7 +2,6 @@ import { useState } from "react";
 import Thumbnail from "../assets/sample_image.png";
 
 function Video(props) {
-    const [url, setUrl] = useState("url");
 
     function call(api, method, request) {
         let options = {
@@ -31,12 +30,10 @@ function Video(props) {
         })
     };
 
-    const deviceId = "F1234";
-
     async function getLink() {
         const url = "/video/download";
         try {
-            const response = await call(`${url}?deviceId=${deviceId}&videoName=${props.title}`, "GET", null);
+            const response = await call(`${url}?deviceId=${props.deviceId}&videoName=${props.title}`, "GET", null);
             if(response) {
                 const data = await response.data;
                 console.log(data);

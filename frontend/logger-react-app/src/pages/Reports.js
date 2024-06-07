@@ -1,8 +1,15 @@
 import '../App.css';
 import React, { useEffect, useState, useRef } from "react";
 import OneToOne from "../components/OneToOne";
+import car1 from "../assets/그랜저 IG.png";
+import car2 from "../assets/아반떼 CN7.png";
+import car3 from "../assets/쏘렌토 MQ4.png";
+import car4 from "../assets/K5 DL3.png";
+import sample_image from "../assets/sample_image.png";
 
 function Reports(props) {
+    const [photo, setPhoto] = useState(sample_image);
+
     function call(api, method, request) {
         let options = {
             headers: new Headers({
@@ -30,16 +37,11 @@ function Reports(props) {
         })
     };
 
-    // 임시 데이터
-    const deviceId = "asdf1234";
-    const name = "JACK"
-    const carName = "그랜저 IG"
-
     async function downloadData() {
         console.log("눌림");
         const url = "/api/obdlog/download";
         try {
-            const response = await call(`${url}?deviceId=${deviceId}&name=${name}&startDate=${startTime}&endDate=${finishTime}`, "GET", null);
+            const response = await call(`${url}?deviceId=${props.deviceId}&startDate=${props.startTime}&endDate=${props.finishTime}`, "GET", null);
             if(response) {
                 const blob = await response.blob();
                 const blobUrl = window.URL.createObjectURL(blob);
@@ -55,9 +57,6 @@ function Reports(props) {
             console.error("Download error:", e)
         }
     };
-
-    const [startTime, setStartTime] = useState("2024-01-01T01:01");
-    const [finishTime, setFinishTime] = useState("2024-12-31T01:01");
 
     const [OBDData, setOBDData] = useState(
         {
@@ -77,19 +76,25 @@ function Reports(props) {
         [
             {
                 "lat": 1.0,
-                "log": 1.0
+                "lon": 1.0
+            },
+            {
+                "lat": 1.0,
+                "lon": 1.0
             }
         ]
     );
 
     const handleStartTimeChange = (e) => {
-        setStartTime(e.target.value);
+        props.setStartTime(e.target.value);
+        console.log("확인", props.startTime);
         view();
         gps_view();
     };
 
     const handleFinishTimeChange = (e) => {
-        setFinishTime(e.target.value);
+        props.setFinishTime(e.target.value);
+        console.log("확인", props.finishTime);
         view();
         gps_view();
     };
@@ -97,7 +102,7 @@ function Reports(props) {
     async function view() {
         const url = "/api/obdlog/summary-avg";
         try {
-            const response = await call(`${url}?deviceId=${deviceId}&startDate=${startTime}&endDate=${finishTime}`, "GET", null);
+            const response = await call(`${url}?deviceId=${props.deviceId}&startDate=${props.startTime}&endDate=${props.finishTime}`, "GET", null);
             if(response) {
                 const data = await response.json();
                 setOBDData(data);
@@ -114,11 +119,13 @@ function Reports(props) {
     async function gps_view() {
         const url = "/api/obdlog/summary-list";
         try {
-            const response = await call(`${url}?deviceId=${deviceId}&startDate=${startTime}&endDate=${finishTime}`, "GET", null);
+            const response = await call(`${url}?deviceId=${props.deviceId}&startDate=${props.startTime}&endDate=${props.finishTime}`, "GET", null);
             if(response) {
                 const data = await response.json();
                 setGPS(data);
                 console.log(data);
+                setLat(GPS[GPS.length/2].lat);
+                setLon(GPS[GPS.length/2].lon);
             }
             else {
                 console.error("Response was undefined");
@@ -129,13 +136,17 @@ function Reports(props) {
     };
 
     useEffect(() => {
+        if(props.carName === "그랜저 IG") { setPhoto(car1); }
+        else if(props.carName === "아반떼 CN7") { setPhoto(car2); }
+        else if(props.carName === "쏘렌토 MQ4") { setPhoto(car3); }
+        else if(props.carName === "K5 DL3") { setPhoto(car4); }
         view();
         gps_view();
     }, []);
 
     const mapRef = useRef();
-    const lat = GPS[0].lat;  // 배열 길치 체크 후 가운데 값 부여
-    const lon = GPS[0].lon;  // 배열 길이 체크 후 가운데 값 부여
+    const [lat, setLat] = useState(1.0);  // 배열 길치 체크 후 가운데 값 부여
+    const [lon, setLon] = useState(1.0);  // 배열 길이 체크 후 가운데 값 부여
 
     // 위도, 경도 최대 최소 구한 후 줌 구현
 
@@ -181,21 +192,21 @@ function Reports(props) {
                     <div className="title">TIME RANGE :</div>
                     <div className="from">FROM</div>
                     <div className="start-time">
-                        <input type="datetime-local" id="start" value={startTime} onChange={handleStartTimeChange}/>
+                        <input type="datetime-local" id="start" value={props.startTime} onChange={handleStartTimeChange}/>
                     </div>
                     <div className="to">TO</div>
                     <div className="finish-time">
-                        <input type="datetime-local" id="finish" value={finishTime} onChange={handleFinishTimeChange}/>
+                        <input type="datetime-local" id="finish" value={props.finishTime} onChange={handleFinishTimeChange}/>
                     </div>
                 </div>
                 <div className="body">
                     <div className="left">
                         <div className="car-photo">
-                            <img src={props.photo} alt="차량 이미지"/>
+                            <img src={photo} alt="차량 이미지"/>
                         </div>
                         <div className="car-info">
                             <ul>
-                                <li>차량 이름: {carName}</li>
+                                <li>차량 이름: {props.carName}</li>
                                 <li>VIN: {OBDData.vin}</li>
                                 <hr/>
                                 <li>이동 거리: {OBDData.distance} km</li>

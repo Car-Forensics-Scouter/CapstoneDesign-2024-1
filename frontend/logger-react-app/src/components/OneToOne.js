@@ -1,6 +1,6 @@
 function OneToOne(props) {
     const fontSize = props.fontSize;
-    // tooltip 구현 예정
+    
     return (
         <div className={props.className}>
             <div className="detail-button">

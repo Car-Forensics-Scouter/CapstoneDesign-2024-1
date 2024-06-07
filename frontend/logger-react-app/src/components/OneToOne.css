@@ -1,0 +1,61 @@
+.OneToOne {
+    width: 150px;
+    height: 150px;
+    background-color: #FFFFFF;
+    border-radius: 18.47px;
+    box-shadow: 2px 2px #878787;
+    align-items: center;
+  }
+  
+  .OneToOne .detail-button {
+    position: relative;
+    left: 128px;
+    top: 5px;
+    display: block;
+    width: 14px;
+    height: 14px;
+  }
+  
+  .OneToOne .detail-button .tooltip {
+    visibility: hidden;
+    background-color: #FFFFFF;
+    color: #808080;
+    min-width: 120px;
+    text-align: center;
+    border-radius: 6px;
+    border: 1px solid #3AE055;
+    margin-left: 3px;
+    top: -10px;
+    padding: 10px 10px;
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .OneToOne .detail-button:hover .tooltip {
+    visibility: visible;
+  }
+  
+  .OneToOne .detail-button i {
+    font-size: 14px;
+  }
+  
+  .OneToOne .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    word-wrap: break-word;
+    height: 25px;
+    width: 100px;
+    color: #5B5B5B;
+    margin: 0 auto;
+  }
+  
+  .OneToOne .avg-value {
+    font-size: 64px;
+    height: 68px;
+    font-weight: 900;
+  }
+  
+  .OneToOne .unit {
+    font-size: 24px;
+  }

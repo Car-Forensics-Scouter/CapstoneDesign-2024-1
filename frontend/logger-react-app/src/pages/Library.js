@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Video from "../components/Video";
 import img from "../assets/sample_image.png";
 
-function Library() {
+function Library(props) {
     const [videos, setVideos] = useState(
         [
             {
@@ -42,12 +42,10 @@ function Library() {
         })
     };
 
-    const deviceId = "asdf1234";
-
     async function video_view() {
         const url = "/video/find";
         try {
-            const response = await call(`${url}?deviceId=${deviceId}`, "GET", null);
+            const response = await call(`${url}?deviceId=${props.deviceId}`, "GET", null);
             if(response) {
                 const data = await response.json();
                 setVideos(data);
@@ -75,7 +73,7 @@ function Library() {
                 </div>
                 <hr color="#E5E5E5"/>
                 <div className="body">
-                    {videos.map((video, index) => (<Video img={img} number={index + 1} from={video.createdDate} to={video.endDate} title={video.title}/>))}
+                    {videos.map((video, index) => (<Video img={img} number={index + 1} from={video.createdDate} to={video.endDate} title={video.title} deviceId={props.deviceId}/>))}
                 </div>
             </div>
         </div>

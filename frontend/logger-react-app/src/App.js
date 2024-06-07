@@ -9,12 +9,12 @@ import Library from './pages/Library';
 import GraphDashboard from './pages/GraphDashboard';
 import SignUp from './pages/SignUp';
 import Settings from './pages/Settings';
-import car1 from "./assets/그랜저 IG.png";
 
 function App() {
-  const [photo, setPhoto] = useState(car1);
   const [carName, setCarName] = useState();
-  const [serialNumber, SetSerialNumber] = useState();
+  const [deviceId, setDeviceId] = useState();
+  const [startTime, setStartTime] = useState("2024-01-01T01:01");
+  const [finishTime, setFinishTime] = useState("2024-12-31T01:01");
 
   return (
     <BrowserRouter>
@@ -22,11 +22,11 @@ function App() {
         <div className="Frame">
           <Banner/>
           <Routes>
-            <Route path="/" element={<LogIn/>}></Route>
+            <Route path="/" element={<LogIn setDeviceId={setDeviceId} setCarName={setCarName}/>}></Route>
             <Route path="FindIdPassword" element={<FindIdPassword/>}></Route>
-            <Route path="Reports" element={<Reports photo={photo}/>}></Route>
-            <Route path="Library" element={<Library/>}></Route>
-            <Route path="GraphDashboard" element={<GraphDashboard/>}></Route>
+            <Route path="Reports" element={<Reports setStartTime={setStartTime} setFinishTime={setFinishTime} startTime={startTime} finishTime={finishTime} deviceId={deviceId} carName={carName}/>}></Route>
+            <Route path="Library" element={<Library deviceId={deviceId}/>}></Route>
+            <Route path="GraphDashboard" element={<GraphDashboard setStartTime={setStartTime} setFinishTime={setFinishTime} startTime={startTime} finishTime={finishTime} deviceId={deviceId}/>}></Route>
             <Route path="SignUp" element={<SignUp/>}></Route>
             <Route path="Settings" element={<Settings/>}></Route>
           </Routes>

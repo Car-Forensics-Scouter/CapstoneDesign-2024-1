@@ -1,0 +1,164 @@
+.App .Frame .Reports {
+    position: relative;
+    background-color: #D3F8D5;
+    border-radius: 27.71px;
+    z-index: 1;
+    width: 1000px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    min-height: 658px;
+    right: 20px;
+    flex: 1;
+  }
+  
+  .App .Frame .Reports .wrap {
+    padding-left: 52px;
+    padding-right: 32px;
+  }
+  
+  .App .Frame .Reports .wrap .head {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    align-items: center;
+  }
+  
+  .App .Frame .Reports .wrap .head .title {
+    font-weight: bold;
+    font-size: 24px;
+  }
+  
+  .App .Frame .Reports .wrap .head .download-button {
+    display: flex;
+    color: #4D4D4D;
+    font-size: small;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .App .Frame .Reports .wrap .head .download-button .download {
+    margin-left: 10px;
+    font-weight: bold;
+  }
+  
+  .App .Frame .Reports .wrap .time-setting {
+    display: grid;
+    justify-content: left;
+    align-items: center;
+    grid-template-columns: 140px 80px 300px 50px 300px;
+    margin-top: 30px;
+    font-size: larger;
+    font-weight: bold;
+    margin-left: 30px;
+  }
+  
+  .App .Frame .Reports .wrap .time-setting .start-time, .App .Frame .Reports .wrap .time-setting .finish-time {
+    width: 300px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: lighter;
+  }
+  
+  .App .Frame .Reports .wrap .time-setting .start-time input[type="datetime-local"], .App .Frame .Reports .wrap .time-setting .finish-time input[type="datetime-local"] {
+    width: 100%;
+    height: 100%;
+    border-radius: 18.47px;
+    border: none;
+    box-shadow: 2px 2px #878787;
+    font-size: 16px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    color: #5B5B5B;
+  }
+  
+  
+  
+  .App .Frame .Reports .wrap .body {
+    display: flex;
+    margin-top: 30px;
+    justify-content: center;
+  }
+  
+  .App .Frame .Reports .wrap .body .left {
+    margin-right: 30px;
+  }
+  
+  .App .Frame .Reports .wrap .body .left .car-photo {
+    width: 330px;
+    height: 150px;
+    display: flex;
+    margin-bottom: 30px;
+    border-radius: 18.47px;
+    box-shadow: 2px 2px #878787;
+  }
+  
+  .App .Frame .Reports .wrap .body .left .car-photo img {
+    width: 330px;
+    height: 150px;
+    border-radius: 18.47px;
+    background-color: #FFFFFF;
+  }
+  
+  .App .Frame .Reports .wrap .body .left .car-info {
+    background-color: #FFFFFF;
+    border-radius: 18.47px;
+    width: 330px;
+    height: 150px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    box-shadow: 2px 2px #878787;
+  }
+  
+  .App .Frame .Reports .wrap .body .left .car-info hr {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    width: 290px;
+  }
+  
+  .App .Frame .Reports .wrap .body .left .car-info ul {
+    text-align: left;
+    padding: 20px;
+  }
+  
+  .App .Frame .Reports .wrap .body .left .car-info ul li {
+    padding: 8px;
+    font-weight: bold;
+  }
+  
+  .App .Frame .Reports .wrap .body .left .car-status-left {
+    display: grid;
+    grid-template-columns: 150px 150px;
+    column-gap: 30px;
+    grid-template-rows: 150px 150px;
+    row-gap: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .App .Frame .Reports .wrap .body .right .map {
+    background-color: #FFFFFF;
+    border: 0.5px solid #878787;
+    box-shadow: 2px 2px #878787;
+    width: 510px;
+    height: 510px;
+    margin-bottom: 30px;
+    overflow: hidden;
+  }
+  
+  .App .Frame .Reports .wrap .body .right .map .naver-map {
+    width: 100%;
+    height: 510px;
+  }
+  
+  .App .Frame .Reports .wrap .body .right .car-status-right {
+    display: grid;
+    grid-template-columns: 150px 150px 150px;
+    column-gap: 30px;
+    grid-template-rows: 150px;
+    row-gap: 30px;
+    margin-bottom: 30px;
+  }

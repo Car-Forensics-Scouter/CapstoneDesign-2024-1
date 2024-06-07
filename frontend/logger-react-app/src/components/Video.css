@@ -1,0 +1,58 @@
+.Video{
+    width: 413px;
+    height: 399px;
+    padding-top: 20px;
+    background-color: #FFFFFF;
+    border-radius: 18.47px;
+    box-shadow: 2px 2px #878787;
+    align-items: center;
+  }
+  
+  .Video img {
+    width: 372px;
+    height: 197px;
+    border: 0.5px solid #878787;
+    border-radius: 18.47px;
+  }
+  
+  .Video .main {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    align-items: center;
+  }
+  
+  .Video .main .index {
+    font-weight: bold;
+    font-size: 24px;
+  }
+  
+  .Video .main .download-button {
+    display: flex;
+    color: #4D4D4D;
+    font-size: small;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .Video .main .download-button .download {
+    margin-left: 10px;
+    font-weight: bold;
+  }
+  
+  .Video .from {
+    display: flex;
+    font-size: 20px;
+    margin-left: 30px;
+    margin-top: 15px;
+  }
+  
+  .Video .to {
+    display: flex;
+    font-size: 20px;
+    margin-left: 30px;
+    margin-top: 30px;
+  }
