@@ -30,11 +30,11 @@ public class VideoController {
   public ResponseEntity<?> uploadUrlVideo(@RequestParam("deviceId") String deviceId,
       @RequestParam("fileName") String fileName, @RequestParam("extension") String extension,
       @RequestParam("createdDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime createdDate,
-      @RequestParam("duration") int duration) {
+      @RequestParam("createdDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime endDate) {
     try {
       String uuidFileName = videoService.generateFileName(fileName) + "." + extension;
       String URL = videoService.uploadUrlVideo(deviceId, uuidFileName);
-      videoService.handleAfterUrlUpload(deviceId, createdDate, duration, uuidFileName);
+      videoService.handleAfterUrlUpload(deviceId, createdDate, endDate, uuidFileName);
       return ResponseEntity.ok().body(URL);
     } catch (Exception e) {
       return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가
@@ -48,13 +48,13 @@ public class VideoController {
   public ResponseEntity<?> uploadVideo(@RequestParam("video") MultipartFile video,
       @RequestParam("deviceId") String deviceId,
       @RequestParam("createdDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime createdDate,
-      @RequestParam("duration") int duration) {
+      @RequestParam("createdDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime endDate) {
     try {
       // 동영상 업로드
       String videoName = video.getOriginalFilename();
       videoService.uploadVideo(video, deviceId);
       // 동영상 업로드 이후 작업 처리 (비동기)
-      videoService.handleAfterUpload(video, deviceId, createdDate, duration, videoName);
+      videoService.handleAfterUpload(video, deviceId, createdDate, endDate, videoName);
       return ResponseEntity.ok().body(videoName);
     } catch (Exception e) {
       return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가
