@@ -122,7 +122,7 @@ public class ObdLogService {
       LocalDateTime endDate) {
     List<ObdLogDTO> obdLogDTOList = findObdLogOnDate(deviceId, startDate, endDate);
     int len = obdLogDTOList.size();
-    double runtime = obdLogDTOList.get(0).getRunTime();
+    double runtime = obdLogDTOList.get(obdLogDTOList.size() - 1).getRunTime();
     double speed = calAvg(obdLogDTOList, ObdLogDTO::getSpeed, len);
     double rpm = calAvg(obdLogDTOList, ObdLogDTO::getRpm, len);
     double engineLoad = calAvg(obdLogDTOList, ObdLogDTO::getEngineLoad, len);
