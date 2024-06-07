@@ -2,7 +2,7 @@ package com.cfs.obd2logger.service;
 
 
 import com.cfs.obd2logger.dto.VideoDTO;
-import com.cfs.obd2logger.entity.User;
+import com.cfs.obd2logger.entity.UserEntity;
 import com.cfs.obd2logger.entity.Video;
 import com.cfs.obd2logger.repository.UserRepository;
 import com.cfs.obd2logger.repository.VideoRepository;
@@ -30,10 +30,9 @@ public class VideoService {
    * 동영상 DB에 동영상 정보 저장
    */
   public void saveVideo(String deviceId, String thumbnail, String fileName,
-      long duration, LocalDateTime createdDate) {
+      LocalDateTime createdDate, LocalDateTime endDate) {
     try {
-      LocalDateTime endDate = createdDate.plusSeconds(duration);
-      User user = userRepository.findByDeviceId(deviceId);
+      UserEntity user = userRepository.findByDeviceId(deviceId);
 
       // 동영상 엔티티 생성
       Video video = Video.builder()
@@ -42,7 +41,6 @@ public class VideoService {
           .filePath(deviceId + "/" + fileName)
           .createdDate(createdDate)
           .endDate(endDate)
-          .duration(duration)
           .thumbnail(thumbnail).build();
       videoRepository.save(video);
     } catch (Exception e) {
@@ -54,7 +52,7 @@ public class VideoService {
    * 사용자의 비디오 조회
    */
   public Video findVideo(String deviceId, String title) {
-    User user = userRepository.findByDeviceId(deviceId);
+    UserEntity user = userRepository.findByDeviceId(deviceId);
     return videoRepository.findByUserAndTitle(user, title);
   }
 
@@ -62,7 +60,7 @@ public class VideoService {
    * 사용자의 모든 동영상 조회
    */
   public List<VideoDTO> findAllVideo(String deviceId) {
-    User user = userRepository.findByDeviceId(deviceId);
+    UserEntity user = userRepository.findByDeviceId(deviceId);
     List<Video> videoList = videoRepository.findAllByUser(user);
     return ListEntityToListDTO(videoList);
   }
@@ -71,7 +69,7 @@ public class VideoService {
    * 사용자의 모든 동영상 삭제
    */
   public int deleteVideo(String deviceId) {
-    User user = userRepository.findByDeviceId(deviceId);
+    UserEntity user = userRepository.findByDeviceId(deviceId);
     int deleted = videoRepository.deleteAllByUser(user);
     if (deleted > 0) {
       s3Service.deleteFolder(deviceId);
@@ -112,8 +110,8 @@ public class VideoService {
    */
   @Async
   public void handleAfterUrlUpload(String deviceId, LocalDateTime createdDate,
-      int duration, String fileName) {
-    saveVideo(deviceId, "tempThumb", fileName, duration, createdDate);
+      LocalDateTime endDate, String fileName) {
+    saveVideo(deviceId, "tempThumb", fileName, createdDate, endDate);
     // 썸네일 처리
   }
 
@@ -122,7 +120,7 @@ public class VideoService {
    */
   @Async
   public void handleAfterUpload(MultipartFile file, String deviceId, LocalDateTime createdDate,
-      int duration, String fileName) throws IOException {
+      LocalDateTime endDate, String fileName) throws IOException {
     System.out.println("START THUMBNAIL GENERATE");
     // 썸네일 생성
 //    File thumbnail = thumbnailService.generateVideoThumbnail(file,
@@ -133,7 +131,7 @@ public class VideoService {
 //        deviceId);
     System.out.println("START VIDEO SAVE");
     // DB에 비디오 저장
-    saveVideo(deviceId, null, fileName, duration, createdDate);
+    saveVideo(deviceId, null, fileName, createdDate, endDate);
   }
 
   /**

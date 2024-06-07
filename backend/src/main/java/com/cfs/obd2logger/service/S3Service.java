@@ -24,11 +24,9 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor
 public class S3Service {
 
+  private final AmazonS3Client amazonS3Client;
   @Value("${cloud.aws.s3.bucket}")
   private String bucket;
-
-  private final AmazonS3Client amazonS3Client;
-
 
   /**
    * 파일 업로드 (MultipartFile 방식) 후 파일의 퍼블릭 URL 반환
