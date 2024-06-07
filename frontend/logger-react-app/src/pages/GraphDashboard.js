@@ -41,6 +41,7 @@ const defaultData = [
 
 function GraphDashboard(props) {
     const [data, setData] = useState(defaultData);   // 가져온 전체 데이터
+    const deviceId = localStorage.getItem("deviceId");
 
     const handleStartTimeChange = (e) => {
         props.setStartTime(e.target.value);
@@ -55,7 +56,7 @@ function GraphDashboard(props) {
         try {
             // 데이터 가져오는 함수 구성.
             const url = "http://localhost:8080/api/obdlog/date-range";
-            const parameter = `${url}?deviceId=${encodeURIComponent(props.deviceId)}&startDate=${encodeURIComponent(props.startTime)}&endDate=${encodeURIComponent(props.finishTime)}`;
+            const parameter = `${url}?deviceId=${encodeURIComponent(deviceId)}&startDate=${encodeURIComponent(props.startTime)}&endDate=${encodeURIComponent(props.finishTime)}`;
             const response = await axios.get(parameter, {
                 headers: {
                     "Content-Type": "application/json",
@@ -85,34 +86,12 @@ function GraphDashboard(props) {
                 console.error("데이터 요청 중 오류 발생: ", error.message);
             }
         }
-    }, [props.startTime, props.finishTime, props.deviceId]);
+    }, [props.startTime, props.finishTime, deviceId]);
 
     // startTime, finishTime 바뀔 때마다 fetchData 실행 
     useEffect(() => {
         fetchData();
     }, [fetchData])
-
-    // Download 버튼 누를 시 전체 데이터 가져옴.
-    const downloadData = () => {
-        const url = "http://localhost:8080/api/obdlog/download";
-        const parameter = `${url}?deviceId=${encodeURIComponent(props.deviceId)}&startDate=${encodeURIComponent(props.startTime)}&endDate=${encodeURIComponent(props.finishTime)}`;
-        const response = axios.get(parameter, {
-            headers: {
-                "Content-Type": "application/json",
-            },
-            withCredentials: true
-        });
-
-        response.blob().then((blob) => {
-            const blobUrl = window.URL.createObjectURL(blob);
-            const link = document.createElement("a");
-            link.href = blobUrl;
-            link.download = "CFS_REPORT.xlsx";
-            link.click();
-            window.URL.revokeObjectURL(blobUrl);
-        }).catch((e) => console.error("Download error:", e));
-    };
-
  
     // 그래프 기본 옵션(SPEED에 기반해서 나머지 만듦)
     const options = {
@@ -151,18 +130,12 @@ function GraphDashboard(props) {
         return series;
       };
 
-    console.log(getSeries("speed"));
-
     return (
     <div className="Graphs">
         <div className="wrap">
             <div className="head">
                 <div className="title">
                     Data Graph
-                </div>
-                <div className="download-button" onClick={downloadData}>
-                    <i class="fa-solid fa-download"/>
-                    <div className="download">Download</div>
                 </div>
             </div>
             <hr color="#E5E5E5"/>
