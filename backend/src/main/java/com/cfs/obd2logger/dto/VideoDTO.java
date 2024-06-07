@@ -10,7 +10,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class VideoDTO {
 
-  private String deviceId;                      // 라즈베리파이 식별번호 (외래키: UserEntity)
+  private String deviceId;                      // 라즈베리파이 식별번호 (외래키: User)
   private String thumbnail;                      // 썸네일 파일 경로
   private String title;                         // 동영상 이름
   private LocalDateTime createdDate;             // 생성 날짜

@@ -22,7 +22,6 @@ public class ObdLogDTO {
   private double barometricPressure; // 공기압
   private double coolantTemp;       // 냉각수 온도
   private double throttlePos;       // 스로틀 위치 정보 (퍼센트)
-  private double distance;          // 주행 거리
   private double runTime;           // 주행 시간
   private double lon;               // GPS 경도
   private double lat;               // GPS 위도
@@ -44,7 +43,6 @@ public class ObdLogDTO {
         .barometricPressure(barometricPressure)
         .coolantTemp(coolantTemp)
         .throttlePos(throttlePos)
-        .distance(distance)
         .runTime(runTime)
         .lat(lat)
         .lon(lon).build();

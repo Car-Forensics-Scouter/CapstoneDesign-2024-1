@@ -46,9 +46,6 @@ public class ObdLog {
   @Column(name = "THROTTLE_POS", nullable = false)
   private double throttlePos;       // 스로틀 위치 정보 (퍼센트)
 
-  @Column(name = "DISTANCE", nullable = false)
-  private double distance;          // 주행 거리
-
   @Column(name = "RUN_TIME", nullable = false)
   private double runTime;           // 주행 시간
 
@@ -71,7 +68,6 @@ public class ObdLog {
         .barometricPressure(barometricPressure)
         .coolantTemp(coolantTemp)
         .throttlePos(throttlePos)
-        .distance(distance)
         .runTime(runTime)
         .lat(lat)
         .lon(lon).build();

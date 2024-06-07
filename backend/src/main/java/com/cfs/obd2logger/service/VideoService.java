@@ -2,7 +2,7 @@ package com.cfs.obd2logger.service;
 
 
 import com.cfs.obd2logger.dto.VideoDTO;
-import com.cfs.obd2logger.entity.UserEntity;
+import com.cfs.obd2logger.entity.User;
 import com.cfs.obd2logger.entity.Video;
 import com.cfs.obd2logger.repository.UserRepository;
 import com.cfs.obd2logger.repository.VideoRepository;
@@ -32,7 +32,7 @@ public class VideoService {
   public void saveVideo(String deviceId, String thumbnail, String fileName,
       LocalDateTime createdDate, LocalDateTime endDate) {
     try {
-      UserEntity user = userRepository.findByDeviceId(deviceId);
+      User user = userRepository.findByDeviceId(deviceId);
 
       // 동영상 엔티티 생성
       Video video = Video.builder()
@@ -52,7 +52,7 @@ public class VideoService {
    * 사용자의 비디오 조회
    */
   public Video findVideo(String deviceId, String title) {
-    UserEntity user = userRepository.findByDeviceId(deviceId);
+    User user = userRepository.findByDeviceId(deviceId);
     return videoRepository.findByUserAndTitle(user, title);
   }
 
@@ -60,7 +60,7 @@ public class VideoService {
    * 사용자의 모든 동영상 조회
    */
   public List<VideoDTO> findAllVideo(String deviceId) {
-    UserEntity user = userRepository.findByDeviceId(deviceId);
+    User user = userRepository.findByDeviceId(deviceId);
     List<Video> videoList = videoRepository.findAllByUser(user);
     return ListEntityToListDTO(videoList);
   }
@@ -69,7 +69,7 @@ public class VideoService {
    * 사용자의 모든 동영상 삭제
    */
   public int deleteVideo(String deviceId) {
-    UserEntity user = userRepository.findByDeviceId(deviceId);
+    User user = userRepository.findByDeviceId(deviceId);
     int deleted = videoRepository.deleteAllByUser(user);
     if (deleted > 0) {
       s3Service.deleteFolder(deviceId);

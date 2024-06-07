@@ -223,8 +223,7 @@ public class ObdLogService {
           "VIN", "SPEED", "RPM",
           "ENGINE_LOAD", "FUEL_LEVEL",
           "BAROMETRIC_PRESSURE", "COOLANT_TEMP",
-          "THROTTLE_POSE", "DISTANCE",
-          "RUN_TIME", "LON", "LAT"};
+          "THROTTLE_POSE", "RUN_TIME", "LON", "LAT"};
 
       // 파일 작성 준비
       Row dataRow = null;
@@ -266,10 +265,9 @@ public class ObdLogService {
         dataRow.createCell(7).setCellValue(dto.getBarometricPressure());
         dataRow.createCell(8).setCellValue(dto.getCoolantTemp());
         dataRow.createCell(9).setCellValue(dto.getThrottlePos());
-        dataRow.createCell(10).setCellValue(dto.getDistance());
-        dataRow.createCell(11).setCellValue(dto.getRunTime());
-        dataRow.createCell(12).setCellValue(dto.getLon());
-        dataRow.createCell(13).setCellValue(dto.getLat());
+        dataRow.createCell(10).setCellValue(dto.getRunTime());
+        dataRow.createCell(11).setCellValue(dto.getLon());
+        dataRow.createCell(12).setCellValue(dto.getLat());
         i++;
       }
 
