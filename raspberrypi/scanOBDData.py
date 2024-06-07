@@ -51,5 +51,9 @@ while True:
 
     response = requests.post(url, json=json_dict)
 
+    with open("./obddata.json", 'a') as f:
+        json.dump(json_dict, f, ensure_ascii=False, indent=4)
+        f.write('\n')
+
     print(response.content.decode("utf-8"))
 
