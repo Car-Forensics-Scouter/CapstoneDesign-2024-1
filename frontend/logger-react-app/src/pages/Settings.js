@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 
-function Settings() {
+function Settings(props) {
     const [password, setPassword] = useState({password: ""});
-    const [car, setCar] = useState("아반떼 CN7");
-    const [serialNumber, setSerialNumber] = useState("F123124");
 
     function call(api, method, request) {
         let options = {
@@ -37,6 +35,8 @@ function Settings() {
 
         const url = "/user/password";
 
+        if(password === "") return alert("패스워드 변경에 실패하셨습니다.");
+
         const body = {
             id: "1234",
             password: password
@@ -66,7 +66,7 @@ function Settings() {
         const url = "/user/carName";
 
         try {
-            const response = await call(`${url}`, "POST", car);
+            const response = await call(`${url}`, "POST", props.carName);
             if(response) {
                 const data = await response.data;
 
@@ -89,7 +89,7 @@ function Settings() {
         const url = "/user/deviceId";
 
         try {
-            const response = await call(`${url}`, "POST", serialNumber);
+            const response = await call(`${url}`, "POST", props.serialNumber);
             if(response) {
                 const data = await response.data;
 
@@ -131,7 +131,7 @@ function Settings() {
                             <div className="save" onClick={handleSettingCar}>저장</div>
                         </div>
                         <div className="input">
-                            <select value={car} onChange={(e) => { setCar(e.target.value); }}>
+                            <select value={props.carName} onChange={(e) => { props.setCarName(e.target.value); }}>
                                 <option value="그랜저 IG">그랜저 IG</option>
                                 <option value="아반떼 CN7">아반떼 CN7</option>
                                 <option value="쏘렌토 MQ4">쏘렌토 MQ4</option>
@@ -145,7 +145,7 @@ function Settings() {
                             <div className="save" onClick={handleSettingSerial}>저장</div>
                         </div>
                         <div className="input">
-                            <input type="text" placeholder={serialNumber} id="serialNumber" onChange={(e) => { setSerialNumber(e.target.value); }}/>
+                            <input type="text" placeholder={props.deviceId} id="serialNumber" onChange={(e) => { props.setDeviceId(e.target.value); }}/>
                        </div>
                     </div>
                 </div>

@@ -5,7 +5,7 @@ import car1 from "../assets/그랜저 IG.png";
 import car2 from "../assets/아반떼 CN7.png";
 import car3 from "../assets/쏘렌토 MQ4.png";
 import car4 from "../assets/K5 DL3.png";
-import sample_image from "../assets/sample_image.png";
+import sample_image from "../assets/car1.jpeg";
 
 function Reports(props) {
     const [photo, setPhoto] = useState(sample_image);
@@ -54,7 +54,7 @@ function Reports(props) {
                 console.error("Response was undefined.");
             }
         } catch (e) {
-            console.error("Download error:", e)
+            console.error("Download error:", e);
         }
     };
 

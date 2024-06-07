@@ -43,6 +43,7 @@ const Login = (props) => {
           // localStorage.setItem("deviceId", data.deviceId); 
           props.setCarName(data.carName);
           props.setDeviceId(data.deviceId);
+          props.setId(data.id);
         }
       
         console.log("로그인 완료: ", data);
