@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import Video from "../components/Video";
 import img from "../assets/sample_image.png";
 
-function Library(props) {
+function Library() {
+    const deviceId = localStorage.getItem("deviceId");
     const [videos, setVideos] = useState(
         [
             {
@@ -45,7 +46,7 @@ function Library(props) {
     async function video_view() {
         const url = "/video/find";
         try {
-            const response = await call(`${url}?deviceId=${props.deviceId}`, "GET", null);
+            const response = await call(`${url}?deviceId=${deviceId}`, "GET", null);
             if(response) {
                 const data = await response.json();
                 setVideos(data);
@@ -73,7 +74,7 @@ function Library(props) {
                 </div>
                 <hr color="#E5E5E5"/>
                 <div className="body">
-                    {videos.map((video, index) => (<Video img={img} number={index + 1} from={video.createdDate} to={video.endDate} title={video.title} deviceId={props.deviceId}/>))}
+                    {videos.map((video, index) => (<Video img={img} number={index + 1} from={video.createdDate} to={video.endDate} title={video.title} deviceId={deviceId}/>))}
                 </div>
             </div>
         </div>

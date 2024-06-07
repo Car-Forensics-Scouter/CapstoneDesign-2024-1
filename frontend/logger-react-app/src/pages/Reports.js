@@ -9,6 +9,8 @@ import sample_image from "../assets/car1.jpeg";
 
 function Reports(props) {
     const [photo, setPhoto] = useState(sample_image);
+    const deviceId = localStorage.getItem("deviceId");
+    const carName = localStorage.getItem("carName");
 
     function call(api, method, request) {
         let options = {
@@ -41,7 +43,7 @@ function Reports(props) {
         console.log("눌림");
         const url = "/api/obdlog/download";
         try {
-            const response = await call(`${url}?deviceId=${props.deviceId}&startDate=${props.startTime}&endDate=${props.finishTime}`, "GET", null);
+            const response = await call(`${url}?deviceId=${deviceId}&startDate=${props.startTime}&endDate=${props.finishTime}`, "GET", null);
             if(response) {
                 const blob = await response.blob();
                 const blobUrl = window.URL.createObjectURL(blob);
@@ -103,7 +105,7 @@ function Reports(props) {
     async function view() {
         const url = "/api/obdlog/summary-avg";
         try {
-            const response = await call(`${url}?deviceId=${props.deviceId}&startDate=${props.startTime}&endDate=${props.finishTime}`, "GET", null);
+            const response = await call(`${url}?deviceId=${deviceId}&startDate=${props.startTime}&endDate=${props.finishTime}`, "GET", null);
             if(response) {
                 const data = await response.json();
                 setOBDData(data);
@@ -120,7 +122,7 @@ function Reports(props) {
     async function gps_view() {
         const url = "/api/obdlog/summary-list";
         try {
-            const response = await call(`${url}?deviceId=${props.deviceId}&startDate=${props.startTime}&endDate=${props.finishTime}`, "GET", null);
+            const response = await call(`${url}?deviceId=${deviceId}&startDate=${props.startTime}&endDate=${props.finishTime}`, "GET", null);
             if(response) {
                 const data = await response.json();
                 setGPS(data);
@@ -137,10 +139,10 @@ function Reports(props) {
     };
 
     useEffect(() => {
-        if(props.carName === "그랜저 IG") { setPhoto(car1); }
-        else if(props.carName === "아반떼 CN7") { setPhoto(car2); }
-        else if(props.carName === "쏘렌토 MQ4") { setPhoto(car3); }
-        else if(props.carName === "K5 DL3") { setPhoto(car4); }
+        if(carName === "그랜저 IG") { setPhoto(car1); }
+        else if(carName === "아반떼 CN7") { setPhoto(car2); }
+        else if(carName === "쏘렌토 MQ4") { setPhoto(car3); }
+        else if(carName === "K5 DL3") { setPhoto(car4); }
         view();
         gps_view();
     }, []);
@@ -207,7 +209,7 @@ function Reports(props) {
                         </div>
                         <div className="car-info">
                             <ul>
-                                <li>차량 이름: {props.carName}</li>
+                                <li>차량 이름: {carName}</li>
                                 <li>VIN: {OBDData.vin}</li>
                                 <hr/>
                                 <li>이동 거리: {OBDData.distance} km</li>

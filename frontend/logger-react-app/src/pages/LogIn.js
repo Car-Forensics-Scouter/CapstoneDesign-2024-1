@@ -40,10 +40,9 @@ const Login = (props) => {
         // 로그인에 성공했으면 accessToken을 발급받음.
         if (data.token) {
           localStorage.setItem("login-token", data.token);
-          // localStorage.setItem("deviceId", data.deviceId); 
-          props.setCarName(data.carName);
-          props.setDeviceId(data.deviceId);
-          props.setId(data.id);
+          localStorage.setItem("deviceId", data.deviceId); 
+          localStorage.setItem("carName", data.carName);
+          localStorage.setItem("id", data.id);
         }
       
         console.log("로그인 완료: ", data);

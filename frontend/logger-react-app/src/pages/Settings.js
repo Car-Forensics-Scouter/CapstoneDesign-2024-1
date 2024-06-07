@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 
-function Settings(props) {
-    const [password, setPassword] = useState({password: ""});
+function Settings() {
+    const [password, setPassword] = useState("");
+    const deviceId = localStorage.getItem("deviceId");
+    const id = localStorage.getItem("id");
+    const carName = localStorage.getItem("carName");
+    const [deviceId_temp, setDeviceId_temp] = useState("");
+    
 
     function call(api, method, request) {
         let options = {
@@ -36,9 +41,10 @@ function Settings(props) {
         const url = "/user/password";
 
         if(password === "") return alert("패스워드 변경에 실패하셨습니다.");
+        if(password === null) return alert("패스워드 변경에 실패하셨습니다.");
 
         const body = {
-            id: "1234",
+            id: id,
             password: password
         }
 
@@ -46,12 +52,7 @@ function Settings(props) {
             const response = await call(`${url}`, "PATCH", body);
             if(response) {
                 const data = await response.data;
-
-                if(data.success) {
-                    alert("패스워드가 성공적으로 변경되었습니다.");
-                } else {
-                    alert("패스워드 변경에 실패하셨습니다.")
-                }
+                alert("패스워드가 성공적으로 변경되었습니다.");
             } else {
                 console.error("Response was undefined");
             }
@@ -66,15 +67,14 @@ function Settings(props) {
         const url = "/user/carName";
 
         try {
-            const response = await call(`${url}`, "POST", props.carName);
+            const body = {
+                id: id,
+                carName: carName
+            }
+            const response = await call(`${url}`, "PATCH", body);
             if(response) {
                 const data = await response.data;
-
-                if(data.success) {
-                    alert("차종이 성공적으로 변경되었습니다.");
-                } else {
-                    alert("차종 변경에 실패하셨습니다.")
-                }
+                alert("차종이 성공적으로 변경되었습니다.");
             } else {
                 console.error("Response was undefined");
             }
@@ -88,16 +88,20 @@ function Settings(props) {
 
         const url = "/user/deviceId";
 
+        if(deviceId_temp === "") return alert("일련번호 변경에 실패하셨습니다.");
+        if(deviceId_temp === null) return alert("일련번호 변경에 실패하셨습니다.");
+
+        const body = {
+            id: id,
+            deviceId: deviceId
+        }
+
         try {
-            const response = await call(`${url}`, "POST", props.serialNumber);
+            const response = await call(`${url}`, "PATCH", body);
             if(response) {
                 const data = await response.data;
-
-                if(data.success) {
-                    alert("일련번호가 성공적으로 변경되었습니다.");
-                } else {
-                    alert("일련번호 변경에 실패하셨습니다.")
-                }
+                alert("일련번호가 성공적으로 변경되었습니다.");
+                localStorage.setItem("deviceId", deviceId_temp);
             } else {
                 console.error("Response was undefined");
             }
@@ -131,7 +135,7 @@ function Settings(props) {
                             <div className="save" onClick={handleSettingCar}>저장</div>
                         </div>
                         <div className="input">
-                            <select value={props.carName} onChange={(e) => { props.setCarName(e.target.value); }}>
+                            <select value={carName} onChange={(e) => { localStorage.setItem("carName"); }}>
                                 <option value="그랜저 IG">그랜저 IG</option>
                                 <option value="아반떼 CN7">아반떼 CN7</option>
                                 <option value="쏘렌토 MQ4">쏘렌토 MQ4</option>
@@ -145,7 +149,7 @@ function Settings(props) {
                             <div className="save" onClick={handleSettingSerial}>저장</div>
                         </div>
                         <div className="input">
-                            <input type="text" placeholder={props.deviceId} id="serialNumber" onChange={(e) => { props.setDeviceId(e.target.value); }}/>
+                            <input type="text" placeholder={deviceId} id="serialNumber" onChange={(e) => { setDeviceId_temp(e.target.value); }}/>
                        </div>
                     </div>
                 </div>
