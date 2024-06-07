@@ -29,7 +29,7 @@ public class Video {
 
   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
   @JoinColumn(name = "DEVICE_ID", referencedColumnName = "DEVICE_ID")
-  private User user;
+  private UserEntity user;
 
   @Column(name = "FILE_PATH", length = 512, nullable = false)
   private String filePath;                      // 동영상 파일 경로
@@ -40,9 +40,6 @@ public class Video {
   @Id
   @Column(name = "TITLE", length = 256, nullable = false)
   private String title;                         // 동영상 이름
-
-  @Column(name = "DURATION", nullable = false)
-  private long duration;                         // 동영상 길이
 
   @Column(name = "CREATED_DATE", nullable = false)
   private LocalDateTime createdDate;          // 생성 날짜
