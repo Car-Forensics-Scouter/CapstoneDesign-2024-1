@@ -68,7 +68,8 @@ function Reports(props) {
             "barometricPressure": 12,
             "coolantTemp": 12,
             "distance": 23,
-            "vin": "asdf1234"
+            "vin": "asdf1234",
+            "runtime": 123
         }
     );
 
@@ -124,8 +125,8 @@ function Reports(props) {
                 const data = await response.json();
                 setGPS(data);
                 console.log(data);
-                setLat(GPS[GPS.length/2].lat);
-                setLon(GPS[GPS.length/2].lon);
+                setLat(GPS[Math.trunc(GPS.length/2)].lat);
+                setLon(GPS[Math.trunc(GPS.length/2)].lon);
             }
             else {
                 console.error("Response was undefined");
