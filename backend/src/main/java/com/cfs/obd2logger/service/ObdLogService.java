@@ -32,7 +32,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ObdLogService {
 
-  private final ObdLogRepository obdLogRepository;
+  private final ObdLogRepository obdLogDataRepository;
   private final UserRepository userRepository;
 
   /**
@@ -45,7 +45,7 @@ public class ObdLogService {
     }
 
     ObdLog newObdLog = obdLogDTO.toEntity();
-    obdLogRepository.save(newObdLog);
+    obdLogDataRepository.save(newObdLog);
     return true;
   }
 
@@ -58,7 +58,7 @@ public class ObdLogService {
     }
 
     List<ObdLog> obdLogList = ListDTOToListEntity(obdLogDTOList);
-    obdLogRepository.saveAll(obdLogList);
+    obdLogDataRepository.saveAll(obdLogList);
     return true;
   }
 
@@ -71,7 +71,7 @@ public class ObdLogService {
     LocalDateTime endDate = dateRange.getEndDate();
 
     try {
-      List<ObdLog> obdLogList = obdLogRepository.findByDeviceIdAndTimeStamp(deviceId, startDate,
+      List<ObdLog> obdLogList = obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId, startDate,
           endDate);
       return ListEntityToListDTO(obdLogList);
     } catch (Exception e) {
@@ -85,7 +85,7 @@ public class ObdLogService {
   public List<ObdLogDTO> findObdLogOnDate(String deviceId, LocalDateTime startDate,
       LocalDateTime endDate) {
     try {
-      List<ObdLog> obdLogList = obdLogRepository.findByDeviceIdAndTimeStamp(deviceId, startDate,
+      List<ObdLog> obdLogList = obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId, startDate,
           endDate);
       return ListEntityToListDTO(obdLogList);
     } catch (Exception e) {
@@ -101,7 +101,7 @@ public class ObdLogService {
     if (!isValidDeviceId(deviceId)) {
       return false;
     }
-    obdLogRepository.deleteAllByDeviceId(deviceId);
+    obdLogDataRepository.deleteAllByDeviceId(deviceId);
     return true;
   }
 
@@ -110,7 +110,7 @@ public class ObdLogService {
    */
   public List<ObdLogGpsDTO> getSummaryList(String deviceId, LocalDateTime startDate,
       LocalDateTime endDate) {
-    List<ObdLogGpsDTO> summaryListDTO = obdLogRepository.findObdLogGPSByDeviceIdAndTimeStamp(
+    List<ObdLogGpsDTO> summaryListDTO = obdLogDataRepository.findObdLogGPSByDeviceIdAndTimeStamp(
         deviceId, startDate, endDate);
     return summaryListDTO;
   }
@@ -122,6 +122,7 @@ public class ObdLogService {
       LocalDateTime endDate) {
     List<ObdLogDTO> obdLogDTOList = findObdLogOnDate(deviceId, startDate, endDate);
     int len = obdLogDTOList.size();
+    double runtime = obdLogDTOList.get(0).getRunTime();
     double speed = calAvg(obdLogDTOList, ObdLogDTO::getSpeed, len);
     double rpm = calAvg(obdLogDTOList, ObdLogDTO::getRpm, len);
     double engineLoad = calAvg(obdLogDTOList, ObdLogDTO::getEngineLoad, len);
@@ -132,6 +133,7 @@ public class ObdLogService {
     double distance = calDistance(deviceId, startDate, endDate);
     String vin = obdLogDTOList.get(0).getVin();
     return ObdLogSummaryAvgDTO.builder()
+        .runtime(runtime)
         .speed(speed)
         .rpm(rpm)
         .engineLoad(engineLoad)
@@ -162,7 +164,7 @@ public class ObdLogService {
    * 특정 시간의 총 거리 계산 후 반환 (Killometer)
    */
   public double calDistance(String deviceId, LocalDateTime startDate, LocalDateTime endDate) {
-    List<ObdLogGpsDTO> GPSList = obdLogRepository.findObdLogGPSByDeviceIdAndTimeStamp(deviceId,
+    List<ObdLogGpsDTO> GPSList = obdLogDataRepository.findObdLogGPSByDeviceIdAndTimeStamp(deviceId,
         startDate, endDate);
     // 로그가 0~1개일 경우, 0 반환
     int size = GPSList.size();
@@ -202,11 +204,11 @@ public class ObdLogService {
   /**
    * 특정 기간의 로그 DB를 엑셀 파일화
    */
-  public ByteArrayResource createLogToExcel(String deviceId, String name, LocalDateTime startDate,
+  public ByteArrayResource createLogToExcel(String deviceId, LocalDateTime startDate,
       LocalDateTime endDate) {
     try {
       // 사용자의 OBD 로그 불러오기
-      List<ObdLog> obdLogList = obdLogRepository.findByDeviceIdAndTimeStamp(deviceId, startDate,
+      List<ObdLog> obdLogList = obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId, startDate,
           endDate);
       List<ObdLogDTO> obdLogDTOList = ListEntityToListDTO(obdLogList);
 
@@ -214,7 +216,7 @@ public class ObdLogService {
       Workbook workbook = new XSSFWorkbook();
 
       // 시트 생성
-      String sheetFile = name + "_CFS_LOG";
+      String sheetFile = "CFS_LOG";
       Sheet sheet = workbook.createSheet(sheetFile);
       String[] headerStrings = {
           "DEVICE_ID", "TIME_STAMP",

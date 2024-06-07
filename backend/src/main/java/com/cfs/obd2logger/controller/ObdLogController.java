@@ -109,13 +109,12 @@ public class ObdLogController {
    */
   @GetMapping("/download")
   public ResponseEntity<?> downloadObdLog(@RequestParam String deviceId,
-      @RequestParam String name,
       @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime startDate,
       @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime endDate) {
     try {
-      ByteArrayResource excelFile = obdLogService.createLogToExcel(deviceId, name, startDate,
+      ByteArrayResource excelFile = obdLogService.createLogToExcel(deviceId, startDate,
           endDate);
-      String filename = URLEncoder.encode(name + "_CFS_LOG.xlsx", StandardCharsets.UTF_8);
+      String filename = URLEncoder.encode("CFS_LOG.xlsx", StandardCharsets.UTF_8);
 
       HttpHeaders headers = new HttpHeaders();
       headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename);

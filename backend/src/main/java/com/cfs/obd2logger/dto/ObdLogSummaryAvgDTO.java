@@ -17,6 +17,7 @@ public class ObdLogSummaryAvgDTO {
   private double barometricPressure; // 공기압
   private double coolantTemp;       // 냉각수 온도
   private double distance;          // 거리
+  private double runtime;
   private String vin;               // 차량 식별 번호
 }
 

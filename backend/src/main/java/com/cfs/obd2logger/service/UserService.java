@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
 
-    @Value("${random_characters}")
+    @Value("${RANDOM_CHARACTERS}")
     private String characters;
 
     private final UserRepository userRepository;
