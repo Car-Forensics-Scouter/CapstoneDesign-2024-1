@@ -6,7 +6,7 @@ import com.cfs.obd2logger.dto.VideoDTO;
 import com.cfs.obd2logger.entity.DateRange;
 import com.cfs.obd2logger.entity.ObdLog;
 import com.cfs.obd2logger.entity.ObdLogTablePK;
-import com.cfs.obd2logger.entity.UserEntity;
+import com.cfs.obd2logger.entity.User;
 import com.cfs.obd2logger.service.ObdLogService;
 import com.cfs.obd2logger.service.UserService;
 import com.cfs.obd2logger.service.VideoService;
@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @Transactional
-class ObdLogDataRepositoryTest {
+class ObdLogRepositoryTest {
 
   @Autowired
   UserService userService;
@@ -32,7 +32,7 @@ class ObdLogDataRepositoryTest {
   ObdLogService obdLogService;
 
   @Autowired
-  ObdLogDataRepository obdLogDataRepository;
+  ObdLogRepository obdLogRepository;
 
   @Autowired
   VideoService videoService;
@@ -46,7 +46,7 @@ class ObdLogDataRepositoryTest {
 
   @Test
   public void testVideoFind() {
-    UserEntity userEntity = UserEntity.builder()
+    User user = User.builder()
         .deviceId(deviceId1)
         .id(deviceId1)
         .password(deviceId1)
@@ -54,7 +54,7 @@ class ObdLogDataRepositoryTest {
         .email("adsf@gmail.com")
         .name("VICTOR")
         .status("activated").build();
-    userService.signup(userEntity);
+    userService.signup(user);
     System.out.println("SIGNED USER: " + userRepository.findByDeviceId(deviceId1));
     videoService.saveVideo(deviceId1, "thumbnail", "TESTING_VIDEO", 25,
         LocalDateTime.of(2024, 05, 05, 10, 10, 10));
@@ -105,7 +105,7 @@ class ObdLogDataRepositoryTest {
   public void testRemoveAll() {
     testDataGenerator();
 
-    int deleted = obdLogDataRepository.deleteAllByDeviceId(deviceId2);
+    int deleted = obdLogRepository.deleteAllByDeviceId(deviceId2);
     assertThat(deleted).isEqualTo(3);       // 3개 삭제된 게 아닐 시 오류
   }
 
@@ -229,11 +229,11 @@ class ObdLogDataRepositoryTest {
         .lon(127.0)
         .lat(37.0).build();
 
-    obdLogDataRepository.save(obdLog1);
-    obdLogDataRepository.save(obdLog2);
-    obdLogDataRepository.save(obdLog3);
-    obdLogDataRepository.save(obdLog4);
-    obdLogDataRepository.save(obdLog5);
+    obdLogRepository.save(obdLog1);
+    obdLogRepository.save(obdLog2);
+    obdLogRepository.save(obdLog3);
+    obdLogRepository.save(obdLog4);
+    obdLogRepository.save(obdLog5);
 
     LocalDateTime start240401 = LocalDateTime.of(2024, 04, 01, 00, 00, 00);
     LocalDateTime end240401 = LocalDateTime.of(2024, 04, 01, 23, 59, 59);

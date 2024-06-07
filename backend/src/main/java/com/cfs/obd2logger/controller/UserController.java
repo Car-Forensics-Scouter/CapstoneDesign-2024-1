@@ -1,7 +1,7 @@
 package com.cfs.obd2logger.controller;
 
 import com.cfs.obd2logger.dto.UserDTO;
-import com.cfs.obd2logger.entity.UserEntity;
+import com.cfs.obd2logger.entity.User;
 import com.cfs.obd2logger.security.TokenProvider;
 import com.cfs.obd2logger.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ public class UserController {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody UserDTO userDTO) {
         try {
-            UserEntity user = UserEntity.builder()
+            User user = User.builder()
                 .name(userDTO.getName())
                 .email(userDTO.getEmail())
                 .carName(userDTO.getCarName())
@@ -35,7 +35,7 @@ public class UserController {
                 .status("activated") // 회원가입 시 활성 상태로 설정
                 .build();
 
-            UserEntity responseUser = userService.signup(user);
+            User responseUser = userService.signup(user);
 
             return ResponseEntity.ok().body("회원가입 성공");
         } catch (Exception e) {
@@ -57,7 +57,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody UserDTO userDTO) {
         try {
-            UserEntity user = userService.login(userDTO.getId(), userDTO.getPassword());
+            User user = userService.login(userDTO.getId(), userDTO.getPassword());
 
             if (user == null) {
                 throw new RuntimeException("로그인 실패");
@@ -114,7 +114,7 @@ public class UserController {
         try {
             String newPassword = passwordEncoder.encode(userDTO.getPassword()); // 비밀번호 암호화
 
-            UserEntity updateUser = userService.editPassword(userDTO, newPassword);
+            User updateUser = userService.editPassword(userDTO, newPassword);
             if (updateUser == null) {
                 return ResponseEntity.ok().body("존재하지 않는 유저입니다.");
             }
@@ -134,7 +134,7 @@ public class UserController {
     @PatchMapping("/carName")
     public ResponseEntity<?> updateCarName(@RequestBody UserDTO userDTO) {
         try {
-            UserEntity updateUser = userService.editCarName(userDTO);
+            User updateUser = userService.editCarName(userDTO);
             if (updateUser == null) {
                 return ResponseEntity.ok().body("존재하지 않는 유저입니다.");
             }
@@ -154,7 +154,7 @@ public class UserController {
     @PatchMapping("/deviceId")
     public ResponseEntity<?> updateDeviceId(@RequestBody UserDTO userDTO) {
         try {
-            UserEntity updateUser = userService.editDeviceId(userDTO);
+            User updateUser = userService.editDeviceId(userDTO);
             if (updateUser == null) {
                 return ResponseEntity.ok().body("존재하지 않는 유저입니다.");
             }

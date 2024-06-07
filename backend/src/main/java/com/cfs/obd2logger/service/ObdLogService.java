@@ -5,8 +5,8 @@ import com.cfs.obd2logger.dto.ObdLogGpsDTO;
 import com.cfs.obd2logger.dto.ObdLogSummaryAvgDTO;
 import com.cfs.obd2logger.entity.DateRange;
 import com.cfs.obd2logger.entity.ObdLog;
-import com.cfs.obd2logger.entity.UserEntity;
-import com.cfs.obd2logger.repository.ObdLogDataRepository;
+import com.cfs.obd2logger.entity.User;
+import com.cfs.obd2logger.repository.ObdLogRepository;
 import com.cfs.obd2logger.repository.UserRepository;
 import java.io.ByteArrayOutputStream;
 import java.time.LocalDateTime;
@@ -32,7 +32,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ObdLogService {
 
-  private final ObdLogDataRepository obdLogDataRepository;
+  private final ObdLogRepository obdLogRepository;
   private final UserRepository userRepository;
 
   /**
@@ -45,7 +45,7 @@ public class ObdLogService {
     }
 
     ObdLog newObdLog = obdLogDTO.toEntity();
-    obdLogDataRepository.save(newObdLog);
+    obdLogRepository.save(newObdLog);
     return true;
   }
 
@@ -58,7 +58,7 @@ public class ObdLogService {
     }
 
     List<ObdLog> obdLogList = ListDTOToListEntity(obdLogDTOList);
-    obdLogDataRepository.saveAll(obdLogList);
+    obdLogRepository.saveAll(obdLogList);
     return true;
   }
 
@@ -71,7 +71,7 @@ public class ObdLogService {
     LocalDateTime endDate = dateRange.getEndDate();
 
     try {
-      List<ObdLog> obdLogList = obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId, startDate,
+      List<ObdLog> obdLogList = obdLogRepository.findByDeviceIdAndTimeStamp(deviceId, startDate,
           endDate);
       return ListEntityToListDTO(obdLogList);
     } catch (Exception e) {
@@ -85,7 +85,7 @@ public class ObdLogService {
   public List<ObdLogDTO> findObdLogOnDate(String deviceId, LocalDateTime startDate,
       LocalDateTime endDate) {
     try {
-      List<ObdLog> obdLogList = obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId, startDate,
+      List<ObdLog> obdLogList = obdLogRepository.findByDeviceIdAndTimeStamp(deviceId, startDate,
           endDate);
       return ListEntityToListDTO(obdLogList);
     } catch (Exception e) {
@@ -101,7 +101,7 @@ public class ObdLogService {
     if (!isValidDeviceId(deviceId)) {
       return false;
     }
-    obdLogDataRepository.deleteAllByDeviceId(deviceId);
+    obdLogRepository.deleteAllByDeviceId(deviceId);
     return true;
   }
 
@@ -110,7 +110,7 @@ public class ObdLogService {
    */
   public List<ObdLogGpsDTO> getSummaryList(String deviceId, LocalDateTime startDate,
       LocalDateTime endDate) {
-    List<ObdLogGpsDTO> summaryListDTO = obdLogDataRepository.findObdLogGPSByDeviceIdAndTimeStamp(
+    List<ObdLogGpsDTO> summaryListDTO = obdLogRepository.findObdLogGPSByDeviceIdAndTimeStamp(
         deviceId, startDate, endDate);
     return summaryListDTO;
   }
@@ -162,7 +162,7 @@ public class ObdLogService {
    * 특정 시간의 총 거리 계산 후 반환 (Killometer)
    */
   public double calDistance(String deviceId, LocalDateTime startDate, LocalDateTime endDate) {
-    List<ObdLogGpsDTO> GPSList = obdLogDataRepository.findObdLogGPSByDeviceIdAndTimeStamp(deviceId,
+    List<ObdLogGpsDTO> GPSList = obdLogRepository.findObdLogGPSByDeviceIdAndTimeStamp(deviceId,
         startDate, endDate);
     // 로그가 0~1개일 경우, 0 반환
     int size = GPSList.size();
@@ -206,7 +206,7 @@ public class ObdLogService {
       LocalDateTime endDate) {
     try {
       // 사용자의 OBD 로그 불러오기
-      List<ObdLog> obdLogList = obdLogDataRepository.findByDeviceIdAndTimeStamp(deviceId, startDate,
+      List<ObdLog> obdLogList = obdLogRepository.findByDeviceIdAndTimeStamp(deviceId, startDate,
           endDate);
       List<ObdLogDTO> obdLogDTOList = ListEntityToListDTO(obdLogList);
 
@@ -290,7 +290,7 @@ public class ObdLogService {
    */
   private boolean isValidDeviceId(String deviceId) {
     try {
-      UserEntity user = userRepository.findByDeviceId(deviceId);
+      User user = userRepository.findByDeviceId(deviceId);
       return true;
     } catch (Exception e) {
       return false;
@@ -304,7 +304,7 @@ public class ObdLogService {
     try {
       int listSize = obdLogDTOList.size();
       String deviceId;
-      UserEntity user = null;
+      User user = null;
       for (ObdLogDTO obdDto : obdLogDTOList) {
         user = null;
         deviceId = obdDto.getDeviceId();

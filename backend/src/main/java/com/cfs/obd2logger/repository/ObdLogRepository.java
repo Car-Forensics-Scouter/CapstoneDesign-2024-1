@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public interface ObdLogDataRepository extends JpaRepository<ObdLog, ObdLogTablePK> {
+public interface ObdLogRepository extends JpaRepository<ObdLog, ObdLogTablePK> {
 
   /**
    * deviceId가 일치하는 모든 obdLog를 조회하는 쿼리 메소드

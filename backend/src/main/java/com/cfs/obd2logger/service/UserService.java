@@ -1,7 +1,7 @@
 package com.cfs.obd2logger.service;
 
 import com.cfs.obd2logger.dto.UserDTO;
-import com.cfs.obd2logger.entity.UserEntity;
+import com.cfs.obd2logger.entity.User;
 import com.cfs.obd2logger.repository.UserRepository;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -22,13 +22,13 @@ public class UserService {
 
 
     // 회원 가입
-    public UserEntity signup(UserEntity userEntity) {
-        if (userEntity == null) {
+    public User signup(User user) {
+        if (user == null) {
             throw new RuntimeException("정보를 모두 입력하세요");
         }
         // 회원 상태 변경
-        userEntity.setStatus("activated");
-        return userRepository.save(userEntity);
+        user.setStatus("activated");
+        return userRepository.save(user);
     }
 
     // 아이디 중복검사
@@ -37,11 +37,11 @@ public class UserService {
     }
 
     // 로그인
-    public UserEntity login(String id, String password) {
-        Optional<UserEntity> responseUser = userRepository.findById(id);
+    public User login(String id, String password) {
+        Optional<User> responseUser = userRepository.findById(id);
 
         if (responseUser.isPresent()) {
-            UserEntity user = responseUser.get();
+            User user = responseUser.get();
             System.out.println("객체가 존재합니다");
             if (passwordEncoder.matches(password, user.getPassword())) {
                 return user;
@@ -57,13 +57,13 @@ public class UserService {
 
     // 아이디 찾기
     public String getUserId(String name, String email) {
-        UserEntity user = userRepository.findByNameAndEmail(name, email);
+        User user = userRepository.findByNameAndEmail(name, email);
         return (user != null) ? user.getId() : null;
     }
 
     // 비밀번호 재발급
     public String getUserPassword(String id, String name, String email) {
-        UserEntity user = userRepository.findByIdAndNameAndEmail(id, name, email);
+        User user = userRepository.findByIdAndNameAndEmail(id, name, email);
         if (user != null) {
             String newTempPassword = generateRandomPassword();
             user.setPassword(passwordEncoder.encode(newTempPassword));
@@ -91,30 +91,30 @@ public class UserService {
     }
 
     // 회원정보 수정
-    public UserEntity editPassword(UserDTO userDTO, String newPassword) {
-        Optional<UserEntity> userOptional = userRepository.findById(userDTO.getId());
+    public User editPassword(UserDTO userDTO, String newPassword) {
+        Optional<User> userOptional = userRepository.findById(userDTO.getId());
         if (userOptional.isPresent()) {
-            UserEntity user = userOptional.get();
+            User user = userOptional.get();
             user.setPassword(newPassword); // 암호화된 비밀번호를 설정
             return userRepository.save(user);
         }
         return null;
     }
 
-    public UserEntity editCarName(UserDTO userDTO) {
-        Optional<UserEntity> userOptional = userRepository.findById(userDTO.getId());
+    public User editCarName(UserDTO userDTO) {
+        Optional<User> userOptional = userRepository.findById(userDTO.getId());
         if (userOptional.isPresent()) {
-            UserEntity user = userOptional.get();
+            User user = userOptional.get();
             user.setCarName(userDTO.getCarName());
             return userRepository.save(user);
         }
         return null;
     }
 
-    public UserEntity editDeviceId(UserDTO userDTO) {
-        Optional<UserEntity> userOptional = userRepository.findById(userDTO.getId());
+    public User editDeviceId(UserDTO userDTO) {
+        Optional<User> userOptional = userRepository.findById(userDTO.getId());
         if (userOptional.isPresent()) {
-            UserEntity user = userOptional.get();
+            User user = userOptional.get();
             user.setDeviceId(userDTO.getDeviceId());
             return userRepository.save(user);
         }
