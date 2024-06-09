@@ -48,7 +48,7 @@ public class VideoController {
   public ResponseEntity<?> uploadVideo(@RequestParam("video") MultipartFile video,
       @RequestParam("deviceId") String deviceId,
       @RequestParam("createdDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime createdDate,
-      @RequestParam("createdDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime endDate) {
+      @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime endDate) {
     try {
       // 동영상 업로드
       String videoName = video.getOriginalFilename();
