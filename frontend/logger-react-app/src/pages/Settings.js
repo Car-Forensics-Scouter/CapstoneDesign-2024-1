@@ -4,8 +4,9 @@ function Settings() {
     const [password, setPassword] = useState("");
     const deviceId = localStorage.getItem("deviceId");
     const id = localStorage.getItem("id");
-    const carName = localStorage.getItem("carName");
+    // const carName = localStorage.getItem("carName");
     const [deviceId_temp, setDeviceId_temp] = useState("");
+    const [carName_temp, setCarName_temp] = useState(localStorage.getItem("carName"));
     
 
     function call(api, method, request) {
@@ -69,12 +70,13 @@ function Settings() {
         try {
             const body = {
                 id: id,
-                carName: carName
+                carName: carName_temp
             }
             const response = await call(`${url}`, "PATCH", body);
             if(response) {
                 const data = await response.data;
                 alert("차종이 성공적으로 변경되었습니다.");
+                localStorage.setItem("carName", carName_temp);
             } else {
                 console.error("Response was undefined");
             }
@@ -135,7 +137,7 @@ function Settings() {
                             <div className="save" onClick={handleSettingCar}>저장</div>
                         </div>
                         <div className="input">
-                            <select value={carName} onChange={(e) => { localStorage.setItem("carName"); }}>
+                            <select value={carName_temp} onChange={(e) => { setCarName_temp(e.target.value); }}>
                                 <option value="그랜저 IG">그랜저 IG</option>
                                 <option value="아반떼 CN7">아반떼 CN7</option>
                                 <option value="쏘렌토 MQ4">쏘렌토 MQ4</option>

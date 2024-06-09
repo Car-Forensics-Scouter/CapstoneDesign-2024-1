@@ -30,18 +30,6 @@
     font-size: 24px;
 }
   
-.App .Frame .Graphs .wrap .head .download-button {
-    display: flex;
-    color: #4D4D4D;
-    font-size: small;
-    align-items: center;
-}
-  
-.App .Frame .Graphs .wrap .head .download-button .download {
-    margin-left: 10px;
-    font-weight: bold;
-}
-  
 .App .Frame .Graphs .wrap .time-setting {
     display: grid;
     justify-content: left;
