@@ -1,32 +1,32 @@
-name: code deploy
+# name: code deploy
 
-# Controls when the workflow will run
-on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches:
-      - main
+# # Controls when the workflow will run
+# on:
+#   # Triggers the workflow on push or pull request events but only for the main branch
+#   push:
+#     branches:
+#       - main
 
 
-jobs:
-  SSH:
-    runs-on: ubuntu-latest
+# jobs:
+#   SSH:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v3
-      - name: ssh to ec2
-        uses: appleboy/ssh-action@master
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }} # 내가 변수로 저장한 pem key
-          host: ${{ secrets.HOST }} # 내가 변수로 저장한 ip
-          username: ${{ secrets.USER }} # 내가 변수로 저장한 User
-          script: |
-            cd Server/CapstoneDesign-2024-1
-            git pull # 자동으로 pull해서 주기적 업데이트
-            cd 
-            cd CapstoneDesign-2024-1\frontend\logger-react-app
-      - name: JDK 17 install
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'corretto'
+#     steps:
+#       - uses: actions/checkout@v3
+#       - name: ssh to ec2
+#         uses: appleboy/ssh-action@master
+#         with:
+#           key: ${{ secrets.SSH_PRIVATE_KEY }} # 내가 변수로 저장한 pem key
+#           host: ${{ secrets.HOST }} # 내가 변수로 저장한 ip
+#           username: ${{ secrets.USER }} # 내가 변수로 저장한 User
+#           script: |
+#             cd Server/CapstoneDesign-2024-1
+#             git pull # 자동으로 pull해서 주기적 업데이트
+#             cd 
+#             cd CapstoneDesign-2024-1\frontend\logger-react-app
+#       - name: JDK 17 install
+#         uses: actions/setup-java@v3
+#         with:
+#           java-version: '17'
+#           distribution: 'corretto'
