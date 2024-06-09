@@ -30,7 +30,7 @@ public class VideoController {
   public ResponseEntity<?> uploadUrlVideo(@RequestParam("deviceId") String deviceId,
       @RequestParam("fileName") String fileName, @RequestParam("extension") String extension,
       @RequestParam("createdDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime createdDate,
-      @RequestParam("createdDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime endDate) {
+      @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime endDate) {
     try {
       String uuidFileName = videoService.generateFileName(fileName) + "." + extension;
       String URL = videoService.uploadUrlVideo(deviceId, uuidFileName);
