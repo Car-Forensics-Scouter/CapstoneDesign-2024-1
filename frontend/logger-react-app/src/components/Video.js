@@ -35,10 +35,10 @@ function Video(props) {
         try {
             const response = await call(`${url}?deviceId=${props.deviceId}&videoName=${props.title}`, "GET", null);
             if(response) {
-                const data = await response.data;
-                console.log(data);
+                const data = await response.json();
+                console.log(data.url);
                 const link = document.createElement('a');
-                link.href = data;
+                link.href = data.url;
                 link.click();
             }
             else {
