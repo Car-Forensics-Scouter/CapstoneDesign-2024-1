@@ -62,16 +62,16 @@ function Reports(props) {
 
     const [OBDData, setOBDData] = useState(
         {
-            "speed": 70,
-            "rpm": 123,
-            "engineLoad": 12,
-            "fuelLevel": 12,
-            "throttlePos": 12,
-            "barometricPressure": 12,
-            "coolantTemp": 12,
-            "distance": 23,
-            "vin": "asdf1234",
-            "runtime": 123
+            "speed": 0,
+            "rpm": 0,
+            "engineLoad": 0,
+            "fuelLevel": 0,
+            "throttlePos": 0,
+            "barometricPressure": 0,
+            "coolantTemp": 0,
+            "distance": 0,
+            "vin": "none",
+            "runtime": 0
         }
     );
 
@@ -113,6 +113,20 @@ function Reports(props) {
             }
             else {
                 console.error("Response was undefined");
+                setOBDData(
+                    {
+                        "speed": 0,
+                        "rpm": 0,
+                        "engineLoad": 0,
+                        "fuelLevel": 0,
+                        "throttlePos": 0,
+                        "barometricPressure": 0,
+                        "coolantTemp": 0,
+                        "distance": 0,
+                        "vin": "none",
+                        "runtime": 0
+                    }
+                )
             }
         } catch(error) {
             console.error("Error fetching data:", error);
