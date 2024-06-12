@@ -63,7 +63,7 @@ const SignUp = () => {
           successAlert("Success!", "사용 가능한 아이디입니다.");
           setIsDuplication(false);
         } else {
-          errorAlert("Duplication Error!", "중복된 아이디입니다.");
+          errorAlert("Duplication Error! 중복된 아이디입니다.");
           setIsDuplication(true);
         }
       }
@@ -78,7 +78,8 @@ const SignUp = () => {
     }
   };
 
-  const handleSignUp = async (e) => {
+   // 회원가입 처리 로직
+   const handleSignUp = async (e) => {
     e.preventDefault();
 
     if (!isPasswordValid(password)) {
@@ -105,23 +106,60 @@ const SignUp = () => {
       deviceId: device_id
     };
 
-    try {
-      const response = await axios.post('http://localhost:8080/user/signup', payload, {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true,
-      });
+    if (password === "") { // 1차 체크 : password
+      errorAlert("비밀번호를 입력해주세요.")
+    } else {
+      console.log("비밀번호 입력 완료");
+      if (password === passwordConfirm) { // 2차 체크 : password confirm
+        console.log("비밀번호 검증 완료");
+        if (isDuplication === false) {     // 3차 체크 : 중복 확인
+          // 중복 체크까지 완료하면 request 보냄.
+          
+          // 필수 입력 데이터 체크
+          if (!name || !email || !id || !password || !passwordConfirm || !car || !device_id) {
+            errorAlert("모든 필수 항목을 입력해주세요.");
+            return;
+          }
+          
+          try {
+          const response = await axios.post('http://localhost:8080/user/signup',
+            payload, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+            });
+          
+          if (response.status === 200) {
+            const data = response.data;
+  
+            console.log("중복 확인 완료");
+            console.log("회원가입 성공:", data);
+
+            successAlert("환영합니다! 회원가입이 되셨습니다. 로그인 화면으로 이동해 로그인 해주시기 바랍니다.")
+            navigate("/");
+          }
+        }
       
-      if (response.status === 200) {
-        successAlert("환영합니다! 회원가입이 되셨습니다. 로그인 화면으로 이동해 로그인 해주시기 바랍니다.");
-        navigate("/");
-      }
-    } catch (error) {
-      if (error.response) {
-        errorAlert(`회원가입 실패: ${error.response.data}`);
-      } else if (error.request) {
-        errorAlert("서버 응답이 없습니다. 나중에 다시 시도해주세요.");
+        catch (error) {
+          if (error.response) {
+            console.error("응답 오류: ", error.response.data);
+            console.error("응답 상태: ", error.response.status);
+            console.error("응답 헤더: ", error.response.headers);
+            errorAlert(`회원가입 실패: ${error.response.data}`);
+          } else if (error.request) {
+            console.error("요청 오류: ", error.request);
+            errorAlert("서버 응답이 없습니다. 나중에 다시 시도해주세요.");
+          } else {
+            console.error("로그인 요청 중 오류 발생: ", error.message);
+            errorAlert("회원가입 요청 중 오류가 발생했습니다.");
+          }
+        }
+      } else{
+          errorAlert("중복 확인이 되지 않았습니다. 다시 확인해주세요.");
+        }
       } else {
-        errorAlert("회원가입 요청 중 오류가 발생했습니다.");
+        errorAlert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
       }
     }
   };
