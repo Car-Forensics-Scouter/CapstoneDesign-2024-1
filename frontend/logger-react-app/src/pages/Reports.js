@@ -127,10 +127,14 @@ function Reports(props) {
                 const data = await response.json();
                 setGPS(data);
                 console.log(data);
-                setLat(GPS[Math.trunc(GPS.length/2)].lat);
-                console.log(lat);
-                setLon(GPS[Math.trunc(GPS.length/2)].lon);
-                console.log(lon);
+                if(data.length > 0) {
+                    const midIndex = Math.trunc(data.length / 2);
+                    console.log(midIndex);
+                    setMidLat(data[midIndex].lat);
+                    console.log(data[midIndex].lat);
+                    setMidLon(data[midIndex].lon);
+                    console.log(data[midIndex].lon);
+                }
             }
             else {
                 console.error("Response was undefined");
@@ -141,8 +145,8 @@ function Reports(props) {
     };
 
     const mapRef = useRef();
-    const [lat, setLat] = useState(1.0);  // 배열 길치 체크 후 가운데 값 부여
-    const [lon, setLon] = useState(1.0);  // 배열 길이 체크 후 가운데 값 부여
+    const [midLat, setMidLat] = useState();  // 배열 길이 체크 후 가운데 값 부여
+    const [midLon, setMidLon] = useState();  // 배열 길이 체크 후 가운데 값 부여
 
     // 위도, 경도 최대 최소 구한 후 줌 구현
 
@@ -153,11 +157,20 @@ function Reports(props) {
         else if(carName === "K5 DL3") { setPhoto(car4); }
         view();
         gps_view();
+    }, []);
+
+    useEffect(() => {
+        if (midLat && midLon) {
+            refreshMap();
+        }
+    }, [midLat, midLon, GPS]);
+
+    function refreshMap() {
         const { naver } = window;
         const polylinePath = GPS.map(gps => new naver.maps.LatLng(gps.lat, gps.lon));
         console.log(polylinePath);
         if(mapRef.current && naver) {
-            const location = new naver.maps.LatLng(lat, lon);
+            const location = new naver.maps.LatLng(midLat, midLon);
             const map = new naver.maps.Map(mapRef.current, {
                 center: location,
                 zoom: 17,
@@ -174,7 +187,7 @@ function Reports(props) {
                 map,
             });
         }
-    }, []);
+    }
 
 
     return  (
@@ -185,7 +198,7 @@ function Reports(props) {
                         Reports
                     </div>
                     <div className="download-button" onClick={downloadData}>
-                        <i class="fa-solid fa-download"/>
+                        <i className="fa-solid fa-download"/>
                         <div className="download">Download</div>
                     </div>
                 </div>
