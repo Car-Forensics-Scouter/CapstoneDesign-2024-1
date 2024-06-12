@@ -89,11 +89,25 @@ function Reports(props) {
     );
 
     const handleStartTimeChange = (e) => {
-        props.setStartTime(e.target.value);
+        const newStartTime = e.target.value;
+        if (validateTimeRange(newStartTime, props.finishTime)) {
+            props.setStartTime(newStartTime);
+        } else {
+            alert("시작 시간은 종료 시간보다 빨라야 합니다.");
+        }
     };
 
     const handleFinishTimeChange = (e) => {
-        props.setFinishTime(e.target.value);
+        const newFinishTime = e.target.value;
+        if (validateTimeRange(props.startTime, newFinishTime)) {
+            props.setFinishTime(newFinishTime);
+        } else {
+            alert("종료 시간은 시작 시간보다 느려야 합니다.");
+        }
+    };
+
+    const validateTimeRange = (start, finish) => {
+        return new Date(start) < new Date(finish);
     };
 
     async function view() {
