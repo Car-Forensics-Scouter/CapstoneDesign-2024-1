@@ -2,6 +2,7 @@ package com.cfs.obd2logger.controller;
 
 import com.cfs.obd2logger.dto.VideoDTO;
 import com.cfs.obd2logger.service.VideoService;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -24,41 +25,35 @@ public class VideoController {
   private final VideoService videoService;
 
   /**
-   * 파일 업로드 (Pre-signed URL 발급  방식) (요청 날짜 포맷: yyyy-mm-hhThh:mm:ss) ex) 2020-11-11T12:34
+   * 파일 업로드 (Pre-signed URL 발급 방식) (요청 날짜 포맷: yyyy-MM-dd'T'HH:mm) ex) 2020-11-11T12:34
    */
   @GetMapping("/URL-upload")
   public ResponseEntity<?> uploadUrlVideo(@RequestParam("deviceId") String deviceId,
-      @RequestParam("fileName") String fileName, @RequestParam("extension") String extension,
+      @RequestParam("fileName") String fileName,
+      @RequestParam("extension") String extension,
       @RequestParam("createdDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime createdDate,
       @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime endDate) {
-    try {
-      String uuidFileName = videoService.generateFileName(fileName) + "." + extension;
-      String URL = videoService.uploadUrlVideo(deviceId, uuidFileName);
-      videoService.handleAfterUrlUpload(deviceId, createdDate, endDate, uuidFileName);
-      return ResponseEntity.ok().body(URL);
-    } catch (Exception e) {
-      return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가
-    }
+    String uuidFileName = videoService.generateFileName(fileName) + "." + extension;
+    String URL = videoService.uploadUrlVideo(deviceId, uuidFileName);
+    videoService.handleAfterUrlUpload(deviceId, createdDate, endDate, uuidFileName);
+    return ResponseEntity.ok().body(URL);
   }
 
   /**
-   * 파일 업로드 (MultipartFile 방식) (요청 날짜 포맷: yyyy-mm-hhThh:mm:ss) ex) 2020-11-11T12:34
+   * 파일 업로드 (MultipartFile 방식) (요청 날짜 포맷: yyyy-MM-dd'T'HH:mm) ex) 2020-11-11T12:34
    */
   @PostMapping("/upload")
   public ResponseEntity<?> uploadVideo(@RequestParam("video") MultipartFile video,
       @RequestParam("deviceId") String deviceId,
       @RequestParam("createdDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime createdDate,
-      @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime endDate) {
-    try {
-      // 동영상 업로드
-      String videoName = video.getOriginalFilename();
-      videoService.uploadVideo(video, deviceId);
-      // 동영상 업로드 이후 작업 처리 (비동기)
-      videoService.handleAfterUpload(video, deviceId, createdDate, endDate, videoName);
-      return ResponseEntity.ok().body(videoName);
-    } catch (Exception e) {
-      return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가
-    }
+      @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime endDate)
+      throws Exception {
+    // 동영상 업로드
+    String videoName = video.getOriginalFilename();
+    videoService.uploadVideo(video, deviceId);
+    // 동영상 업로드 이후 작업 처리 (비동기)
+    videoService.handleAfterUpload(video, deviceId, createdDate, endDate, videoName);
+    return ResponseEntity.ok().body(videoName);
   }
 
   /**
@@ -66,12 +61,8 @@ public class VideoController {
    */
   @GetMapping("/find")
   public ResponseEntity<?> findVideo(@RequestParam("deviceId") String deviceId) {
-    try {
-      List<VideoDTO> videoDTOList = videoService.findAllVideo(deviceId);
-      return ResponseEntity.ok().body(videoDTOList);
-    } catch (Exception e) {
-      return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가
-    }
+    List<VideoDTO> videoDTOList = videoService.findAllVideo(deviceId);
+    return ResponseEntity.ok().body(videoDTOList);
   }
 
   /**
@@ -79,15 +70,11 @@ public class VideoController {
    */
   @GetMapping("/download")
   public ResponseEntity<?> downloadVideo(@RequestParam("deviceId") String deviceId,
-      @RequestParam("videoName") String videoName) {
-    try {
-      String videoUrl = videoService.downloadVideo(deviceId, videoName);
-      Map<String, String> response = new HashMap<>();
-      response.put("url", videoUrl);
-      return ResponseEntity.ok().body(response);
-    } catch (Exception e) {
-      return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가
-    }
+      @RequestParam("videoName") String videoName) throws UnsupportedEncodingException {
+    String videoUrl = videoService.downloadVideo(deviceId, videoName);
+    Map<String, String> response = new HashMap<>();
+    response.put("url", videoUrl);
+    return ResponseEntity.ok().body(response);
   }
 
   /**
@@ -95,11 +82,7 @@ public class VideoController {
    */
   @GetMapping("/delete")
   public ResponseEntity<?> deleteVideo(@RequestParam("deviceId") String deviceId) {
-    try {
-      int deleted = videoService.deleteVideo(deviceId);
-      return ResponseEntity.ok().body(deleted);
-    } catch (Exception e) {
-      return ResponseEntity.badRequest().body(e.getMessage());    // not-found 시 body에 에러 메세지 표기 불가
-    }
+    int deleted = videoService.deleteVideo(deviceId);
+    return ResponseEntity.ok().body(deleted);
   }
 }
