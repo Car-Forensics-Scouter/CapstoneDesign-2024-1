@@ -90,16 +90,10 @@ function Reports(props) {
 
     const handleStartTimeChange = (e) => {
         props.setStartTime(e.target.value);
-        console.log("확인", props.startTime);
-        view();
-        gps_view();
     };
 
     const handleFinishTimeChange = (e) => {
         props.setFinishTime(e.target.value);
-        console.log("확인", props.finishTime);
-        view();
-        gps_view();
     };
 
     async function view() {
@@ -169,9 +163,11 @@ function Reports(props) {
         else if(carName === "아반떼 CN7") { setPhoto(car2); }
         else if(carName === "쏘렌토 MQ4") { setPhoto(car3); }
         else if(carName === "K5 DL3") { setPhoto(car4); }
+        console.log(props.startTime);
+        console.log(props.finishTime);
         view();
         gps_view();
-    }, []);
+    }, [props.startTime, props.finishTime]);
 
     useEffect(() => {
         if (midLat && midLon) {
