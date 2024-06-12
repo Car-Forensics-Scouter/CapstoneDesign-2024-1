@@ -32,18 +32,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 150px;
+    margin-right: 50px;
     margin-bottom: 15px;
 }
 
 .SignUp .input_center .signup_form {
-    width: 900px;
+    width: 1200px;
 }
 
 .SignUp .input_center .signup_form .left_side {
     float: left;
     text-align: left;
-    margin-left: 200px;
+    margin-left: 250px;
     width: 300px;
 }
 
@@ -65,7 +65,7 @@
 
 .SignUp .input_center .signup_form .right_side .data_name {
     margin-top: 8px;
-    width: 300px;
+    width: 500px;
 }
 
 .SignUp .input_center .signup_form .right_side .data_name .input_box {
@@ -85,11 +85,10 @@
 .SignUp .car_selection {
     width: 800px;
     margin-top: 275px;
-    margin-left: -80px;
+    margin-left: 0px;
 }
 
-.SignUp .data_name .menu {
-    margin-bottom: 1px;
+.SignUp .menu {
     cursor: pointer; /* 클릭 가능하도록 커서 모양 변경 */
 }
 
@@ -98,12 +97,12 @@
 }
 
 .SignUp .signup_button {
-    width: 40%;
+    width: 30%;
     background-color: #3AE6B2;
     padding: 10px;
     border-radius: 25px;
     font-size: 20px;
-    margin-left: 175px;
+    margin-left: 100px;
     margin-top: 15px;
 }
 
