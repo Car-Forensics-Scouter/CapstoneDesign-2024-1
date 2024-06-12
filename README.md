@@ -19,7 +19,7 @@
 <br />
 
 # System Architecture
-![스크린샷 2024-04-10 152256](https://github.com/Car-Forensics-Scouter/CapstoneDesign-2024-1/assets/121649620/c4a449d9-da63-4aad-8a49-5c82615f2a70)
+![스크린샷 2024-06-12 221023](https://github.com/Car-Forensics-Scouter/CapstoneDesign-2024-1/assets/110958351/570c8dc2-c4f0-4511-ad9b-34830ec93c87)
 
 Raspberry Pi는 차량의 OBD-II 포트를 통해 차량 내부에 저장된 데이터를 수집하고, 페달 작동과 관련된 영상을 수집한다. 획득한 OBD 데이터는 MQTT 프로토콜을, 영상 데이터는 HTTP
 프로토콜을 사용하여 AWS IoT 시스템으로 전송된다. 전송된 OBD 데이터와 영상의 메타데이터는
