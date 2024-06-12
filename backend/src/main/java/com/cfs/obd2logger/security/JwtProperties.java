@@ -1,4 +1,4 @@
-package com.cfs.obd2logger.config;
+package com.cfs.obd2logger.security;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,5 @@
 package com.cfs.obd2logger.security;
 
-import com.cfs.obd2logger.config.JwtProperties;
 import com.cfs.obd2logger.entity.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
