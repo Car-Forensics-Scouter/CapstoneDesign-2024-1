@@ -122,7 +122,8 @@ public class ObdLogService {
       LocalDateTime endDate) {
     List<ObdLogDTO> obdLogDTOList = findObdLogOnDate(deviceId, startDate, endDate);
     int len = obdLogDTOList.size();
-    double runtime = obdLogDTOList.get(obdLogDTOList.size() - 1).getRunTime();
+    double runtime = obdLogDTOList.get(obdLogDTOList.size() - 1).getRunTime() - obdLogDTOList.get(0)
+        .getRunTime();
     double speed = calAvg(obdLogDTOList, ObdLogDTO::getSpeed, len);
     double rpm = calAvg(obdLogDTOList, ObdLogDTO::getRpm, len);
     double engineLoad = calAvg(obdLogDTOList, ObdLogDTO::getEngineLoad, len);
@@ -172,7 +173,7 @@ public class ObdLogService {
       return 0;
     }
 
-    double earthRadius = 6371000;                   // 미터 단위
+    double earthRadius = 6371.0;                   // 미터 단위
     double dLat = 0.0;
     double dLon = 0.0;
     double lon1 = 0.0;
@@ -196,7 +197,6 @@ public class ObdLogService {
       c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
       dist += earthRadius * c;
     }
-    dist = dist / 1000.0;       // KM 단위 변환
     return dist;
   }
 
