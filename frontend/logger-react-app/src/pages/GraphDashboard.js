@@ -16,6 +16,7 @@ const defaultData = [
         "barometricPressure": 0.0,
         "coolantTemp": 0.0,
         "throttlePos": 0.0,
+        "distance": 0.0,
         "runTime": 0.0,
         "lon": 0.0,
         "lat": 0.0
@@ -31,6 +32,7 @@ const defaultData = [
         "barometricPressure": 0.0,
         "coolantTemp": 0.0,
         "throttlePos": 0.0,
+        "distance": 0.0,
         "runTime": 0.0,
         "lon": 0.0,
         "lat": 0.0
@@ -109,9 +111,9 @@ function GraphDashboard(props) {
     const engine_load_options = { ...options, title: { text: "ENGINE LOAD" }, subtitle: { text: "percent(%)"},
     yaxis: { ...options.yaxis, labels: { formatter: function (value) {  return value.toFixed(1); } } } } // 소수점 첫째자리까지 표현
     const throttle_pos_options = { ...options, title: { text: "THROTTLE POSITION" }, subtitle: { text: "" },
-    yaxis: { ...options.yaxis, labels: { formatter: function (value) {  return value.toFixed(1); } } } }
+    yaxis: { ...options.yaxis, labels: { formatter: function (value) {  return value.toFixed(1); } } } } // 소수점 첫째자리까지 표현
     const fuel_level_options = { ...options, title: { text: "FUEL LEVEL" }, subtitle: { text: "LEVEL"},
-    yaxis: { ...options.yaxis, labels: { formatter: function (value) {  return value.toFixed(1); } } } }
+    yaxis: { ...options.yaxis, labels: { formatter: function (value) {  return value.toFixed(1); } } } } // 소수점 첫째자리까지 표현
     const barometric_press_options = { ...options, title: { text: "BAROMETRIC PRESSURE" }, subtitle: { text: "℃" }}
     const run_time_options = { ...options, title: { text: "RUN TIME" }, subtitle: { text: "TIME(DAY:HH:MM"} }
     const coolant_temp_options = { ...options, title: { text: "COOLANT TEMPERATURE" }, subtitle: { text: "℃"} }
