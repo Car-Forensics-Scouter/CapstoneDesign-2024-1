@@ -16,7 +16,6 @@ const defaultData = [
         "barometricPressure": 0.0,
         "coolantTemp": 0.0,
         "throttlePos": 0.0,
-        "distance": 0.0,
         "runTime": 0.0,
         "lon": 0.0,
         "lat": 0.0
@@ -32,7 +31,6 @@ const defaultData = [
         "barometricPressure": 0.0,
         "coolantTemp": 0.0,
         "throttlePos": 0.0,
-        "distance": 0.0,
         "runTime": 0.0,
         "lon": 0.0,
         "lat": 0.0
@@ -108,12 +106,14 @@ function GraphDashboard(props) {
 
     // 그래프별 세부 옵션
     const rpm_options = { ...options, title: { text: "RPM" }, subtitle: { text: "rpm"} }
-    const engine_load_options = { ...options, title: { text: "ENGINE LOAD" }, subtitle: { text: "percent(%)"} }
-    const throttle_pos_options = { ...options, title: { text: "THROTTLE POSITION" }, subtitle: { text: "" } }
-    const fuel_level_options = { ...options, title: { text: "FUEL LEVEL" }, subtitle: { text: "LEVEL"} }
-    const barometric_press_options = { ...options, title: { text: "BAROMETRIC PRESSURE" }, subtitle: { text: "℃"} }
+    const engine_load_options = { ...options, title: { text: "ENGINE LOAD" }, subtitle: { text: "percent(%)"},
+    yaxis: { ...options.yaxis, labels: { formatter: function (value) {  return value.toFixed(1); } } } } // 소수점 첫째자리까지 표현
+    const throttle_pos_options = { ...options, title: { text: "THROTTLE POSITION" }, subtitle: { text: "" },
+    yaxis: { ...options.yaxis, labels: { formatter: function (value) {  return value.toFixed(1); } } } }
+    const fuel_level_options = { ...options, title: { text: "FUEL LEVEL" }, subtitle: { text: "LEVEL"},
+    yaxis: { ...options.yaxis, labels: { formatter: function (value) {  return value.toFixed(1); } } } }
+    const barometric_press_options = { ...options, title: { text: "BAROMETRIC PRESSURE" }, subtitle: { text: "℃" }}
     const run_time_options = { ...options, title: { text: "RUN TIME" }, subtitle: { text: "TIME(DAY:HH:MM"} }
-    const distance_options = { ...options, title: { text: "DISTANCE" }, subtitle: { text: "℃"} }
     const coolant_temp_options = { ...options, title: { text: "COOLANT TEMPERATURE" }, subtitle: { text: "℃"} }
 
     // 데이터들 중 원하는 것만 취사 선택해서 그래프에 표시할 데이터로 포맷.
@@ -157,9 +157,8 @@ function GraphDashboard(props) {
                 <Chart options={engine_load_options} series={getSeries("engineLoad")} type="area" height={350}/>
                 <Chart options={throttle_pos_options} series={getSeries("throttlePos")} type="area" height={350}/>
                 <Chart options={fuel_level_options} series={getSeries("fuelLevel")} type="area" height={350}/>
-                <Chart options={barometric_press_options} series={getSeries("barometricPress")} type="area" height={350}/>
+                <Chart options={barometric_press_options} series={getSeries("barometricPressure")} type="area" height={350}/>
                 <Chart options={run_time_options} series={getSeries("runTime")} type="area" height={350}/>
-                <Chart options={distance_options} series={getSeries("distance")} type="area" height={350}/>
                 <Chart options={coolant_temp_options} series={getSeries("coolantTemp")} type="area" height={350}/>
             </div>
         </div>
